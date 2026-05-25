@@ -19,6 +19,7 @@
 		2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0147791F9F24F101B742D /* CleanupCategoryTests.swift */; };
 		3AFD459974A122BAEF2C1608 /* CleanupItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B129CDE89F863BDF613E9 /* CleanupItemRow.swift */; };
 		4245825AD43FF469A0E1BEB5 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF49D4DC8132A07BE241CAD /* FileUtils.swift */; };
+		5779015287E845E457E5FC7B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059662B59C1D710940143627 /* OnboardingView.swift */; };
 		59424627DCAB7F4B4ED1BAF9 /* JunkScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2436C0411B3B105B995EA8 /* JunkScanner.swift */; };
 		5DA2235921201405C6E46B3D /* AppUninstallerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4106EAD248920AD54E94E /* AppUninstallerViewModel.swift */; };
 		5EFD3520ADEC826BF3FDFA6A /* CleanupConfidenceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689E00FD56AB04B20435ADE /* CleanupConfidenceLevel.swift */; };
@@ -73,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		059662B59C1D710940143627 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0A4DA3A4DA47753BD05DACA5 /* SystemJunkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemJunkView.swift; sourceTree = "<group>"; };
 		0AD83C26579DAB9A3C990650 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		0B58940879213198AAB30244 /* SystemJunkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemJunkViewModel.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				6E065D755F92505E80760AB3 /* AppUninstaller */,
 				BAAFB53EEAD4165D4B40C842 /* Cleanup */,
 				7EF3FAB82F13D7F45B6150BD /* DiskAnalyzer */,
+				A7EEEAD6E68CEE9C99F439CA /* Onboarding */,
 				D18A15E6D4B763B76B4A34B1 /* Shared */,
 				BC83BCF32A8626DB3FB644E5 /* Sidebar */,
 				2FFEAFA26314BAB7E6C0C572 /* SmartScan */,
@@ -249,6 +252,14 @@
 				2A82CABE138EE56191E32DFD /* DiskPieChart.swift */,
 			);
 			path = DiskAnalyzer;
+			sourceTree = "<group>";
+		};
+		A7EEEAD6E68CEE9C99F439CA /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				059662B59C1D710940143627 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		A8F1C251567E5321E1CA2484 /* ViewModels */ = {
@@ -454,6 +465,7 @@
 				E1D7277553C1ED10686A5750 /* Int64+Formatting.swift in Sources */,
 				70662A4B5740C39D802AD0BA /* JunkCategoryRow.swift in Sources */,
 				59424627DCAB7F4B4ED1BAF9 /* JunkScanner.swift in Sources */,
+				5779015287E845E457E5FC7B /* OnboardingView.swift in Sources */,
 				EDEF28CAD23E936FBED1783B /* PureMacApp.swift in Sources */,
 				DF259EE91C15CDC7B12306E7 /* RecommendationCard.swift in Sources */,
 				992CDC9CA125CBACFA0561BD /* ScanMetadata.swift in Sources */,

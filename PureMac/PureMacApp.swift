@@ -9,6 +9,7 @@ struct PureMacApp: App {
     @State private var diskAnalyzerVM   = DiskAnalyzerViewModel()
     @State private var cleanupCoord     = CleanupCoordinator()
     @State private var fdaVM            = FullDiskAccessViewModel()
+    @State private var showOnboarding   = !OnboardingView.hasShown
 
     var body: some Scene {
         WindowGroup {
@@ -20,6 +21,9 @@ struct PureMacApp: App {
                 .environment(cleanupCoord)
                 .environment(fdaVM)
                 .task { fdaVM.refresh() }
+                .sheet(isPresented: $showOnboarding) {
+                    OnboardingView(isPresented: $showOnboarding)
+                }
                 .sheet(isPresented: Binding(
                     get: { cleanupCoord.isReviewPresented },
                     set: { cleanupCoord.isReviewPresented = $0 }
