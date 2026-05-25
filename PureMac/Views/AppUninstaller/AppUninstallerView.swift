@@ -2,15 +2,18 @@ import SwiftUI
 
 struct AppUninstallerView: View {
     @Environment(AppUninstallerViewModel.self) private var vm
+    @Environment(CleanupCoordinator.self) private var coord
+
+    @State private var searchText: String = ""
+    @State private var selectedDetailID: UUID?
 
     var body: some View {
         VStack(spacing: 0) {
-            FeatureToolbar(title: "App Uninstaller", subtitle: "Remove apps and their leftovers") {
+            FeatureToolbar(title: "App Uninstaller",
+                           subtitle: "Remove apps and their leftovers safely") {
                 toolbarButtons
             }
-
             Divider().background(Color.white.opacity(0.08))
-
             mainContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -25,28 +28,16 @@ struct AppUninstallerView: View {
         switch vm.state {
         case .scanning:
             ProgressView().controlSize(.small).tint(.white)
-        case .results, .uninstalling, .done:
-            HStack(spacing: 8) {
-                if vm.state == .done {
-                    Button("Scan Again") { vm.scan() }
-                        .buttonStyle(.bordered)
-                        .foregroundStyle(.white)
-                        .controlSize(.small)
-                } else {
-                    Button("Re-Scan") { vm.scan() }
-                        .buttonStyle(.bordered)
-                        .foregroundStyle(.white)
-                        .controlSize(.small)
-                }
-            }
+        case .results:
+            Button("Re-Scan") { vm.scan() }
+                .buttonStyle(.bordered).controlSize(.small).foregroundStyle(.white)
         default:
             Button("Scan Apps") { vm.scan() }
-                .buttonStyle(.borderedProminent)
-                .tint(.red)
+                .buttonStyle(.borderedProminent).tint(.red)
         }
     }
 
-    // MARK: - Main content
+    // MARK: - Content
 
     @ViewBuilder
     private var mainContent: some View {
@@ -55,44 +46,33 @@ struct AppUninstallerView: View {
             idleView
         case .scanning:
             loadingView
-        case .results, .uninstalling, .done:
+        case .results:
             if vm.apps.isEmpty {
-                ContentUnavailableView(
-                    "No Apps Found",
-                    systemImage: "app.badge.minus",
-                    description: Text("No applications found in /Applications.")
-                )
-                .foregroundStyle(.white)
+                ContentUnavailableView("No Apps Found",
+                                       systemImage: "app.badge.minus",
+                                       description: Text("Nothing found in /Applications, ~/Applications, or /Applications/Utilities."))
+                    .foregroundStyle(.white)
             } else {
-                appListView
+                splitView
             }
         }
     }
-
-    // MARK: - Views
 
     private var idleView: some View {
         VStack(spacing: 28) {
             Image(systemName: "app.badge.minus")
                 .font(.system(size: 76))
-                .foregroundStyle(
-                    LinearGradient(colors: [.red, .pink], startPoint: .top, endPoint: .bottom)
-                )
+                .foregroundStyle(LinearGradient(colors: [.red, .pink],
+                                                startPoint: .top, endPoint: .bottom))
                 .symbolEffect(.pulse)
-
             VStack(spacing: 8) {
-                Text("Remove Apps Completely")
-                    .font(.title.bold())
-                Text("Find all installed apps, their sizes,\nand hidden leftover files.")
-                    .font(.body)
-                    .foregroundStyle(.white.opacity(0.55))
+                Text("Remove Apps Completely").font(.title.bold())
+                Text("Find installed apps with confidence-graded leftover\ndetection. Apple system apps are protected.")
+                    .font(.body).foregroundStyle(.white.opacity(0.55))
                     .multilineTextAlignment(.center)
             }
-
             Button("Scan Applications") { vm.scan() }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .tint(.red)
+                .buttonStyle(.borderedProminent).controlSize(.large).tint(.red)
         }
         .padding(40)
     }
@@ -100,16 +80,36 @@ struct AppUninstallerView: View {
     private var loadingView: some View {
         VStack(spacing: 16) {
             ProgressView().controlSize(.large).tint(.red)
-            Text("Scanning /Applications…")
-                .foregroundStyle(.white.opacity(0.6))
+            Text("Scanning installed apps…").foregroundStyle(.white.opacity(0.6))
         }
     }
 
-    private var appListView: some View {
+    // MARK: - Split layout
+
+    private var splitView: some View {
+        HSplitView {
+            appListPane
+                .frame(minWidth: 320)
+            detailPane
+                .frame(minWidth: 320)
+        }
+    }
+
+    private var appListPane: some View {
         VStack(spacing: 0) {
-            // App rows
-            List {
-                ForEach(vm.apps) { app in
+            // Search bar
+            HStack(spacing: 8) {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(.white.opacity(0.4))
+                TextField("Search apps…", text: $searchText)
+                    .textFieldStyle(.plain)
+                    .foregroundStyle(.white)
+            }
+            .padding(.horizontal, 14).padding(.vertical, 10)
+            .background(Color.white.opacity(0.06))
+
+            List(selection: $selectedDetailID) {
+                ForEach(filteredApps) { app in
                     AppRow(
                         app: app,
                         isSelected: vm.selectedIDs.contains(app.id),
@@ -117,47 +117,66 @@ struct AppUninstallerView: View {
                         onToggle: { vm.toggleSelection(app.id) },
                         onScanLeftovers: { vm.scanLeftovers(for: app) }
                     )
+                    .tag(app.id)
                     .listRowBackground(
                         vm.selectedIDs.contains(app.id)
-                            ? Color.red.opacity(0.12)
+                            ? Color.red.opacity(0.10)
                             : Color.white.opacity(0.04)
                     )
-                    .listRowSeparatorTint(Color.white.opacity(0.07))
+                    .listRowSeparatorTint(Color.white.opacity(0.06))
                 }
             }
             .listStyle(.inset)
             .scrollContentBackground(.hidden)
 
-            // Bottom bar (shown when selection is non-empty)
             if !vm.selectedIDs.isEmpty {
                 uninstallBar
             }
         }
     }
 
+    private var filteredApps: [AppInfo] {
+        let q = searchText.lowercased()
+        if q.isEmpty { return vm.apps }
+        return vm.apps.filter {
+            $0.name.lowercased().contains(q) || $0.bundleID.lowercased().contains(q)
+        }
+    }
+
+    @ViewBuilder
+    private var detailPane: some View {
+        if let id = selectedDetailID, let app = vm.apps.first(where: { $0.id == id }) {
+            AppDetailPanel(
+                app: app,
+                isScanningLeftovers: vm.scanningLeftoversID == app.id,
+                onScanLeftovers: { vm.scanLeftovers(for: app) }
+            )
+        } else {
+            ContentUnavailableView("Select an app",
+                                   systemImage: "app.dashed",
+                                   description: Text("Pick an app from the list to see details."))
+                .foregroundStyle(.white)
+        }
+    }
+
     private var uninstallBar: some View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(vm.selectedIDs.count) apps selected")
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.5))
+                Text("\(vm.selectedIDs.count) app\(vm.selectedIDs.count == 1 ? "" : "s") selected")
+                    .font(.caption).foregroundStyle(.white.opacity(0.5))
                 Text(vm.totalSelectedSize.formattedBytes)
-                    .font(.headline)
-                    .foregroundStyle(.red)
+                    .font(.headline).foregroundStyle(.red)
             }
             Spacer()
-            if vm.isUninstalling {
-                ProgressView().controlSize(.small).tint(.red).padding(.trailing, 8)
+            Button("Review & Uninstall") {
+                coord.startReview(
+                    vm.buildCleanupCategories(),
+                    title: "Review Uninstall"
+                )
             }
-            Button(vm.isUninstalling ? "Uninstalling…" : "Uninstall \(vm.selectedIDs.count) Apps") {
-                vm.uninstall()
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.red)
-            .disabled(vm.isUninstalling)
+            .buttonStyle(.borderedProminent).tint(.red)
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 12)
+        .padding(.horizontal, 16).padding(.vertical, 12)
         .background(Color(red: 0.09, green: 0.09, blue: 0.14))
     }
 }
@@ -172,8 +191,7 @@ struct AppRow: View {
     let onScanLeftovers: () -> Void
 
     var body: some View {
-        HStack(spacing: 14) {
-            // Checkbox
+        HStack(spacing: 12) {
             Button(action: onToggle) {
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                     .foregroundStyle(isSelected ? .red : .white.opacity(0.3))
@@ -181,27 +199,25 @@ struct AppRow: View {
             }
             .buttonStyle(.plain)
 
-            // Icon
             AppIconView(appURL: app.url)
-                .frame(width: 32, height: 32)
+                .frame(width: 28, height: 28)
 
-            // Name + bundle ID
             VStack(alignment: .leading, spacing: 2) {
-                Text(app.name)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.white)
-                Text(app.bundleID)
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.4))
-                    .lineLimit(1)
+                HStack(spacing: 6) {
+                    Text(app.name).font(.system(size: 13, weight: .semibold))
+                    if let v = app.version {
+                        Text(v).font(.system(size: 10))
+                            .foregroundStyle(.white.opacity(0.4))
+                    }
+                }
+                Text(app.bundleID).font(.caption)
+                    .foregroundStyle(.white.opacity(0.4)).lineLimit(1)
             }
 
             Spacer()
 
-            // Bundle size
             SizeBadge(bytes: app.bundleSize, color: .blue)
 
-            // Leftovers column
             Group {
                 if isScanningLeftovers {
                     ProgressView().controlSize(.mini).tint(.orange)
@@ -211,21 +227,19 @@ struct AppRow: View {
                         SizeBadge(bytes: app.leftoverSize, color: .orange)
                             .frame(width: 70, alignment: .trailing)
                     } else {
-                        Text("Clean")
-                            .font(.caption)
+                        Text("Clean").font(.caption)
                             .foregroundStyle(.green.opacity(0.8))
                             .frame(width: 70, alignment: .trailing)
                     }
                 } else {
                     Button("Leftovers") { onScanLeftovers() }
-                        .buttonStyle(.borderless)
-                        .font(.caption)
-                        .foregroundStyle(.white.opacity(0.4))
+                        .buttonStyle(.borderless).font(.caption)
+                        .foregroundStyle(.white.opacity(0.5))
                         .frame(width: 70, alignment: .trailing)
                 }
             }
         }
-        .padding(.vertical, 6)
+        .padding(.vertical, 4)
         .contentShape(Rectangle())
         .onTapGesture { onToggle() }
     }

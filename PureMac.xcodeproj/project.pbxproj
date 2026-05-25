@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		047D410548F926BD17171391 /* CleanupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F171CC37AB350FCC075176 /* CleanupService.swift */; };
+		098E7056BDC30AD1A6305445 /* AppDetailPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229DB321A669BD75235A5555 /* AppDetailPanel.swift */; };
 		0D57250655BBE5464AA55C8D /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD83C26579DAB9A3C990650 /* SidebarView.swift */; };
 		17E49EED528F57BF899E3AFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BAAB249D511F10DE12A735 /* ContentView.swift */; };
 		1AB9BA4BDDA64D3A3731B84D /* AppUninstallerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18670BF6E0728BC2EFC2FA0 /* AppUninstallerView.swift */; };
@@ -65,6 +66,7 @@
 		1416A6621C187BDDA9E414CB /* CleanupProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupProgressView.swift; sourceTree = "<group>"; };
 		1D72748082E45E6D726D8946 /* CleanupReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupReason.swift; sourceTree = "<group>"; };
 		21C4FBD68976DA3CBF5AA99A /* CleanupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupCoordinator.swift; sourceTree = "<group>"; };
+		229DB321A669BD75235A5555 /* AppDetailPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailPanel.swift; sourceTree = "<group>"; };
 		2A82CABE138EE56191E32DFD /* DiskPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskPieChart.swift; sourceTree = "<group>"; };
 		311078221878708524283765 /* PureMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		330010533CA041CCA381C043 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		6E065D755F92505E80760AB3 /* AppUninstaller */ = {
 			isa = PBXGroup;
 			children = (
+				229DB321A669BD75235A5555 /* AppDetailPanel.swift */,
 				D647CD02C5917AB77EEA268B /* AppIconView.swift */,
 				A18670BF6E0728BC2EFC2FA0 /* AppUninstallerView.swift */,
 			);
@@ -350,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				098E7056BDC30AD1A6305445 /* AppDetailPanel.swift in Sources */,
 				E1C626AAA13FC506ACAC5B46 /* AppFeature.swift in Sources */,
 				FFE2B10F03302F93B3F86230 /* AppIconView.swift in Sources */,
 				A16B8DB970A37135ED953258 /* AppInfo.swift in Sources */,

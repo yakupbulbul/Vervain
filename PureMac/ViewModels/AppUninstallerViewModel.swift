@@ -5,7 +5,7 @@ import SwiftUI
 final class AppUninstallerViewModel {
 
     enum State {
-        case idle, scanning, results, uninstalling, done
+        case idle, scanning, results
     }
 
     var state: State = .idle
@@ -16,10 +16,6 @@ final class AppUninstallerViewModel {
 
     var isScanning: Bool {
         if case .scanning = state { return true }
-        return false
-    }
-    var isUninstalling: Bool {
-        if case .uninstalling = state { return true }
         return false
     }
 
@@ -66,21 +62,47 @@ final class AppUninstallerViewModel {
         }
     }
 
-    func uninstall() {
-        Task {
-            state = .uninstalling
-            for app in selectedApps {
-                try? await scanner.uninstall(app)
-                apps.removeAll { $0.id == app.id }
-            }
-            selectedIDs.removeAll()
-            state = .done
-        }
-    }
+    /// Build a CleanupCategory per selected app — bundle + leftovers — for
+    /// the universal review flow.
+    ///
+    /// The `.app` bundle itself is always tagged `risky`/`high` so the user
+    /// must explicitly acknowledge the uninstall in the confirmation sheet.
+    func buildCleanupCategories() -> [CleanupCategory] {
+        var cats: [CleanupCategory] = []
+        for app in selectedApps {
+            var items: [CleanupItem] = []
 
-    func reset() {
-        apps.removeAll()
-        selectedIDs.removeAll()
-        state = .idle
+            // The .app bundle itself
+            items.append(CleanupItem(
+                url: app.url,
+                name: app.name,
+                size: app.bundleSize,
+                category: "\(app.name) — Application",
+                reason: .appBundle,
+                riskLevel: .risky,
+                confidenceLevel: .high,
+                lastModifiedDate: app.lastModifiedDate,
+                sourceModule: .appUninstaller
+            ))
+            // Leftover files (already CleanupItems with graded confidence)
+            items.append(contentsOf: app.leftoverItems)
+
+            let subtitle: String = {
+                if app.leftoverScanned {
+                    return "Bundle + \(app.leftoverItems.count) leftover item\(app.leftoverItems.count == 1 ? "" : "s")"
+                } else {
+                    return "Bundle only — leftovers not scanned"
+                }
+            }()
+
+            cats.append(CleanupCategory(
+                title: app.name,
+                subtitle: subtitle,
+                icon: "app.badge.minus",
+                sourceModule: .appUninstaller,
+                items: items
+            ))
+        }
+        return cats
     }
 }
