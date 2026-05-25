@@ -25,7 +25,7 @@ struct SidebarView: View {
             Spacer(minLength: 0)
 
             // Health badge
-            if let score = smartScanVM.finalScore {
+            if let score = smartScanVM.breakdown?.asHealthScore {
                 healthBadge(score: score)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 20)

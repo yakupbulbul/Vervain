@@ -21,10 +21,16 @@ struct ContentView: View {
     @ViewBuilder
     private func detailView(for feature: AppFeature?) -> some View {
         switch feature {
-        case .smartScan, nil:   SmartScanView()
-        case .systemJunk:       SystemJunkView()
-        case .appUninstaller:   AppUninstallerView()
-        case .diskAnalyzer:     DiskAnalyzerView()
+        case .smartScan, nil:
+            SmartScanView(onNavigate: { feature in
+                selectedFeature = feature
+            })
+        case .systemJunk:
+            SystemJunkView()
+        case .appUninstaller:
+            AppUninstallerView()
+        case .diskAnalyzer:
+            DiskAnalyzerView()
         }
     }
 }
