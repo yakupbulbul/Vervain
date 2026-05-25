@@ -37,3 +37,30 @@ targets:
         CODE_SIGN_IDENTITY: "-"
         CODE_SIGN_STYLE: Manual
         DEVELOPMENT_TEAM: ""
+
+  PureMacTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: PureMacTests
+    dependencies:
+      - target: PureMac
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yakupbulbul.PureMacTests
+        SWIFT_VERSION: "6.0"
+        MACOSX_DEPLOYMENT_TARGET: "15.0"
+        SWIFT_STRICT_CONCURRENCY: complete
+        BUNDLE_LOADER: "$(TEST_HOST)"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/PureMac.app/Contents/MacOS/PureMac"
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  PureMac:
+    build:
+      targets:
+        PureMac: all
+        PureMacTests: [test]
+    test:
+      targets:
+        - PureMacTests
