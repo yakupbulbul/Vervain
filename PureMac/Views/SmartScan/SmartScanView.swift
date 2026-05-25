@@ -119,17 +119,22 @@ struct SmartScanView: View {
 
             // Junk categories
             VStack(spacing: 12) {
-                ForEach(JunkCategoryType.allCases) { type in
-                    let size = vm.junkSummary[type] ?? 0
+                if vm.junkSummary.isEmpty {
+                    Text("No junk categories found.")
+                        .font(.system(size: 12))
+                        .foregroundStyle(.white.opacity(0.4))
+                        .padding(.vertical, 8)
+                }
+                ForEach(Array(vm.junkSummary.enumerated()), id: \.offset) { _, entry in
                     HStack {
-                        Image(systemName: type.icon)
+                        Image(systemName: entry.icon)
                             .foregroundStyle(.white.opacity(0.5))
                             .frame(width: 20)
-                        Text(type.rawValue)
+                        Text(entry.title)
                             .font(.system(size: 13))
                             .foregroundStyle(.white.opacity(0.8))
                         Spacer()
-                        SizeBadge(bytes: size, color: size > 0 ? .orange : .gray)
+                        SizeBadge(bytes: entry.size, color: entry.size > 0 ? .orange : .gray)
                     }
                     .padding(.vertical, 8)
                     .padding(.horizontal, 14)

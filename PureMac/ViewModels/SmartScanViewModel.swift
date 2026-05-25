@@ -22,23 +22,28 @@ final class SmartScanViewModel {
     var state: ScanState = .idle
     var displayedScore: Int = 0
     var finalScore: HealthScore?
-    var junkSummary: [JunkCategoryType: Int64] = [:]
+
+    /// Per-category total sizes, keyed by category title (e.g. "Old Caches").
+    var junkSummary: [(title: String, icon: String, size: Int64)] = []
     var totalJunkBytes: Int64 = 0
     var diskUsageFraction: Double = 0
     var installedAppCount: Int = 0
+    var scanMetadata = ScanMetadata()
+
+    /// Categories produced by the junk scan — used by Phase 4 to feed the
+    /// universal review flow with pre-selected safe items.
+    var cleanupCategories: [CleanupCategory] = []
 
     var isScanning: Bool { state == .scanning }
 
-    private let junkScanner    = JunkScanner()
-    private let diskService    = DiskAnalyzerService()
-    private let appScanner     = AppScanner()
+    private let junkScanner = JunkScanner()
+    private let diskService = DiskAnalyzerService()
+    private let appScanner  = AppScanner()
     private var scanTask: Task<Void, Never>?
 
     func startScan() {
         scanTask?.cancel()
-        scanTask = Task {
-            await performScan()
-        }
+        scanTask = Task { await performScan() }
     }
 
     func cancelScan() {
@@ -51,22 +56,17 @@ final class SmartScanViewModel {
         displayedScore = 0
 
         do {
-            // Run all three scanners concurrently
-            async let junkCategories = junkScanner.scan()
-            async let fraction       = diskService.getDiskUsageFraction()
-            async let apps           = appScanner.scanInstalledApps()
+            async let junkResult = junkScanner.scan()
+            async let fraction   = diskService.getDiskUsageFraction()
+            async let apps       = appScanner.scanInstalledApps()
 
-            let (categories, diskFraction, installedApps) = try await (junkCategories, fraction, apps)
+            let ((cats, meta), diskFraction, installedApps) =
+                try await (junkResult, fraction, apps)
 
             guard !Task.isCancelled else { return }
 
-            // Aggregate junk totals
-            var summary: [JunkCategoryType: Int64] = [:]
-            var total: Int64 = 0
-            for cat in categories {
-                summary[cat.id] = cat.totalSize
-                total += cat.totalSize
-            }
+            let total = cats.reduce(Int64(0)) { $0 + $1.totalSize }
+            let summary = cats.map { (title: $0.title, icon: $0.icon, size: $0.totalSize) }
 
             let score = HealthScore.compute(
                 junkBytes: total,
@@ -74,15 +74,16 @@ final class SmartScanViewModel {
                 appCount: installedApps.count
             )
 
-            junkSummary           = summary
-            totalJunkBytes        = total
-            diskUsageFraction     = diskFraction
-            installedAppCount     = installedApps.count
-            finalScore            = score
-            state                 = .results
+            cleanupCategories = cats
+            junkSummary       = summary
+            totalJunkBytes    = total
+            diskUsageFraction = diskFraction
+            installedAppCount = installedApps.count
+            scanMetadata      = meta
+            finalScore        = score
+            state             = .results
 
             await animateScore(to: score.value)
-
         } catch is CancellationError {
             state = .idle
         } catch {
@@ -92,7 +93,7 @@ final class SmartScanViewModel {
 
     private func animateScore(to target: Int) async {
         guard target > 0 else { return }
-        let stepDelay: UInt64 = 1_500_000_000 / UInt64(target) // total 1.5s
+        let stepDelay: UInt64 = 1_500_000_000 / UInt64(target)
         for i in 1...target {
             guard !Task.isCancelled else { return }
             displayedScore = i
