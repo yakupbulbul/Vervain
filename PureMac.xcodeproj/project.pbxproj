@@ -28,6 +28,7 @@
 		70662A4B5740C39D802AD0BA /* JunkCategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB3F316AC6CD4187A8D58B /* JunkCategoryRow.swift */; };
 		70F99FDE757919BE784A3619 /* CleanupItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388EAC19AA6EA1D5261AAB /* CleanupItem.swift */; };
 		7262070823F0A8C4539D88A0 /* AppScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93EC1CBE9EA084DB221BCE /* AppScanner.swift */; };
+		787B1BF1EADC742DD3AB8E44 /* FullDiskAccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B535CAC8C17F290470F285F /* FullDiskAccessViewModel.swift */; };
 		85BCCF5FFA97CC6B7F4A20DF /* HealthRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CE0325A94785B58D212743 /* HealthRingView.swift */; };
 		9301D04EB50959E983B0CFD2 /* DiskAnalyzerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A46C018233BEC8EC3315D /* DiskAnalyzerViewModel.swift */; };
 		992CDC9CA125CBACFA0561BD /* ScanMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6E6DCABB7A85524BF2FEC /* ScanMetadata.swift */; };
@@ -39,6 +40,7 @@
 		B88C88EAEF63E388D3962A92 /* DiskAnalyzerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50887AC434862BC403C881EF /* DiskAnalyzerService.swift */; };
 		C08105D43CF3BDE06C3DC6FA /* DoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A94BA422B9696F2F6DCE21 /* DoneView.swift */; };
 		C5B84ED0F43392B67CD09693 /* SmartRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3384BDE7F39A2453B37F2E7A /* SmartRecommendation.swift */; };
+		C5D21F311DB26BEBF4222C90 /* FullDiskAccessProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105AFAAA6411A48E5DCBCB49 /* FullDiskAccessProbe.swift */; };
 		DBA94ECE1CEEF4AF37E57F51 /* FeatureToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12886648D5489FFE73D0F3EB /* FeatureToolbar.swift */; };
 		DBE34CE69CF88D49440F3D5D /* CleanupProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416A6621C187BDDA9E414CB /* CleanupProgressView.swift */; };
 		DF259EE91C15CDC7B12306E7 /* RecommendationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7A8D99FF7988BB9004308 /* RecommendationCard.swift */; };
@@ -62,6 +64,7 @@
 		0B58940879213198AAB30244 /* SystemJunkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemJunkViewModel.swift; sourceTree = "<group>"; };
 		0D49D49C657AC7653F6BA568 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		0FC43684E3D6FA87B05CB886 /* CleanupSelectionPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupSelectionPolicy.swift; sourceTree = "<group>"; };
+		105AFAAA6411A48E5DCBCB49 /* FullDiskAccessProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDiskAccessProbe.swift; sourceTree = "<group>"; };
 		12886648D5489FFE73D0F3EB /* FeatureToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToolbar.swift; sourceTree = "<group>"; };
 		1416A6621C187BDDA9E414CB /* CleanupProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupProgressView.swift; sourceTree = "<group>"; };
 		1D72748082E45E6D726D8946 /* CleanupReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupReason.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		71CE0325A94785B58D212743 /* HealthRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRingView.swift; sourceTree = "<group>"; };
 		74BFEF2D8CE6A682AC21DA8D /* CleanupReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupReviewView.swift; sourceTree = "<group>"; };
 		779EC2221374DE14F9D36900 /* DiskAnalyzerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskAnalyzerView.swift; sourceTree = "<group>"; };
+		7B535CAC8C17F290470F285F /* FullDiskAccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDiskAccessViewModel.swift; sourceTree = "<group>"; };
 		806443ED59E4F8150F2D7486 /* SmartScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartScanView.swift; sourceTree = "<group>"; };
 		86A94BA422B9696F2F6DCE21 /* DoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneView.swift; sourceTree = "<group>"; };
 		A18670BF6E0728BC2EFC2FA0 /* AppUninstallerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUninstallerView.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 				5E93EC1CBE9EA084DB221BCE /* AppScanner.swift */,
 				50887AC434862BC403C881EF /* DiskAnalyzerService.swift */,
 				CCF49D4DC8132A07BE241CAD /* FileUtils.swift */,
+				105AFAAA6411A48E5DCBCB49 /* FullDiskAccessProbe.swift */,
 				CF2436C0411B3B105B995EA8 /* JunkScanner.swift */,
 				B7AEA7E485C8E66088475ECB /* Cleanup */,
 			);
@@ -220,6 +225,7 @@
 				F1F4106EAD248920AD54E94E /* AppUninstallerViewModel.swift */,
 				21C4FBD68976DA3CBF5AA99A /* CleanupCoordinator.swift */,
 				3C8A46C018233BEC8EC3315D /* DiskAnalyzerViewModel.swift */,
+				7B535CAC8C17F290470F285F /* FullDiskAccessViewModel.swift */,
 				E8EB73D0E8BF07975D1095C2 /* SmartScanViewModel.swift */,
 				0B58940879213198AAB30244 /* SystemJunkViewModel.swift */,
 			);
@@ -384,6 +390,8 @@
 				DBA94ECE1CEEF4AF37E57F51 /* FeatureToolbar.swift in Sources */,
 				4245825AD43FF469A0E1BEB5 /* FileUtils.swift in Sources */,
 				1EAE90BADA01B1ECE5C6225B /* FullDiskAccessBanner.swift in Sources */,
+				C5D21F311DB26BEBF4222C90 /* FullDiskAccessProbe.swift in Sources */,
+				787B1BF1EADC742DD3AB8E44 /* FullDiskAccessViewModel.swift in Sources */,
 				85BCCF5FFA97CC6B7F4A20DF /* HealthRingView.swift in Sources */,
 				FA519C45C51BA3A10C5A9614 /* HealthScore.swift in Sources */,
 				DF4C54FACFF1E5E1EDED628C /* HealthScoreBreakdown.swift in Sources */,

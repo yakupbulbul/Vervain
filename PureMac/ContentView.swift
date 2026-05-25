@@ -11,8 +11,11 @@ struct ContentView: View {
             ZStack {
                 Color(red: 0.09, green: 0.09, blue: 0.14)
                     .ignoresSafeArea()
-                detailView(for: selectedFeature)
-                    .frame(minWidth: 600, minHeight: 500)
+                VStack(spacing: 0) {
+                    FullDiskAccessBanner()
+                    detailView(for: selectedFeature)
+                        .frame(minWidth: 600, minHeight: 500)
+                }
             }
         }
         .navigationSplitViewStyle(.prominentDetail)

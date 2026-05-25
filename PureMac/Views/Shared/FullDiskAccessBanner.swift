@@ -1,13 +1,14 @@
 import SwiftUI
 import AppKit
 
-/// A dismissible banner that prompts the user to grant Full Disk Access
-/// when PureMac can't read protected directories.
+/// Dismissible banner shown when `FullDiskAccessViewModel.shouldShowBanner`
+/// is true. Replaces the always-on placeholder from Phase 0 with a probed
+/// version that only nudges the user when they actually need to act.
 struct FullDiskAccessBanner: View {
-    @State private var isDismissed = false
+    @Environment(FullDiskAccessViewModel.self) private var fda
 
     var body: some View {
-        if !isDismissed {
+        if fda.shouldShowBanner {
             HStack(spacing: 12) {
                 Image(systemName: "lock.shield.fill")
                     .foregroundStyle(.yellow)
@@ -17,7 +18,7 @@ struct FullDiskAccessBanner: View {
                     Text("Full Disk Access recommended")
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(.white)
-                    Text("Some directories may be skipped without it.")
+                    Text("PureMac runs entirely on your Mac. Granting access lets it scan protected folders too.")
                         .font(.system(size: 11))
                         .foregroundStyle(.white.opacity(0.6))
                 }
@@ -25,14 +26,14 @@ struct FullDiskAccessBanner: View {
                 Spacer()
 
                 Button("Grant Access") {
-                    openFullDiskAccessPrefs()
+                    fda.openSystemSettings()
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
                 .foregroundStyle(.yellow)
 
                 Button {
-                    withAnimation(.easeOut(duration: 0.2)) { isDismissed = true }
+                    fda.dismissBanner()
                 } label: {
                     Image(systemName: "xmark")
                         .font(.system(size: 11, weight: .semibold))
@@ -48,10 +49,5 @@ struct FullDiskAccessBanner: View {
             }
             .transition(.move(edge: .top).combined(with: .opacity))
         }
-    }
-
-    private func openFullDiskAccessPrefs() {
-        let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")!
-        NSWorkspace.shared.open(url)
     }
 }

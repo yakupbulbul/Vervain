@@ -8,6 +8,7 @@ struct PureMacApp: App {
     @State private var appUninstallerVM = AppUninstallerViewModel()
     @State private var diskAnalyzerVM   = DiskAnalyzerViewModel()
     @State private var cleanupCoord     = CleanupCoordinator()
+    @State private var fdaVM            = FullDiskAccessViewModel()
 
     var body: some Scene {
         WindowGroup {
@@ -17,6 +18,8 @@ struct PureMacApp: App {
                 .environment(appUninstallerVM)
                 .environment(diskAnalyzerVM)
                 .environment(cleanupCoord)
+                .environment(fdaVM)
+                .task { fdaVM.refresh() }
                 .sheet(isPresented: Binding(
                     get: { cleanupCoord.isReviewPresented },
                     set: { cleanupCoord.isReviewPresented = $0 }
