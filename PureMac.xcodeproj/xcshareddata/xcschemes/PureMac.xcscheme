@@ -35,6 +35,20 @@
                ReferencedContainer = "container:PureMac.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB7DBB6442E91DCB12243C43"
+               BuildableName = "PureMacUITests.xctest"
+               BlueprintName = "PureMacUITests"
+               ReferencedContainer = "container:PureMac.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -61,6 +75,17 @@
                BlueprintIdentifier = "FBA8B0DE95746207A043B802"
                BuildableName = "PureMacTests.xctest"
                BlueprintName = "PureMacTests"
+               ReferencedContainer = "container:PureMac.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB7DBB6442E91DCB12243C43"
+               BuildableName = "PureMacUITests.xctest"
+               BlueprintName = "PureMacUITests"
                ReferencedContainer = "container:PureMac.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -37,6 +37,7 @@ targets:
         CODE_SIGN_IDENTITY: "-"
         CODE_SIGN_STYLE: Manual
         DEVELOPMENT_TEAM: ""
+        OTHER_CODE_SIGN_FLAGS: "--deep"
 
   PureMacTests:
     type: bundle.unit-test
@@ -55,12 +56,29 @@ targets:
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/PureMac.app/Contents/MacOS/PureMac"
         GENERATE_INFOPLIST_FILE: YES
 
+  PureMacUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources:
+      - path: PureMacUITests
+    dependencies:
+      - target: PureMac
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yakupbulbul.PureMacUITests
+        SWIFT_VERSION: "6.0"
+        MACOSX_DEPLOYMENT_TARGET: "15.0"
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: PureMac
+
 schemes:
   PureMac:
     build:
       targets:
         PureMac: all
         PureMacTests: [test]
+        PureMacUITests: [test]
     test:
       targets:
         - PureMacTests
+        - PureMacUITests

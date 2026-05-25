@@ -16,6 +16,7 @@
 		1E357F3DDCBEEFE6B3287C56 /* HealthScoreBreakdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41288BB6D125AAA0F004A5 /* HealthScoreBreakdownView.swift */; };
 		1EAE90BADA01B1ECE5C6225B /* FullDiskAccessBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CFC69969E13F905E4493A7 /* FullDiskAccessBanner.swift */; };
 		20B5BFD7185EA68FCEF201B2 /* SmartScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EB73D0E8BF07975D1095C2 /* SmartScanViewModel.swift */; };
+		22A5933DF7F70E08185DB2BB /* PureMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3ED8B07A6307FE8D2BE65 /* PureMacUITests.swift */; };
 		2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0147791F9F24F101B742D /* CleanupCategoryTests.swift */; };
 		3AFD459974A122BAEF2C1608 /* CleanupItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B129CDE89F863BDF613E9 /* CleanupItemRow.swift */; };
 		4245825AD43FF469A0E1BEB5 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF49D4DC8132A07BE241CAD /* FileUtils.swift */; };
@@ -71,6 +72,13 @@
 			remoteGlobalIDString = B19E38DEAA0144A77120F39C;
 			remoteInfo = PureMac;
 		};
+		945446BD29D986737D70F235 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37BE87544E2EC9F6FF1CD280 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B19E38DEAA0144A77120F39C;
+			remoteInfo = PureMac;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +115,7 @@
 		607B9A8C7B34D6A7DCF4FFE2 /* PureMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PureMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60E78BE53D2E6705867843EA /* CleanupConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupConfirmationSheet.swift; sourceTree = "<group>"; };
 		63581B70F9B10231964E3602 /* PureMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureMacApp.swift; sourceTree = "<group>"; };
+		71A3ED8B07A6307FE8D2BE65 /* PureMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureMacUITests.swift; sourceTree = "<group>"; };
 		71B6156E2BCBDC22AA06D032 /* HealthScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthScore.swift; sourceTree = "<group>"; };
 		71CE0325A94785B58D212743 /* HealthRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRingView.swift; sourceTree = "<group>"; };
 		74BFEF2D8CE6A682AC21DA8D /* CleanupReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupReviewView.swift; sourceTree = "<group>"; };
@@ -129,6 +138,7 @@
 		E0D6E6DCABB7A85524BF2FEC /* ScanMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanMetadata.swift; sourceTree = "<group>"; };
 		E8EB73D0E8BF07975D1095C2 /* SmartScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartScanViewModel.swift; sourceTree = "<group>"; };
 		EDF0147791F9F24F101B742D /* CleanupCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupCategoryTests.swift; sourceTree = "<group>"; };
+		EF4F0D9B4398C94682A02274 /* PureMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PureMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1EB3F316AC6CD4187A8D58B /* JunkCategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JunkCategoryRow.swift; sourceTree = "<group>"; };
 		F1F4106EAD248920AD54E94E /* AppUninstallerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUninstallerViewModel.swift; sourceTree = "<group>"; };
 		F6CFC69969E13F905E4493A7 /* FullDiskAccessBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDiskAccessBanner.swift; sourceTree = "<group>"; };
@@ -140,6 +150,7 @@
 			children = (
 				E383F69184F4552E5A41D010 /* PureMac */,
 				261FB8D961FEC76F15EA523A /* PureMacTests */,
+				717DA3E955959B69BF53434F /* PureMacUITests */,
 				4562CA9E5625FA4EEEFECB6D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -195,6 +206,7 @@
 			children = (
 				311078221878708524283765 /* PureMac.app */,
 				607B9A8C7B34D6A7DCF4FFE2 /* PureMacTests.xctest */,
+				EF4F0D9B4398C94682A02274 /* PureMacUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,6 +247,14 @@
 				A18670BF6E0728BC2EFC2FA0 /* AppUninstallerView.swift */,
 			);
 			path = AppUninstaller;
+			sourceTree = "<group>";
+		};
+		717DA3E955959B69BF53434F /* PureMacUITests */ = {
+			isa = PBXGroup;
+			children = (
+				71A3ED8B07A6307FE8D2BE65 /* PureMacUITests.swift */,
+			);
+			path = PureMacUITests;
 			sourceTree = "<group>";
 		};
 		7C1729F88C0E5563E1A3DB40 /* Extensions */ = {
@@ -363,6 +383,24 @@
 			productReference = 311078221878708524283765 /* PureMac.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BB7DBB6442E91DCB12243C43 /* PureMacUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 91ED7AE24D42A1D8D36C0A34 /* Build configuration list for PBXNativeTarget "PureMacUITests" */;
+			buildPhases = (
+				547E6607E135E897002A7638 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				78DFDC3CF7EA9D8184DCD1CC /* PBXTargetDependency */,
+			);
+			name = PureMacUITests;
+			packageProductDependencies = (
+			);
+			productName = PureMacUITests;
+			productReference = EF4F0D9B4398C94682A02274 /* PureMacUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		FBA8B0DE95746207A043B802 /* PureMacTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25F40856927F2EE5BC50A0FB /* Build configuration list for PBXNativeTarget "PureMacTests" */;
@@ -394,6 +432,11 @@
 						DevelopmentTeam = "";
 						ProvisioningStyle = Manual;
 					};
+					BB7DBB6442E91DCB12243C43 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+						TestTargetID = B19E38DEAA0144A77120F39C;
+					};
 					FBA8B0DE95746207A043B802 = {
 						DevelopmentTeam = "";
 						ProvisioningStyle = Manual;
@@ -416,11 +459,20 @@
 			targets = (
 				B19E38DEAA0144A77120F39C /* PureMac */,
 				FBA8B0DE95746207A043B802 /* PureMacTests */,
+				BB7DBB6442E91DCB12243C43 /* PureMacUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		547E6607E135E897002A7638 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22A5933DF7F70E08185DB2BB /* PureMacUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63C589367B714FC06B0519E5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -497,6 +549,11 @@
 			target = B19E38DEAA0144A77120F39C /* PureMac */;
 			targetProxy = 8D91DC174C821BE74C4B518C /* PBXContainerItemProxy */;
 		};
+		78DFDC3CF7EA9D8184DCD1CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B19E38DEAA0144A77120F39C /* PureMac */;
+			targetProxy = 945446BD29D986737D70F235 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -568,6 +625,25 @@
 			};
 			name = Debug;
 		};
+		4201C8649386F8090FBE15E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yakupbulbul.PureMacUITests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+				TEST_TARGET_NAME = PureMac;
+			};
+			name = Debug;
+		};
 		62DEA95205CFC6624F5AE4DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -584,6 +660,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yakupbulbul.PureMac;
 				SDKROOT = macosx;
 				SWIFT_STRICT_CONCURRENCY = complete;
@@ -628,6 +705,25 @@
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PureMac.app/Contents/MacOS/PureMac";
+			};
+			name = Release;
+		};
+		C024A587828C83C23696AE25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yakupbulbul.PureMacUITests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+				TEST_TARGET_NAME = PureMac;
 			};
 			name = Release;
 		};
@@ -708,6 +804,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yakupbulbul.PureMac;
 				SDKROOT = macosx;
 				SWIFT_STRICT_CONCURRENCY = complete;
@@ -741,6 +838,15 @@
 			buildConfigurations = (
 				0794DC5454CB748EC1374422 /* Debug */,
 				D1B9D379DD6CC0DA24E58BCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		91ED7AE24D42A1D8D36C0A34 /* Build configuration list for PBXNativeTarget "PureMacUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4201C8649386F8090FBE15E5 /* Debug */,
+				C024A587828C83C23696AE25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
