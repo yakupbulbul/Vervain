@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SystemJunkView: View {
     @Environment(SystemJunkViewModel.self) private var vm
+    @Environment(CleanupCoordinator.self) private var coord
 
     var body: some View {
         VStack(spacing: 0) {
@@ -177,9 +178,11 @@ struct SystemJunkView: View {
                 }
             }
             Spacer()
-            Button("Clean \(vm.totalSelectedSize.compactBytes)") { vm.clean() }
-                .buttonStyle(.borderedProminent).tint(.orange)
-                .disabled(vm.totalSelectedSize == 0)
+            Button("Review & Clean \(vm.totalSelectedSize.compactBytes)") {
+                coord.startReview(vm.categories, title: "Review System Junk")
+            }
+            .buttonStyle(.borderedProminent).tint(.orange)
+            .disabled(vm.totalSelectedSize == 0)
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 12)

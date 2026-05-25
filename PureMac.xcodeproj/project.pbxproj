@@ -11,8 +11,10 @@
 		0D57250655BBE5464AA55C8D /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD83C26579DAB9A3C990650 /* SidebarView.swift */; };
 		17E49EED528F57BF899E3AFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BAAB249D511F10DE12A735 /* ContentView.swift */; };
 		1AB9BA4BDDA64D3A3731B84D /* AppUninstallerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18670BF6E0728BC2EFC2FA0 /* AppUninstallerView.swift */; };
+		1CDE71E12D8A69F1E87C5633 /* CleanupReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BFEF2D8CE6A682AC21DA8D /* CleanupReviewView.swift */; };
 		1EAE90BADA01B1ECE5C6225B /* FullDiskAccessBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CFC69969E13F905E4493A7 /* FullDiskAccessBanner.swift */; };
 		20B5BFD7185EA68FCEF201B2 /* SmartScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EB73D0E8BF07975D1095C2 /* SmartScanViewModel.swift */; };
+		3AFD459974A122BAEF2C1608 /* CleanupItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B129CDE89F863BDF613E9 /* CleanupItemRow.swift */; };
 		4245825AD43FF469A0E1BEB5 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF49D4DC8132A07BE241CAD /* FileUtils.swift */; };
 		59424627DCAB7F4B4ED1BAF9 /* JunkScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2436C0411B3B105B995EA8 /* JunkScanner.swift */; };
 		5DA2235921201405C6E46B3D /* AppUninstallerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4106EAD248920AD54E94E /* AppUninstallerViewModel.swift */; };
@@ -30,15 +32,19 @@
 		A16B8DB970A37135ED953258 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D49D49C657AC7653F6BA568 /* AppInfo.swift */; };
 		A245EC097C9434D1BD7423D1 /* DiskPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A82CABE138EE56191E32DFD /* DiskPieChart.swift */; };
 		AC246D765EFBA0E2D2A1515F /* DiskNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE154A8FA138766973CEA1 /* DiskNode.swift */; };
+		AEE0086A9E835134DDED2AA1 /* CleanupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4FBD68976DA3CBF5AA99A /* CleanupCoordinator.swift */; };
+		B17AE707820FCC9F77229B53 /* CleanupConfirmationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E78BE53D2E6705867843EA /* CleanupConfirmationSheet.swift */; };
 		B88C88EAEF63E388D3962A92 /* DiskAnalyzerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50887AC434862BC403C881EF /* DiskAnalyzerService.swift */; };
 		C08105D43CF3BDE06C3DC6FA /* DoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A94BA422B9696F2F6DCE21 /* DoneView.swift */; };
 		DBA94ECE1CEEF4AF37E57F51 /* FeatureToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12886648D5489FFE73D0F3EB /* FeatureToolbar.swift */; };
+		DBE34CE69CF88D49440F3D5D /* CleanupProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416A6621C187BDDA9E414CB /* CleanupProgressView.swift */; };
 		E0FB33E2B395BD0D24C1CCCD /* CleanupCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48324FC861F3CC710AA704D /* CleanupCategory.swift */; };
 		E1C626AAA13FC506ACAC5B46 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330010533CA041CCA381C043 /* AppFeature.swift */; };
 		E1D44D58D9D8A9B41FFBD2BB /* CleanupSelectionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC43684E3D6FA87B05CB886 /* CleanupSelectionPolicy.swift */; };
 		E1D7277553C1ED10686A5750 /* Int64+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABABDA120F631D21449582E9 /* Int64+Formatting.swift */; };
 		E5709ACDA4F246006079EC62 /* SmartScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806443ED59E4F8150F2D7486 /* SmartScanView.swift */; };
 		EDEF28CAD23E936FBED1783B /* PureMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63581B70F9B10231964E3602 /* PureMacApp.swift */; };
+		F5473915DF991C836F84CF3D /* CleanupDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F24E0B0842994AEA346BCB /* CleanupDoneView.swift */; };
 		F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B58940879213198AAB30244 /* SystemJunkViewModel.swift */; };
 		F9AD616987D739F4689E4DEB /* CleanupSourceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41D3CBDCBCD0DBD5DC19FFE /* CleanupSourceModule.swift */; };
 		FA519C45C51BA3A10C5A9614 /* HealthScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B6156E2BCBDC22AA06D032 /* HealthScore.swift */; };
@@ -52,7 +58,9 @@
 		0D49D49C657AC7653F6BA568 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		0FC43684E3D6FA87B05CB886 /* CleanupSelectionPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupSelectionPolicy.swift; sourceTree = "<group>"; };
 		12886648D5489FFE73D0F3EB /* FeatureToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToolbar.swift; sourceTree = "<group>"; };
+		1416A6621C187BDDA9E414CB /* CleanupProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupProgressView.swift; sourceTree = "<group>"; };
 		1D72748082E45E6D726D8946 /* CleanupReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupReason.swift; sourceTree = "<group>"; };
+		21C4FBD68976DA3CBF5AA99A /* CleanupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupCoordinator.swift; sourceTree = "<group>"; };
 		2A82CABE138EE56191E32DFD /* DiskPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskPieChart.swift; sourceTree = "<group>"; };
 		311078221878708524283765 /* PureMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		330010533CA041CCA381C043 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
@@ -63,15 +71,19 @@
 		50887AC434862BC403C881EF /* DiskAnalyzerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskAnalyzerService.swift; sourceTree = "<group>"; };
 		53BAAB249D511F10DE12A735 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5664D2BDAEAA9AE3A53DB364 /* PureMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PureMac.entitlements; sourceTree = "<group>"; };
+		5B0B129CDE89F863BDF613E9 /* CleanupItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupItemRow.swift; sourceTree = "<group>"; };
 		5E93EC1CBE9EA084DB221BCE /* AppScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScanner.swift; sourceTree = "<group>"; };
+		60E78BE53D2E6705867843EA /* CleanupConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupConfirmationSheet.swift; sourceTree = "<group>"; };
 		63581B70F9B10231964E3602 /* PureMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureMacApp.swift; sourceTree = "<group>"; };
 		71B6156E2BCBDC22AA06D032 /* HealthScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthScore.swift; sourceTree = "<group>"; };
 		71CE0325A94785B58D212743 /* HealthRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRingView.swift; sourceTree = "<group>"; };
+		74BFEF2D8CE6A682AC21DA8D /* CleanupReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupReviewView.swift; sourceTree = "<group>"; };
 		779EC2221374DE14F9D36900 /* DiskAnalyzerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskAnalyzerView.swift; sourceTree = "<group>"; };
 		806443ED59E4F8150F2D7486 /* SmartScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartScanView.swift; sourceTree = "<group>"; };
 		86A94BA422B9696F2F6DCE21 /* DoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneView.swift; sourceTree = "<group>"; };
 		A18670BF6E0728BC2EFC2FA0 /* AppUninstallerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUninstallerView.swift; sourceTree = "<group>"; };
 		ABABDA120F631D21449582E9 /* Int64+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Formatting.swift"; sourceTree = "<group>"; };
+		B6F24E0B0842994AEA346BCB /* CleanupDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupDoneView.swift; sourceTree = "<group>"; };
 		C1388EAC19AA6EA1D5261AAB /* CleanupItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupItem.swift; sourceTree = "<group>"; };
 		C41D3CBDCBCD0DBD5DC19FFE /* CleanupSourceModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupSourceModule.swift; sourceTree = "<group>"; };
 		C6FE154A8FA138766973CEA1 /* DiskNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskNode.swift; sourceTree = "<group>"; };
@@ -139,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				6E065D755F92505E80760AB3 /* AppUninstaller */,
+				BAAFB53EEAD4165D4B40C842 /* Cleanup */,
 				7EF3FAB82F13D7F45B6150BD /* DiskAnalyzer */,
 				D18A15E6D4B763B76B4A34B1 /* Shared */,
 				BC83BCF32A8626DB3FB644E5 /* Sidebar */,
@@ -190,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				F1F4106EAD248920AD54E94E /* AppUninstallerViewModel.swift */,
+				21C4FBD68976DA3CBF5AA99A /* CleanupCoordinator.swift */,
 				3C8A46C018233BEC8EC3315D /* DiskAnalyzerViewModel.swift */,
 				E8EB73D0E8BF07975D1095C2 /* SmartScanViewModel.swift */,
 				0B58940879213198AAB30244 /* SystemJunkViewModel.swift */,
@@ -201,6 +215,18 @@
 			isa = PBXGroup;
 			children = (
 				37F171CC37AB350FCC075176 /* CleanupService.swift */,
+			);
+			path = Cleanup;
+			sourceTree = "<group>";
+		};
+		BAAFB53EEAD4165D4B40C842 /* Cleanup */ = {
+			isa = PBXGroup;
+			children = (
+				60E78BE53D2E6705867843EA /* CleanupConfirmationSheet.swift */,
+				B6F24E0B0842994AEA346BCB /* CleanupDoneView.swift */,
+				5B0B129CDE89F863BDF613E9 /* CleanupItemRow.swift */,
+				1416A6621C187BDDA9E414CB /* CleanupProgressView.swift */,
+				74BFEF2D8CE6A682AC21DA8D /* CleanupReviewView.swift */,
 			);
 			path = Cleanup;
 			sourceTree = "<group>";
@@ -320,8 +346,14 @@
 				5DA2235921201405C6E46B3D /* AppUninstallerViewModel.swift in Sources */,
 				E0FB33E2B395BD0D24C1CCCD /* CleanupCategory.swift in Sources */,
 				5EFD3520ADEC826BF3FDFA6A /* CleanupConfidenceLevel.swift in Sources */,
+				B17AE707820FCC9F77229B53 /* CleanupConfirmationSheet.swift in Sources */,
+				AEE0086A9E835134DDED2AA1 /* CleanupCoordinator.swift in Sources */,
+				F5473915DF991C836F84CF3D /* CleanupDoneView.swift in Sources */,
 				70F99FDE757919BE784A3619 /* CleanupItem.swift in Sources */,
+				3AFD459974A122BAEF2C1608 /* CleanupItemRow.swift in Sources */,
+				DBE34CE69CF88D49440F3D5D /* CleanupProgressView.swift in Sources */,
 				6FDDC23F1925DBD26EAE3F20 /* CleanupReason.swift in Sources */,
+				1CDE71E12D8A69F1E87C5633 /* CleanupReviewView.swift in Sources */,
 				666FD0E0DA0AA11E44E15229 /* CleanupRiskLevel.swift in Sources */,
 				E1D44D58D9D8A9B41FFBD2BB /* CleanupSelectionPolicy.swift in Sources */,
 				047D410548F926BD17171391 /* CleanupService.swift in Sources */,
