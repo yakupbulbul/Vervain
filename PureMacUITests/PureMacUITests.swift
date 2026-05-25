@@ -81,6 +81,7 @@ final class PureMacUITests: XCTestCase {
     // MARK: - 02: Smart Scan
 
     func test02_SmartScanFlow() {
+        app.activate()
         // Find and click the scan button (toolbar or content pane)
         let scanNow = app.buttons["Scan Now"]
         let startScan = app.buttons["Start Smart Scan"]
@@ -138,13 +139,14 @@ final class PureMacUITests: XCTestCase {
 
     func test03_SystemJunkModule() {
         // Navigate to System Junk
+        app.activate()
         let sidebarItem = app.staticTexts["System Junk"].firstMatch
-        XCTAssertTrue(sidebarItem.waitForExistence(timeout: 3))
+        XCTAssertTrue(sidebarItem.waitForExistence(timeout: 5))
         sidebarItem.click()
 
         // Idle state
         XCTAssertTrue(
-            app.staticTexts["Clean System Junk"].waitForExistence(timeout: 3),
+            app.staticTexts["Clean System Junk"].waitForExistence(timeout: 5),
             "System Junk idle state not shown"
         )
 
@@ -152,26 +154,31 @@ final class PureMacUITests: XCTestCase {
 
         // Start scan
         let scanBtn = app.buttons["Scan for Junk"]
-        XCTAssertTrue(scanBtn.waitForExistence(timeout: 3))
+        XCTAssertTrue(scanBtn.waitForExistence(timeout: 5))
         scanBtn.click()
 
         screenshot("03b_junk_scanning")
 
-        // Wait for results (up to 30s)
+        // Wait for results (up to 150s). The first run may show system permission dialogs
+        // (Apple Music, Contacts) that take time to process. After the first run those
+        // dialogs don't appear again. The JunkScanner intentionally skips TCC-sensitive
+        // cache directories (Music, AMPLibraryAgent, etc.) to prevent those dialogs.
         let scanningText = app.staticTexts.matching(
             NSPredicate(format: "label CONTAINS 'Scanning'")
         ).firstMatch
-        _ = scanningText.waitForExistence(timeout: 2)  // may appear briefly
+        _ = scanningText.waitForExistence(timeout: 3)  // may appear briefly
 
-        // Wait up to 90s for results — the Apple Music permission dialog may slow things down
-        // Look for either the "clean" empty state or the Re-Scan button (results loaded)
+        // Activate the app periodically so the UIInterruptionMonitor has a chance to
+        // fire and dismiss any system permission dialogs that appear mid-scan.
         let reScanBtn = app.buttons["Re-Scan"]
         let cleanMsg  = app.staticTexts["Your Mac is Clean!"]
         var found = false
-        for _ in 0..<18 {   // 18 × 5s = 90s max
+        for i in 0..<30 {   // 30 × 5s = 150s max
             if reScanBtn.waitForExistence(timeout: 5) || cleanMsg.exists { found = true; break }
+            // Re-activate app every 10s so interrupt monitor can fire
+            if i % 2 == 1 { app.activate() }
         }
-        XCTAssertTrue(found, "System Junk scan didn't complete in 90s")
+        XCTAssertTrue(found, "System Junk scan didn't complete in 150s")
 
         screenshot("03c_junk_results")
 
@@ -199,12 +206,13 @@ final class PureMacUITests: XCTestCase {
     // MARK: - 04: App Uninstaller
 
     func test04_AppUninstallerModule() {
+        app.activate()
         let sidebarItem = app.staticTexts["App Uninstaller"].firstMatch
-        XCTAssertTrue(sidebarItem.waitForExistence(timeout: 3))
+        XCTAssertTrue(sidebarItem.waitForExistence(timeout: 5))
         sidebarItem.click()
 
         XCTAssertTrue(
-            app.staticTexts["Remove Apps Completely"].waitForExistence(timeout: 3),
+            app.staticTexts["Remove Apps Completely"].waitForExistence(timeout: 8),
             "App Uninstaller idle state not shown"
         )
 

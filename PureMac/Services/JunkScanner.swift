@@ -51,7 +51,7 @@ actor JunkScanner {
         var oldItems: [CleanupItem] = []
         var recentItems: [CleanupItem] = []
 
-        try enumerate(at: base, meta: &meta) { url, attrs in
+        try enumerate(at: base, meta: &meta, skipDirNames: Self.tccSensitiveCacheDirs) { url, attrs in
             let modified = attrs.contentModificationDate ?? attrs.creationDate ?? .distantPast
             let ageDays = max(0, Int(now.timeIntervalSince(modified) / 86_400))
             let size = Int64(attrs.fileSize ?? 0)
@@ -350,9 +350,25 @@ actor JunkScanner {
     /// Records inaccessible directories into `meta` instead of throwing.
     /// Synchronous so it can be called from an `actor` method without colliding
     /// with the inout/sendable rules around `async let`.
+    /// Directory names inside ~/Library/Caches that trigger TCC prompts for
+    /// Media & Apple Music or Contacts — skip them entirely to avoid dialogs.
+    private static let tccSensitiveCacheDirs: Set<String> = [
+        "com.apple.Music",
+        "com.apple.AMPLibraryAgent",
+        "com.apple.AMPDevicesAgent",
+        "com.apple.AppleMediaServices",
+        "com.apple.AppleMediaServicesUI",
+        "com.apple.AppleMediaServicesUIDynamicService",
+        "com.apple.iTunesCloud",
+        "com.apple.Contacts",
+        "com.apple.AddressBook",
+        "com.apple.AddressBookSourceSync",
+    ]
+
     private func enumerate(
         at base: URL,
         meta: inout ScanMetadata,
+        skipDirNames: Set<String> = [],
         handle: (URL, URLResourceValues) -> Void
     ) throws {
         let fm = FileManager.default
@@ -361,7 +377,7 @@ actor JunkScanner {
         let keys: Set<URLResourceKey> = [
             .isRegularFileKey, .fileSizeKey,
             .contentModificationDateKey, .creationDateKey,
-            .isSymbolicLinkKey
+            .isSymbolicLinkKey, .isDirectoryKey
         ]
 
         // Box the meta counters so the @Sendable errorHandler can update them.
@@ -387,6 +403,17 @@ actor JunkScanner {
         while let next = enumerator.nextObject() {
             try Task.checkCancellation()
             guard let url = next as? URL else { continue }
+
+            // Skip TCC-sensitive directories and their descendants
+            if !skipDirNames.isEmpty {
+                let dirName = url.lastPathComponent
+                if skipDirNames.contains(dirName) {
+                    enumerator.skipDescendants()
+                    meta.skippedCount += 1
+                    continue
+                }
+            }
+
             guard let rv = try? url.resourceValues(forKeys: keys) else {
                 meta.skippedCount += 1
                 continue
