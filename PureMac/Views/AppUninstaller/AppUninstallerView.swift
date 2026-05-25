@@ -16,6 +16,7 @@ struct AppUninstallerView: View {
             Divider().background(Color.white.opacity(0.08))
             mainContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .animation(.easeInOut(duration: 0.2), value: vm.isScanning)
         }
         .background(Color(red: 0.09, green: 0.09, blue: 0.14))
         .foregroundStyle(.white)
@@ -78,10 +79,16 @@ struct AppUninstallerView: View {
     }
 
     private var loadingView: some View {
-        VStack(spacing: 16) {
-            ProgressView().controlSize(.large).tint(.red)
-            Text("Scanning installed apps…").foregroundStyle(.white.opacity(0.6))
+        VStack(spacing: 20) {
+            ProgressView().controlSize(.extraLarge).tint(.red)
+            VStack(spacing: 6) {
+                Text("Scanning installed apps…").font(.headline)
+                Text("Looking in /Applications and ~/Applications.")
+                    .font(.caption).foregroundStyle(.white.opacity(0.55))
+                    .multilineTextAlignment(.center)
+            }
         }
+        .padding(40)
     }
 
     // MARK: - Split layout
@@ -172,7 +179,9 @@ struct AppUninstallerView: View {
                 coord.startReview(
                     vm.buildCleanupCategories(),
                     title: "Review Uninstall"
-                )
+                ) {
+                    vm.scan()   // refresh app list after uninstall completes
+                }
             }
             .buttonStyle(.borderedProminent).tint(.red)
         }

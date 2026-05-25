@@ -27,6 +27,7 @@ struct SmartScanView: View {
 
             mainContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .animation(.easeInOut(duration: 0.25), value: vm.isScanning)
         }
         .background(Color(red: 0.09, green: 0.09, blue: 0.14))
         .foregroundStyle(.white)

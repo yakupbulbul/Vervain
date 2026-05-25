@@ -4,28 +4,26 @@ import SwiftUI
 @MainActor
 final class SystemJunkViewModel {
 
-    enum State {
+    enum State: Equatable {
         case idle
         case scanning
         case results
-        case cleaning
-        case done(CleanupResult)
         case error(String)
+
+        static func == (lhs: State, rhs: State) -> Bool {
+            switch (lhs, rhs) {
+            case (.idle, .idle), (.scanning, .scanning), (.results, .results): return true
+            case (.error(let l), .error(let r)): return l == r
+            default: return false
+            }
+        }
     }
 
     var state: State = .idle
     var categories: [CleanupCategory] = []
     var metadata = ScanMetadata()
-    var progress: CleanupProgress?
 
-    var isScanning: Bool {
-        if case .scanning = state { return true }
-        return false
-    }
-    var isCleaning: Bool {
-        if case .cleaning = state { return true }
-        return false
-    }
+    var isScanning: Bool { state == .scanning }
 
     var totalSelectedSize: Int64 {
         categories.reduce(0) { $0 + $1.selectedSize }
@@ -42,9 +40,7 @@ final class SystemJunkViewModel {
     }
 
     private let scanner = JunkScanner()
-    private let cleanupService = CleanupService()
     private var scanTask: Task<Void, Never>?
-    private var cleanTask: Task<Void, Never>?
 
     // MARK: - Scanning
 
@@ -87,38 +83,5 @@ final class SystemJunkViewModel {
 
     func resetToDefaults() {
         for idx in categories.indices { categories[idx].resetToDefaults() }
-    }
-
-    // MARK: - Cleanup
-
-    func clean() {
-        cleanTask?.cancel()
-        cleanTask = Task {
-            state = .cleaning
-            progress = nil
-            do {
-                let toClean = categories
-                let result = try await cleanupService.execute(toClean) { [weak self] p in
-                    Task { @MainActor in
-                        self?.progress = p
-                    }
-                }
-                // Remove cleaned items from categories
-                for idx in categories.indices {
-                    categories[idx].items.removeAll { $0.isSelected }
-                }
-                categories.removeAll { $0.items.isEmpty }
-                state = .done(result)
-            } catch is CancellationError {
-                state = .results
-            } catch {
-                state = .error(error.localizedDescription)
-            }
-        }
-    }
-
-    func dismissResult() {
-        state = categories.isEmpty ? .idle : .results
-        progress = nil
     }
 }

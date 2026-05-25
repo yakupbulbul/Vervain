@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedFeature: AppFeature? = .smartScan
+    @Environment(FullDiskAccessViewModel.self) private var fda
 
     var body: some View {
         NavigationSplitView(columnVisibility: .constant(.all)) {
@@ -16,6 +17,7 @@ struct ContentView: View {
                     detailView(for: selectedFeature)
                         .frame(minWidth: 600, minHeight: 500)
                 }
+                .animation(.easeInOut(duration: 0.25), value: fda.shouldShowBanner)
             }
         }
         .navigationSplitViewStyle(.prominentDetail)

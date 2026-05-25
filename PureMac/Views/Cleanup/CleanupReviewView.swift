@@ -7,12 +7,17 @@ struct CleanupReviewView: View {
 
     @State private var expanded: Set<UUID> = []
 
+    /// Tracks the last non-idle state so the sheet content stays visible
+    /// during the dismiss animation (prevents the "blank flash" bug where
+    /// state flips to .idle before the sheet has finished sliding away).
+    @State private var displayedState: CleanupCoordinator.State = .reviewing
+
     var body: some View {
         VStack(spacing: 0) {
             header
             Divider().background(Color.white.opacity(0.08))
 
-            switch coord.state {
+            switch displayedState {
             case .reviewing:
                 reviewBody
             case .confirming:
@@ -28,6 +33,21 @@ struct CleanupReviewView: View {
         .frame(width: 720, height: 560)
         .background(Color(red: 0.09, green: 0.09, blue: 0.14))
         .foregroundStyle(.white)
+        .onAppear {
+            // Always start fresh in reviewing state and auto-expand the first category
+            displayedState = .reviewing
+            if let first = coord.categories.first {
+                expanded = [first.id]
+            }
+        }
+        .onChange(of: coord.state) { _, new in
+            // Only advance displayedState when state is meaningful.
+            // When state returns to .idle (sheet is dismissing), keep the last
+            // real content visible so there's no blank flash during animation.
+            if new != .idle {
+                displayedState = new
+            }
+        }
     }
 
     // MARK: - Header
@@ -37,7 +57,7 @@ struct CleanupReviewView: View {
             Text(coord.presentationTitle)
                 .font(.title3.bold())
             Spacer()
-            if coord.state == .reviewing {
+            if displayedState == .reviewing {
                 Button("Reset Defaults") { coord.resetToDefaults() }
                     .buttonStyle(.bordered).controlSize(.small)
                     .foregroundStyle(.white)
@@ -112,8 +132,9 @@ struct CleanupReviewView: View {
                         .foregroundStyle(.white.opacity(0.45))
                 }
                 Spacer()
-                if let risk = category.maxSelectedRisk {
-                    riskPill(risk)
+                // Only show a risk pill when there are selected items above safe level
+                if !category.noneSelected && category.maxSelectedRisk > .safe {
+                    riskPill(category.maxSelectedRisk)
                 }
             }
             .padding(.horizontal, 16).padding(.vertical, 10)
@@ -154,8 +175,13 @@ struct CleanupReviewView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(coord.totalSelectedCount) item\(coord.totalSelectedCount == 1 ? "" : "s") selected")
                     .font(.caption).foregroundStyle(.white.opacity(0.5))
-                Text(coord.totalSelectedSize.formattedBytes)
-                    .font(.title3.bold()).foregroundStyle(.orange)
+                if coord.totalSelectedCount == 0 {
+                    Text("Select items above to clean")
+                        .font(.caption).foregroundStyle(.white.opacity(0.35))
+                } else {
+                    Text(coord.totalSelectedSize.formattedBytes)
+                        .font(.title3.bold()).foregroundStyle(.orange)
+                }
             }
             // Inline risk summary
             if coord.hasAnyRiskySelected || coord.hasAnyReviewSelected {

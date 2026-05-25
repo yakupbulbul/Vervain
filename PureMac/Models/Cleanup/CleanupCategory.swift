@@ -45,9 +45,9 @@ struct CleanupCategory: Identifiable, Sendable {
         Dictionary(grouping: items, by: \.riskLevel).mapValues(\.count)
     }
 
-    /// Highest risk level among currently selected items.
-    var maxSelectedRisk: CleanupRiskLevel? {
-        items.filter(\.isSelected).map(\.riskLevel).max()
+    /// Highest risk level among currently selected items. Defaults to `.safe` if none are selected.
+    var maxSelectedRisk: CleanupRiskLevel {
+        items.filter(\.isSelected).map(\.riskLevel).max() ?? .safe
     }
 
     /// True if every item in the category is currently selected.

@@ -53,6 +53,7 @@ final class CleanupCoordinator {
 
     private let service = CleanupService()
     private var executeTask: Task<Void, Never>?
+    private var onComplete: (() -> Void)?
 
     // MARK: - Derived
 
@@ -78,7 +79,8 @@ final class CleanupCoordinator {
 
     /// Module entry point: opens the universal review sheet with these
     /// categories pre-loaded.
-    func startReview(_ categories: [CleanupCategory], title: String = "Review Cleanup") {
+    func startReview(_ categories: [CleanupCategory], title: String = "Review Cleanup", onComplete: (() -> Void)? = nil) {
+        self.onComplete = onComplete
         self.categories = categories
         self.presentationTitle = title
         self.progress = nil
@@ -128,6 +130,7 @@ final class CleanupCoordinator {
 
     /// User closed the cleanup sheet at any stage.
     func cancel() {
+        onComplete = nil    // discarded — no cleanup happened on cancel path
         executeTask?.cancel()
         executeTask = nil
         state = .idle
@@ -137,7 +140,11 @@ final class CleanupCoordinator {
     }
 
     /// User pressed Done on the result screen.
-    func finish() { cancel() }
+    func finish() {
+        onComplete?()   // call before cancel() clears it
+        onComplete = nil
+        cancel()
+    }
 
     // MARK: - Selection helpers (mirror SystemJunkViewModel for reuse)
 

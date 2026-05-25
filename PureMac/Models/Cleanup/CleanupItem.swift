@@ -60,7 +60,7 @@ struct CleanupItem: Identifiable, Sendable, Hashable {
         let path = url.path
         let home = FileManager.default.homeDirectoryForCurrentUser.path
         if path.hasPrefix(home) {
-            return "~" + path.dropFirst(home.count)
+            return "~" + String(path.dropFirst(home.count))
         }
         return path
     }

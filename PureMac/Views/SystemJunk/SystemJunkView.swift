@@ -12,6 +12,7 @@ struct SystemJunkView: View {
             Divider().background(Color.white.opacity(0.08))
             mainContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .animation(.easeInOut(duration: 0.2), value: vm.isScanning)
         }
         .background(Color(red: 0.09, green: 0.09, blue: 0.14))
         .foregroundStyle(.white)
@@ -48,10 +49,6 @@ struct SystemJunkView: View {
             loadingView
         case .results:
             resultsView
-        case .cleaning:
-            cleaningView
-        case .done(let result):
-            doneView(result)
         case .error(let msg):
             ContentUnavailableView("Scan Failed",
                                    systemImage: "exclamationmark.triangle.fill",
@@ -82,10 +79,16 @@ struct SystemJunkView: View {
     }
 
     private var loadingView: some View {
-        VStack(spacing: 16) {
-            ProgressView().controlSize(.large).tint(.orange)
-            Text("Scanning…").foregroundStyle(.white.opacity(0.6))
+        VStack(spacing: 20) {
+            ProgressView().controlSize(.extraLarge).tint(.orange)
+            VStack(spacing: 6) {
+                Text("Scanning your Mac…").font(.headline)
+                Text("Checking caches, logs, language files, and downloads.")
+                    .font(.caption).foregroundStyle(.white.opacity(0.55))
+                    .multilineTextAlignment(.center)
+            }
         }
+        .padding(40)
     }
 
     @ViewBuilder
@@ -114,53 +117,6 @@ struct SystemJunkView: View {
         }
     }
 
-    private var cleaningView: some View {
-        VStack(spacing: 24) {
-            ProgressView(value: vm.progress?.fraction ?? 0)
-                .progressViewStyle(.linear).tint(.orange)
-                .frame(width: 360)
-            VStack(spacing: 4) {
-                Text("Cleaning…").font(.title3.bold())
-                if let p = vm.progress {
-                    Text("\(p.currentIndex) of \(p.totalCount) · \(p.bytesFreed.formattedBytes) freed")
-                        .font(.caption).foregroundStyle(.white.opacity(0.5))
-                }
-            }
-        }
-    }
-
-    private func doneView(_ result: CleanupResult) -> some View {
-        VStack(spacing: 20) {
-            Image(systemName: result.allSucceeded ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
-                .font(.system(size: 60))
-                .foregroundStyle(result.allSucceeded ? .green : .yellow)
-            Text(result.allSucceeded ? "Cleanup Complete" : "Completed with Issues")
-                .font(.title2.bold())
-            Text("\(result.freedBytes.formattedBytes) freed · moved \(result.successCount) item\(result.successCount == 1 ? "" : "s") to Trash")
-                .foregroundStyle(.white.opacity(0.7))
-            if result.failedCount > 0 {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("\(result.failedCount) item\(result.failedCount == 1 ? "" : "s") could not be removed:")
-                        .font(.caption.bold()).foregroundStyle(.yellow)
-                    ForEach(result.failures.prefix(5)) { f in
-                        Text("• \(f.item.name) — \(f.reason.displayText)")
-                            .font(.caption2).foregroundStyle(.white.opacity(0.6))
-                    }
-                    if result.failures.count > 5 {
-                        Text("and \(result.failures.count - 5) more…").font(.caption2).foregroundStyle(.white.opacity(0.4))
-                    }
-                }
-                .padding(.horizontal, 40)
-            }
-            HStack(spacing: 12) {
-                Button("Open Trash") { openTrash() }
-                    .buttonStyle(.bordered).controlSize(.large).foregroundStyle(.white)
-                Button("Done") { vm.dismissResult() }
-                    .buttonStyle(.borderedProminent).controlSize(.large).tint(.orange)
-            }
-        }
-    }
-
     // MARK: - Bottom bar
 
     private var bottomBar: some View {
@@ -179,7 +135,9 @@ struct SystemJunkView: View {
             }
             Spacer()
             Button("Review & Clean \(vm.totalSelectedSize.compactBytes)") {
-                coord.startReview(vm.categories, title: "Review System Junk")
+                coord.startReview(vm.categories, title: "Review System Junk") {
+                    vm.scan()   // refresh after coordinator cleanup completes
+                }
             }
             .buttonStyle(.borderedProminent).tint(.orange)
             .disabled(vm.totalSelectedSize == 0)
@@ -198,11 +156,5 @@ struct SystemJunkView: View {
         }
         .padding(.horizontal, 16).padding(.vertical, 8)
         .background(Color.yellow.opacity(0.08))
-    }
-
-    private func openTrash() {
-        let trash = FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent(".Trash")
-        NSWorkspace.shared.open(trash)
     }
 }
