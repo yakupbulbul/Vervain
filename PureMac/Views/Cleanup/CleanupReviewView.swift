@@ -6,6 +6,9 @@ struct CleanupReviewView: View {
     @Environment(CleanupCoordinator.self) private var coord
 
     @State private var expanded: Set<UUID> = []
+    @State private var showAllItems: Set<UUID> = []
+
+    private static let maxVisibleItems = 200
 
     /// Tracks the last non-idle state so the sheet content stays visible
     /// during the dismiss animation (prevents the "blank flash" bug where
@@ -34,16 +37,16 @@ struct CleanupReviewView: View {
         .background(Color(red: 0.09, green: 0.09, blue: 0.14))
         .foregroundStyle(.white)
         .onAppear {
-            // Always start fresh in reviewing state and auto-expand the first category
             displayedState = .reviewing
-            if let first = coord.categories.first {
+            showAllItems = []
+            // Auto-expand first category only if it has a manageable number of items
+            if let first = coord.categories.first, first.items.count <= Self.maxVisibleItems {
                 expanded = [first.id]
+            } else {
+                expanded = []
             }
         }
         .onChange(of: coord.state) { _, new in
-            // Only advance displayedState when state is meaningful.
-            // When state returns to .idle (sheet is dismissing), keep the last
-            // real content visible so there's no blank flash during animation.
             if new != .idle {
                 displayedState = new
             }
@@ -85,12 +88,19 @@ struct CleanupReviewView: View {
                     ForEach(coord.categories) { category in
                         categoryHeader(category)
                         if expanded.contains(category.id) {
-                            ForEach(category.items) { item in
+                            let showAll = showAllItems.contains(category.id)
+                            let visible = showAll
+                                ? category.items
+                                : Array(category.items.prefix(Self.maxVisibleItems))
+                            ForEach(visible) { item in
                                 CleanupItemRow(item: item) {
                                     coord.toggleItem(categoryID: category.id, itemID: item.id)
                                 }
                                 .background(Color.white.opacity(0.02))
                                 Divider().background(Color.white.opacity(0.05))
+                            }
+                            if !showAll && category.items.count > Self.maxVisibleItems {
+                                showMoreButton(category: category)
                             }
                         }
                     }
@@ -99,6 +109,24 @@ struct CleanupReviewView: View {
             Divider().background(Color.white.opacity(0.08))
             footer
         }
+    }
+
+    private func showMoreButton(category: CleanupCategory) -> some View {
+        let remaining = category.items.count - Self.maxVisibleItems
+        return Button {
+            showAllItems.insert(category.id)
+        } label: {
+            HStack {
+                Image(systemName: "ellipsis.circle")
+                    .foregroundStyle(.blue)
+                Text("Show \(remaining) more items…")
+                    .font(.system(size: 12, weight: .medium))
+                Spacer()
+            }
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal, 16).padding(.vertical, 10)
+        .background(Color.white.opacity(0.03))
     }
 
     private func categoryHeader(_ category: CleanupCategory) -> some View {

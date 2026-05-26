@@ -6,6 +6,13 @@ struct AppUninstallerView: View {
 
     @State private var searchText: String = ""
     @State private var selectedDetailID: UUID?
+    @State private var sortOrder: SortOrder = .size
+
+    enum SortOrder: String, CaseIterable {
+        case size = "Size"
+        case name = "Name"
+        case date = "Date"
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -96,7 +103,7 @@ struct AppUninstallerView: View {
     private var splitView: some View {
         HSplitView {
             appListPane
-                .frame(minWidth: 320)
+                .frame(minWidth: 360, idealWidth: 420)
             detailPane
                 .frame(minWidth: 320)
         }
@@ -104,37 +111,56 @@ struct AppUninstallerView: View {
 
     private var appListPane: some View {
         VStack(spacing: 0) {
-            // Search bar
+            // Search + sort bar
             HStack(spacing: 8) {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(.white.opacity(0.4))
                 TextField("Search apps…", text: $searchText)
                     .textFieldStyle(.plain)
                     .foregroundStyle(.white)
+                Spacer()
+                Picker("Sort", selection: $sortOrder) {
+                    ForEach(SortOrder.allCases, id: \.self) { order in
+                        Text(order.rawValue).tag(order)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 160)
             }
-            .padding(.horizontal, 14).padding(.vertical, 10)
-            .background(Color.white.opacity(0.06))
+            .padding(.horizontal, 14).padding(.vertical, 8)
+            .background(Color.white.opacity(0.04))
 
-            List(selection: $selectedDetailID) {
-                ForEach(filteredApps) { app in
-                    AppRow(
-                        app: app,
-                        isSelected: vm.selectedIDs.contains(app.id),
-                        isScanningLeftovers: vm.scanningLeftoversID == app.id,
-                        onToggle: { vm.toggleSelection(app.id) },
-                        onScanLeftovers: { vm.scanLeftovers(for: app) }
-                    )
-                    .tag(app.id)
-                    .listRowBackground(
-                        vm.selectedIDs.contains(app.id)
-                            ? Color.red.opacity(0.10)
-                            : Color.white.opacity(0.04)
-                    )
-                    .listRowSeparatorTint(Color.white.opacity(0.06))
+            // Stats bar
+            HStack(spacing: 16) {
+                Text("\(filteredApps.count) apps")
+                    .font(.caption).foregroundStyle(.white.opacity(0.5))
+                Spacer()
+                if !vm.selectedIDs.isEmpty {
+                    Text("\(vm.selectedIDs.count) selected")
+                        .font(.caption.bold()).foregroundStyle(.red)
                 }
             }
-            .listStyle(.inset)
-            .scrollContentBackground(.hidden)
+            .padding(.horizontal, 14).padding(.vertical, 6)
+            .background(Color.white.opacity(0.02))
+
+            Divider().background(Color.white.opacity(0.06))
+
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(filteredApps) { app in
+                        AppRow(
+                            app: app,
+                            isSelected: vm.selectedIDs.contains(app.id),
+                            isDetailSelected: selectedDetailID == app.id,
+                            isScanningLeftovers: vm.scanningLeftoversID == app.id,
+                            onToggle: { vm.toggleSelection(app.id) },
+                            onSelect: { selectedDetailID = app.id },
+                            onScanLeftovers: { vm.scanLeftovers(for: app) }
+                        )
+                        Divider().background(Color.white.opacity(0.05))
+                    }
+                }
+            }
 
             if !vm.selectedIDs.isEmpty {
                 uninstallBar
@@ -144,9 +170,13 @@ struct AppUninstallerView: View {
 
     private var filteredApps: [AppInfo] {
         let q = searchText.lowercased()
-        if q.isEmpty { return vm.apps }
-        return vm.apps.filter {
+        let base = q.isEmpty ? vm.apps : vm.apps.filter {
             $0.name.lowercased().contains(q) || $0.bundleID.lowercased().contains(q)
+        }
+        switch sortOrder {
+        case .size: return base.sorted { $0.bundleSize > $1.bundleSize }
+        case .name: return base.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+        case .date: return base.sorted { ($0.lastModifiedDate ?? .distantPast) > ($1.lastModifiedDate ?? .distantPast) }
         }
     }
 
@@ -159,34 +189,49 @@ struct AppUninstallerView: View {
                 onScanLeftovers: { vm.scanLeftovers(for: app) }
             )
         } else {
-            ContentUnavailableView("Select an app",
-                                   systemImage: "app.dashed",
-                                   description: Text("Pick an app from the list to see details."))
-                .foregroundStyle(.white)
+            VStack(spacing: 16) {
+                Image(systemName: "app.dashed")
+                    .font(.system(size: 48))
+                    .foregroundStyle(.white.opacity(0.2))
+                Text("Select an app")
+                    .font(.title3.bold()).foregroundStyle(.white.opacity(0.5))
+                Text("Pick an app from the list to see details.")
+                    .font(.caption).foregroundStyle(.white.opacity(0.3))
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 
     private var uninstallBar: some View {
-        HStack {
+        HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(vm.selectedIDs.count) app\(vm.selectedIDs.count == 1 ? "" : "s") selected")
-                    .font(.caption).foregroundStyle(.white.opacity(0.5))
+                    .font(.system(size: 12, weight: .medium)).foregroundStyle(.white.opacity(0.6))
                 Text(vm.totalSelectedSize.formattedBytes)
-                    .font(.headline).foregroundStyle(.red)
+                    .font(.system(size: 16, weight: .bold, design: .rounded)).foregroundStyle(.red)
             }
             Spacer()
+            Button("Deselect All") {
+                vm.selectedIDs.removeAll()
+            }
+            .buttonStyle(.bordered).controlSize(.small).foregroundStyle(.white)
             Button("Review & Uninstall") {
                 coord.startReview(
                     vm.buildCleanupCategories(),
                     title: "Review Uninstall"
                 ) {
-                    vm.scan()   // refresh app list after uninstall completes
+                    vm.scan()
                 }
             }
             .buttonStyle(.borderedProminent).tint(.red)
         }
         .padding(.horizontal, 16).padding(.vertical, 12)
-        .background(Color(red: 0.09, green: 0.09, blue: 0.14))
+        .background(
+            Color.red.opacity(0.08)
+                .overlay(alignment: .top) {
+                    Divider().background(Color.red.opacity(0.3))
+                }
+        )
     }
 }
 
@@ -195,61 +240,96 @@ struct AppUninstallerView: View {
 struct AppRow: View {
     let app: AppInfo
     let isSelected: Bool
+    let isDetailSelected: Bool
     let isScanningLeftovers: Bool
     let onToggle: () -> Void
+    let onSelect: () -> Void
     let onScanLeftovers: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
+            // Checkbox
             Button(action: onToggle) {
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .foregroundStyle(isSelected ? .red : .white.opacity(0.3))
-                    .font(.system(size: 18))
+                    .foregroundStyle(isSelected ? .red : .white.opacity(0.25))
+                    .font(.system(size: 20))
             }
             .buttonStyle(.plain)
 
+            // App icon
             AppIconView(appURL: app.url)
-                .frame(width: 28, height: 28)
+                .frame(width: 40, height: 40)
+                .clipShape(RoundedRectangle(cornerRadius: 9))
 
-            VStack(alignment: .leading, spacing: 2) {
+            // App info
+            VStack(alignment: .leading, spacing: 3) {
                 HStack(spacing: 6) {
-                    Text(app.name).font(.system(size: 13, weight: .semibold))
+                    Text(app.name)
+                        .font(.system(size: 14, weight: .semibold))
+                        .lineLimit(1)
                     if let v = app.version {
-                        Text(v).font(.system(size: 10))
-                            .foregroundStyle(.white.opacity(0.4))
+                        Text(v)
+                            .font(.system(size: 10, design: .rounded))
+                            .foregroundStyle(.white.opacity(0.35))
+                            .lineLimit(1)
                     }
                 }
-                Text(app.bundleID).font(.caption)
-                    .foregroundStyle(.white.opacity(0.4)).lineLimit(1)
+                Text(app.bundleID)
+                    .font(.system(size: 10, design: .monospaced))
+                    .foregroundStyle(.white.opacity(0.3))
+                    .lineLimit(1)
             }
 
             Spacer()
 
-            SizeBadge(bytes: app.bundleSize, color: .blue)
+            // Size badge
+            Text(app.bundleSize.compactBytes)
+                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 8).padding(.vertical, 3)
+                .background(sizeColor(app.bundleSize).opacity(0.2), in: Capsule())
 
+            // Leftovers status
             Group {
                 if isScanningLeftovers {
                     ProgressView().controlSize(.mini).tint(.orange)
-                        .frame(width: 70)
                 } else if app.leftoverScanned {
                     if app.leftoverSize > 0 {
-                        SizeBadge(bytes: app.leftoverSize, color: .orange)
-                            .frame(width: 70, alignment: .trailing)
+                        Text("+\(app.leftoverSize.compactBytes)")
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .foregroundStyle(.orange)
                     } else {
-                        Text("Clean").font(.caption)
-                            .foregroundStyle(.green.opacity(0.8))
-                            .frame(width: 70, alignment: .trailing)
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 12))
+                            .foregroundStyle(.green.opacity(0.7))
                     }
                 } else {
-                    Button("Leftovers") { onScanLeftovers() }
-                        .buttonStyle(.borderless).font(.caption)
-                        .foregroundStyle(.white.opacity(0.5))
-                        .frame(width: 70, alignment: .trailing)
+                    Button {
+                        onScanLeftovers()
+                    } label: {
+                        Text("Leftovers")
+                            .font(.system(size: 10, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.4))
+                    }
+                    .buttonStyle(.borderless)
                 }
             }
+            .frame(width: 70, alignment: .trailing)
         }
-        .padding(.vertical, 4)
+        .padding(.horizontal, 14).padding(.vertical, 8)
+        .background(
+            isDetailSelected
+                ? Color.white.opacity(0.06)
+                : (isSelected ? Color.red.opacity(0.06) : Color.clear)
+        )
         .contentShape(Rectangle())
-        .onTapGesture { onToggle() }
+        .onTapGesture { onSelect() }
+    }
+
+    private func sizeColor(_ bytes: Int64) -> Color {
+        if bytes > 1_000_000_000 { return .red }
+        if bytes > 500_000_000 { return .orange }
+        if bytes > 100_000_000 { return .yellow }
+        return .blue
     }
 }

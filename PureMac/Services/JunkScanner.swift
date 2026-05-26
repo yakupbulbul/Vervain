@@ -13,19 +13,21 @@ actor JunkScanner {
 
     // MARK: - Public API
 
-    /// Performs a full scan across the five System Junk categories.
+    /// Performs a full scan across all System Junk categories including
+    /// developer tools, containers, and other "System Data" paths.
     /// Returns categories whose items have already had selection policy applied.
     /// `metadata` reports scanned/inaccessible counts and any per-path errors.
     func scan() async throws -> (categories: [CleanupCategory], metadata: ScanMetadata) {
         let started = Date()
 
-        async let caches    = scanUserCaches()
-        async let logs      = scanLogs()
-        async let langs     = scanLanguageFiles()
-        async let trash     = scanTrash()
-        async let downloads = scanDownloads()
+        async let caches     = scanUserCaches()
+        async let logs       = scanLogs()
+        async let langs      = scanLanguageFiles()
+        async let trash      = scanTrash()
+        async let downloads  = scanDownloads()
+        async let systemData = scanSystemData()
 
-        let results = try await [caches, logs, langs, trash, downloads]
+        let results = try await [caches, logs, langs, trash, downloads, systemData]
 
         var allCategories: [CleanupCategory] = []
         var combined = ScanMetadata()
@@ -224,6 +226,137 @@ actor JunkScanner {
             sourceModule: .systemJunk,
             items: items
         )]
+        return ScanProduct(categories: cats, meta: meta)
+    }
+
+    // MARK: - System Data (developer caches, containers, package managers)
+
+    private func scanSystemData() async throws -> ScanProduct {
+        let home = FileManager.default.homeDirectoryForCurrentUser
+        let fm = FileManager.default
+        var meta = ScanMetadata()
+
+        struct SystemDataTarget {
+            let path: String
+            let title: String
+            let reason: CleanupReason
+            let risk: CleanupRiskLevel
+            let confidence: CleanupConfidenceLevel
+        }
+
+        let targets: [SystemDataTarget] = [
+            .init(path: "Library/Developer/Xcode/DerivedData",
+                  title: "Xcode Build Cache",
+                  reason: .custom("Xcode derived data — rebuilds automatically"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Developer/CoreSimulator/Caches",
+                  title: "Simulator Caches",
+                  reason: .custom("iOS Simulator caches — recreated on demand"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Developer/Xcode/iOS DeviceSupport",
+                  title: "iOS Device Support",
+                  reason: .custom("Debug symbols for connected devices — re-downloaded on next connect"),
+                  risk: .review, confidence: .high),
+            .init(path: "Library/Developer/Xcode/watchOS DeviceSupport",
+                  title: "watchOS Device Support",
+                  reason: .custom("Debug symbols for Apple Watch — re-downloaded on next connect"),
+                  risk: .review, confidence: .high),
+            .init(path: "Library/Developer/Xcode/Archives",
+                  title: "Xcode Archives",
+                  reason: .custom("Archived app builds — only needed for App Store submissions"),
+                  risk: .risky, confidence: .high),
+            .init(path: "Library/Caches/Homebrew",
+                  title: "Homebrew Cache",
+                  reason: .custom("Package manager download cache — re-downloaded on install"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Caches/pip",
+                  title: "Python pip Cache",
+                  reason: .custom("Python package cache — re-downloaded on install"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Caches/yarn",
+                  title: "Yarn Cache",
+                  reason: .custom("JavaScript package cache — re-downloaded on install"),
+                  risk: .safe, confidence: .high),
+            .init(path: ".npm/_cacache",
+                  title: "npm Cache",
+                  reason: .custom("Node.js package cache — re-downloaded on install"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Caches/CocoaPods",
+                  title: "CocoaPods Cache",
+                  reason: .custom("iOS dependency cache — re-downloaded on pod install"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Caches/org.carthage.CarthageKit",
+                  title: "Carthage Cache",
+                  reason: .custom("iOS dependency cache — re-downloaded on build"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Containers/com.docker.docker/Data",
+                  title: "Docker Data",
+                  reason: .custom("Docker images, containers, and volumes"),
+                  risk: .risky, confidence: .high),
+            .init(path: "Library/Android/sdk",
+                  title: "Android SDK",
+                  reason: .custom("Android development SDK — re-downloaded via SDK Manager"),
+                  risk: .risky, confidence: .high),
+            .init(path: "Library/Caches/com.apple.dt.Xcode",
+                  title: "Xcode Internal Cache",
+                  reason: .custom("Xcode internal caches — rebuilt automatically"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Developer/Xcode/UserData/IB Support",
+                  title: "Interface Builder Cache",
+                  reason: .custom("Interface Builder support files — recreated on demand"),
+                  risk: .safe, confidence: .high),
+        ]
+
+        var devItems: [CleanupItem] = []
+        var packageItems: [CleanupItem] = []
+
+        for target in targets {
+            try Task.checkCancellation()
+            let url = home.appendingPathComponent(target.path)
+            guard fm.fileExists(atPath: url.path) else { continue }
+
+            let size = directorySize(at: url)
+            guard size > 10_000_000 else { continue } // Skip < 10 MB
+
+            let item = CleanupItem(
+                url: url,
+                size: size,
+                category: "System Data",
+                reason: target.reason,
+                riskLevel: target.risk,
+                confidenceLevel: target.confidence,
+                sourceModule: .systemJunk
+            )
+
+            let isDev = target.path.contains("Developer") || target.path.contains("Android")
+                     || target.path.contains("docker")
+            if isDev {
+                devItems.append(item)
+            } else {
+                packageItems.append(item)
+            }
+            meta.scannedCount += 1
+        }
+
+        var cats: [CleanupCategory] = []
+        if !devItems.isEmpty {
+            cats.append(CleanupCategory(
+                title: "Developer Caches",
+                subtitle: "Xcode, simulators, and dev tool data",
+                icon: "hammer.fill",
+                sourceModule: .systemJunk,
+                items: devItems.sorted { $0.size > $1.size }
+            ))
+        }
+        if !packageItems.isEmpty {
+            cats.append(CleanupCategory(
+                title: "Package Manager Caches",
+                subtitle: "Homebrew, npm, pip, CocoaPods, and others",
+                icon: "shippingbox.fill",
+                sourceModule: .systemJunk,
+                items: packageItems.sorted { $0.size > $1.size }
+            ))
+        }
         return ScanProduct(categories: cats, meta: meta)
     }
 

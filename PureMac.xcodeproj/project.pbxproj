@@ -48,6 +48,7 @@
 		C5D21F311DB26BEBF4222C90 /* FullDiskAccessProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105AFAAA6411A48E5DCBCB49 /* FullDiskAccessProbe.swift */; };
 		DBA94ECE1CEEF4AF37E57F51 /* FeatureToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12886648D5489FFE73D0F3EB /* FeatureToolbar.swift */; };
 		DBE34CE69CF88D49440F3D5D /* CleanupProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416A6621C187BDDA9E414CB /* CleanupProgressView.swift */; };
+		DDD6BA35DBF32E7A6B5F6F8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2EA41E1096FA8E3B916AD13 /* Assets.xcassets */; };
 		DF259EE91C15CDC7B12306E7 /* RecommendationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7A8D99FF7988BB9004308 /* RecommendationCard.swift */; };
 		DF4C54FACFF1E5E1EDED628C /* HealthScoreBreakdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFC84CE8C571AC3FAB99DE8 /* HealthScoreBreakdown.swift */; };
 		E0FB33E2B395BD0D24C1CCCD /* CleanupCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48324FC861F3CC710AA704D /* CleanupCategory.swift */; };
@@ -125,6 +126,7 @@
 		86A94BA422B9696F2F6DCE21 /* DoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneView.swift; sourceTree = "<group>"; };
 		A18670BF6E0728BC2EFC2FA0 /* AppUninstallerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUninstallerView.swift; sourceTree = "<group>"; };
 		ABABDA120F631D21449582E9 /* Int64+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Formatting.swift"; sourceTree = "<group>"; };
+		B2EA41E1096FA8E3B916AD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5A7A8D99FF7988BB9004308 /* RecommendationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCard.swift; sourceTree = "<group>"; };
 		B6F24E0B0842994AEA346BCB /* CleanupDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupDoneView.swift; sourceTree = "<group>"; };
 		C1388EAC19AA6EA1D5261AAB /* CleanupItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupItem.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 		E383F69184F4552E5A41D010 /* PureMac */ = {
 			isa = PBXGroup;
 			children = (
+				B2EA41E1096FA8E3B916AD13 /* Assets.xcassets */,
 				53BAAB249D511F10DE12A735 /* ContentView.swift */,
 				46660271CFF167AB0FE7371D /* Info.plist */,
 				5664D2BDAEAA9AE3A53DB364 /* PureMac.entitlements */,
@@ -371,6 +374,7 @@
 			buildConfigurationList = 2754925F163D15C85EDF494D /* Build configuration list for PBXNativeTarget "PureMac" */;
 			buildPhases = (
 				63C589367B714FC06B0519E5 /* Sources */,
+				3975A867E04014FA565E9F46 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -463,6 +467,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3975A867E04014FA565E9F46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDD6BA35DBF32E7A6B5F6F8B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		547E6607E135E897002A7638 /* Sources */ = {
