@@ -98,7 +98,7 @@ final class AppUninstallerViewModel {
             cats.append(CleanupCategory(
                 title: app.name,
                 subtitle: subtitle,
-                icon: "app.badge.minus",
+                icon: "xmark.app.fill",
                 sourceModule: .appUninstaller,
                 items: items
             ))

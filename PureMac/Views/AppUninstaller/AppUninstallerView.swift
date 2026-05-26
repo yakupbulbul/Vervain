@@ -57,7 +57,7 @@ struct AppUninstallerView: View {
         case .results:
             if vm.apps.isEmpty {
                 ContentUnavailableView("No Apps Found",
-                                       systemImage: "app.badge.minus",
+                                       systemImage: "xmark.app.fill",
                                        description: Text("Nothing found in /Applications, ~/Applications, or /Applications/Utilities."))
                     .foregroundStyle(.white)
             } else {
@@ -68,7 +68,7 @@ struct AppUninstallerView: View {
 
     private var idleView: some View {
         VStack(spacing: 28) {
-            Image(systemName: "app.badge.minus")
+            Image(systemName: "xmark.app.fill")
                 .font(.system(size: 76))
                 .foregroundStyle(LinearGradient(colors: [.red, .pink],
                                                 startPoint: .top, endPoint: .bottom))

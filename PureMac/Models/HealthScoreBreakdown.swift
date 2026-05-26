@@ -51,7 +51,7 @@ struct HealthScoreBreakdown: Sendable {
                 case .junkOver1GB, .junkOver5GB, .junkOver10GB: return "trash.circle.fill"
                 case .diskOver80, .diskOver90:                  return "externaldrive.fill"
                 case .manyApps:                                 return "app.badge"
-                case .manyLeftovers:                            return "app.badge.minus"
+                case .manyLeftovers:                            return "xmark.app.fill"
                 case .oldDownloads:                             return "arrow.down.circle.fill"
                 }
             }
