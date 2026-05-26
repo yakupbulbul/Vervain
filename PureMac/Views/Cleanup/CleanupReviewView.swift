@@ -83,7 +83,16 @@ struct CleanupReviewView: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(coord.categories) { category in
-                        categorySection(category)
+                        categoryHeader(category)
+                        if expanded.contains(category.id) {
+                            ForEach(category.items) { item in
+                                CleanupItemRow(item: item) {
+                                    coord.toggleItem(categoryID: category.id, itemID: item.id)
+                                }
+                                .background(Color.white.opacity(0.02))
+                                Divider().background(Color.white.opacity(0.05))
+                            }
+                        }
                     }
                 }
             }
@@ -92,67 +101,57 @@ struct CleanupReviewView: View {
         }
     }
 
-    private func categorySection(_ category: CleanupCategory) -> some View {
+    private func categoryHeader(_ category: CleanupCategory) -> some View {
         let isOpen = expanded.contains(category.id)
-        return VStack(spacing: 0) {
-            // Category header
-            HStack(spacing: 12) {
-                Button {
+        return HStack(spacing: 12) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
                     if isOpen { expanded.remove(category.id) }
                     else      { expanded.insert(category.id) }
-                } label: {
-                    Image(systemName: isOpen ? "chevron.down" : "chevron.right")
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundStyle(.white.opacity(0.5))
-                        .frame(width: 16)
                 }
-                .buttonStyle(.plain)
-
-                Button { coord.toggleCategory(category.id) } label: {
-                    Image(systemName: category.allSelected
-                          ? "checkmark.circle.fill"
-                          : (category.noneSelected ? "circle" : "minus.circle.fill"))
-                        .foregroundStyle(
-                            category.allSelected || !category.noneSelected
-                                ? .blue : .white.opacity(0.3)
-                        )
-                        .font(.system(size: 16))
-                }
-                .buttonStyle(.plain)
-
-                Image(systemName: category.icon)
+            } label: {
+                Image(systemName: isOpen ? "chevron.down" : "chevron.right")
+                    .font(.system(size: 11, weight: .semibold))
                     .foregroundStyle(.white.opacity(0.5))
-                    .frame(width: 18)
-
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(category.title)
-                        .font(.system(size: 13, weight: .semibold))
-                    Text("\(category.itemCount) items · \(category.selectedSize.formattedBytes) selected of \(category.totalSize.formattedBytes)")
-                        .font(.system(size: 10))
-                        .foregroundStyle(.white.opacity(0.45))
-                }
-                Spacer()
-                // Only show a risk pill when there are selected items above safe level
-                if !category.noneSelected && category.maxSelectedRisk > .safe {
-                    riskPill(category.maxSelectedRisk)
-                }
+                    .frame(width: 16)
             }
-            .padding(.horizontal, 16).padding(.vertical, 10)
-            .background(Color.white.opacity(0.04))
-            .contentShape(Rectangle())
-            .onTapGesture {
+            .buttonStyle(.plain)
+
+            Button { coord.toggleCategory(category.id) } label: {
+                Image(systemName: category.allSelected
+                      ? "checkmark.circle.fill"
+                      : (category.noneSelected ? "circle" : "minus.circle.fill"))
+                    .foregroundStyle(
+                        category.allSelected || !category.noneSelected
+                            ? .blue : .white.opacity(0.3)
+                    )
+                    .font(.system(size: 16))
+            }
+            .buttonStyle(.plain)
+
+            Image(systemName: category.icon)
+                .foregroundStyle(.white.opacity(0.5))
+                .frame(width: 18)
+
+            VStack(alignment: .leading, spacing: 1) {
+                Text(category.title)
+                    .font(.system(size: 13, weight: .semibold))
+                Text("\(category.itemCount) items · \(category.selectedSize.formattedBytes) selected of \(category.totalSize.formattedBytes)")
+                    .font(.system(size: 10))
+                    .foregroundStyle(.white.opacity(0.45))
+            }
+            Spacer()
+            if !category.noneSelected && category.maxSelectedRisk > .safe {
+                riskPill(category.maxSelectedRisk)
+            }
+        }
+        .padding(.horizontal, 16).padding(.vertical, 10)
+        .background(Color.white.opacity(0.04))
+        .contentShape(Rectangle())
+        .onTapGesture {
+            withAnimation(.easeInOut(duration: 0.2)) {
                 if isOpen { expanded.remove(category.id) }
                 else      { expanded.insert(category.id) }
-            }
-
-            if isOpen {
-                ForEach(category.items) { item in
-                    CleanupItemRow(item: item) {
-                        coord.toggleItem(categoryID: category.id, itemID: item.id)
-                    }
-                    .background(Color.white.opacity(0.02))
-                    Divider().background(Color.white.opacity(0.05))
-                }
             }
         }
     }
