@@ -10,12 +10,13 @@ struct DiskAnalyzerView: View {
     var body: some View {
         VStack(spacing: 0) {
             FeatureToolbar(title: "Disk Analyzer",
-                           subtitle: "Visualize what's using space in your home folder") {
+                           subtitle: "Visualize what's using space on your Mac") {
                 toolbarButtons
             }
             Divider().background(Color.white.opacity(0.08))
             mainContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .animation(.easeInOut(duration: 0.2), value: vm.isAnalyzing)
         }
         .background(Color(red: 0.09, green: 0.09, blue: 0.14))
         .foregroundStyle(.white)
@@ -28,7 +29,7 @@ struct DiskAnalyzerView: View {
                 .buttonStyle(.bordered).foregroundStyle(.white)
         } else {
             HStack(spacing: 8) {
-                if vm.state.isAnalyzing == false, vm.rootNode != nil {
+                if case .results = vm.state {
                     Toggle("Large files", isOn: $showLargeFiles)
                         .toggleStyle(.switch)
                         .labelsHidden()
@@ -58,37 +59,59 @@ struct DiskAnalyzerView: View {
         }
     }
 
+    // MARK: - Idle
+
     private var idleView: some View {
         VStack(spacing: 28) {
-            Image(systemName: "chart.pie.fill")
+            Image(systemName: "internaldrive.fill")
                 .font(.system(size: 76))
                 .foregroundStyle(LinearGradient(colors: [.purple, .blue],
                                                 startPoint: .top, endPoint: .bottom))
                 .symbolEffect(.pulse)
             VStack(spacing: 8) {
-                Text("Disk Space Analyzer").font(.title.bold())
-                Text("Get a visual breakdown of what's taking up\nspace, then send big files to the review flow.")
+                Text("Mac Storage Analyzer").font(.title.bold())
+                Text("See exactly what is eating your storage —\nall folders, all top-level directories.")
                     .font(.body).foregroundStyle(.white.opacity(0.55))
                     .multilineTextAlignment(.center)
             }
-            Button("Analyze Home Folder") { vm.analyze() }
+            Button("Analyze Mac Storage") { vm.analyze() }
                 .buttonStyle(.borderedProminent).controlSize(.large).tint(.purple)
         }
         .padding(40)
     }
 
+    // MARK: - Analyzing
+
     private var analyzingView: some View {
-        VStack(spacing: 16) {
-            ProgressView().controlSize(.large).tint(.purple)
-            Text("Analyzing home folder…").foregroundStyle(.white.opacity(0.6))
-            Text("This can take a moment for large folders. You can cancel any time.")
-                .font(.caption).foregroundStyle(.white.opacity(0.35))
+        VStack(spacing: 20) {
+            ProgressView().controlSize(.extraLarge).tint(.purple)
+            VStack(spacing: 6) {
+                Text("Analyzing Mac Storage…").font(.headline)
+                if !vm.scanningPath.isEmpty {
+                    Text(vm.scanningPath)
+                        .font(.caption).foregroundStyle(.white.opacity(0.5))
+                        .animation(.easeInOut(duration: 0.3), value: vm.scanningPath)
+                }
+            }
+            Text("Scanning all directories concurrently. You can cancel any time.")
+                .font(.caption2).foregroundStyle(.white.opacity(0.3))
+                .multilineTextAlignment(.center)
+            Button("Cancel") { vm.cancelAnalyze() }
+                .buttonStyle(.bordered).foregroundStyle(.white).controlSize(.small)
         }
+        .padding(40)
     }
+
+    // MARK: - Results
 
     @ViewBuilder
     private var resultsView: some View {
         VStack(spacing: 0) {
+            // Disk space usage bar
+            if vm.diskTotalBytes > 0 {
+                diskSpaceBar
+                Divider().background(Color.white.opacity(0.06))
+            }
             if vm.metadata.hasInaccessiblePaths {
                 inaccessibleBanner
             }
@@ -101,7 +124,47 @@ struct DiskAnalyzerView: View {
         }
     }
 
-    // MARK: - Drill-down (existing layout, refreshed)
+    // MARK: - Disk space bar
+
+    private var diskSpaceBar: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Label("Macintosh HD", systemImage: "internaldrive.fill")
+                    .font(.caption.bold()).foregroundStyle(.white.opacity(0.8))
+                Spacer()
+                Text("\(vm.diskTotalBytes.formattedBytes) total")
+                    .font(.caption2).foregroundStyle(.white.opacity(0.4))
+            }
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(Color.white.opacity(0.08))
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(LinearGradient(
+                            colors: [.purple, .blue],
+                            startPoint: .leading, endPoint: .trailing))
+                        .frame(width: geo.size.width * usedFraction)
+                }
+            }
+            .frame(height: 7)
+            HStack {
+                Text("\(vm.diskUsedBytes.formattedBytes) used")
+                    .font(.caption).foregroundStyle(.white)
+                Spacer()
+                Text("\(vm.diskFreeBytes.formattedBytes) available")
+                    .font(.caption2).foregroundStyle(.white.opacity(0.5))
+            }
+        }
+        .padding(.horizontal, 16).padding(.vertical, 10)
+        .background(Color.white.opacity(0.03))
+    }
+
+    private var usedFraction: Double {
+        guard vm.diskTotalBytes > 0 else { return 0 }
+        return min(1.0, Double(vm.diskUsedBytes) / Double(vm.diskTotalBytes))
+    }
+
+    // MARK: - Drill-down
 
     private var drillDownPane: some View {
         HSplitView {

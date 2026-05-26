@@ -43,6 +43,10 @@ final class DiskNode: Identifiable, @unchecked Sendable {
         case "movies", "music", "pictures":          return .media
         case "developer", "xcode", "simulators":     return .developer
         case "library":                              return .library
+        case "users":                                return .documents  // personal data
+        case "opt", "usr":                           return .developer  // unix / homebrew tools
+        case "system", "var", "private",
+             "system & other":                       return .other
         default:                                     return .other
         }
     }

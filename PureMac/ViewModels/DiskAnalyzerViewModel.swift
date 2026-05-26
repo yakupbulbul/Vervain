@@ -24,6 +24,12 @@ final class DiskAnalyzerViewModel {
     var largestFiles: [DiskNode] = []
     var selectedFileIDs: Set<UUID> = []
 
+    // Whole-disk progress & capacity
+    var scanningPath: String = ""
+    var diskTotalBytes: Int64 = 0
+    var diskFreeBytes: Int64  = 0
+    var diskUsedBytes: Int64  { diskTotalBytes - diskFreeBytes }
+
     var isAnalyzing: Bool { state.isAnalyzing }
 
     /// Top N children of the selected node, sorted by size, for chart display.
@@ -47,19 +53,26 @@ final class DiskAnalyzerViewModel {
 
     func analyze() {
         analyzeTask?.cancel()
+        scanningPath = ""
         analyzeTask = Task {
             state = .analyzing
-            let homeURL = FileManager.default.homeDirectoryForCurrentUser
             do {
-                let result = try await service.analyze(root: homeURL, maxDepth: 4)
-                rootNode = result.root
-                selectedNode = result.root
-                breadcrumbs = [result.root]
-                metadata = result.metadata
-                scannedFolders = result.scannedFolders
-                scannedFiles = result.scannedFiles
+                let result = try await service.analyzeWholeDisk(
+                    maxDepth: 5,
+                    progress: { @MainActor [weak self] label in
+                        self?.scanningPath = "Scanning \(label)…"
+                    }
+                )
+                rootNode        = result.root
+                selectedNode    = result.root
+                breadcrumbs     = [result.root]
+                metadata        = result.metadata
+                scannedFolders  = result.scannedFolders
+                scannedFiles    = result.scannedFiles
                 skippedSymlinks = result.skippedSymlinks
-                largestFiles = result.largestFiles
+                largestFiles    = result.largestFiles
+                diskTotalBytes  = result.totalDiskBytes
+                diskFreeBytes   = result.freeDiskBytes
                 selectedFileIDs.removeAll()
                 state = .results
             } catch is CancellationError {
@@ -103,8 +116,6 @@ final class DiskAnalyzerViewModel {
 
     /// Build a CleanupCategory of currently-selected large files so the user
     /// can push the selection into the universal review/confirmation flow.
-    /// All items are tagged `.review` / `.medium` — they're user-owned and
-    /// must be checked before removal.
     func buildLargeFileCleanupCategory() -> [CleanupCategory] {
         let items = selectedLargeFiles.map { node -> CleanupItem in
             let ageDays = max(0, Int(Date().timeIntervalSince(
