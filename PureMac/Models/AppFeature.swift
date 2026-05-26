@@ -12,7 +12,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .smartScan:      return "shield.lefthalf.filled"
         case .systemJunk:     return "trash.circle.fill"
-        case .appUninstaller: return "app.badge.minus"
+        case .appUninstaller: return "xmark.app.fill"
         case .diskAnalyzer:   return "chart.pie.fill"
         }
     }
