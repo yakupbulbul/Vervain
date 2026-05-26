@@ -3,43 +3,56 @@ import AppKit
 
 let size = NSSize(width: 1024, height: 1024)
 let image = NSImage(size: size, flipped: false) { rect in
-    // Rounded-rect background with blue-purple gradient
-    let inset = rect.insetBy(dx: 80, dy: 80)
-    let path = NSBezierPath(roundedRect: inset, xRadius: 180, yRadius: 180)
-
+    // 1. Full-bleed opaque gradient background — fills entire canvas, no inset
     let gradient = NSGradient(colorsAndLocations:
-        (NSColor(red: 0.15, green: 0.15, blue: 0.85, alpha: 1.0), 0.0),
-        (NSColor(red: 0.45, green: 0.15, blue: 0.75, alpha: 1.0), 0.5),
-        (NSColor(red: 0.60, green: 0.20, blue: 0.90, alpha: 1.0), 1.0)
+        (NSColor(red: 0.10, green: 0.12, blue: 0.80, alpha: 1.0), 0.0),   // deep blue
+        (NSColor(red: 0.35, green: 0.12, blue: 0.78, alpha: 1.0), 0.55),  // indigo
+        (NSColor(red: 0.58, green: 0.18, blue: 0.88, alpha: 1.0), 1.0)    // purple
     )!
-    gradient.draw(in: path, angle: -45)
+    gradient.draw(in: rect, angle: -50)
 
-    // Subtle inner shadow / border
-    let borderPath = NSBezierPath(roundedRect: inset.insetBy(dx: 2, dy: 2), xRadius: 178, yRadius: 178)
-    NSColor.white.withAlphaComponent(0.12).setStroke()
-    borderPath.lineWidth = 3
-    borderPath.stroke()
+    // 2. Soft radial glow in center for depth
+    let glow = NSGradient(colors: [
+        NSColor.white.withAlphaComponent(0.15),
+        NSColor.clear
+    ])!
+    let glowRect = rect.insetBy(dx: 80, dy: 80)
+    glow.draw(in: glowRect, relativeCenterPosition: NSPoint(x: 0, y: 0))
 
-    // Draw the sparkles symbol centered
-    let symbolConfig = NSImage.SymbolConfiguration(pointSize: 420, weight: .bold)
+    // 3. White sparkles symbol, centered, medium weight
+    let symbolConfig = NSImage.SymbolConfiguration(pointSize: 440, weight: .medium)
         .applying(.init(paletteColors: [.white]))
-    if let sparkle = NSImage(systemSymbolName: "sparkles", accessibilityDescription: nil)?
+    if let symbol = NSImage(systemSymbolName: "sparkles", accessibilityDescription: nil)?
         .withSymbolConfiguration(symbolConfig) {
-        let symbolSize = sparkle.size
+        let sz = symbol.size
         let origin = NSPoint(
-            x: (rect.width - symbolSize.width) / 2,
-            y: (rect.height - symbolSize.height) / 2
+            x: (rect.width - sz.width) / 2,
+            y: (rect.height - sz.height) / 2
         )
-        sparkle.draw(at: origin, from: .zero, operation: .sourceOver, fraction: 0.95)
+        symbol.draw(at: origin, from: .zero, operation: .sourceOver, fraction: 1.0)
     }
-
     return true
 }
 
-// Write PNG
-guard let tiffData = image.tiffRepresentation,
-      let bitmap = NSBitmapImageRep(data: tiffData),
-      let pngData = bitmap.representation(using: .png, properties: [:]) else {
+// Write opaque PNG — samplesPerPixel: 3, hasAlpha: false ensures no alpha channel
+let rep = NSBitmapImageRep(
+    bitmapDataPlanes: nil,
+    pixelsWide: 1024,
+    pixelsHigh: 1024,
+    bitsPerSample: 8,
+    samplesPerPixel: 3,
+    hasAlpha: false,
+    isPlanar: false,
+    colorSpaceName: .deviceRGB,
+    bytesPerRow: 0,
+    bitsPerPixel: 0
+)!
+NSGraphicsContext.saveGraphicsState()
+NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
+image.draw(in: NSRect(x: 0, y: 0, width: 1024, height: 1024))
+NSGraphicsContext.restoreGraphicsState()
+
+guard let pngData = rep.representation(using: .png, properties: [:]) else {
     print("Failed to create PNG data")
     exit(1)
 }
@@ -49,4 +62,4 @@ let outputDir = URL(fileURLWithPath: CommandLine.arguments.count > 1
     : ".")
 let outputPath = outputDir.appendingPathComponent("AppIcon.png")
 try pngData.write(to: outputPath)
-print("Generated icon at \(outputPath.path)")
+print("✅ Generated opaque icon at \(outputPath.path)")
