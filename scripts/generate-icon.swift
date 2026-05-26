@@ -1,65 +1,68 @@
 #!/usr/bin/env swift
 import AppKit
 
-let size = NSSize(width: 1024, height: 1024)
-let image = NSImage(size: size, flipped: false) { rect in
-    // 1. Full-bleed opaque gradient background — fills entire canvas, no inset
-    let gradient = NSGradient(colorsAndLocations:
-        (NSColor(red: 0.10, green: 0.12, blue: 0.80, alpha: 1.0), 0.0),   // deep blue
-        (NSColor(red: 0.35, green: 0.12, blue: 0.78, alpha: 1.0), 0.55),  // indigo
-        (NSColor(red: 0.58, green: 0.18, blue: 0.88, alpha: 1.0), 1.0)    // purple
-    )!
-    gradient.draw(in: rect, angle: -50)
+// Matches the app's visual identity:
+//   Background: dark navy  Color(red:0.09, green:0.09, blue:0.14)
+//   Symbol:     sparkles with blue→purple gradient (topLeading→bottomTrailing)
+//               same as SidebarView.appHeader & OnboardingView.header
+//   SwiftUI .blue   ≈ #007AFF  (0.00, 0.478, 1.00)
+//   SwiftUI .purple ≈ #AF52DE  (0.686, 0.322, 0.871)
 
-    // 2. Soft radial glow in center for depth
-    let glow = NSGradient(colors: [
-        NSColor.white.withAlphaComponent(0.15),
-        NSColor.clear
-    ])!
-    let glowRect = rect.insetBy(dx: 80, dy: 80)
-    glow.draw(in: glowRect, relativeCenterPosition: NSPoint(x: 0, y: 0))
+let W = 1024
 
-    // 3. White sparkles symbol, centered, medium weight
-    let symbolConfig = NSImage.SymbolConfiguration(pointSize: 440, weight: .medium)
-        .applying(.init(paletteColors: [.white]))
-    if let symbol = NSImage(systemSymbolName: "sparkles", accessibilityDescription: nil)?
-        .withSymbolConfiguration(symbolConfig) {
-        let sz = symbol.size
-        let origin = NSPoint(
-            x: (rect.width - sz.width) / 2,
-            y: (rect.height - sz.height) / 2
-        )
-        symbol.draw(at: origin, from: .zero, operation: .sourceOver, fraction: 1.0)
-    }
-    return true
+// ── Opaque CGContext (no alpha channel) ───────────────────────────────────────
+let space   = CGColorSpaceCreateDeviceRGB()
+let bmpInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipLast.rawValue)
+guard let ctx = CGContext(
+    data: nil, width: W, height: W,
+    bitsPerComponent: 8, bytesPerRow: 0,
+    space: space, bitmapInfo: bmpInfo.rawValue
+) else { print("CGContext init failed"); exit(1) }
+
+// Wrap in NSGraphicsContext so AppKit calls (NSImage, NSGradient) draw into ctx
+let nsCtx = NSGraphicsContext(cgContext: ctx, flipped: false)
+NSGraphicsContext.saveGraphicsState()
+NSGraphicsContext.current = nsCtx
+
+// ── 1. Dark navy background ───────────────────────────────────────────────────
+ctx.setFillColor(CGColor(red: 0.09, green: 0.09, blue: 0.14, alpha: 1.0))
+ctx.fill(CGRect(x: 0, y: 0, width: W, height: W))
+
+// ── 2. White sparkles symbol ──────────────────────────────────────────────────
+let symCfg = NSImage.SymbolConfiguration(pointSize: 520, weight: .semibold)
+    .applying(NSImage.SymbolConfiguration(paletteColors: [.white]))
+if let sym = NSImage(systemSymbolName: "sparkles", accessibilityDescription: nil)?
+    .withSymbolConfiguration(symCfg) {
+    let sz = sym.size
+    sym.draw(at: NSPoint(x: (CGFloat(W) - sz.width)  / 2,
+                         y: (CGFloat(W) - sz.height) / 2),
+             from: .zero, operation: .sourceOver, fraction: 1.0)
 }
 
-// Write opaque PNG — samplesPerPixel: 3, hasAlpha: false ensures no alpha channel
-let rep = NSBitmapImageRep(
-    bitmapDataPlanes: nil,
-    pixelsWide: 1024,
-    pixelsHigh: 1024,
-    bitsPerSample: 8,
-    samplesPerPixel: 3,
-    hasAlpha: false,
-    isPlanar: false,
-    colorSpaceName: .deviceRGB,
-    bytesPerRow: 0,
-    bitsPerPixel: 0
-)!
-NSGraphicsContext.saveGraphicsState()
-NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
-image.draw(in: NSRect(x: 0, y: 0, width: 1024, height: 1024))
+// ── 3. Blue→Purple gradient via .multiply blend (tints white sparkles) ────────
+// multiply: result = src × dest
+//   • white sparkle pixels (1,1,1) × gradient = gradient colour  ✓
+//   • dark bg (~0.09)              × gradient ≈ near-black        ✓
+// angle 135° in AppKit y-up coords → blue at top-left, purple at bottom-right
+// matching SwiftUI startPoint:.topLeading / endPoint:.bottomTrailing
+let blue   = NSColor(red: 0.00,  green: 0.478, blue: 1.00,  alpha: 1.0)
+let purple = NSColor(red: 0.686, green: 0.322, blue: 0.871, alpha: 1.0)
+let grad   = NSGradient(starting: blue, ending: purple)!
+ctx.setBlendMode(.multiply)
+grad.draw(in: NSRect(x: 0, y: 0, width: W, height: W), angle: 135)
+ctx.setBlendMode(.normal)
+
 NSGraphicsContext.restoreGraphicsState()
 
-guard let pngData = rep.representation(using: .png, properties: [:]) else {
-    print("Failed to create PNG data")
-    exit(1)
-}
+// ── Write opaque PNG ──────────────────────────────────────────────────────────
+guard let finalImg = ctx.makeImage() else { print("makeImage failed"); exit(1) }
 
-let outputDir = URL(fileURLWithPath: CommandLine.arguments.count > 1
-    ? CommandLine.arguments[1]
-    : ".")
-let outputPath = outputDir.appendingPathComponent("AppIcon.png")
-try pngData.write(to: outputPath)
-print("✅ Generated opaque icon at \(outputPath.path)")
+let outDir = CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : "."
+let outURL = URL(fileURLWithPath: outDir).appendingPathComponent("AppIcon.png")
+guard let dest = CGImageDestinationCreateWithURL(
+        outURL as CFURL, "public.png" as CFString, 1, nil) else {
+    print("Destination create failed"); exit(1)
+}
+CGImageDestinationAddImage(dest, finalImg, nil)
+guard CGImageDestinationFinalize(dest) else { print("Finalize failed"); exit(1) }
+print("✅ Generated opaque icon at \(outURL.path)")
