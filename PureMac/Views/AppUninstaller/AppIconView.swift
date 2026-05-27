@@ -18,11 +18,13 @@ struct AppIconView: View {
                     .foregroundStyle(.white.opacity(0.3))
             }
         }
-        .task(id: appURL) {
-            // NSWorkspace must be accessed on MainActor
-            icon = await MainActor.run {
-                NSWorkspace.shared.icon(forFile: appURL.path)
+        .onAppear {
+            if icon == nil {
+                icon = NSWorkspace.shared.icon(forFile: appURL.path)
             }
+        }
+        .onChange(of: appURL) {
+            icon = NSWorkspace.shared.icon(forFile: appURL.path)
         }
     }
 }

@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 /// Shared @Observable wrapper around `FullDiskAccessProbe` so any view can
 /// reactively show or hide the FDA banner.
@@ -23,10 +24,24 @@ final class FullDiskAccessViewModel {
 
     func openSystemSettings() {
         FullDiskAccessProbe.openSystemSettings()
-        // After the user returns, recheck after a short delay.
-        Task {
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
-            status = await probe.probe(force: true)
+
+        // Re-probe exactly once when the user returns to the app from System Settings.
+        // This avoids the race where a fixed 1.5 s delay fires before the user has
+        // finished granting access, leaving the banner visible.
+        var token: NSObjectProtocol?
+        token = NotificationCenter.default.addObserver(
+            forName: NSApplication.didBecomeActiveNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            // Remove observer immediately so it only fires once.
+            if let token { NotificationCenter.default.removeObserver(token) }
+            Task { @MainActor [weak self] in
+                // Brief pause to let TCC write the new permission to disk.
+                try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 s
+                guard let self else { return }
+                self.status = await self.probe.probe(force: true)
+            }
         }
     }
 
