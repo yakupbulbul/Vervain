@@ -14,10 +14,10 @@ struct ContentView: View {
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     FullDiskAccessBanner()
+                        .animation(.easeInOut(duration: 0.25), value: fda.shouldShowBanner)
                     detailView(for: selectedFeature)
                         .frame(minWidth: 600, minHeight: 500)
                 }
-                .animation(.easeInOut(duration: 0.25), value: fda.shouldShowBanner)
             }
         }
         .navigationSplitViewStyle(.prominentDetail)
