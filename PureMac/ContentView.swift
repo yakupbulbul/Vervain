@@ -21,6 +21,7 @@ struct ContentView: View {
             }
         }
         .navigationSplitViewStyle(.prominentDetail)
+        .toolbar(removing: .sidebarToggle)
     }
 
     @ViewBuilder
