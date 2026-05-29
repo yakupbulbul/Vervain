@@ -10,12 +10,12 @@ enum DiskCategory: String, CaseIterable, Sendable {
 
     var color: Color {
         switch self {
-        case .applications: return .blue
-        case .documents:    return .green
-        case .media:        return .orange
-        case .developer:    return .purple
-        case .library:      return .teal
-        case .other:        return .gray
+        case .applications: return Theme.chartApplications
+        case .documents:    return Theme.chartDocuments
+        case .media:        return Theme.chartMedia
+        case .developer:    return Theme.chartDeveloper
+        case .library:      return Theme.chartLibrary
+        case .other:        return Theme.chartOther
         }
     }
 }

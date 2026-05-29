@@ -11,7 +11,7 @@ struct HealthRingView: View {
         ZStack {
             // Background track
             Circle()
-                .stroke(Color.white.opacity(0.08), lineWidth: strokeWidth)
+                .stroke(Theme.divider, lineWidth: strokeWidth)
                 .frame(width: size, height: size)
 
             // Progress arc
@@ -37,7 +37,7 @@ struct HealthRingView: View {
             VStack(spacing: 4) {
                 Text("\(score)")
                     .font(.system(size: size * 0.28, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Theme.textPrimary)
                     .contentTransition(.numericText(value: Double(score)))
                     .animation(.spring(.smooth), value: score)
 
@@ -65,13 +65,13 @@ struct ScanningRingView: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.white.opacity(0.08), lineWidth: size * 0.08)
+                .stroke(Theme.divider, lineWidth: size * 0.08)
                 .frame(width: size, height: size)
 
             Circle()
                 .trim(from: 0, to: 0.25)
                 .stroke(
-                    LinearGradient(colors: [.blue, .purple], startPoint: .leading, endPoint: .trailing),
+                    LinearGradient(colors: [Theme.smartScanAccent, Theme.systemJunkAccent], startPoint: .leading, endPoint: .trailing),
                     style: StrokeStyle(lineWidth: size * 0.08, lineCap: .round)
                 )
                 .frame(width: size, height: size)
@@ -84,10 +84,10 @@ struct ScanningRingView: View {
             VStack(spacing: 4) {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: size * 0.18, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(Theme.textSecondary)
                 Text("Scanning…")
                     .font(.system(size: size * 0.09, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.5))
+                    .foregroundStyle(Theme.textSecondary)
             }
         }
         .onAppear { rotation = 360 }

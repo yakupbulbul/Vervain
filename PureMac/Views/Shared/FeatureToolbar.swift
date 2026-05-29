@@ -20,11 +20,11 @@ struct FeatureToolbar<Actions: View>: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.title2.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Theme.textPrimary)
                 if let subtitle {
                     Text(subtitle)
                         .font(.caption)
-                        .foregroundStyle(.white.opacity(0.5))
+                        .foregroundStyle(Theme.textSecondary)
                 }
             }
             Spacer()
@@ -32,7 +32,7 @@ struct FeatureToolbar<Actions: View>: View {
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 16)
-        .background(Color(red: 0.09, green: 0.09, blue: 0.14))
+        .background(Theme.background)
     }
 }
 

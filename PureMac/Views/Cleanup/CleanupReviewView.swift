@@ -18,7 +18,7 @@ struct CleanupReviewView: View {
     var body: some View {
         VStack(spacing: 0) {
             header
-            Divider().background(Color.white.opacity(0.08))
+            Divider().background(Theme.divider)
 
             switch displayedState {
             case .reviewing:
@@ -34,8 +34,8 @@ struct CleanupReviewView: View {
             }
         }
         .frame(width: 720, height: 560)
-        .background(Color(red: 0.09, green: 0.09, blue: 0.14))
-        .foregroundStyle(.white)
+        .background(Theme.background)
+        .foregroundStyle(Theme.textPrimary)
         .onAppear {
             displayedState = .reviewing
             showAllItems = []
@@ -63,16 +63,16 @@ struct CleanupReviewView: View {
             if displayedState == .reviewing {
                 Button("Reset Defaults") { coord.resetToDefaults() }
                     .buttonStyle(.bordered).controlSize(.small)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Theme.textPrimary)
             }
             Button {
                 coord.cancel()
             } label: {
                 Image(systemName: "xmark")
                     .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.6))
+                    .foregroundStyle(Theme.textSecondary)
                     .padding(6)
-                    .background(Color.white.opacity(0.08), in: Circle())
+                    .background(Theme.divider, in: Circle())
             }
             .buttonStyle(.plain)
         }
@@ -96,8 +96,8 @@ struct CleanupReviewView: View {
                                 CleanupItemRow(item: item) {
                                     coord.toggleItem(categoryID: category.id, itemID: item.id)
                                 }
-                                .background(Color.white.opacity(0.02))
-                                Divider().background(Color.white.opacity(0.05))
+                                .background(Theme.surfaceOverlay)
+                                Divider().background(Theme.divider)
                             }
                             if !showAll && category.items.count > Self.maxVisibleItems {
                                 showMoreButton(category: category)
@@ -106,7 +106,7 @@ struct CleanupReviewView: View {
                     }
                 }
             }
-            Divider().background(Color.white.opacity(0.08))
+            Divider().background(Theme.divider)
             footer
         }
     }
@@ -118,7 +118,7 @@ struct CleanupReviewView: View {
         } label: {
             HStack {
                 Image(systemName: "ellipsis.circle")
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(Theme.smartScanAccent)
                 Text("Show \(remaining) more items…")
                     .font(.system(size: 12, weight: .medium))
                 Spacer()
@@ -126,7 +126,7 @@ struct CleanupReviewView: View {
         }
         .buttonStyle(.plain)
         .padding(.horizontal, 16).padding(.vertical, 10)
-        .background(Color.white.opacity(0.03))
+        .background(Theme.surfaceOverlay)
     }
 
     private func categoryHeader(_ category: CleanupCategory) -> some View {
@@ -140,7 +140,7 @@ struct CleanupReviewView: View {
             } label: {
                 Image(systemName: isOpen ? "chevron.down" : "chevron.right")
                     .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.5))
+                    .foregroundStyle(Theme.textSecondary)
                     .frame(width: 16)
             }
             .buttonStyle(.plain)
@@ -151,14 +151,14 @@ struct CleanupReviewView: View {
                       : (category.noneSelected ? "circle" : "minus.circle.fill"))
                     .foregroundStyle(
                         category.allSelected || !category.noneSelected
-                            ? .blue : .white.opacity(0.3)
+                            ? Theme.smartScanAccent : Theme.textMuted
                     )
                     .font(.system(size: 16))
             }
             .buttonStyle(.plain)
 
             Image(systemName: category.icon)
-                .foregroundStyle(.white.opacity(0.5))
+                .foregroundStyle(Theme.textSecondary)
                 .frame(width: 18)
 
             VStack(alignment: .leading, spacing: 1) {
@@ -166,7 +166,7 @@ struct CleanupReviewView: View {
                     .font(.system(size: 13, weight: .semibold))
                 Text("\(category.itemCount) items · \(category.selectedSize.formattedBytes) selected of \(category.totalSize.formattedBytes)")
                     .font(.system(size: 10))
-                    .foregroundStyle(.white.opacity(0.45))
+                    .foregroundStyle(Theme.textMuted)
             }
             Spacer()
             if !category.noneSelected && category.maxSelectedRisk > .safe {
@@ -174,7 +174,7 @@ struct CleanupReviewView: View {
             }
         }
         .padding(.horizontal, 16).padding(.vertical, 10)
-        .background(Color.white.opacity(0.04))
+        .background(Theme.surfaceOverlay)
         .contentShape(Rectangle())
         .onTapGesture {
             withAnimation(.easeInOut(duration: 0.2)) {
@@ -201,13 +201,13 @@ struct CleanupReviewView: View {
         HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(coord.totalSelectedCount) item\(coord.totalSelectedCount == 1 ? "" : "s") selected")
-                    .font(.caption).foregroundStyle(.white.opacity(0.5))
+                    .font(.caption).foregroundStyle(Theme.textSecondary)
                 if coord.totalSelectedCount == 0 {
                     Text("Select items above to clean")
-                        .font(.caption).foregroundStyle(.white.opacity(0.35))
+                        .font(.caption).foregroundStyle(Theme.textMuted)
                 } else {
                     Text(coord.totalSelectedSize.formattedBytes)
-                        .font(.title3.bold()).foregroundStyle(.orange)
+                        .font(.title3.bold()).foregroundStyle(Theme.systemJunkAccent)
                 }
             }
             // Inline risk summary
@@ -215,22 +215,22 @@ struct CleanupReviewView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     if coord.hasAnyRiskySelected {
                         Label("\(coord.riskyItems.count) risky", systemImage: "exclamationmark.triangle.fill")
-                            .font(.caption).foregroundStyle(.red)
+                            .font(.caption).foregroundStyle(Theme.statusRisky)
                     }
                     if coord.hasAnyReviewSelected {
                         Label("\(coord.reviewItems.count) review", systemImage: "exclamationmark.circle.fill")
-                            .font(.caption).foregroundStyle(.yellow)
+                            .font(.caption).foregroundStyle(Theme.statusReview)
                     }
                 }
             }
             Spacer()
             Button("Cancel") { coord.cancel() }
-                .buttonStyle(.bordered).foregroundStyle(.white)
+                .buttonStyle(.bordered).foregroundStyle(Theme.textPrimary)
             Button(coord.hasAnyRiskySelected || coord.hasAnyReviewSelected
                    ? "Continue…" : "Clean \(coord.totalSelectedSize.compactBytes)") {
                 coord.confirm()
             }
-            .buttonStyle(.borderedProminent).tint(.orange)
+            .buttonStyle(.borderedProminent).tint(Theme.systemJunkAccent)
             .disabled(coord.totalSelectedSize == 0)
         }
         .padding(.horizontal, 20).padding(.vertical, 14)

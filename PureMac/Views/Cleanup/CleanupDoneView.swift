@@ -17,7 +17,7 @@ struct CleanupDoneView: View {
                 }
                 .padding(24)
             }
-            Divider().background(Color.white.opacity(0.08))
+            Divider().background(Theme.divider)
             footer
         }
     }
@@ -27,7 +27,7 @@ struct CleanupDoneView: View {
         return VStack(spacing: 12) {
             Image(systemName: allOk ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
                 .font(.system(size: 60))
-                .foregroundStyle(allOk ? .green : .yellow)
+                .foregroundStyle(allOk ? Theme.statusSafe : Theme.statusReview)
                 .symbolEffect(.bounce, value: true)
             Text(allOk ? "Cleanup Complete" : "Completed with Issues")
                 .font(.title2.bold())
@@ -38,13 +38,13 @@ struct CleanupDoneView: View {
         VStack(spacing: 4) {
             Text(coord.result?.freedBytes.formattedBytes ?? "0 bytes")
                 .font(.system(size: 32, weight: .bold, design: .rounded))
-                .foregroundStyle(.orange)
+                .foregroundStyle(Theme.systemJunkAccent)
             Text("freed by moving \(coord.result?.successCount ?? 0) item\((coord.result?.successCount ?? 0) == 1 ? "" : "s") to Trash")
                 .font(.subheadline)
-                .foregroundStyle(.white.opacity(0.7))
+                .foregroundStyle(Theme.textSecondary)
             if let res = coord.result, res.duration > 0 {
                 Text(String(format: "in %.1fs", res.duration))
-                    .font(.caption).foregroundStyle(.white.opacity(0.4))
+                    .font(.caption).foregroundStyle(Theme.textMuted)
             }
         }
     }
@@ -53,7 +53,7 @@ struct CleanupDoneView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
                 Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.yellow)
+                    .foregroundStyle(Theme.fdaBannerAccent)
                 Text("\(failures.count) item\(failures.count == 1 ? "" : "s") could not be removed")
                     .font(.subheadline.bold())
             }
@@ -65,17 +65,17 @@ struct CleanupDoneView: View {
                             .lineLimit(1)
                         Spacer()
                         Text(f.reason.displayText)
-                            .font(.caption).foregroundStyle(.yellow.opacity(0.8))
+                            .font(.caption).foregroundStyle(Theme.fdaBannerAccent.opacity(0.8))
                     }
                     .padding(.vertical, 3)
                 }
                 if failures.count > 8 {
                     Text("and \(failures.count - 8) more…")
-                        .font(.caption).foregroundStyle(.white.opacity(0.4))
+                        .font(.caption).foregroundStyle(Theme.textMuted)
                 }
             }
             .padding(10)
-            .background(Color.yellow.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
+            .background(Theme.fdaBannerAccent.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
         }
     }
 
@@ -83,9 +83,9 @@ struct CleanupDoneView: View {
         HStack {
             Spacer()
             Button("Open Trash") { openTrash() }
-                .buttonStyle(.bordered).foregroundStyle(.white)
+                .buttonStyle(.bordered).foregroundStyle(Theme.textPrimary)
             Button("Done") { coord.finish() }
-                .buttonStyle(.borderedProminent).tint(.orange)
+                .buttonStyle(.borderedProminent).tint(Theme.systemJunkAccent)
         }
         .padding(.horizontal, 20).padding(.vertical, 14)
     }

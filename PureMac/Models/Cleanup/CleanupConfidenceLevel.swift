@@ -21,10 +21,10 @@ enum CleanupConfidenceLevel: String, CaseIterable, Sendable, Hashable {
 
     var color: Color {
         switch self {
-        case .high:    return .green
-        case .medium:  return .yellow
-        case .low:     return .orange
-        case .unknown: return .gray
+        case .high:    return Theme.statusSafe
+        case .medium:  return Theme.statusReview
+        case .low:     return Theme.systemJunkAccent
+        case .unknown: return Theme.chartOther
         }
     }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002C62EAE7F30A6CD4C71251 /* Color+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45239B576A785991FA1E564D /* Color+Adaptive.swift */; };
 		047D410548F926BD17171391 /* CleanupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F171CC37AB350FCC075176 /* CleanupService.swift */; };
 		098E7056BDC30AD1A6305445 /* AppDetailPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229DB321A669BD75235A5555 /* AppDetailPanel.swift */; };
 		0D57250655BBE5464AA55C8D /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD83C26579DAB9A3C990650 /* SidebarView.swift */; };
@@ -26,6 +27,7 @@
 		5EFD3520ADEC826BF3FDFA6A /* CleanupConfidenceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689E00FD56AB04B20435ADE /* CleanupConfidenceLevel.swift */; };
 		6047573DC5E3EBECBC0A7C51 /* DiskAnalyzerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779EC2221374DE14F9D36900 /* DiskAnalyzerView.swift */; };
 		666FD0E0DA0AA11E44E15229 /* CleanupRiskLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49F3A85DC9A97BC8614DAD1 /* CleanupRiskLevel.swift */; };
+		6E6E0F0D8D11AF6A3047C388 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DCB2556E8F42456E3159F8 /* Theme.swift */; };
 		6F0C938C1BF1D14B2EF9E1AB /* SystemJunkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DA3A4DA47753BD05DACA5 /* SystemJunkView.swift */; };
 		6FDDC23F1925DBD26EAE3F20 /* CleanupReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D72748082E45E6D726D8946 /* CleanupReason.swift */; };
 		70662A4B5740C39D802AD0BA /* JunkCategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB3F316AC6CD4187A8D58B /* JunkCategoryRow.swift */; };
@@ -95,6 +97,7 @@
 		1D72748082E45E6D726D8946 /* CleanupReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupReason.swift; sourceTree = "<group>"; };
 		21C4FBD68976DA3CBF5AA99A /* CleanupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupCoordinator.swift; sourceTree = "<group>"; };
 		229DB321A669BD75235A5555 /* AppDetailPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailPanel.swift; sourceTree = "<group>"; };
+		23DCB2556E8F42456E3159F8 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		2A82CABE138EE56191E32DFD /* DiskPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskPieChart.swift; sourceTree = "<group>"; };
 		311078221878708524283765 /* PureMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		330010533CA041CCA381C043 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 		37F171CC37AB350FCC075176 /* CleanupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupService.swift; sourceTree = "<group>"; };
 		3C8A46C018233BEC8EC3315D /* DiskAnalyzerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskAnalyzerViewModel.swift; sourceTree = "<group>"; };
 		3D41288BB6D125AAA0F004A5 /* HealthScoreBreakdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthScoreBreakdownView.swift; sourceTree = "<group>"; };
+		45239B576A785991FA1E564D /* Color+Adaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Adaptive.swift"; sourceTree = "<group>"; };
 		46660271CFF167AB0FE7371D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4689E00FD56AB04B20435ADE /* CleanupConfidenceLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupConfidenceLevel.swift; sourceTree = "<group>"; };
 		503B1280653952AFC80A394B /* HealthScoreBreakdownTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthScoreBreakdownTests.swift; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 		7C1729F88C0E5563E1A3DB40 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				45239B576A785991FA1E564D /* Color+Adaptive.swift */,
 				ABABDA120F631D21449582E9 /* Int64+Formatting.swift */,
 			);
 			path = Extensions;
@@ -343,6 +348,7 @@
 				46660271CFF167AB0FE7371D /* Info.plist */,
 				5664D2BDAEAA9AE3A53DB364 /* PureMac.entitlements */,
 				63581B70F9B10231964E3602 /* PureMacApp.swift */,
+				23DCB2556E8F42456E3159F8 /* Theme.swift */,
 				7C1729F88C0E5563E1A3DB40 /* Extensions */,
 				3CF46713F75B81F0F86D1C6F /* Models */,
 				6184B2EC3D01E6E95633406E /* Services */,
@@ -430,7 +436,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2640;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					B19E38DEAA0144A77120F39C = {
 						DevelopmentTeam = "";
@@ -513,6 +519,7 @@
 				E1D44D58D9D8A9B41FFBD2BB /* CleanupSelectionPolicy.swift in Sources */,
 				047D410548F926BD17171391 /* CleanupService.swift in Sources */,
 				F9AD616987D739F4689E4DEB /* CleanupSourceModule.swift in Sources */,
+				002C62EAE7F30A6CD4C71251 /* Color+Adaptive.swift in Sources */,
 				17E49EED528F57BF899E3AFA /* ContentView.swift in Sources */,
 				B88C88EAEF63E388D3962A92 /* DiskAnalyzerService.swift in Sources */,
 				6047573DC5E3EBECBC0A7C51 /* DiskAnalyzerView.swift in Sources */,
@@ -542,6 +549,7 @@
 				20B5BFD7185EA68FCEF201B2 /* SmartScanViewModel.swift in Sources */,
 				6F0C938C1BF1D14B2EF9E1AB /* SystemJunkView.swift in Sources */,
 				F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */,
+				6E6E0F0D8D11AF6A3047C388 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +584,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -609,13 +616,11 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -636,7 +641,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_STRICT_CONCURRENCY = complete;
@@ -649,7 +653,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -672,7 +675,6 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				INFOPLIST_FILE = PureMac/Info.plist;
@@ -694,7 +696,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -715,7 +716,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -736,7 +736,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -755,7 +754,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -788,13 +786,11 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -808,7 +804,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_STRICT_CONCURRENCY = complete;
@@ -824,7 +819,6 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				INFOPLIST_FILE = PureMac/Info.plist;

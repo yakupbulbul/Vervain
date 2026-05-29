@@ -13,20 +13,20 @@ struct DiskAnalyzerView: View {
                            subtitle: "Visualize what's using space on your Mac") {
                 toolbarButtons
             }
-            Divider().background(Color.white.opacity(0.08))
+            Divider().background(Theme.divider)
             mainContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .animation(.easeInOut(duration: 0.2), value: vm.isAnalyzing)
         }
-        .background(Color(red: 0.09, green: 0.09, blue: 0.14))
-        .foregroundStyle(.white)
+        .background(Theme.background)
+        .foregroundStyle(Theme.textPrimary)
     }
 
     @ViewBuilder
     private var toolbarButtons: some View {
         if vm.isAnalyzing {
             Button("Cancel") { vm.cancelAnalyze() }
-                .buttonStyle(.bordered).foregroundStyle(.white)
+                .buttonStyle(.bordered).foregroundStyle(Theme.textPrimary)
         } else {
             HStack(spacing: 8) {
                 if case .results = vm.state {
@@ -35,12 +35,12 @@ struct DiskAnalyzerView: View {
                         .labelsHidden()
                         .help("Show largest files in a separate panel")
                     Text("Large files")
-                        .font(.caption).foregroundStyle(.white.opacity(0.6))
+                        .font(.caption).foregroundStyle(Theme.textSecondary)
                 }
                 Button(vm.rootNode != nil ? "Re-Analyze" : "Analyze") {
                     vm.analyze()
                 }
-                .buttonStyle(.borderedProminent).tint(.purple)
+                .buttonStyle(.borderedProminent).tint(Theme.diskAnalyzerAccent)
             }
         }
     }
@@ -55,7 +55,7 @@ struct DiskAnalyzerView: View {
             ContentUnavailableView("Analyze Failed",
                                    systemImage: "exclamationmark.triangle.fill",
                                    description: Text(m))
-                .foregroundStyle(.white)
+                .foregroundStyle(Theme.textPrimary)
         }
     }
 
@@ -63,19 +63,19 @@ struct DiskAnalyzerView: View {
 
     private var idleView: some View {
         VStack(spacing: 28) {
-            Image(systemName: "internaldrive.fill")
+            Image(systemName: "tree.fill")
                 .font(.system(size: 76))
-                .foregroundStyle(LinearGradient(colors: [.purple, .blue],
+                .foregroundStyle(LinearGradient(colors: [Theme.diskAnalyzerAccent, Theme.smartScanAccent],
                                                 startPoint: .top, endPoint: .bottom))
                 .symbolEffect(.pulse)
             VStack(spacing: 8) {
                 Text("Mac Storage Analyzer").font(.title.bold())
                 Text("See exactly what is eating your storage —\nall folders, all top-level directories.")
-                    .font(.body).foregroundStyle(.white.opacity(0.55))
+                    .font(.body).foregroundStyle(Theme.textSecondary)
                     .multilineTextAlignment(.center)
             }
             Button("Analyze Mac Storage") { vm.analyze() }
-                .buttonStyle(.borderedProminent).controlSize(.large).tint(.purple)
+                .buttonStyle(.borderedProminent).controlSize(.large).tint(Theme.diskAnalyzerAccent)
         }
         .padding(40)
     }
@@ -84,20 +84,20 @@ struct DiskAnalyzerView: View {
 
     private var analyzingView: some View {
         VStack(spacing: 20) {
-            ProgressView().controlSize(.extraLarge).tint(.purple)
+            ProgressView().controlSize(.extraLarge).tint(Theme.diskAnalyzerAccent)
             VStack(spacing: 6) {
                 Text("Analyzing Mac Storage…").font(.headline)
                 if !vm.scanningPath.isEmpty {
                     Text(vm.scanningPath)
-                        .font(.caption).foregroundStyle(.white.opacity(0.5))
+                        .font(.caption).foregroundStyle(Theme.textSecondary)
                         .animation(.easeInOut(duration: 0.3), value: vm.scanningPath)
                 }
             }
             Text("Scanning all directories concurrently. You can cancel any time.")
-                .font(.caption2).foregroundStyle(.white.opacity(0.3))
+                .font(.caption2).foregroundStyle(Theme.textMuted)
                 .multilineTextAlignment(.center)
             Button("Cancel") { vm.cancelAnalyze() }
-                .buttonStyle(.bordered).foregroundStyle(.white).controlSize(.small)
+                .buttonStyle(.bordered).foregroundStyle(Theme.textPrimary).controlSize(.small)
         }
         .padding(40)
     }
@@ -110,7 +110,7 @@ struct DiskAnalyzerView: View {
             // Disk space usage bar
             if vm.diskTotalBytes > 0 {
                 diskSpaceBar
-                Divider().background(Color.white.opacity(0.06))
+                Divider().background(Theme.divider)
             }
             if vm.metadata.hasInaccessiblePaths {
                 inaccessibleBanner
@@ -130,18 +130,18 @@ struct DiskAnalyzerView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Label("Macintosh HD", systemImage: "internaldrive.fill")
-                    .font(.caption.bold()).foregroundStyle(.white.opacity(0.8))
+                    .font(.caption.bold()).foregroundStyle(Theme.textPrimary.opacity(0.8))
                 Spacer()
                 Text("\(vm.diskTotalBytes.formattedBytes) total")
-                    .font(.caption2).foregroundStyle(.white.opacity(0.4))
+                    .font(.caption2).foregroundStyle(Theme.textMuted)
             }
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 3)
-                        .fill(Color.white.opacity(0.08))
+                        .fill(Theme.divider)
                     RoundedRectangle(cornerRadius: 3)
                         .fill(LinearGradient(
-                            colors: [.purple, .blue],
+                            colors: [Theme.smartScanAccent, Theme.systemJunkAccent],
                             startPoint: .leading, endPoint: .trailing))
                         .frame(width: geo.size.width * usedFraction)
                 }
@@ -149,14 +149,14 @@ struct DiskAnalyzerView: View {
             .frame(height: 7)
             HStack {
                 Text("\(vm.diskUsedBytes.formattedBytes) used")
-                    .font(.caption).foregroundStyle(.white)
+                    .font(.caption).foregroundStyle(Theme.textPrimary)
                 Spacer()
                 Text("\(vm.diskFreeBytes.formattedBytes) available")
-                    .font(.caption2).foregroundStyle(.white.opacity(0.5))
+                    .font(.caption2).foregroundStyle(Theme.textSecondary)
             }
         }
         .padding(.horizontal, 16).padding(.vertical, 10)
-        .background(Color.white.opacity(0.03))
+        .background(Theme.surfaceOverlay)
     }
 
     private var usedFraction: Double {
@@ -170,7 +170,7 @@ struct DiskAnalyzerView: View {
         HSplitView {
             VStack(spacing: 0) {
                 if !vm.breadcrumbs.isEmpty { breadcrumbBar }
-                Divider().background(Color.white.opacity(0.08))
+                Divider().background(Theme.divider)
                 ScrollView {
                     DiskPieChart(items: vm.chartItems) { node in
                         vm.drillDown(into: node)
@@ -179,7 +179,7 @@ struct DiskAnalyzerView: View {
                 }
             }
             .frame(minWidth: 280, maxWidth: 360)
-            .background(Color(red: 0.09, green: 0.09, blue: 0.14))
+            .background(Theme.background)
 
             diskNodeList
                 .frame(minWidth: 320)
@@ -193,14 +193,14 @@ struct DiskAnalyzerView: View {
                     if idx > 0 {
                         Image(systemName: "chevron.right")
                             .font(.system(size: 10))
-                            .foregroundStyle(.white.opacity(0.3))
+                            .foregroundStyle(Theme.textMuted)
                     }
                     Button(node.name) { vm.navigateToBreadcrumb(node) }
                         .buttonStyle(.plain)
                         .font(.system(size: 12,
                             weight: idx == vm.breadcrumbs.count - 1 ? .semibold : .regular))
                         .foregroundStyle(idx == vm.breadcrumbs.count - 1
-                                         ? .white : .white.opacity(0.5))
+                                         ? Theme.textPrimary : Theme.textSecondary)
                 }
             }
             .padding(.horizontal, 16).padding(.vertical, 10)
@@ -211,14 +211,14 @@ struct DiskAnalyzerView: View {
         List {
             let children = vm.selectedNode?.children ?? []
             if children.isEmpty {
-                Text("No items").foregroundStyle(.white.opacity(0.3))
+                Text("No items").foregroundStyle(Theme.textMuted)
                     .listRowBackground(Color.clear)
             } else {
                 ForEach(children, id: \.id) { node in
                     DiskNodeRow(node: node,
                                 parentSize: vm.selectedNode?.size ?? 1)
-                        .listRowBackground(Color.white.opacity(0.04))
-                        .listRowSeparatorTint(Color.white.opacity(0.07))
+                        .listRowBackground(Theme.surfaceOverlay)
+                        .listRowSeparatorTint(Theme.divider)
                         .onTapGesture {
                             if node.isDirectory { vm.drillDown(into: node) }
                         }
@@ -227,7 +227,7 @@ struct DiskAnalyzerView: View {
         }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
-        .background(Color(red: 0.09, green: 0.09, blue: 0.14))
+        .background(Theme.background)
     }
 
     // MARK: - Largest-files pane
@@ -239,16 +239,16 @@ struct DiskAnalyzerView: View {
                 Spacer()
                 if !vm.selectedFileIDs.isEmpty {
                     Text("\(vm.selectedFileIDs.count) selected · \(vm.selectedLargeFilesSize.formattedBytes)")
-                        .font(.caption).foregroundStyle(.orange)
+                        .font(.caption).foregroundStyle(Theme.systemJunkAccent)
                     Button("Send to Review") {
                         let cats = vm.buildLargeFileCleanupCategory()
                         coord.startReview(cats, title: "Review Large Files")
                     }
-                    .buttonStyle(.borderedProminent).tint(.purple).controlSize(.small)
+                    .buttonStyle(.borderedProminent).tint(Theme.diskAnalyzerAccent).controlSize(.small)
                 }
             }
             .padding(.horizontal, 16).padding(.vertical, 10)
-            .background(Color.white.opacity(0.04))
+            .background(Theme.surfaceOverlay)
 
             List(vm.largestFiles, id: \.id) { node in
                 LargeFileRow(
@@ -258,10 +258,10 @@ struct DiskAnalyzerView: View {
                 )
                 .listRowBackground(
                     vm.selectedFileIDs.contains(node.id)
-                        ? Color.purple.opacity(0.10)
-                        : Color.white.opacity(0.04)
+                        ? Theme.diskAnalyzerAccent.opacity(0.10)
+                        : Theme.surfaceOverlay
                 )
-                .listRowSeparatorTint(Color.white.opacity(0.07))
+                .listRowSeparatorTint(Theme.divider)
             }
             .listStyle(.inset)
             .scrollContentBackground(.hidden)
@@ -272,13 +272,13 @@ struct DiskAnalyzerView: View {
 
     private var inaccessibleBanner: some View {
         HStack(spacing: 10) {
-            Image(systemName: "lock.fill").foregroundStyle(.yellow)
+            Image(systemName: "lock.fill").foregroundStyle(Theme.fdaBannerAccent)
             Text("\(vm.metadata.inaccessibleCount) folder\(vm.metadata.inaccessibleCount == 1 ? "" : "s") couldn't be read. Grant Full Disk Access for a complete picture.")
-                .font(.caption).foregroundStyle(.white.opacity(0.7))
+                .font(.caption).foregroundStyle(Theme.textSecondary)
             Spacer()
         }
         .padding(.horizontal, 16).padding(.vertical, 8)
-        .background(Color.yellow.opacity(0.08))
+        .background(Theme.fdaBannerBackground)
     }
 
     private var statsBar: some View {
@@ -289,22 +289,22 @@ struct DiskAnalyzerView: View {
                 stat("Symlinks skipped", "\(vm.skippedSymlinks)")
             }
             if vm.metadata.inaccessibleCount > 0 {
-                stat("Inaccessible", "\(vm.metadata.inaccessibleCount)", color: .yellow)
+                stat("Inaccessible", "\(vm.metadata.inaccessibleCount)", color: Theme.fdaBannerAccent)
             }
             Spacer()
             if vm.metadata.duration > 0 {
                 Text(String(format: "%.1fs", vm.metadata.duration))
-                    .font(.caption).foregroundStyle(.white.opacity(0.4))
+                    .font(.caption).foregroundStyle(Theme.textMuted)
             }
         }
         .padding(.horizontal, 16).padding(.vertical, 8)
-        .background(Color(red: 0.09, green: 0.09, blue: 0.14))
+        .background(Theme.background)
     }
 
-    private func stat(_ label: String, _ value: String, color: Color = .white) -> some View {
+    private func stat(_ label: String, _ value: String, color: Color = Theme.textPrimary) -> some View {
         VStack(alignment: .leading, spacing: 1) {
             Text(label).font(.system(size: 9))
-                .foregroundStyle(.white.opacity(0.4))
+                .foregroundStyle(Theme.textMuted)
                 .textCase(.uppercase).tracking(0.5)
             Text(value).font(.system(.caption, design: .rounded).weight(.semibold))
                 .foregroundStyle(color)
@@ -327,19 +327,19 @@ struct DiskNodeRow: View {
         HStack(spacing: 12) {
             Image(systemName: node.isDirectory ? "folder.fill" : "doc.fill")
                 .font(.system(size: 14))
-                .foregroundStyle(node.isDirectory ? .yellow.opacity(0.8) : .white.opacity(0.35))
+                .foregroundStyle(node.isDirectory ? Theme.systemJunkAccent.opacity(0.8) : Theme.textMuted)
                 .frame(width: 20)
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text(node.name).font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(.white).lineLimit(1)
+                        .foregroundStyle(Theme.textPrimary).lineLimit(1)
                     Spacer()
                     SizeBadge(bytes: node.size, color: node.category.color)
                 }
                 GeometryReader { geo in
                     ZStack(alignment: .leading) {
-                        Capsule().fill(Color.white.opacity(0.07))
+                        Capsule().fill(Theme.divider)
                         Capsule().fill(node.category.color.opacity(0.7))
                             .frame(width: max(4, geo.size.width * fraction))
                     }
@@ -349,7 +349,7 @@ struct DiskNodeRow: View {
 
             if node.isDirectory {
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 10)).foregroundStyle(.white.opacity(0.25))
+                    .font(.system(size: 10)).foregroundStyle(Theme.textFaint)
             }
         }
         .padding(.vertical, 6)
@@ -367,13 +367,13 @@ struct LargeFileRow: View {
         HStack(spacing: 12) {
             Button(action: onToggle) {
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .foregroundStyle(isSelected ? .purple : .white.opacity(0.3))
+                    .foregroundStyle(isSelected ? Theme.diskAnalyzerAccent : Theme.textMuted)
                     .font(.system(size: 16))
             }
             .buttonStyle(.plain)
 
             Image(systemName: "doc.fill")
-                .foregroundStyle(.white.opacity(0.35))
+                .foregroundStyle(Theme.textMuted)
 
             VStack(alignment: .leading, spacing: 1) {
                 Text(node.name)
@@ -381,14 +381,14 @@ struct LargeFileRow: View {
                     .lineLimit(1)
                 Text(CleanupItem.makeDisplayPath(url: node.url))
                     .font(.system(size: 10, design: .monospaced))
-                    .foregroundStyle(.white.opacity(0.4))
+                    .foregroundStyle(Theme.textMuted)
                     .lineLimit(1).truncationMode(.middle)
             }
 
             Spacer()
             Text(node.size.formattedBytes)
                 .font(.system(.caption, design: .rounded).weight(.semibold))
-                .foregroundStyle(.orange)
+                .foregroundStyle(Theme.systemJunkAccent)
         }
         .padding(.vertical, 4)
         .contentShape(Rectangle())

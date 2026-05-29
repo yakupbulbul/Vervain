@@ -28,9 +28,9 @@ enum CleanupRiskLevel: String, CaseIterable, Sendable, Comparable, Hashable {
 
     var color: Color {
         switch self {
-        case .safe:   return .green
-        case .review: return .yellow
-        case .risky:  return .red
+        case .safe:   return Theme.statusSafe
+        case .review: return Theme.statusReview
+        case .risky:  return Theme.statusRisky
         }
     }
 

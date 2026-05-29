@@ -20,13 +20,13 @@ struct AppUninstallerView: View {
                            subtitle: "Remove apps and their leftovers safely") {
                 toolbarButtons
             }
-            Divider().background(Color.white.opacity(0.08))
+            Divider().background(Theme.divider)
             mainContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .animation(.easeInOut(duration: 0.2), value: vm.isScanning)
         }
-        .background(Color(red: 0.09, green: 0.09, blue: 0.14))
-        .foregroundStyle(.white)
+        .background(Theme.background)
+        .foregroundStyle(Theme.textPrimary)
     }
 
     // MARK: - Toolbar
@@ -35,13 +35,13 @@ struct AppUninstallerView: View {
     private var toolbarButtons: some View {
         switch vm.state {
         case .scanning:
-            ProgressView().controlSize(.small).tint(.white)
+            ProgressView().controlSize(.small).tint(Theme.appUninstallerAccent)
         case .results:
             Button("Re-Scan") { vm.scan() }
-                .buttonStyle(.bordered).controlSize(.small).foregroundStyle(.white)
+                .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
         default:
             Button("Scan Apps") { vm.scan() }
-                .buttonStyle(.borderedProminent).tint(.red)
+                .buttonStyle(.borderedProminent).tint(Theme.appUninstallerAccent)
         }
     }
 
@@ -59,7 +59,7 @@ struct AppUninstallerView: View {
                 ContentUnavailableView("No Apps Found",
                                        systemImage: "xmark.app.fill",
                                        description: Text("Nothing found in /Applications, ~/Applications, or /Applications/Utilities."))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Theme.textPrimary)
             } else {
                 splitView
             }
@@ -68,30 +68,30 @@ struct AppUninstallerView: View {
 
     private var idleView: some View {
         VStack(spacing: 28) {
-            Image(systemName: "xmark.app.fill")
+            Image(systemName: "leaf.arrow.circlepath")
                 .font(.system(size: 76))
-                .foregroundStyle(LinearGradient(colors: [.red, .pink],
+                .foregroundStyle(LinearGradient(colors: [Theme.appUninstallerAccent, Color(red: 0.60, green: 0.32, blue: 0.22)],
                                                 startPoint: .top, endPoint: .bottom))
                 .symbolEffect(.pulse)
             VStack(spacing: 8) {
                 Text("Remove Apps Completely").font(.title.bold())
                 Text("Find installed apps with confidence-graded leftover\ndetection. Apple system apps are protected.")
-                    .font(.body).foregroundStyle(.white.opacity(0.55))
+                    .font(.body).foregroundStyle(Theme.textSecondary)
                     .multilineTextAlignment(.center)
             }
             Button("Scan Applications") { vm.scan() }
-                .buttonStyle(.borderedProminent).controlSize(.large).tint(.red)
+                .buttonStyle(.borderedProminent).controlSize(.large).tint(Theme.appUninstallerAccent)
         }
         .padding(40)
     }
 
     private var loadingView: some View {
         VStack(spacing: 20) {
-            ProgressView().controlSize(.extraLarge).tint(.red)
+            ProgressView().controlSize(.extraLarge).tint(Theme.appUninstallerAccent)
             VStack(spacing: 6) {
                 Text("Scanning installed apps…").font(.headline)
                 Text("Looking in /Applications and ~/Applications.")
-                    .font(.caption).foregroundStyle(.white.opacity(0.55))
+                    .font(.caption).foregroundStyle(Theme.textSecondary)
                     .multilineTextAlignment(.center)
             }
         }
@@ -114,10 +114,10 @@ struct AppUninstallerView: View {
             // Search + sort bar
             HStack(spacing: 8) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundStyle(.white.opacity(0.4))
+                    .foregroundStyle(Theme.textMuted)
                 TextField("Search apps…", text: $searchText)
                     .textFieldStyle(.plain)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Theme.textPrimary)
                 Spacer()
                 Picker("Sort", selection: $sortOrder) {
                     ForEach(SortOrder.allCases, id: \.self) { order in
@@ -128,22 +128,22 @@ struct AppUninstallerView: View {
                 .frame(width: 160)
             }
             .padding(.horizontal, 14).padding(.vertical, 8)
-            .background(Color.white.opacity(0.04))
+            .background(Theme.surfaceOverlay)
 
             // Stats bar
             HStack(spacing: 16) {
                 Text("\(filteredApps.count) apps")
-                    .font(.caption).foregroundStyle(.white.opacity(0.5))
+                    .font(.caption).foregroundStyle(Theme.textSecondary)
                 Spacer()
                 if !vm.selectedIDs.isEmpty {
                     Text("\(vm.selectedIDs.count) selected")
-                        .font(.caption.bold()).foregroundStyle(.red)
+                        .font(.caption.bold()).foregroundStyle(Theme.appUninstallerAccent)
                 }
             }
             .padding(.horizontal, 14).padding(.vertical, 6)
-            .background(Color.white.opacity(0.02))
+            .background(Theme.surfaceOverlay)
 
-            Divider().background(Color.white.opacity(0.06))
+            Divider().background(Theme.divider)
 
             ScrollView {
                 LazyVStack(spacing: 0) {
@@ -157,7 +157,7 @@ struct AppUninstallerView: View {
                             onSelect: { selectedDetailID = app.id },
                             onScanLeftovers: { vm.scanLeftovers(for: app) }
                         )
-                        Divider().background(Color.white.opacity(0.05))
+                        Divider().background(Theme.divider)
                     }
                 }
             }
@@ -192,11 +192,11 @@ struct AppUninstallerView: View {
             VStack(spacing: 16) {
                 Image(systemName: "app.dashed")
                     .font(.system(size: 48))
-                    .foregroundStyle(.white.opacity(0.2))
+                    .foregroundStyle(Theme.textFaint)
                 Text("Select an app")
-                    .font(.title3.bold()).foregroundStyle(.white.opacity(0.5))
+                    .font(.title3.bold()).foregroundStyle(Theme.textSecondary)
                 Text("Pick an app from the list to see details.")
-                    .font(.caption).foregroundStyle(.white.opacity(0.3))
+                    .font(.caption).foregroundStyle(Theme.textMuted)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -206,15 +206,15 @@ struct AppUninstallerView: View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(vm.selectedIDs.count) app\(vm.selectedIDs.count == 1 ? "" : "s") selected")
-                    .font(.system(size: 12, weight: .medium)).foregroundStyle(.white.opacity(0.6))
+                    .font(.system(size: 12, weight: .medium)).foregroundStyle(Theme.textSecondary)
                 Text(vm.totalSelectedSize.formattedBytes)
-                    .font(.system(size: 16, weight: .bold, design: .rounded)).foregroundStyle(.red)
+                    .font(.system(size: 16, weight: .bold, design: .rounded)).foregroundStyle(Theme.appUninstallerAccent)
             }
             Spacer()
             Button("Deselect All") {
                 vm.selectedIDs.removeAll()
             }
-            .buttonStyle(.bordered).controlSize(.small).foregroundStyle(.white)
+            .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
             Button("Review & Uninstall") {
                 coord.startReview(
                     vm.buildCleanupCategories(),
@@ -223,13 +223,13 @@ struct AppUninstallerView: View {
                     vm.scan()
                 }
             }
-            .buttonStyle(.borderedProminent).tint(.red)
+            .buttonStyle(.borderedProminent).tint(Theme.appUninstallerAccent)
         }
         .padding(.horizontal, 16).padding(.vertical, 12)
         .background(
-            Color.red.opacity(0.08)
+            Theme.appUninstallerAccent.opacity(0.08)
                 .overlay(alignment: .top) {
-                    Divider().background(Color.red.opacity(0.3))
+                    Divider().background(Theme.appUninstallerAccent.opacity(0.3))
                 }
         )
     }
@@ -251,7 +251,7 @@ struct AppRow: View {
             // Checkbox
             Button(action: onToggle) {
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .foregroundStyle(isSelected ? .red : .white.opacity(0.25))
+                    .foregroundStyle(isSelected ? Theme.appUninstallerAccent : Theme.textFaint)
                     .font(.system(size: 20))
             }
             .buttonStyle(.plain)
@@ -270,13 +270,13 @@ struct AppRow: View {
                     if let v = app.version {
                         Text(v)
                             .font(.system(size: 10, design: .rounded))
-                            .foregroundStyle(.white.opacity(0.35))
+                            .foregroundStyle(Theme.textMuted)
                             .lineLimit(1)
                     }
                 }
                 Text(app.bundleID)
                     .font(.system(size: 10, design: .monospaced))
-                    .foregroundStyle(.white.opacity(0.3))
+                    .foregroundStyle(Theme.textMuted)
                     .lineLimit(1)
             }
 
@@ -285,23 +285,23 @@ struct AppRow: View {
             // Size badge
             Text(app.bundleSize.compactBytes)
                 .font(.system(size: 12, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
+                .foregroundStyle(Theme.textPrimary)
                 .padding(.horizontal, 8).padding(.vertical, 3)
                 .background(sizeColor(app.bundleSize).opacity(0.2), in: Capsule())
 
             // Leftovers status
             Group {
                 if isScanningLeftovers {
-                    ProgressView().controlSize(.mini).tint(.orange)
+                    ProgressView().controlSize(.mini).tint(Theme.systemJunkAccent)
                 } else if app.leftoverScanned {
                     if app.leftoverSize > 0 {
                         Text("+\(app.leftoverSize.compactBytes)")
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(Theme.systemJunkAccent)
                     } else {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 12))
-                            .foregroundStyle(.green.opacity(0.7))
+                            .foregroundStyle(Theme.statusSafe.opacity(0.7))
                     }
                 } else {
                     Button {
@@ -309,7 +309,7 @@ struct AppRow: View {
                     } label: {
                         Text("Leftovers")
                             .font(.system(size: 10, weight: .medium))
-                            .foregroundStyle(.white.opacity(0.4))
+                            .foregroundStyle(Theme.textMuted)
                     }
                     .buttonStyle(.borderless)
                 }
@@ -319,17 +319,17 @@ struct AppRow: View {
         .padding(.horizontal, 14).padding(.vertical, 8)
         .background(
             isDetailSelected
-                ? Color.white.opacity(0.06)
-                : (isSelected ? Color.red.opacity(0.06) : Color.clear)
+                ? Theme.divider
+                : (isSelected ? Theme.appUninstallerAccent.opacity(0.06) : Color.clear)
         )
         .contentShape(Rectangle())
         .onTapGesture { onSelect() }
     }
 
     private func sizeColor(_ bytes: Int64) -> Color {
-        if bytes > 1_000_000_000 { return .red }
-        if bytes > 500_000_000 { return .orange }
-        if bytes > 100_000_000 { return .yellow }
-        return .blue
+        if bytes > 1_000_000_000 { return Theme.appUninstallerAccent }
+        if bytes > 500_000_000 { return Theme.systemJunkAccent }
+        if bytes > 100_000_000 { return Theme.statusReview }
+        return Theme.smartScanAccent
     }
 }

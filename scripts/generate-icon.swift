@@ -1,12 +1,11 @@
 #!/usr/bin/env swift
 import AppKit
 
-// Matches the app's visual identity:
-//   Background: dark navy  Color(red:0.09, green:0.09, blue:0.14)
-//   Symbol:     sparkles with blue→purple gradient (topLeading→bottomTrailing)
-//               same as SidebarView.appHeader & OnboardingView.header
-//   SwiftUI .blue   ≈ #007AFF  (0.00, 0.478, 1.00)
-//   SwiftUI .purple ≈ #AF52DE  (0.686, 0.322, 0.871)
+// Matches the app's organic visual identity:
+//   Background: Forest Green → Warm Amber gradient (full-bleed)
+//   Symbol:     white leaf.fill — nature, care, purity
+//   Theme.brandPrimary  = (0.22, 0.56, 0.35)  forest green
+//   Theme.brandSecondary = (0.78, 0.55, 0.18)  warm amber
 
 let W = 1024
 
@@ -24,33 +23,31 @@ let nsCtx = NSGraphicsContext(cgContext: ctx, flipped: false)
 NSGraphicsContext.saveGraphicsState()
 NSGraphicsContext.current = nsCtx
 
-// ── 1. Dark navy background ───────────────────────────────────────────────────
-ctx.setFillColor(CGColor(red: 0.09, green: 0.09, blue: 0.14, alpha: 1.0))
-ctx.fill(CGRect(x: 0, y: 0, width: W, height: W))
+// ── 1. Full-bleed Forest Green → Warm Amber gradient ─────────────────────────
+let forestGreen = NSColor(red: 0.15, green: 0.45, blue: 0.28, alpha: 1.0)
+let warmAmber   = NSColor(red: 0.78, green: 0.55, blue: 0.18, alpha: 1.0)
+let grad = NSGradient(starting: forestGreen, ending: warmAmber)!
+// angle 135° in AppKit y-up coords → green at top-left, amber at bottom-right
+grad.draw(in: NSRect(x: 0, y: 0, width: W, height: W), angle: 135)
 
-// ── 2. White sparkles symbol ──────────────────────────────────────────────────
-let symCfg = NSImage.SymbolConfiguration(pointSize: 520, weight: .semibold)
+// ── 2. Subtle radial glow in center for depth ────────────────────────────────
+let glow = NSGradient(colors: [
+    NSColor.white.withAlphaComponent(0.12),
+    NSColor.clear
+])!
+let glowRect = NSRect(x: 0, y: 0, width: W, height: W).insetBy(dx: 100, dy: 100)
+glow.draw(in: glowRect, relativeCenterPosition: NSPoint(x: 0, y: 0))
+
+// ── 3. White leaf symbol, centered ───────────────────────────────────────────
+let symCfg = NSImage.SymbolConfiguration(pointSize: 480, weight: .semibold)
     .applying(NSImage.SymbolConfiguration(paletteColors: [.white]))
-if let sym = NSImage(systemSymbolName: "sparkles", accessibilityDescription: nil)?
+if let sym = NSImage(systemSymbolName: "leaf.fill", accessibilityDescription: nil)?
     .withSymbolConfiguration(symCfg) {
     let sz = sym.size
     sym.draw(at: NSPoint(x: (CGFloat(W) - sz.width)  / 2,
                          y: (CGFloat(W) - sz.height) / 2),
              from: .zero, operation: .sourceOver, fraction: 1.0)
 }
-
-// ── 3. Blue→Purple gradient via .multiply blend (tints white sparkles) ────────
-// multiply: result = src × dest
-//   • white sparkle pixels (1,1,1) × gradient = gradient colour  ✓
-//   • dark bg (~0.09)              × gradient ≈ near-black        ✓
-// angle 135° in AppKit y-up coords → blue at top-left, purple at bottom-right
-// matching SwiftUI startPoint:.topLeading / endPoint:.bottomTrailing
-let blue   = NSColor(red: 0.00,  green: 0.478, blue: 1.00,  alpha: 1.0)
-let purple = NSColor(red: 0.686, green: 0.322, blue: 0.871, alpha: 1.0)
-let grad   = NSGradient(starting: blue, ending: purple)!
-ctx.setBlendMode(.multiply)
-grad.draw(in: NSRect(x: 0, y: 0, width: W, height: W), angle: 135)
-ctx.setBlendMode(.normal)
 
 NSGraphicsContext.restoreGraphicsState()
 

@@ -11,7 +11,7 @@ struct CleanupItemRow: View {
             Button(action: onToggle) {
                 Image(systemName: item.isSelected
                       ? "checkmark.circle.fill" : "circle")
-                    .foregroundStyle(item.isSelected ? .blue : .white.opacity(0.3))
+                    .foregroundStyle(item.isSelected ? Theme.smartScanAccent : Theme.textMuted)
                     .font(.system(size: 16))
             }
             .buttonStyle(.plain)
@@ -26,19 +26,19 @@ struct CleanupItemRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.name)
                     .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Theme.textPrimary)
                     .lineLimit(1)
                 HStack(spacing: 4) {
                     Text(item.displayPath)
                         .font(.system(size: 10, design: .monospaced))
-                        .foregroundStyle(.white.opacity(0.4))
+                        .foregroundStyle(Theme.textMuted)
                         .lineLimit(1)
                         .truncationMode(.middle)
                     Text("·")
-                        .foregroundStyle(.white.opacity(0.3))
+                        .foregroundStyle(Theme.textMuted)
                     Text(item.reason.displayText)
                         .font(.system(size: 10))
-                        .foregroundStyle(.white.opacity(0.5))
+                        .foregroundStyle(Theme.textSecondary)
                         .lineLimit(1)
                 }
                 .help(item.url.path)
@@ -52,7 +52,7 @@ struct CleanupItemRow: View {
             // Size
             Text(item.size.compactBytes)
                 .font(.system(size: 11, weight: .semibold, design: .rounded))
-                .foregroundStyle(.white.opacity(0.7))
+                .foregroundStyle(Theme.textSecondary)
                 .frame(width: 64, alignment: .trailing)
         }
         .padding(.vertical, 6)

@@ -10,35 +10,35 @@ struct OnboardingView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
                     header
-                    promise(icon: "lock.shield.fill", color: .blue,
+                    promise(icon: "hand.raised.fill", color: Theme.smartScanAccent,
                             title: "Private by design",
                             body: "PureMac never sends data anywhere. No telemetry, no analytics, no account. Everything runs on this Mac.")
-                    promise(icon: "trash.circle.fill", color: .orange,
+                    promise(icon: "arrow.3.trianglepath", color: Theme.systemJunkAccent,
                             title: "Trash only — nothing is permanently deleted",
                             body: "Every cleanup moves files to the Trash. You can restore anything until you empty it yourself.")
-                    promise(icon: "checkmark.shield.fill", color: .green,
+                    promise(icon: "eye.fill", color: Theme.statusSafe,
                             title: "Review before you clean",
                             body: "Nothing is ever removed without a review screen. Risky or low-confidence items are never selected by default.")
-                    promise(icon: "magnifyingglass", color: .purple,
+                    promise(icon: "binoculars.fill", color: Theme.diskAnalyzerAccent,
                             title: "Optional Full Disk Access",
                             body: "PureMac asks for Full Disk Access only so it can scan your protected folders. You can decline — partial results will still work.")
                 }
                 .padding(28)
             }
-            Divider().background(Color.white.opacity(0.08))
+            Divider().background(Theme.divider)
             HStack {
                 Spacer()
                 Button("Get Started") {
                     UserDefaults.standard.set(true, forKey: Self.onboardingShownKey)
                     isPresented = false
                 }
-                .buttonStyle(.borderedProminent).controlSize(.large).tint(.blue)
+                .buttonStyle(.borderedProminent).controlSize(.large).tint(Theme.brandPrimary)
             }
             .padding(.horizontal, 20).padding(.vertical, 14)
         }
         .frame(width: 560, height: 540)
-        .background(Color(red: 0.09, green: 0.09, blue: 0.14))
-        .foregroundStyle(.white)
+        .background(Theme.background)
+        .foregroundStyle(Theme.textPrimary)
     }
 
     static let onboardingShownKey = "com.yakupbulbul.PureMac.onboardingShown"
@@ -48,14 +48,12 @@ struct OnboardingView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Image(systemName: "sparkles")
+            Image(systemName: "leaf.fill")
                 .font(.system(size: 36, weight: .semibold))
-                .foregroundStyle(LinearGradient(colors: [.blue, .purple],
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing))
+                .foregroundStyle(Theme.brandGradient())
             Text("Welcome to PureMac").font(.title.bold())
-            Text("A safe, transparent way to clean your Mac.")
-                .font(.title3).foregroundStyle(.white.opacity(0.7))
+            Text("A gentle way to care for your Mac.")
+                .font(.title3).foregroundStyle(Theme.textSecondary)
         }
     }
 
@@ -70,7 +68,7 @@ struct OnboardingView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(title).font(.headline)
                 Text(body).font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.65))
+                    .foregroundStyle(Theme.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
         }

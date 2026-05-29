@@ -9,17 +9,17 @@ struct DoneView: View {
         VStack(spacing: 24) {
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 72))
-                .foregroundStyle(.green)
+                .foregroundStyle(Theme.statusSafe)
                 .symbolEffect(.bounce, value: true)
 
             VStack(spacing: 8) {
                 Text(message)
                     .font(.title2.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Theme.textPrimary)
 
                 Text("\(freedBytes.formattedBytes) freed")
                     .font(.title3)
-                    .foregroundStyle(.green)
+                    .foregroundStyle(Theme.statusSafe)
             }
 
             if let onDismiss {
@@ -36,12 +36,12 @@ struct DoneView: View {
 
 struct SizeBadge: View {
     let bytes: Int64
-    var color: Color = .orange
+    var color: Color = Theme.systemJunkAccent
 
     var body: some View {
         Text(bytes.compactBytes)
             .font(.system(size: 11, weight: .semibold, design: .rounded))
-            .foregroundStyle(.white)
+            .foregroundStyle(Theme.textPrimary)
             .padding(.horizontal, 8)
             .padding(.vertical, 3)
             .background(color.opacity(0.9), in: Capsule())

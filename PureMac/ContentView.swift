@@ -10,7 +10,7 @@ struct ContentView: View {
                 .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 260)
         } detail: {
             ZStack {
-                Color(red: 0.09, green: 0.09, blue: 0.14)
+                Theme.background
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     FullDiskAccessBanner()

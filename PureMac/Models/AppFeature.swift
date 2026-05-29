@@ -10,28 +10,28 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
 
     var icon: String {
         switch self {
-        case .smartScan:      return "shield.lefthalf.filled"
-        case .systemJunk:     return "trash.circle.fill"
-        case .appUninstaller: return "xmark.app.fill"
-        case .diskAnalyzer:   return "chart.pie.fill"
+        case .smartScan:      return "leaf.fill"
+        case .systemJunk:     return "arrow.3.trianglepath"
+        case .appUninstaller: return "leaf.arrow.circlepath"
+        case .diskAnalyzer:   return "tree.fill"
         }
     }
 
     var accentColor: Color {
         switch self {
-        case .smartScan:      return .blue
-        case .systemJunk:     return .orange
-        case .appUninstaller: return .red
-        case .diskAnalyzer:   return .purple
+        case .smartScan:      return Theme.smartScanAccent
+        case .systemJunk:     return Theme.systemJunkAccent
+        case .appUninstaller: return Theme.appUninstallerAccent
+        case .diskAnalyzer:   return Theme.diskAnalyzerAccent
         }
     }
 
     var description: String {
         switch self {
-        case .smartScan:      return "Check overall Mac health"
-        case .systemJunk:     return "Free up wasted space"
-        case .appUninstaller: return "Remove apps completely"
-        case .diskAnalyzer:   return "Visualize disk usage"
+        case .smartScan:      return "Nurture your Mac's health"
+        case .systemJunk:     return "Recycle unused files"
+        case .appUninstaller: return "Gently remove apps"
+        case .diskAnalyzer:   return "See what's growing"
         }
     }
 }

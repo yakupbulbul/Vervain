@@ -14,7 +14,7 @@ struct AppDetailPanel: View {
             }
             .padding(24)
         }
-        .background(Color.white.opacity(0.02))
+        .background(Theme.surfaceOverlay)
     }
 
     private var header: some View {
@@ -30,11 +30,11 @@ struct AppDetailPanel: View {
                     .multilineTextAlignment(.center)
                 Text(app.bundleID)
                     .font(.system(size: 11, design: .monospaced))
-                    .foregroundStyle(.white.opacity(0.4))
+                    .foregroundStyle(Theme.textMuted)
                 if let dev = app.developer {
                     Text(dev)
                         .font(.caption)
-                        .foregroundStyle(.white.opacity(0.35))
+                        .foregroundStyle(Theme.textMuted)
                         .lineLimit(2)
                         .multilineTextAlignment(.center)
                 }
@@ -52,28 +52,28 @@ struct AppDetailPanel: View {
                         app.leftoverSize > 0
                             ? app.leftoverSize.formattedBytes
                             : "Clean",
-                        valueColor: app.leftoverSize > 0 ? .orange : .green)
+                        valueColor: app.leftoverSize > 0 ? Theme.systemJunkAccent : Theme.statusSafe)
             }
             if let mod = app.lastModifiedDate {
                 metaRow("Last Modified", mod.formatted(date: .abbreviated, time: .shortened))
             }
-            Divider().background(Color.white.opacity(0.06))
+            Divider().background(Theme.divider)
             HStack {
                 Text("Total Size").font(.system(size: 12, weight: .bold))
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(Theme.textSecondary)
                 Spacer()
                 Text(app.totalSize.formattedBytes)
                     .font(.system(size: 16, weight: .bold, design: .rounded))
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(Theme.systemJunkAccent)
             }
         }
         .padding(16)
-        .background(Color.white.opacity(0.04), in: RoundedRectangle(cornerRadius: 12))
+        .background(Theme.surfaceOverlay, in: RoundedRectangle(cornerRadius: 12))
     }
 
-    private func metaRow(_ k: String, _ v: String, valueColor: Color = .white) -> some View {
+    private func metaRow(_ k: String, _ v: String, valueColor: Color = Theme.textPrimary) -> some View {
         HStack {
-            Text(k).font(.system(size: 12)).foregroundStyle(.white.opacity(0.45))
+            Text(k).font(.system(size: 12)).foregroundStyle(Theme.textMuted)
             Spacer()
             Text(v)
                 .font(.system(size: 13, weight: .medium, design: .rounded))
@@ -86,38 +86,38 @@ struct AppDetailPanel: View {
         if !app.leftoverScanned {
             HStack(spacing: 10) {
                 if isScanningLeftovers {
-                    ProgressView().controlSize(.small).tint(.orange)
+                    ProgressView().controlSize(.small).tint(Theme.systemJunkAccent)
                     Text("Scanning leftover files…")
-                        .font(.subheadline).foregroundStyle(.white.opacity(0.6))
+                        .font(.subheadline).foregroundStyle(Theme.textSecondary)
                 } else {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Leftover Detection")
                             .font(.system(size: 12, weight: .semibold))
                         Text("Scan ~/Library for caches, preferences, and support files left by this app.")
                             .font(.system(size: 11))
-                            .foregroundStyle(.white.opacity(0.5))
+                            .foregroundStyle(Theme.textSecondary)
                     }
                     Spacer()
                     Button("Scan") { onScanLeftovers() }
-                        .buttonStyle(.borderedProminent).controlSize(.small).tint(.orange)
+                        .buttonStyle(.borderedProminent).controlSize(.small).tint(Theme.systemJunkAccent)
                 }
             }
             .padding(14)
-            .background(Color.orange.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
+            .background(Theme.systemJunkAccent.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
         } else if app.leftoverItems.isEmpty {
             HStack(spacing: 8) {
-                Image(systemName: "checkmark.seal.fill").foregroundStyle(.green)
+                Image(systemName: "checkmark.seal.fill").foregroundStyle(Theme.statusSafe)
                     .font(.system(size: 20))
                 VStack(alignment: .leading, spacing: 2) {
                     Text("No leftover files found")
                         .font(.system(size: 13, weight: .medium))
                     Text("This app has a clean footprint.")
-                        .font(.system(size: 11)).foregroundStyle(.white.opacity(0.4))
+                        .font(.system(size: 11)).foregroundStyle(Theme.textMuted)
                 }
             }
             .padding(14)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.green.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
+            .background(Theme.statusSafe.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
         } else {
             groupedLeftovers
         }
@@ -130,11 +130,11 @@ struct AppDetailPanel: View {
                 Text("Leftover Files")
                     .font(.system(size: 12, weight: .bold))
                     .textCase(.uppercase).tracking(0.8)
-                    .foregroundStyle(.white.opacity(0.5))
+                    .foregroundStyle(Theme.textSecondary)
                 Spacer()
                 Text("\(app.leftoverItems.count) items · \(app.leftoverSize.compactBytes)")
                     .font(.system(size: 11, design: .rounded))
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(Theme.systemJunkAccent)
             }
 
             ForEach(CleanupConfidenceLevel.allCases, id: \.self) { conf in
@@ -156,7 +156,7 @@ struct AppDetailPanel: View {
                 Spacer()
                 Text("\(items.count) · \(items.reduce(Int64(0)) { $0 + $1.size }.compactBytes)")
                     .font(.system(size: 10, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.4))
+                    .foregroundStyle(Theme.textMuted)
             }
             VStack(spacing: 2) {
                 ForEach(items.prefix(10)) { item in
@@ -166,22 +166,22 @@ struct AppDetailPanel: View {
                         Spacer()
                         Text(item.size.compactBytes)
                             .font(.system(size: 10, design: .rounded))
-                            .foregroundStyle(.white.opacity(0.4))
+                            .foregroundStyle(Theme.textMuted)
                     }
                     .padding(.vertical, 3).padding(.horizontal, 10)
-                    .background(Color.white.opacity(0.03), in: RoundedRectangle(cornerRadius: 6))
+                    .background(Theme.surfaceOverlay, in: RoundedRectangle(cornerRadius: 6))
                     .help(item.displayPath)
                 }
                 if items.count > 10 {
                     Text("and \(items.count - 10) more…")
                         .font(.system(size: 10))
-                        .foregroundStyle(.white.opacity(0.35))
+                        .foregroundStyle(Theme.textMuted)
                         .padding(.leading, 10).padding(.top, 2)
                 }
             }
         }
         .padding(12)
-        .background(Color.white.opacity(0.03), in: RoundedRectangle(cornerRadius: 10))
+        .background(Theme.surfaceOverlay, in: RoundedRectangle(cornerRadius: 10))
     }
 
     private func headerText(for c: CleanupConfidenceLevel) -> String {

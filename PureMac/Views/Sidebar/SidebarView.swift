@@ -12,7 +12,7 @@ struct SidebarView: View {
                 .padding(.bottom, 16)
 
             Divider()
-                .background(Color.white.opacity(0.1))
+                .background(Theme.divider)
 
             // Feature list
             List(AppFeature.allCases, selection: $selectedFeature) { feature in
@@ -32,32 +32,26 @@ struct SidebarView: View {
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
-        .background(Color(red: 0.11, green: 0.11, blue: 0.18))
+        .background(Theme.sidebarBackground)
     }
 
     // MARK: - Sub-views
 
     private var appHeader: some View {
         HStack(spacing: 10) {
-            Image(systemName: "sparkles")
+            Image(systemName: "leaf.fill")
                 .font(.system(size: 22, weight: .semibold))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [.blue, .purple],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+                .foregroundStyle(Theme.brandGradient())
                 .frame(width: 36, height: 36)
-                .background(Color.white.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
+                .background(Theme.divider, in: RoundedRectangle(cornerRadius: 8))
 
             VStack(alignment: .leading, spacing: 1) {
                 Text("PureMac")
                     .font(.system(size: 15, weight: .bold))
-                    .foregroundStyle(.white)
-                Text("System Cleaner")
+                    .foregroundStyle(Theme.textPrimary)
+                Text("Mac Care")
                     .font(.system(size: 10, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.45))
+                    .foregroundStyle(Theme.textMuted)
             }
             Spacer()
         }
@@ -71,7 +65,7 @@ struct SidebarView: View {
                 .frame(width: 8, height: 8)
             Text(score.tier.label)
                 .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(.white.opacity(0.8))
+                .foregroundStyle(Theme.textSecondary)
             Spacer()
             Text("\(score.value)")
                 .font(.system(size: 11, weight: .bold, design: .rounded))
@@ -79,7 +73,7 @@ struct SidebarView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
-        .background(Color.white.opacity(0.07), in: RoundedRectangle(cornerRadius: 8))
+        .background(Theme.surfaceOverlay, in: RoundedRectangle(cornerRadius: 8))
     }
 }
 
@@ -93,10 +87,10 @@ struct SidebarRow: View {
             VStack(alignment: .leading, spacing: 1) {
                 Text(feature.rawValue)
                     .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Theme.textPrimary)
                 Text(feature.description)
                     .font(.system(size: 10))
-                    .foregroundStyle(.white.opacity(0.4))
+                    .foregroundStyle(Theme.textMuted)
             }
         } icon: {
             Image(systemName: feature.icon)

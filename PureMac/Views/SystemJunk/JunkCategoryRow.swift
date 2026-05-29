@@ -20,42 +20,42 @@ struct JunkCategoryRow: View {
                 Image(systemName: isSelected
                       ? "checkmark.circle.fill"
                       : (isPartial ? "minus.circle.fill" : "circle"))
-                    .foregroundStyle(isSelected || isPartial ? .blue : .white.opacity(0.3))
+                    .foregroundStyle(isSelected || isPartial ? Theme.smartScanAccent : Theme.textMuted)
                     .font(.system(size: 18))
             }
             .buttonStyle(.plain)
 
             Image(systemName: category.icon)
                 .font(.system(size: 16))
-                .foregroundStyle(.white.opacity(0.6))
+                .foregroundStyle(Theme.textSecondary)
                 .frame(width: 22)
 
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
                     Text(category.title)
                         .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Theme.textPrimary)
                     riskBadge(riskPill)
                 }
                 if let sub = category.subtitle {
                     Text(sub)
                         .font(.caption)
-                        .foregroundStyle(.white.opacity(0.45))
+                        .foregroundStyle(Theme.textMuted)
                         .lineLimit(1)
                 }
                 Text("\(category.itemCount) \(category.itemCount == 1 ? "item" : "items") · \(category.selectedCount) selected")
                     .font(.system(size: 10))
-                    .foregroundStyle(.white.opacity(0.35))
+                    .foregroundStyle(Theme.textMuted)
             }
 
             Spacer()
 
             VStack(alignment: .trailing, spacing: 2) {
-                SizeBadge(bytes: category.totalSize, color: .orange)
+                SizeBadge(bytes: category.totalSize, color: Theme.systemJunkAccent)
                 if category.selectedSize > 0 && category.selectedSize != category.totalSize {
                     Text(category.selectedSize.compactBytes + " sel.")
                         .font(.system(size: 10, weight: .medium))
-                        .foregroundStyle(.blue)
+                        .foregroundStyle(Theme.smartScanAccent)
                 }
             }
         }

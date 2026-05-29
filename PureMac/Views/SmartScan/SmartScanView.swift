@@ -15,22 +15,22 @@ struct SmartScanView: View {
                     Button("Cancel") { vm.cancelScan() }
                         .buttonStyle(.bordered)
                         .controlSize(.regular)
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Theme.textPrimary)
                 } else {
                     Button("Scan Now") { vm.startScan() }
                         .buttonStyle(.borderedProminent)
-                        .tint(.blue)
+                        .tint(Theme.smartScanAccent)
                 }
             }
 
-            Divider().background(Color.white.opacity(0.08))
+            Divider().background(Theme.divider)
 
             mainContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .animation(.easeInOut(duration: 0.25), value: vm.isScanning)
         }
-        .background(Color(red: 0.09, green: 0.09, blue: 0.14))
-        .foregroundStyle(.white)
+        .background(Theme.background)
+        .foregroundStyle(Theme.textPrimary)
     }
 
     @ViewBuilder
@@ -43,7 +43,7 @@ struct SmartScanView: View {
             ContentUnavailableView("Scan Failed",
                                    systemImage: "exclamationmark.triangle.fill",
                                    description: Text(m))
-                .foregroundStyle(.white)
+                .foregroundStyle(Theme.textPrimary)
         }
     }
 
@@ -51,19 +51,19 @@ struct SmartScanView: View {
 
     private var idleView: some View {
         VStack(spacing: 32) {
-            Image(systemName: "shield.lefthalf.filled")
+            Image(systemName: "leaf.fill")
                 .font(.system(size: 80))
-                .foregroundStyle(LinearGradient(colors: [.blue, .purple],
+                .foregroundStyle(LinearGradient(colors: [Theme.smartScanAccent, Theme.diskAnalyzerAccent],
                                                 startPoint: .top, endPoint: .bottom))
                 .symbolEffect(.pulse)
             VStack(spacing: 8) {
                 Text("Ready to Scan").font(.title.bold())
                 Text("PureMac scans your caches, logs, language files,\napps, and disk usage — and explains every finding.")
-                    .font(.body).foregroundStyle(.white.opacity(0.55))
+                    .font(.body).foregroundStyle(Theme.textSecondary)
                     .multilineTextAlignment(.center)
             }
             Button("Start Smart Scan") { vm.startScan() }
-                .buttonStyle(.borderedProminent).controlSize(.large).tint(.blue)
+                .buttonStyle(.borderedProminent).controlSize(.large).tint(Theme.smartScanAccent)
         }
         .padding(40)
     }
@@ -74,7 +74,7 @@ struct SmartScanView: View {
         VStack(spacing: 40) {
             ScanningRingView(size: 180)
             Text("Analyzing your Mac…")
-                .font(.title3).foregroundStyle(.white.opacity(0.7))
+                .font(.title3).foregroundStyle(Theme.textSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -99,7 +99,7 @@ struct SmartScanView: View {
                 VStack(spacing: 12) {
                     HealthRingView(score: vm.displayedScore, tier: bd.tier, size: 180)
                     Text("Health Score")
-                        .font(.headline).foregroundStyle(.white.opacity(0.6))
+                        .font(.headline).foregroundStyle(Theme.textSecondary)
                 }
                 .frame(width: 200)
             }
@@ -109,12 +109,12 @@ struct SmartScanView: View {
                 if let bd = vm.breakdown {
                     Text(bd.explanation)
                         .font(.title3.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Theme.textPrimary)
                 }
                 if vm.totalJunkBytes > 0 {
                     Text("We found \(vm.totalJunkBytes.formattedBytes) that can be reviewed and cleaned.")
                         .font(.subheadline)
-                        .foregroundStyle(.white.opacity(0.65))
+                        .foregroundStyle(Theme.textSecondary)
                 }
                 if !vm.cleanupCategories.isEmpty {
                     Button {
@@ -125,7 +125,7 @@ struct SmartScanView: View {
                     } label: {
                         Label("Review Cleanup", systemImage: "checklist")
                     }
-                    .buttonStyle(.borderedProminent).tint(.orange).controlSize(.large)
+                    .buttonStyle(.borderedProminent).tint(Theme.systemJunkAccent).controlSize(.large)
                 }
                 if vm.scanMetadata.hasInaccessiblePaths {
                     inaccessibleNote
@@ -147,7 +147,7 @@ struct SmartScanView: View {
         if !vm.recommendations.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Recommended Actions")
-                    .font(.caption.bold()).foregroundStyle(.white.opacity(0.5))
+                    .font(.caption.bold()).foregroundStyle(Theme.textSecondary)
                     .textCase(.uppercase).tracking(0.8)
                 ForEach(vm.recommendations) { rec in
                     RecommendationCard(recommendation: rec) { action in
@@ -162,34 +162,34 @@ struct SmartScanView: View {
         HStack(spacing: 24) {
             stat(label: "Total Junk",
                  value: vm.totalJunkBytes.formattedBytes,
-                 color: .orange)
-            Divider().frame(height: 30).overlay(Color.white.opacity(0.1))
+                 color: Theme.systemJunkAccent)
+            Divider().frame(height: 30).overlay(Theme.divider)
             stat(label: "Disk Used",
                  value: String(format: "%.0f%%", vm.diskUsageFraction * 100),
-                 color: vm.diskUsageFraction > 0.8 ? .red : .white)
-            Divider().frame(height: 30).overlay(Color.white.opacity(0.1))
+                 color: vm.diskUsageFraction > 0.8 ? Theme.appUninstallerAccent : Theme.textPrimary)
+            Divider().frame(height: 30).overlay(Theme.divider)
             stat(label: "Apps",
                  value: "\(vm.installedAppCount)",
-                 color: .white)
+                 color: Theme.textPrimary)
             Spacer()
         }
         .padding(16)
-        .background(Color.white.opacity(0.04), in: RoundedRectangle(cornerRadius: 12))
+        .background(Theme.surfaceOverlay, in: RoundedRectangle(cornerRadius: 12))
     }
 
     private func stat(label: String, value: String, color: Color) -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(label).font(.caption).foregroundStyle(.white.opacity(0.5))
+            Text(label).font(.caption).foregroundStyle(Theme.textSecondary)
             Text(value).font(.title3.bold()).foregroundStyle(color)
         }
     }
 
     private var inaccessibleNote: some View {
         HStack(spacing: 6) {
-            Image(systemName: "lock.fill").foregroundStyle(.yellow)
+            Image(systemName: "lock.fill").foregroundStyle(Theme.fdaBannerAccent)
             Text("\(vm.scanMetadata.inaccessibleCount) folder\(vm.scanMetadata.inaccessibleCount == 1 ? " was" : "s were") inaccessible — grant Full Disk Access for complete results.")
                 .font(.caption)
-                .foregroundStyle(.white.opacity(0.6))
+                .foregroundStyle(Theme.textSecondary)
         }
     }
 

@@ -16,17 +16,17 @@ struct HealthScore: Sendable {
 
         var color: Color {
             switch self {
-            case .good:     return .green
-            case .warning:  return .yellow
-            case .critical: return .red
+            case .good:     return Theme.statusSafe
+            case .warning:  return Theme.statusReview
+            case .critical: return Theme.statusRisky
             }
         }
 
         var gradientColors: [Color] {
             switch self {
-            case .good:     return [.green, .mint]
-            case .warning:  return [.yellow, .orange]
-            case .critical: return [.red, .pink]
+            case .good:     return Theme.healthGood
+            case .warning:  return Theme.healthWarning
+            case .critical: return Theme.healthCritical
             }
         }
 

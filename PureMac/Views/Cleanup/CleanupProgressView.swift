@@ -10,7 +10,7 @@ struct CleanupProgressView: View {
             Spacer()
             Image(systemName: "trash.circle.fill")
                 .font(.system(size: 64))
-                .foregroundStyle(.orange)
+                .foregroundStyle(Theme.systemJunkAccent)
                 .symbolEffect(.pulse)
             VStack(spacing: 6) {
                 Text("Moving items to Trash…")
@@ -18,11 +18,11 @@ struct CleanupProgressView: View {
                 if let p = coord.progress {
                     Text("\(p.currentIndex) of \(p.totalCount)")
                         .font(.subheadline)
-                        .foregroundStyle(.white.opacity(0.6))
+                        .foregroundStyle(Theme.textSecondary)
                     if let current = p.currentItem {
                         Text(current.displayPath)
                             .font(.system(size: 11, design: .monospaced))
-                            .foregroundStyle(.white.opacity(0.4))
+                            .foregroundStyle(Theme.textMuted)
                             .lineLimit(1)
                             .truncationMode(.middle)
                             .padding(.horizontal, 40)
@@ -30,11 +30,11 @@ struct CleanupProgressView: View {
                 }
             }
             ProgressView(value: coord.progress?.fraction ?? 0)
-                .progressViewStyle(.linear).tint(.orange)
+                .progressViewStyle(.linear).tint(Theme.systemJunkAccent)
                 .frame(width: 420)
             if let p = coord.progress {
                 Text("\(p.bytesFreed.formattedBytes) freed of \(p.totalBytes.formattedBytes)")
-                    .font(.caption).foregroundStyle(.white.opacity(0.5))
+                    .font(.caption).foregroundStyle(Theme.textSecondary)
             }
             Spacer()
         }

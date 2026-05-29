@@ -14,18 +14,18 @@ struct RecommendationCard: View {
                 HStack(spacing: 6) {
                     Text(recommendation.title)
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Theme.textPrimary)
                     Spacer()
                     if recommendation.estimatedRecoverableBytes > 0 {
                         SizeBadge(
                             bytes: recommendation.estimatedRecoverableBytes,
-                            color: .orange
+                            color: Theme.systemJunkAccent
                         )
                     }
                 }
                 Text(recommendation.description)
                     .font(.system(size: 12))
-                    .foregroundStyle(.white.opacity(0.65))
+                    .foregroundStyle(Theme.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
                 HStack {
                     Spacer()
@@ -45,7 +45,7 @@ struct RecommendationCard: View {
             }
         }
         .padding(14)
-        .background(Color.white.opacity(0.04), in: RoundedRectangle(cornerRadius: 12))
+        .background(Theme.surfaceOverlay, in: RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(recommendation.severity.color.opacity(0.25), lineWidth: 1)

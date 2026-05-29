@@ -37,9 +37,9 @@ struct SmartRecommendation: Identifiable, Sendable {
 
         var color: Color {
             switch self {
-            case .info:     return .blue
-            case .warning:  return .yellow
-            case .critical: return .red
+            case .info:     return Theme.statusInfo
+            case .warning:  return Theme.statusReview
+            case .critical: return Theme.statusRisky
             }
         }
 

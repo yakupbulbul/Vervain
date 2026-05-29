@@ -25,18 +25,18 @@ struct CleanupConfirmationSheet: View {
                 .padding(20)
             }
 
-            Divider().background(Color.white.opacity(0.08))
+            Divider().background(Theme.divider)
 
             HStack {
                 Button("Back to Review") { coord.backToReview() }
-                    .buttonStyle(.bordered).foregroundStyle(.white)
+                    .buttonStyle(.bordered).foregroundStyle(Theme.textPrimary)
                 Spacer()
                 Button {
                     coord.executeNow()
                 } label: {
                     Text("Confirm & Clean \(coord.totalSelectedSize.compactBytes)")
                 }
-                .buttonStyle(.borderedProminent).tint(.red)
+                .buttonStyle(.borderedProminent).tint(Theme.appUninstallerAccent)
                 .disabled(!acknowledged)
             }
             .padding(.horizontal, 20).padding(.vertical, 14)
@@ -49,20 +49,20 @@ struct CleanupConfirmationSheet: View {
         HStack(alignment: .top, spacing: 14) {
             Image(systemName: "exclamationmark.shield.fill")
                 .font(.system(size: 28))
-                .foregroundStyle(.yellow)
+                .foregroundStyle(Theme.fdaBannerAccent)
             VStack(alignment: .leading, spacing: 4) {
                 Text("Some items need a closer look")
                     .font(.title3.bold())
                 Text("PureMac moves files to Trash so nothing is permanently lost, but please confirm the items below before continuing.")
                     .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(Theme.textSecondary)
             }
         }
     }
 
     private var riskySection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Risky", icon: "exclamationmark.triangle.fill", color: .red,
+            sectionHeader("Risky", icon: "exclamationmark.triangle.fill", color: Theme.statusRisky,
                           count: coord.riskyItems.count)
             VStack(spacing: 0) {
                 ForEach(coord.riskyItems.prefix(6)) { item in
@@ -70,18 +70,18 @@ struct CleanupConfirmationSheet: View {
                 }
                 if coord.riskyItems.count > 6 {
                     Text("and \(coord.riskyItems.count - 6) more…")
-                        .font(.caption).foregroundStyle(.white.opacity(0.4))
+                        .font(.caption).foregroundStyle(Theme.textMuted)
                         .padding(.leading, 12).padding(.top, 4)
                 }
             }
             .padding(.vertical, 6).padding(.horizontal, 10)
-            .background(Color.red.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
+            .background(Theme.statusRisky.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
         }
     }
 
     private var reviewSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Review", icon: "exclamationmark.circle.fill", color: .yellow,
+            sectionHeader("Review", icon: "exclamationmark.circle.fill", color: Theme.statusReview,
                           count: coord.reviewItems.count)
             VStack(spacing: 0) {
                 ForEach(coord.reviewItems.prefix(6)) { item in
@@ -89,12 +89,12 @@ struct CleanupConfirmationSheet: View {
                 }
                 if coord.reviewItems.count > 6 {
                     Text("and \(coord.reviewItems.count - 6) more…")
-                        .font(.caption).foregroundStyle(.white.opacity(0.4))
+                        .font(.caption).foregroundStyle(Theme.textMuted)
                         .padding(.leading, 12).padding(.top, 4)
                 }
             }
             .padding(.vertical, 6).padding(.horizontal, 10)
-            .background(Color.yellow.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
+            .background(Theme.statusReview.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
         }
     }
 
@@ -113,13 +113,13 @@ struct CleanupConfirmationSheet: View {
                 .lineLimit(1)
             Text(item.displayPath)
                 .font(.system(size: 10, design: .monospaced))
-                .foregroundStyle(.white.opacity(0.4))
+                .foregroundStyle(Theme.textMuted)
                 .lineLimit(1)
                 .truncationMode(.middle)
             Spacer()
             Text(item.size.compactBytes)
                 .font(.system(size: 11, design: .rounded))
-                .foregroundStyle(.white.opacity(0.6))
+                .foregroundStyle(Theme.textSecondary)
         }
         .padding(.vertical, 3)
     }
@@ -130,16 +130,16 @@ struct CleanupConfirmationSheet: View {
         } label: {
             HStack(alignment: .top, spacing: 10) {
                 Image(systemName: acknowledged ? "checkmark.square.fill" : "square")
-                    .foregroundStyle(acknowledged ? .blue : .white.opacity(0.4))
+                    .foregroundStyle(acknowledged ? Theme.smartScanAccent : Theme.textMuted)
                     .font(.system(size: 16))
                 Text("I've reviewed the items above and understand they will be moved to Trash.")
                     .font(.subheadline)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Theme.textPrimary)
                     .multilineTextAlignment(.leading)
             }
         }
         .buttonStyle(.plain)
         .padding(.vertical, 10).padding(.horizontal, 12)
-        .background(Color.white.opacity(0.04), in: RoundedRectangle(cornerRadius: 8))
+        .background(Theme.surfaceOverlay, in: RoundedRectangle(cornerRadius: 8))
     }
 }
