@@ -5,7 +5,8 @@
 <h1 align="center">PureMac</h1>
 
 <p align="center">
-  A free, open-source macOS cleaner that respects your files and your privacy.
+  A free, open-source macOS cleaner that respects your files and your privacy.<br>
+  <a href="https://puremac.app">puremac.app</a>
 </p>
 
 ---
