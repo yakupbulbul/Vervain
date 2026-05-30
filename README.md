@@ -1,141 +1,83 @@
-# PureMac
-
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-macOS%2015%2B-blue" />
-  <img src="https://img.shields.io/badge/Swift-6.0-orange" />
-  <img src="https://img.shields.io/badge/Concurrency-Strict-purple" />
-  <img src="https://img.shields.io/badge/UI-SwiftUI-pink" />
-  <img src="https://img.shields.io/badge/Tests-35%20passing-brightgreen" />
+  <img src="PureMac/Assets.xcassets/AppIcon.appiconset/icon_256.png" width="128" height="128" alt="PureMac icon" />
 </p>
 
-A safe, transparent macOS cleaning utility built with **Swift 6** and **SwiftUI**.
+<h1 align="center">PureMac</h1>
 
-> CleanMyMac-style functionality, none of the dark patterns. Everything is reviewed before it's removed; nothing is deleted permanently; nothing leaves your Mac.
-
----
-
-## Safety Model
-
-PureMac is built around three non-negotiable rules:
-
-1. **No permanent deletion.** Every cleanup uses `FileManager.trashItem`. You can restore anything from Trash until you empty it yourself.
-2. **No cleanup without explicit review.** Every module routes through a universal **Review → Confirm → Execute → Done** flow owned by `CleanupCoordinator`. Risky or low-confidence items never default-on.
-3. **No telemetry.** Zero analytics, zero accounts, zero network traffic outside the user-initiated Full Disk Access deep-link.
-
-These rules are pinned by **35 unit tests** covering `CleanupSelectionPolicy`, `HealthScoreBreakdown`, and `CleanupCategory` invariants.
+<p align="center">
+  A free, open-source macOS cleaner that respects your files and your privacy.
+</p>
 
 ---
 
-## Features
+I built PureMac because every Mac cleaner I tried either wanted a subscription, phoned home with analytics, or auto-deleted files I didn't ask it to touch. PureMac does none of that. It moves things to Trash so you can undo, it shows you everything before acting, and it never talks to a server.
 
-| Module | What it does | Safety highlights |
-|---|---|---|
-| 🛡️ **Smart Scan** | Animated health score + transparent breakdown + top-3 recommendations | Score deductions are itemised; each recommendation links to the review flow |
-| 🗑️ **System Junk** | Caches, logs, language files, trash, downloads, old installers | Downloads never auto-selected; language files always require review |
-| 📦 **App Uninstaller** | Lists installed apps with bundle + leftover sizes | High/Medium/Low/Unknown confidence per leftover; Apple system apps protected |
-| 🍩 **Disk Analyzer** | Donut chart + drill-down + largest files | Cancellable; inaccessible folders reported honestly; large files can be sent to review |
+<p align="center">
+  <img src="https://puremac.app/images/screenshots/smart-scan-dark.png" width="720" alt="PureMac Smart Scan" />
+</p>
 
----
+## What it does
 
-## Architecture
+**Smart Scan** — Gives you a health score with a transparent breakdown. Every deduction is explained, and each recommendation links directly to the thing it found.
 
-```
-MVVM · actor services · @Observable @MainActor ViewModels · SwiftUI Views
-```
+**System Junk** — Finds caches, logs, leftover language files, old installers, and stale downloads. Downloads are never pre-selected for cleanup — you pick what goes.
 
-```
-PureMac/
-├── Models/
-│   ├── Cleanup/                       ← shared domain
-│   │   ├── CleanupItem.swift          ← fully described candidate
-│   │   ├── CleanupCategory.swift      ← grouping
-│   │   ├── CleanupRiskLevel.swift     ← safe < review < risky
-│   │   ├── CleanupConfidenceLevel.swift ← high/medium/low/unknown
-│   │   ├── CleanupReason.swift        ← human-readable explanation
-│   │   ├── CleanupSourceModule.swift
-│   │   └── CleanupSelectionPolicy.swift ← sole authority for default selection
-│   ├── HealthScoreBreakdown.swift     ← explainable Smart Scan
-│   ├── SmartRecommendation.swift
-│   ├── ScanMetadata.swift             ← inaccessible/skipped/error reporting
-│   ├── AppFeature, AppInfo, DiskNode, HealthScore
-├── Services/
-│   ├── Cleanup/CleanupService.swift   ← single trashItem chokepoint
-│   ├── JunkScanner.swift              ← per-category risk/confidence tagging
-│   ├── AppScanner.swift               ← graded leftover matching, system-app guards
-│   ├── DiskAnalyzerService.swift      ← cancellable, FDA-aware
-│   ├── FullDiskAccessProbe.swift      ← TCC probe (heuristic)
-│   └── FileUtils.swift
-├── ViewModels/                        ← all @Observable @MainActor
-│   ├── CleanupCoordinator.swift       ← idle → reviewing → confirming → executing → done
-│   ├── FullDiskAccessViewModel.swift
-│   ├── SmartScan, SystemJunk, AppUninstaller, DiskAnalyzer
-├── Views/
-│   ├── Cleanup/                       ← Review, Confirmation, Progress, Done, Row
-│   ├── SmartScan/                     ← Health ring, breakdown, recommendation cards
-│   ├── SystemJunk/                    ← Category rows
-│   ├── AppUninstaller/                ← App list, detail panel, leftover groups
-│   ├── DiskAnalyzer/                  ← Donut chart, drill-down, large-files pane
-│   ├── Onboarding/OnboardingView.swift
-│   └── Shared/                        ← FeatureToolbar, FullDiskAccessBanner, badges
-└── Extensions/
-```
+**App Uninstaller** — Shows your installed apps alongside any leftover files they'd leave behind. Each leftover is tagged with a confidence level (high, medium, low, unknown) so you know what's safe to remove. Apple system apps are protected and can't be uninstalled.
 
-### Concurrency invariants
+**Disk Analyzer** — A donut chart view of what's eating your disk space, with drill-down into folders and a list of your largest files. Fully cancellable, and honest about folders it can't access.
 
-- All filesystem work happens on `actor` services
-- ViewModels stay on `@MainActor`
-- Models are `Sendable` value types (only `DiskNode` is `final class @unchecked Sendable` — needed for recursive tree)
-- `Task.checkCancellation()` in every scan/cleanup loop
-- `FileManager.trashItem` is the **only** deletion primitive — enforced by routing all deletion through `CleanupService`
+## Three promises
 
----
+1. **Nothing gets permanently deleted.** Every cleanup goes through `trashItem`. You can always restore from Trash.
+2. **Nothing gets cleaned without your say-so.** Every module goes through a review → confirm → clean flow. Risky items are never pre-selected.
+3. **Nothing leaves your Mac.** No analytics, no accounts, no network calls.
 
-## Getting Started
+## Building from source
 
-### Requirements
-- macOS 15.0+
-- Xcode 16+
-- Swift 6
-- [xcodegen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`)
+You need macOS 15+, Xcode 16+, and Swift 6.
 
-### Build & run
 ```bash
 git clone https://github.com/yakupbulbul/PureMac.git
 cd PureMac
-xcodegen generate
 open PureMac.xcodeproj
-# ⌘R in Xcode
+# ⌘R to run
 ```
 
-### Run tests
+To run tests:
 ```bash
 xcodebuild -project PureMac.xcodeproj -scheme PureMac \
   -destination 'platform=macOS' test
 ```
 
-### Full Disk Access (optional)
-PureMac probes a few protected paths at launch. If they're unreadable, the yellow FDA banner appears. Click **Grant Access**, add PureMac in **System Settings → Privacy & Security → Full Disk Access**, and return — the banner re-probes and dismisses itself.
+### Full Disk Access
 
-You can use PureMac without granting FDA — protected folders are simply reported as "inaccessible" in scan stats instead of being scanned.
+PureMac works without Full Disk Access — it just skips protected folders and tells you what it couldn't reach. If you want a complete scan, go to **System Settings → Privacy & Security → Full Disk Access** and add PureMac. The app detects the change automatically.
 
----
+## How it's built
 
-## Roadmap
+Swift 6 with strict concurrency. SwiftUI for the UI, actor-isolated services for file system work, `@Observable` view models on the main actor. The only deletion primitive in the entire codebase is `FileManager.trashItem`, called from a single `CleanupService` — everything else routes through it.
 
-Completed: **Phases 0–7 + 13** (safe core + Disk Analyzer 2.0 + FDA probe + safety tests).
+The `CleanupCoordinator` owns the review flow state machine (idle → reviewing → confirming → executing → done) and is shared across all modules.
 
-Not yet started:
-- **Phase 8** — Login Items viewer (SMAppService), maintenance tasks with confirmations
-- **Phase 9** — Large & Old Files scanner, Duplicate Finder MVP
-- **Phase 10** — Privacy module (browser cache/history/cookies — cookies always risky)
-- **Phase 11** — Optional menu bar monitor (disk, memory)
-- **Phase 12** — Settings panel for thresholds (onboarding ✅)
-- **Phase 14** — Hardened runtime / sandbox / notarization documentation
+## What's next
 
-See `docs/AUDIT.md` for the safety risk register that drove the v2 rework.
+- Login items viewer and maintenance tasks
+- Large & old files scanner
+- Duplicate file finder
+- Privacy cleanup (browser caches, cookies)
+- Menu bar disk/memory monitor
+- Notarization and sandboxing
 
----
+## Contributing
+
+Pull requests are welcome. If you're adding a new cleanup module, the main thing to know is that all deletion must go through `CleanupService.trashItem` — this is how the safety model works. Items need a risk level and a confidence level so the review UI can make good default selections.
+
+Have a look at `CleanupSelectionPolicy` to understand which items get pre-selected and which don't.
 
 ## License
 
-MIT — see [LICENSE](LICENSE)
+MIT — see [LICENSE](LICENSE).
+
+---
+
+<p align="center">Made by <a href="https://github.com/yakupbulbul">Yakup Bülbül</a> in Istanbul.</p>
