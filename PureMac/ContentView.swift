@@ -22,6 +22,14 @@ struct ContentView: View {
         }
         .navigationSplitViewStyle(.prominentDetail)
         .toolbar(removing: .sidebarToggle)
+        .onAppear {
+            // Force-hide any toolbar the system adds (sidebar toggle)
+            DispatchQueue.main.async {
+                for window in NSApplication.shared.windows {
+                    window.toolbar?.isVisible = false
+                }
+            }
+        }
     }
 
     @ViewBuilder
