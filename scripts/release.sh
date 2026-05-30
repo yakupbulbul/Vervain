@@ -78,6 +78,10 @@ xcrun stapler staple "${APP_PATH}"
 
 # Step 5: Create DMG
 echo "==> Creating DMG..."
+DMG_STAGING="${BUILD_DIR}/dmg-staging"
+mkdir -p "${DMG_STAGING}"
+cp -R "${APP_PATH}" "${DMG_STAGING}/"
+
 create-dmg \
     --volname "PureMac" \
     --volicon "${PROJECT_DIR}/PureMac/Assets.xcassets/AppIcon.appiconset/AppIcon.png" \
@@ -88,7 +92,7 @@ create-dmg \
     --app-drop-link 450 190 \
     --hide-extension "PureMac.app" \
     "${DMG_PATH}" \
-    "${EXPORT_PATH}/" \
+    "${DMG_STAGING}/" \
     || test $? -eq 2  # create-dmg returns 2 on "success with warnings"
 
 # Step 6: Hash
