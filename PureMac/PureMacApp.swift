@@ -10,10 +10,11 @@ struct PureMacApp: App {
     @State private var cleanupCoord     = CleanupCoordinator()
     @State private var fdaVM            = FullDiskAccessViewModel()
     @State private var showOnboarding   = !OnboardingView.hasShown
+    @State private var showAbout        = false
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(showAbout: $showAbout)
                 .environment(smartScanVM)
                 .environment(systemJunkVM)
                 .environment(appUninstallerVM)
@@ -21,6 +22,9 @@ struct PureMacApp: App {
                 .environment(cleanupCoord)
                 .environment(fdaVM)
                 .task { fdaVM.refresh() }
+                .sheet(isPresented: $showAbout) {
+                    AboutView()
+                }
                 .sheet(isPresented: $showOnboarding) {
                     OnboardingView(isPresented: $showOnboarding)
                 }
@@ -37,6 +41,9 @@ struct PureMacApp: App {
         .defaultSize(width: 980, height: 660)
         .commands {
             CommandGroup(replacing: .newItem) {}
+            CommandGroup(replacing: .appInfo) {
+                Button("About PureMac") { showAbout = true }
+            }
         }
     }
 }

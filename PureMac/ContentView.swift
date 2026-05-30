@@ -1,12 +1,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var showAbout: Bool
     @State private var selectedFeature: AppFeature? = .smartScan
     @Environment(FullDiskAccessViewModel.self) private var fda
 
     var body: some View {
         NavigationSplitView(columnVisibility: .constant(.all)) {
-            SidebarView(selectedFeature: $selectedFeature)
+            SidebarView(selectedFeature: $selectedFeature, showAbout: $showAbout)
                 .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 260)
         } detail: {
             ZStack {

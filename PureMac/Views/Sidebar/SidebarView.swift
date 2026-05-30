@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SidebarView: View {
     @Binding var selectedFeature: AppFeature?
+    @Binding var showAbout: Bool
     @Environment(SmartScanViewModel.self) private var smartScanVM
 
     var body: some View {
@@ -23,6 +24,25 @@ struct SidebarView: View {
             .scrollContentBackground(.hidden)
 
             Spacer(minLength: 0)
+
+            // About button
+            Button { showAbout = true } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 11))
+                        .foregroundStyle(Theme.textMuted)
+                    Text("About")
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundStyle(Theme.textMuted)
+                    Spacer()
+                    Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")")
+                        .font(.system(size: 10, design: .rounded))
+                        .foregroundStyle(Theme.textFaint)
+                }
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 8)
 
             // Health badge
             if let score = smartScanVM.breakdown?.asHealthScore {

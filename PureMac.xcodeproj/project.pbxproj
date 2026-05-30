@@ -65,6 +65,7 @@
 		F9AD616987D739F4689E4DEB /* CleanupSourceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41D3CBDCBCD0DBD5DC19FFE /* CleanupSourceModule.swift */; };
 		FA519C45C51BA3A10C5A9614 /* HealthScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B6156E2BCBDC22AA06D032 /* HealthScore.swift */; };
 		FFE2B10F03302F93B3F86230 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D647CD02C5917AB77EEA268B /* AppIconView.swift */; };
+		EEF9318C30DD4C70AF0B7B12 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6D8F7F259A4204A8A60A82 /* AboutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +149,7 @@
 		F1EB3F316AC6CD4187A8D58B /* JunkCategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JunkCategoryRow.swift; sourceTree = "<group>"; };
 		F1F4106EAD248920AD54E94E /* AppUninstallerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUninstallerViewModel.swift; sourceTree = "<group>"; };
 		F6CFC69969E13F905E4493A7 /* FullDiskAccessBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDiskAccessBanner.swift; sourceTree = "<group>"; };
+		CF6D8F7F259A4204A8A60A82 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -228,7 +230,8 @@
 				BC83BCF32A8626DB3FB644E5 /* Sidebar */,
 				2FFEAFA26314BAB7E6C0C572 /* SmartScan */,
 				2D28D00936EE3BD785FEA342 /* SystemJunk */,
-			);
+			
+				6621A21B973F4B0D84D7C82C /* About */,);
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -372,6 +375,7 @@
 			path = Cleanup;
 			sourceTree = "<group>";
 		};
+		6621A21B973F4B0D84D7C82C /* About */ = {isa = PBXGroup; children = (CF6D8F7F259A4204A8A60A82 /* AboutView.swift */,); path = About; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -498,6 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF9318C30DD4C70AF0B7B12 /* AboutView.swift in Sources */,
 				098E7056BDC30AD1A6305445 /* AppDetailPanel.swift in Sources */,
 				E1C626AAA13FC506ACAC5B46 /* AppFeature.swift in Sources */,
 				FFE2B10F03302F93B3F86230 /* AppIconView.swift in Sources */,
@@ -564,7 +569,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXSourcesBuildPhase section */
+
 
 /* Begin PBXTargetDependency section */
 		0E97FDF7F6FA15845FCE6737 /* PBXTargetDependency */ = {
