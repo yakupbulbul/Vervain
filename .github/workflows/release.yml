@@ -1,0 +1,78 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: macos-15
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Install create-dmg
+        run: brew install create-dmg
+
+      - name: Import Developer ID certificate
+        env:
+          CERTIFICATE_P12: ${{ secrets.DEVELOPER_ID_APPLICATION_CERT }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERT_PASSWORD }}
+        run: |
+          KEYCHAIN_PATH="$RUNNER_TEMP/build.keychain-db"
+          KEYCHAIN_PASSWORD="$(openssl rand -base64 32)"
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+          CERT_PATH="$RUNNER_TEMP/certificate.p12"
+          echo "$CERTIFICATE_P12" | base64 --decode > "$CERT_PATH"
+          security import "$CERT_PATH" \
+            -k "$KEYCHAIN_PATH" \
+            -P "$CERTIFICATE_PASSWORD" \
+            -T /usr/bin/codesign \
+            -T /usr/bin/security
+
+          security set-key-partition-list -S apple-tool:,apple: \
+            -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain-db
+
+      - name: Build, sign, notarize, and package
+        env:
+          TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APP_PASSWORD: ${{ secrets.APP_SPECIFIC_PASSWORD }}
+        run: |
+          chmod +x scripts/release.sh
+          scripts/release.sh "${{ steps.version.outputs.version }}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/PureMac-${{ steps.version.outputs.version }}.dmg
+          generate_release_notes: true
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Output Homebrew info
+        run: |
+          SHA256=$(shasum -a 256 "build/PureMac-${{ steps.version.outputs.version }}.dmg" | awk '{print $1}')
+          echo "### Homebrew Cask Update" >> "$GITHUB_STEP_SUMMARY"
+          echo '```ruby' >> "$GITHUB_STEP_SUMMARY"
+          echo "version \"${{ steps.version.outputs.version }}\"" >> "$GITHUB_STEP_SUMMARY"
+          echo "sha256 \"${SHA256}\"" >> "$GITHUB_STEP_SUMMARY"
+          echo "url \"https://github.com/yakupbulbul/PureMac/releases/download/v${{ steps.version.outputs.version }}/PureMac-${{ steps.version.outputs.version }}.dmg\"" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Cleanup keychain
+        if: always()
+        run: security delete-keychain "$RUNNER_TEMP/build.keychain-db" || true
