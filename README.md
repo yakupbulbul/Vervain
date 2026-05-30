@@ -80,4 +80,4 @@ MIT — see [LICENSE](LICENSE).
 
 ---
 
-<p align="center">Made by <a href="https://github.com/yakupbulbul">Yakup Bülbül</a> in Istanbul.</p>
+<p align="center">Made by <a href="https://github.com/yakupbulbul">Yakup Bülbül</a></p>
