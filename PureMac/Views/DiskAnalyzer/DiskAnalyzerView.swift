@@ -212,8 +212,17 @@ struct DiskAnalyzerView: View {
         List {
             let children = vm.selectedNode?.children ?? []
             if children.isEmpty {
-                Text("No items").foregroundStyle(Theme.textMuted)
-                    .listRowBackground(Color.clear)
+                VStack(spacing: 8) {
+                    if vm.selectedNode?.name == "System & Other" {
+                        Text("This space is used by macOS system data — APFS snapshots, virtual memory, firmware, and other protected resources that can't be individually listed.")
+                            .foregroundStyle(Theme.textSecondary)
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                    } else {
+                        Text("No items").foregroundStyle(Theme.textMuted)
+                    }
+                }
+                .listRowBackground(Color.clear)
             } else {
                 ForEach(children, id: \.id) { node in
                     DiskNodeRow(node: node,
