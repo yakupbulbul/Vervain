@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 
 /// The single chokepoint through which every cleanup action in the app runs.
 ///
@@ -41,14 +42,24 @@ actor CleanupService {
                 totalBytes: totalBytes
             ))
             do {
+                // Try FileManager first (works for user-owned files)
                 try fm.trashItem(at: item.url, resultingItemURL: nil)
                 freedBytes += item.size
                 successCount += 1
-            } catch let err as NSError {
-                failures.append(CleanupFailure(
-                    item: item,
-                    reason: Self.mapError(err)
-                ))
+            } catch {
+                // Fall back to Finder via AppleScript — Finder has the
+                // privileges to trash items in /Applications and will
+                // show a system auth dialog if needed.
+                do {
+                    try Self.trashViaFinder(item.url)
+                    freedBytes += item.size
+                    successCount += 1
+                } catch let err as NSError {
+                    failures.append(CleanupFailure(
+                        item: item,
+                        reason: Self.mapError(err)
+                    ))
+                }
             }
         }
 
@@ -70,6 +81,31 @@ actor CleanupService {
             failures: failures,
             duration: Date().timeIntervalSince(started)
         )
+    }
+
+    /// Uses Finder via AppleScript to move a file to Trash.
+    /// Finder has the privilege to trash items in /Applications and will
+    /// show a system authentication dialog when needed.
+    private static func trashViaFinder(_ url: URL) throws {
+        let posixPath = url.path.replacingOccurrences(of: "\"", with: "\\\"")
+        let script = """
+        tell application "Finder"
+            move POSIX file "\(posixPath)" to trash
+        end tell
+        """
+        guard let appleScript = NSAppleScript(source: script) else {
+            throw NSError(domain: NSCocoaErrorDomain, code: NSFileWriteNoPermissionError)
+        }
+        var errorInfo: NSDictionary?
+        appleScript.executeAndReturnError(&errorInfo)
+        if let errorInfo {
+            let message = errorInfo[NSAppleScript.errorMessage] as? String ?? "Unknown error"
+            throw NSError(
+                domain: NSCocoaErrorDomain,
+                code: NSFileWriteNoPermissionError,
+                userInfo: [NSLocalizedDescriptionKey: message]
+            )
+        }
     }
 
     /// Map a Cocoa `NSError` to our user-friendly failure reason.

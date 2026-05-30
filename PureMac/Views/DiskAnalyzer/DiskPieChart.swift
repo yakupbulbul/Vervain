@@ -56,12 +56,12 @@ struct DiskPieChart: View {
                 .frame(width: 9, height: 9)
             Text(node.name)
                 .font(.caption)
-                .foregroundStyle(.white.opacity(0.8))
+                .foregroundStyle(Theme.textPrimary)
                 .lineLimit(1)
             Spacer(minLength: 0)
             Text(node.size.compactBytes)
                 .font(.system(size: 11, weight: .medium, design: .rounded))
-                .foregroundStyle(.white.opacity(0.45))
+                .foregroundStyle(Theme.textSecondary)
         }
         .contentShape(Rectangle())
         .onTapGesture {

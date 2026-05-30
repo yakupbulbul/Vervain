@@ -62,7 +62,7 @@ actor FullDiskAccessProbe {
     /// Opens the System Settings pane for Full Disk Access.
     @MainActor
     static func openSystemSettings() {
-        let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")!
+        let url = URL(string: "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_AllFiles")!
         NSWorkspace.shared.open(url)
     }
 }

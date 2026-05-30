@@ -4,6 +4,7 @@ import Charts
 struct DiskAnalyzerView: View {
     @Environment(DiskAnalyzerViewModel.self) private var vm
     @Environment(CleanupCoordinator.self) private var coord
+    @Environment(FullDiskAccessViewModel.self) private var fda
 
     @State private var showLargeFiles = false
 
@@ -273,12 +274,24 @@ struct DiskAnalyzerView: View {
     private var inaccessibleBanner: some View {
         HStack(spacing: 10) {
             Image(systemName: "lock.fill").foregroundStyle(Theme.fdaBannerAccent)
-            Text("\(vm.metadata.inaccessibleCount) folder\(vm.metadata.inaccessibleCount == 1 ? "" : "s") couldn't be read. Grant Full Disk Access for a complete picture.")
+            Text(inaccessibleMessage)
                 .font(.caption).foregroundStyle(Theme.textSecondary)
             Spacer()
         }
         .padding(.horizontal, 16).padding(.vertical, 8)
         .background(Theme.fdaBannerBackground)
+    }
+
+    private var inaccessibleMessage: String {
+        let count = vm.metadata.inaccessibleCount
+        let folders = count == 1 ? "folder" : "folders"
+        // With FDA denied, typically 50+ folders are inaccessible.
+        // With FDA granted, only ~20-30 SIP-protected folders remain.
+        if count <= 40 {
+            return "\(count) system-protected \(folders) couldn't be read. This is normal — macOS protects these with SIP."
+        } else {
+            return "\(count) \(folders) couldn't be read. Grant Full Disk Access for a complete picture."
+        }
     }
 
     private var statsBar: some View {

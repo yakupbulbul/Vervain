@@ -172,6 +172,14 @@ actor AppScanner {
         if !isAllowedAppLocation(url) {
             return nil
         }
+        // Skip apps that have been moved to Trash.
+        if url.pathComponents.contains(".Trash") {
+            return nil
+        }
+        // Skip apps that no longer exist at their original location.
+        if !FileManager.default.fileExists(atPath: url.path) {
+            return nil
+        }
 
         let info = bundle.infoDictionary
         let name = (info?["CFBundleDisplayName"] as? String)
