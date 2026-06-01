@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://vervain.app"><img src="https://img.shields.io/badge/website-vervain.app-8B5E3C?style=flat-square" alt="Website" /></a>
   <a href="https://github.com/yakupbulbul/Vervain/releases/latest"><img src="https://img.shields.io/github/v/release/yakupbulbul/Vervain?style=flat-square&color=8B5E3C" alt="Latest Release" /></a>
-  <a href="https://github.com/yakupbulbul/Vervain/blob/main/LICENSE"><img src="https://img.shields.io/github/license/yakupbulbul/Vervain?style=flat-square&color=8B5E3C" alt="MIT License" /></a>
+  <a href="https://github.com/yakupbulbul/Vervain/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-8B5E3C?style=flat-square" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/platform-macOS_15+-8B5E3C?style=flat-square" alt="macOS 15+" />
   <img src="https://img.shields.io/badge/Swift-6-8B5E3C?style=flat-square" alt="Swift 6" />
 </p>
