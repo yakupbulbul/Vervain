@@ -1,5 +1,5 @@
 import XCTest
-@testable import PureMac
+@testable import Vervain
 
 final class HealthScoreBreakdownTests: XCTestCase {
 

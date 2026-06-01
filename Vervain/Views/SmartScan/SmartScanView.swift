@@ -58,7 +58,7 @@ struct SmartScanView: View {
                 .symbolEffect(.pulse)
             VStack(spacing: 8) {
                 Text("Ready to Scan").font(.title.bold())
-                Text("PureMac scans your caches, logs, language files,\napps, and disk usage — and explains every finding.")
+                Text("Vervain scans your caches, logs, language files,\napps, and disk usage — and explains every finding.")
                     .font(.body).foregroundStyle(Theme.textSecondary)
                     .multilineTextAlignment(.center)
             }

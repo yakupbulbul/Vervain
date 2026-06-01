@@ -60,7 +60,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: build/PureMac-${{ steps.version.outputs.version }}.dmg
+          files: build/Vervain-${{ steps.version.outputs.version }}.dmg
           generate_release_notes: true
           draft: false
         env:
@@ -68,12 +68,12 @@ jobs:
 
       - name: Output Homebrew info
         run: |
-          SHA256=$(shasum -a 256 "build/PureMac-${{ steps.version.outputs.version }}.dmg" | awk '{print $1}')
+          SHA256=$(shasum -a 256 "build/Vervain-${{ steps.version.outputs.version }}.dmg" | awk '{print $1}')
           echo "### Homebrew Cask Update" >> "$GITHUB_STEP_SUMMARY"
           echo '```ruby' >> "$GITHUB_STEP_SUMMARY"
           echo "version \"${{ steps.version.outputs.version }}\"" >> "$GITHUB_STEP_SUMMARY"
           echo "sha256 \"${SHA256}\"" >> "$GITHUB_STEP_SUMMARY"
-          echo "url \"https://github.com/yakupbulbul/PureMac/releases/download/v${{ steps.version.outputs.version }}/PureMac-${{ steps.version.outputs.version }}.dmg\"" >> "$GITHUB_STEP_SUMMARY"
+          echo "url \"https://github.com/yakupbulbul/Vervain/releases/download/v${{ steps.version.outputs.version }}/Vervain-${{ steps.version.outputs.version }}.dmg\"" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Cleanup keychain

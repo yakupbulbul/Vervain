@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-# PureMac release build script
+# Vervain release build script
 # Usage: TEAM_ID=DP95N34FAN ./scripts/release.sh 1.0.0
 
 VERSION="${1:?Usage: scripts/release.sh <version>  (e.g. 1.0.0)}"
@@ -10,15 +10,15 @@ VERSION="${1:?Usage: scripts/release.sh <version>  (e.g. 1.0.0)}"
 TEAM_ID="${TEAM_ID:?Set TEAM_ID env var (e.g. DP95N34FAN)}"
 APPLE_ID="${APPLE_ID:-}"
 APP_PASSWORD="${APP_PASSWORD:-}"
-KEYCHAIN_PROFILE="${KEYCHAIN_PROFILE:-PureMac-Notary}"
+KEYCHAIN_PROFILE="${KEYCHAIN_PROFILE:-Vervain-Notary}"
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD_DIR="${PROJECT_DIR}/build"
-ARCHIVE_PATH="${BUILD_DIR}/PureMac.xcarchive"
+ARCHIVE_PATH="${BUILD_DIR}/Vervain.xcarchive"
 EXPORT_PATH="${BUILD_DIR}/Export"
-APP_PATH="${EXPORT_PATH}/PureMac.app"
-DMG_PATH="${BUILD_DIR}/PureMac-${VERSION}.dmg"
-ZIP_PATH="${BUILD_DIR}/PureMac.zip"
+APP_PATH="${EXPORT_PATH}/Vervain.app"
+DMG_PATH="${BUILD_DIR}/Vervain-${VERSION}.dmg"
+ZIP_PATH="${BUILD_DIR}/Vervain.zip"
 EXPORT_OPTIONS="${BUILD_DIR}/ExportOptions.plist"
 
 # Preflight
@@ -34,9 +34,9 @@ sed "s/REPLACE_WITH_YOUR_TEAM_ID/${TEAM_ID}/g" \
     "${PROJECT_DIR}/docs/ExportOptions.plist.template" > "${EXPORT_OPTIONS}"
 
 # Step 1: Archive
-echo "==> Archiving PureMac ${VERSION}..."
-xcodebuild -project "${PROJECT_DIR}/PureMac.xcodeproj" \
-    -scheme PureMac \
+echo "==> Archiving Vervain ${VERSION}..."
+xcodebuild -project "${PROJECT_DIR}/Vervain.xcodeproj" \
+    -scheme Vervain \
     -configuration Release \
     -archivePath "${ARCHIVE_PATH}" \
     MARKETING_VERSION="${VERSION}" \
@@ -45,7 +45,7 @@ xcodebuild -project "${PROJECT_DIR}/PureMac.xcodeproj" \
     CODE_SIGN_IDENTITY="Developer ID Application" \
     CODE_SIGN_STYLE=Manual \
     DEVELOPMENT_TEAM="${TEAM_ID}" \
-    CODE_SIGN_ENTITLEMENTS="${PROJECT_DIR}/PureMac/PureMac.Release.entitlements" \
+    CODE_SIGN_ENTITLEMENTS="${PROJECT_DIR}/Vervain/Vervain.Release.entitlements" \
     archive
 
 # Step 2: Export
@@ -83,14 +83,14 @@ mkdir -p "${DMG_STAGING}"
 cp -R "${APP_PATH}" "${DMG_STAGING}/"
 
 create-dmg \
-    --volname "PureMac" \
-    --volicon "${PROJECT_DIR}/PureMac/Assets.xcassets/AppIcon.appiconset/AppIcon.png" \
+    --volname "Vervain" \
+    --volicon "${PROJECT_DIR}/Vervain/Assets.xcassets/AppIcon.appiconset/AppIcon.png" \
     --window-pos 200 120 \
     --window-size 600 400 \
     --icon-size 100 \
-    --icon "PureMac.app" 150 190 \
+    --icon "Vervain.app" 150 190 \
     --app-drop-link 450 190 \
-    --hide-extension "PureMac.app" \
+    --hide-extension "Vervain.app" \
     "${DMG_PATH}" \
     "${DMG_STAGING}/" \
     || test $? -eq 2  # create-dmg returns 2 on "success with warnings"
@@ -108,5 +108,5 @@ echo "============================================"
 echo ""
 echo "Homebrew cask update:"
 echo "  sha256 \"${SHA256}\""
-echo "  url \"https://github.com/yakupbulbul/PureMac/releases/download/v${VERSION}/PureMac-${VERSION}.dmg\""
+echo "  url \"https://github.com/yakupbulbul/Vervain/releases/download/v${VERSION}/Vervain-${VERSION}.dmg\""
 echo "  version \"${VERSION}\""

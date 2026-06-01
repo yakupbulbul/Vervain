@@ -66,7 +66,7 @@ struct SidebarView: View {
                 .background(Theme.divider, in: RoundedRectangle(cornerRadius: 8))
 
             VStack(alignment: .leading, spacing: 1) {
-                Text("PureMac")
+                Text("Vervain")
                     .font(.system(size: 15, weight: .bold))
                     .foregroundStyle(Theme.textPrimary)
                 Text("Mac Care")

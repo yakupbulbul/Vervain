@@ -18,7 +18,7 @@ struct FullDiskAccessBanner: View {
                     Text("Full Disk Access recommended")
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(Theme.textPrimary)
-                    Text("PureMac runs entirely on your Mac. Granting access lets it scan protected folders too.")
+                    Text("Vervain runs entirely on your Mac. Granting access lets it scan protected folders too.")
                         .font(.system(size: 11))
                         .foregroundStyle(Theme.textSecondary)
                 }

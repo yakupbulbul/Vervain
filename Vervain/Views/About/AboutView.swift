@@ -46,7 +46,7 @@ struct AboutView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 18))
                 .shadow(color: .black.opacity(0.15), radius: 6, y: 3)
 
-            Text("PureMac")
+            Text("Vervain")
                 .font(.system(size: 20, weight: .bold))
 
             Text("Mac Care")
@@ -75,8 +75,8 @@ struct AboutView: View {
 
     private var links: some View {
         VStack(spacing: 1) {
-            linkRow(icon: "globe", label: "Website", url: "https://puremac.app")
-            linkRow(icon: "chevron.left.forwardslash.chevron.right", label: "Source Code", url: "https://github.com/yakupbulbul/PureMac")
+            linkRow(icon: "globe", label: "Website", url: "https://vervain.app")
+            linkRow(icon: "chevron.left.forwardslash.chevron.right", label: "Source Code", url: "https://github.com/yakupbulbul/Vervain")
             linkRow(icon: "cup.and.saucer.fill", label: "Buy Me a Coffee", url: "https://buymeacoffee.com/yakupbulbul")
         }
         .background(Theme.surface, in: RoundedRectangle(cornerRadius: 10))

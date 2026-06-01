@@ -1,4 +1,4 @@
-# PureMac — Phase 0 Audit
+# Vervain — Phase 0 Audit
 
 **Baseline:** `main` @ `0e5d3ad` · 28 Swift files · macOS 15 · Swift 6 strict concurrency · BUILD SUCCEEDED · 0 warnings
 
@@ -37,7 +37,7 @@
 
 - `FileManager.trashItem` already used for all deletions (no permanent delete primitive in codebase) ✅
 - No telemetry, no analytics, no network calls except FDA deep-link via `NSWorkspace` ✅
-- Sandbox disabled in `PureMac.entitlements` (intentional for full-disk scanning) ✅
+- Sandbox disabled in `Vervain.entitlements` (intentional for full-disk scanning) ✅
 - Build is clean (0 warnings, 0 errors) — no compile fixes needed ✅
 
 ## Phase 0 outcome

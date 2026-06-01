@@ -1,20 +1,20 @@
 <p align="center">
-  <img src="PureMac/Assets.xcassets/AppIcon.appiconset/icon_256.png" width="128" height="128" alt="PureMac icon" />
+  <img src="Vervain/Assets.xcassets/AppIcon.appiconset/icon_256.png" width="128" height="128" alt="Vervain icon" />
 </p>
 
-<h1 align="center">PureMac</h1>
+<h1 align="center">Vervain</h1>
 
 <p align="center">
   A free, open-source macOS cleaner that respects your files and your privacy.<br>
-  <a href="https://puremac.app">puremac.app</a>
+  <a href="https://vervain.app">vervain.app</a>
 </p>
 
 ---
 
-I built PureMac because every Mac cleaner I tried either wanted a subscription, phoned home with analytics, or auto-deleted files I didn't ask it to touch. PureMac does none of that. It moves things to Trash so you can undo, it shows you everything before acting, and it never talks to a server.
+I built Vervain because every Mac cleaner I tried either wanted a subscription, phoned home with analytics, or auto-deleted files I didn't ask it to touch. Vervain does none of that. It moves things to Trash so you can undo, it shows you everything before acting, and it never talks to a server.
 
 <p align="center">
-  <img src="https://puremac.app/images/screenshots/smart-scan-dark.png" width="720" alt="PureMac Smart Scan" />
+  <img src="https://vervain.app/images/screenshots/smart-scan-dark.png" width="720" alt="Vervain Smart Scan" />
 </p>
 
 ## What it does
@@ -38,21 +38,21 @@ I built PureMac because every Mac cleaner I tried either wanted a subscription, 
 You need macOS 15+, Xcode 16+, and Swift 6.
 
 ```bash
-git clone https://github.com/yakupbulbul/PureMac.git
-cd PureMac
-open PureMac.xcodeproj
+git clone https://github.com/yakupbulbul/Vervain.git
+cd Vervain
+open Vervain.xcodeproj
 # ⌘R to run
 ```
 
 To run tests:
 ```bash
-xcodebuild -project PureMac.xcodeproj -scheme PureMac \
+xcodebuild -project Vervain.xcodeproj -scheme Vervain \
   -destination 'platform=macOS' test
 ```
 
 ### Full Disk Access
 
-PureMac works without Full Disk Access — it just skips protected folders and tells you what it couldn't reach. If you want a complete scan, go to **System Settings → Privacy & Security → Full Disk Access** and add PureMac. The app detects the change automatically.
+Vervain works without Full Disk Access — it just skips protected folders and tells you what it couldn't reach. If you want a complete scan, go to **System Settings → Privacy & Security → Full Disk Access** and add Vervain. The app detects the change automatically.
 
 ## How it's built
 

@@ -1,7 +1,7 @@
 import XCTest
-@testable import PureMac
+@testable import Vervain
 
-/// Safety-critical: any regression here means PureMac could auto-select
+/// Safety-critical: any regression here means Vervain could auto-select
 /// files it shouldn't. Tests pin every branch of the policy.
 final class CleanupSelectionPolicyTests: XCTestCase {
 

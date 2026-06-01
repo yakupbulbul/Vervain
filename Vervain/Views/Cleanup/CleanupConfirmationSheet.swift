@@ -53,7 +53,7 @@ struct CleanupConfirmationSheet: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Some items need a closer look")
                     .font(.title3.bold())
-                Text("PureMac moves files to Trash so nothing is permanently lost, but please confirm the items below before continuing.")
+                Text("Vervain moves files to Trash so nothing is permanently lost, but please confirm the items below before continuing.")
                     .font(.subheadline)
                     .foregroundStyle(Theme.textSecondary)
             }

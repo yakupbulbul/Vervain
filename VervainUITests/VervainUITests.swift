@@ -1,8 +1,8 @@
 import XCTest
 
-/// UI tests for PureMac. These drive the real app through the XCTest
+/// UI tests for Vervain. These drive the real app through the XCTest
 /// automation framework (which has proper accessibility injection rights).
-final class PureMacUITests: XCTestCase {
+final class VervainUITests: XCTestCase {
 
     var app: XCUIApplication!
 
@@ -33,7 +33,7 @@ final class PureMacUITests: XCTestCase {
         app.terminate()
     }
 
-    /// Dismiss the "Welcome to PureMac" onboarding sheet if it's visible.
+    /// Dismiss the "Welcome to Vervain" onboarding sheet if it's visible.
     private func dismissOnboardingIfPresent() {
         let getStarted = app.buttons["Get Started"]
         if getStarted.waitForExistence(timeout: 3) {

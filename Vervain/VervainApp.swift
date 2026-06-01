@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct PureMacApp: App {
+struct VervainApp: App {
 
     @State private var smartScanVM      = SmartScanViewModel()
     @State private var systemJunkVM     = SystemJunkViewModel()
@@ -42,7 +42,7 @@ struct PureMacApp: App {
         .commands {
             CommandGroup(replacing: .newItem) {}
             CommandGroup(replacing: .appInfo) {
-                Button("About PureMac") { showAbout = true }
+                Button("About Vervain") { showAbout = true }
             }
         }
     }

@@ -1,6 +1,6 @@
-# PureMac — Release Readiness
+# Vervain — Release Readiness
 
-This document captures the decisions, risks, and outstanding work needed to ship PureMac as a notarized, signed macOS app. It is not a build script — it is the audit trail Developer ID distribution will rely on.
+This document captures the decisions, risks, and outstanding work needed to ship Vervain as a notarized, signed macOS app. It is not a build script — it is the audit trail Developer ID distribution will rely on.
 
 ---
 
@@ -21,7 +21,7 @@ This document captures the decisions, risks, and outstanding work needed to ship
 
 **Decision: ship outside the App Sandbox.**
 
-PureMac's value proposition requires reading and trashing files in arbitrary user-owned locations (`~/Library/Caches`, `/Applications/*.app`, `~/Downloads`, …). The App Sandbox forbids this without user-granted Bookmark Files per cleanup, which would destroy the UX.
+Vervain's value proposition requires reading and trashing files in arbitrary user-owned locations (`~/Library/Caches`, `/Applications/*.app`, `~/Downloads`, …). The App Sandbox forbids this without user-granted Bookmark Files per cleanup, which would destroy the UX.
 
 This means:
 
@@ -70,7 +70,7 @@ Regenerate the Xcode project and run a smoke build to catch any code-signing-inc
 2. **Developer ID Application** certificate downloaded into the login keychain.
 3. App-specific password for `notarytool` stored in keychain:
    ```bash
-   xcrun notarytool store-credentials "PureMac-Notary" \
+   xcrun notarytool store-credentials "Vervain-Notary" \
      --apple-id you@example.com \
      --team-id ABCDEF1234 \
      --password app-specific-password
@@ -79,25 +79,25 @@ Regenerate the Xcode project and run a smoke build to catch any code-signing-inc
 ### Per-release build
 ```bash
 # 1. Archive
-xcodebuild -project PureMac.xcodeproj -scheme PureMac \
+xcodebuild -project Vervain.xcodeproj -scheme Vervain \
   -configuration Release \
-  -archivePath build/PureMac.xcarchive archive
+  -archivePath build/Vervain.xcarchive archive
 
 # 2. Export Developer ID app
 xcodebuild -exportArchive \
-  -archivePath build/PureMac.xcarchive \
+  -archivePath build/Vervain.xcarchive \
   -exportOptionsPlist ExportOptions.plist \
   -exportPath build/Export
 
 # 3. Zip for notarytool
-ditto -c -k --keepParent build/Export/PureMac.app build/PureMac.zip
+ditto -c -k --keepParent build/Export/Vervain.app build/Vervain.zip
 
 # 4. Submit for notarization (~2 min typical)
-xcrun notarytool submit build/PureMac.zip \
-  --keychain-profile "PureMac-Notary" --wait
+xcrun notarytool submit build/Vervain.zip \
+  --keychain-profile "Vervain-Notary" --wait
 
 # 5. Staple the notarization ticket onto the app
-xcrun stapler staple build/Export/PureMac.app
+xcrun stapler staple build/Export/Vervain.app
 
 # 6. (Optional) build a DMG with create-dmg
 ```
@@ -125,8 +125,8 @@ This is out of scope for the current release and explicitly **not** added withou
 Run through this before every tag:
 
 - [ ] `xcodebuild ... test` — all unit tests pass
-- [ ] `grep -r "removeItem\|unlink\b" PureMac/` — must return no hits except inside `CleanupService` (currently: zero hits anywhere — only `trashItem` is used)
-- [ ] `grep -r "Process()\|URLSession\|URLRequest" PureMac/` — should be empty (no network, no shell)
+- [ ] `grep -r "removeItem\|unlink\b" Vervain/` — must return no hits except inside `CleanupService` (currently: zero hits anywhere — only `trashItem` is used)
+- [ ] `grep -r "Process()\|URLSession\|URLRequest" Vervain/` — should be empty (no network, no shell)
 - [ ] Onboarding sheet promises still match behavior
 - [ ] AUDIT.md risk register has no new red rows
 - [ ] FDA banner only appears when probe denies (`FullDiskAccessProbe` heuristic)
@@ -135,10 +135,10 @@ Run through this before every tag:
 ### Current state (commit `a1aa3e4`)
 
 ```bash
-$ grep -rn "removeItem\|unlink\b" PureMac/
+$ grep -rn "removeItem\|unlink\b" Vervain/
 # (no output — clean)
 
-$ grep -rn "Process()\|URLSession\|URLRequest" PureMac/
+$ grep -rn "Process()\|URLSession\|URLRequest" Vervain/
 # (no output — clean)
 ```
 

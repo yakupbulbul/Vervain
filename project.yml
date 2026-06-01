@@ -1,4 +1,4 @@
-name: PureMac
+name: Vervain
 options:
   bundleIdPrefix: com.yakupbulbul
   deploymentTarget:
@@ -16,18 +16,18 @@ settings:
     DEVELOPMENT_TEAM: ""
 
 targets:
-  PureMac:
+  Vervain:
     type: application
     platform: macOS
     sources:
-      - path: PureMac
+      - path: Vervain
         excludes:
           - "**/.DS_Store"
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.yakupbulbul.PureMac
-        INFOPLIST_FILE: PureMac/Info.plist
-        CODE_SIGN_ENTITLEMENTS: PureMac/PureMac.entitlements
+        PRODUCT_BUNDLE_IDENTIFIER: com.yakupbulbul.Vervain
+        INFOPLIST_FILE: Vervain/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Vervain/Vervain.entitlements
         SWIFT_VERSION: "6.0"
         MACOSX_DEPLOYMENT_TARGET: "15.0"
         SWIFT_STRICT_CONCURRENCY: complete
@@ -39,46 +39,46 @@ targets:
         DEVELOPMENT_TEAM: ""
         OTHER_CODE_SIGN_FLAGS: "--deep"
 
-  PureMacTests:
+  VervainTests:
     type: bundle.unit-test
     platform: macOS
     sources:
-      - path: PureMacTests
+      - path: VervainTests
     dependencies:
-      - target: PureMac
+      - target: Vervain
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.yakupbulbul.PureMacTests
+        PRODUCT_BUNDLE_IDENTIFIER: com.yakupbulbul.VervainTests
         SWIFT_VERSION: "6.0"
         MACOSX_DEPLOYMENT_TARGET: "15.0"
         SWIFT_STRICT_CONCURRENCY: complete
         BUNDLE_LOADER: "$(TEST_HOST)"
-        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/PureMac.app/Contents/MacOS/PureMac"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Vervain.app/Contents/MacOS/Vervain"
         GENERATE_INFOPLIST_FILE: YES
 
-  PureMacUITests:
+  VervainUITests:
     type: bundle.ui-testing
     platform: macOS
     sources:
-      - path: PureMacUITests
+      - path: VervainUITests
     dependencies:
-      - target: PureMac
+      - target: Vervain
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.yakupbulbul.PureMacUITests
+        PRODUCT_BUNDLE_IDENTIFIER: com.yakupbulbul.VervainUITests
         SWIFT_VERSION: "6.0"
         MACOSX_DEPLOYMENT_TARGET: "15.0"
         GENERATE_INFOPLIST_FILE: YES
-        TEST_TARGET_NAME: PureMac
+        TEST_TARGET_NAME: Vervain
 
 schemes:
-  PureMac:
+  Vervain:
     build:
       targets:
-        PureMac: all
-        PureMacTests: [test]
-        PureMacUITests: [test]
+        Vervain: all
+        VervainTests: [test]
+        VervainUITests: [test]
     test:
       targets:
-        - PureMacTests
-        - PureMacUITests
+        - VervainTests
+        - VervainUITests

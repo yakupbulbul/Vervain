@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Centralised design tokens for PureMac's organic, eco-conscious visual identity.
+/// Centralised design tokens for Vervain's organic, eco-conscious visual identity.
 /// Every colour adapts automatically to macOS light / dark appearance.
 enum Theme {
 

@@ -17,7 +17,7 @@
 		1E357F3DDCBEEFE6B3287C56 /* HealthScoreBreakdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41288BB6D125AAA0F004A5 /* HealthScoreBreakdownView.swift */; };
 		1EAE90BADA01B1ECE5C6225B /* FullDiskAccessBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CFC69969E13F905E4493A7 /* FullDiskAccessBanner.swift */; };
 		20B5BFD7185EA68FCEF201B2 /* SmartScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EB73D0E8BF07975D1095C2 /* SmartScanViewModel.swift */; };
-		22A5933DF7F70E08185DB2BB /* PureMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3ED8B07A6307FE8D2BE65 /* PureMacUITests.swift */; };
+		22A5933DF7F70E08185DB2BB /* VervainUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3ED8B07A6307FE8D2BE65 /* VervainUITests.swift */; };
 		2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0147791F9F24F101B742D /* CleanupCategoryTests.swift */; };
 		3AFD459974A122BAEF2C1608 /* CleanupItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B129CDE89F863BDF613E9 /* CleanupItemRow.swift */; };
 		4245825AD43FF469A0E1BEB5 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF49D4DC8132A07BE241CAD /* FileUtils.swift */; };
@@ -59,7 +59,7 @@
 		E1D7277553C1ED10686A5750 /* Int64+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABABDA120F631D21449582E9 /* Int64+Formatting.swift */; };
 		E4EECC430E06D628D7D9810B /* CleanupSelectionPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5105482573F73B425078F7DA /* CleanupSelectionPolicyTests.swift */; };
 		E5709ACDA4F246006079EC62 /* SmartScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806443ED59E4F8150F2D7486 /* SmartScanView.swift */; };
-		EDEF28CAD23E936FBED1783B /* PureMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63581B70F9B10231964E3602 /* PureMacApp.swift */; };
+		EDEF28CAD23E936FBED1783B /* VervainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63581B70F9B10231964E3602 /* VervainApp.swift */; };
 		EEF9318C30DD4C70AF0B7B12 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6D8F7F259A4204A8A60A82 /* AboutView.swift */; };
 		F5473915DF991C836F84CF3D /* CleanupDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F24E0B0842994AEA346BCB /* CleanupDoneView.swift */; };
 		F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B58940879213198AAB30244 /* SystemJunkViewModel.swift */; };
@@ -74,14 +74,14 @@
 			containerPortal = 37BE87544E2EC9F6FF1CD280 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B19E38DEAA0144A77120F39C;
-			remoteInfo = PureMac;
+			remoteInfo = Vervain;
 		};
 		945446BD29D986737D70F235 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 37BE87544E2EC9F6FF1CD280 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B19E38DEAA0144A77120F39C;
-			remoteInfo = PureMac;
+			remoteInfo = Vervain;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -100,7 +100,7 @@
 		229DB321A669BD75235A5555 /* AppDetailPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailPanel.swift; sourceTree = "<group>"; };
 		23DCB2556E8F42456E3159F8 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		2A82CABE138EE56191E32DFD /* DiskPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskPieChart.swift; sourceTree = "<group>"; };
-		311078221878708524283765 /* PureMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		311078221878708524283765 /* Vervain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vervain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		330010533CA041CCA381C043 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		3384BDE7F39A2453B37F2E7A /* SmartRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartRecommendation.swift; sourceTree = "<group>"; };
 		37F171CC37AB350FCC075176 /* CleanupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupService.swift; sourceTree = "<group>"; };
@@ -114,14 +114,14 @@
 		5105482573F73B425078F7DA /* CleanupSelectionPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupSelectionPolicyTests.swift; sourceTree = "<group>"; };
 		53BAAB249D511F10DE12A735 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		556E0918A78BE7D960F590FA /* Int64FormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int64FormattingTests.swift; sourceTree = "<group>"; };
-		5664D2BDAEAA9AE3A53DB364 /* PureMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PureMac.entitlements; sourceTree = "<group>"; };
+		5664D2BDAEAA9AE3A53DB364 /* Vervain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vervain.entitlements; sourceTree = "<group>"; };
 		5B0B129CDE89F863BDF613E9 /* CleanupItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupItemRow.swift; sourceTree = "<group>"; };
 		5DFC84CE8C571AC3FAB99DE8 /* HealthScoreBreakdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthScoreBreakdown.swift; sourceTree = "<group>"; };
 		5E93EC1CBE9EA084DB221BCE /* AppScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScanner.swift; sourceTree = "<group>"; };
-		607B9A8C7B34D6A7DCF4FFE2 /* PureMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PureMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		607B9A8C7B34D6A7DCF4FFE2 /* VervainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VervainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60E78BE53D2E6705867843EA /* CleanupConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupConfirmationSheet.swift; sourceTree = "<group>"; };
-		63581B70F9B10231964E3602 /* PureMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureMacApp.swift; sourceTree = "<group>"; };
-		71A3ED8B07A6307FE8D2BE65 /* PureMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureMacUITests.swift; sourceTree = "<group>"; };
+		63581B70F9B10231964E3602 /* VervainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VervainApp.swift; sourceTree = "<group>"; };
+		71A3ED8B07A6307FE8D2BE65 /* VervainUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VervainUITests.swift; sourceTree = "<group>"; };
 		71B6156E2BCBDC22AA06D032 /* HealthScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthScore.swift; sourceTree = "<group>"; };
 		71CE0325A94785B58D212743 /* HealthRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRingView.swift; sourceTree = "<group>"; };
 		74BFEF2D8CE6A682AC21DA8D /* CleanupReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupReviewView.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		E0D6E6DCABB7A85524BF2FEC /* ScanMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanMetadata.swift; sourceTree = "<group>"; };
 		E8EB73D0E8BF07975D1095C2 /* SmartScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartScanViewModel.swift; sourceTree = "<group>"; };
 		EDF0147791F9F24F101B742D /* CleanupCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupCategoryTests.swift; sourceTree = "<group>"; };
-		EF4F0D9B4398C94682A02274 /* PureMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PureMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF4F0D9B4398C94682A02274 /* VervainUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VervainUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1EB3F316AC6CD4187A8D58B /* JunkCategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JunkCategoryRow.swift; sourceTree = "<group>"; };
 		F1F4106EAD248920AD54E94E /* AppUninstallerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUninstallerViewModel.swift; sourceTree = "<group>"; };
 		F6CFC69969E13F905E4493A7 /* FullDiskAccessBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDiskAccessBanner.swift; sourceTree = "<group>"; };
@@ -156,14 +156,14 @@
 		13CF0676D0E93925F46C13AA = {
 			isa = PBXGroup;
 			children = (
-				E383F69184F4552E5A41D010 /* PureMac */,
-				261FB8D961FEC76F15EA523A /* PureMacTests */,
-				717DA3E955959B69BF53434F /* PureMacUITests */,
+				E383F69184F4552E5A41D010 /* Vervain */,
+				261FB8D961FEC76F15EA523A /* VervainTests */,
+				717DA3E955959B69BF53434F /* VervainUITests */,
 				4562CA9E5625FA4EEEFECB6D /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		261FB8D961FEC76F15EA523A /* PureMacTests */ = {
+		261FB8D961FEC76F15EA523A /* VervainTests */ = {
 			isa = PBXGroup;
 			children = (
 				EDF0147791F9F24F101B742D /* CleanupCategoryTests.swift */,
@@ -171,7 +171,7 @@
 				503B1280653952AFC80A394B /* HealthScoreBreakdownTests.swift */,
 				556E0918A78BE7D960F590FA /* Int64FormattingTests.swift */,
 			);
-			path = PureMacTests;
+			path = VervainTests;
 			sourceTree = "<group>";
 		};
 		2D28D00936EE3BD785FEA342 /* SystemJunk */ = {
@@ -212,9 +212,9 @@
 		4562CA9E5625FA4EEEFECB6D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				311078221878708524283765 /* PureMac.app */,
-				607B9A8C7B34D6A7DCF4FFE2 /* PureMacTests.xctest */,
-				EF4F0D9B4398C94682A02274 /* PureMacUITests.xctest */,
+				311078221878708524283765 /* Vervain.app */,
+				607B9A8C7B34D6A7DCF4FFE2 /* VervainTests.xctest */,
+				EF4F0D9B4398C94682A02274 /* VervainUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,12 +266,12 @@
 			path = AppUninstaller;
 			sourceTree = "<group>";
 		};
-		717DA3E955959B69BF53434F /* PureMacUITests */ = {
+		717DA3E955959B69BF53434F /* VervainUITests */ = {
 			isa = PBXGroup;
 			children = (
-				71A3ED8B07A6307FE8D2BE65 /* PureMacUITests.swift */,
+				71A3ED8B07A6307FE8D2BE65 /* VervainUITests.swift */,
 			);
-			path = PureMacUITests;
+			path = VervainUITests;
 			sourceTree = "<group>";
 		};
 		7C1729F88C0E5563E1A3DB40 /* Extensions */ = {
@@ -351,14 +351,14 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		E383F69184F4552E5A41D010 /* PureMac */ = {
+		E383F69184F4552E5A41D010 /* Vervain */ = {
 			isa = PBXGroup;
 			children = (
 				B2EA41E1096FA8E3B916AD13 /* Assets.xcassets */,
 				53BAAB249D511F10DE12A735 /* ContentView.swift */,
 				46660271CFF167AB0FE7371D /* Info.plist */,
-				5664D2BDAEAA9AE3A53DB364 /* PureMac.entitlements */,
-				63581B70F9B10231964E3602 /* PureMacApp.swift */,
+				5664D2BDAEAA9AE3A53DB364 /* Vervain.entitlements */,
+				63581B70F9B10231964E3602 /* VervainApp.swift */,
 				23DCB2556E8F42456E3159F8 /* Theme.swift */,
 				7C1729F88C0E5563E1A3DB40 /* Extensions */,
 				3CF46713F75B81F0F86D1C6F /* Models */,
@@ -366,7 +366,7 @@
 				A8F1C251567E5321E1CA2484 /* ViewModels */,
 				45B485C4ACB5B08C1B87917F /* Views */,
 			);
-			path = PureMac;
+			path = Vervain;
 			sourceTree = "<group>";
 		};
 		F9F01EE06562DF8641E5BC90 /* Cleanup */ = {
@@ -386,9 +386,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B19E38DEAA0144A77120F39C /* PureMac */ = {
+		B19E38DEAA0144A77120F39C /* Vervain */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2754925F163D15C85EDF494D /* Build configuration list for PBXNativeTarget "PureMac" */;
+			buildConfigurationList = 2754925F163D15C85EDF494D /* Build configuration list for PBXNativeTarget "Vervain" */;
 			buildPhases = (
 				63C589367B714FC06B0519E5 /* Sources */,
 				3975A867E04014FA565E9F46 /* Resources */,
@@ -397,16 +397,16 @@
 			);
 			dependencies = (
 			);
-			name = PureMac;
+			name = Vervain;
 			packageProductDependencies = (
 			);
-			productName = PureMac;
-			productReference = 311078221878708524283765 /* PureMac.app */;
+			productName = Vervain;
+			productReference = 311078221878708524283765 /* Vervain.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BB7DBB6442E91DCB12243C43 /* PureMacUITests */ = {
+		BB7DBB6442E91DCB12243C43 /* VervainUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 91ED7AE24D42A1D8D36C0A34 /* Build configuration list for PBXNativeTarget "PureMacUITests" */;
+			buildConfigurationList = 91ED7AE24D42A1D8D36C0A34 /* Build configuration list for PBXNativeTarget "VervainUITests" */;
 			buildPhases = (
 				547E6607E135E897002A7638 /* Sources */,
 			);
@@ -415,16 +415,16 @@
 			dependencies = (
 				78DFDC3CF7EA9D8184DCD1CC /* PBXTargetDependency */,
 			);
-			name = PureMacUITests;
+			name = VervainUITests;
 			packageProductDependencies = (
 			);
-			productName = PureMacUITests;
-			productReference = EF4F0D9B4398C94682A02274 /* PureMacUITests.xctest */;
+			productName = VervainUITests;
+			productReference = EF4F0D9B4398C94682A02274 /* VervainUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		FBA8B0DE95746207A043B802 /* PureMacTests */ = {
+		FBA8B0DE95746207A043B802 /* VervainTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 25F40856927F2EE5BC50A0FB /* Build configuration list for PBXNativeTarget "PureMacTests" */;
+			buildConfigurationList = 25F40856927F2EE5BC50A0FB /* Build configuration list for PBXNativeTarget "VervainTests" */;
 			buildPhases = (
 				A6847DD7D5552F4AA6B17BA8 /* Sources */,
 			);
@@ -433,11 +433,11 @@
 			dependencies = (
 				0E97FDF7F6FA15845FCE6737 /* PBXTargetDependency */,
 			);
-			name = PureMacTests;
+			name = VervainTests;
 			packageProductDependencies = (
 			);
-			productName = PureMacTests;
-			productReference = 607B9A8C7B34D6A7DCF4FFE2 /* PureMacTests.xctest */;
+			productName = VervainTests;
+			productReference = 607B9A8C7B34D6A7DCF4FFE2 /* VervainTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -463,7 +463,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2ABAFAE07AA42044AE58F688 /* Build configuration list for PBXProject "PureMac" */;
+			buildConfigurationList = 2ABAFAE07AA42044AE58F688 /* Build configuration list for PBXProject "Vervain" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -477,9 +477,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B19E38DEAA0144A77120F39C /* PureMac */,
-				FBA8B0DE95746207A043B802 /* PureMacTests */,
-				BB7DBB6442E91DCB12243C43 /* PureMacUITests */,
+				B19E38DEAA0144A77120F39C /* Vervain */,
+				FBA8B0DE95746207A043B802 /* VervainTests */,
+				BB7DBB6442E91DCB12243C43 /* VervainUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -500,7 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22A5933DF7F70E08185DB2BB /* PureMacUITests.swift in Sources */,
+				22A5933DF7F70E08185DB2BB /* VervainUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,7 +551,7 @@
 				70662A4B5740C39D802AD0BA /* JunkCategoryRow.swift in Sources */,
 				59424627DCAB7F4B4ED1BAF9 /* JunkScanner.swift in Sources */,
 				5779015287E845E457E5FC7B /* OnboardingView.swift in Sources */,
-				EDEF28CAD23E936FBED1783B /* PureMacApp.swift in Sources */,
+				EDEF28CAD23E936FBED1783B /* VervainApp.swift in Sources */,
 				DF259EE91C15CDC7B12306E7 /* RecommendationCard.swift in Sources */,
 				992CDC9CA125CBACFA0561BD /* ScanMetadata.swift in Sources */,
 				0D57250655BBE5464AA55C8D /* SidebarView.swift in Sources */,
@@ -580,12 +580,12 @@
 /* Begin PBXTargetDependency section */
 		0E97FDF7F6FA15845FCE6737 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B19E38DEAA0144A77120F39C /* PureMac */;
+			target = B19E38DEAA0144A77120F39C /* Vervain */;
 			targetProxy = 8D91DC174C821BE74C4B518C /* PBXContainerItemProxy */;
 		};
 		78DFDC3CF7EA9D8184DCD1CC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B19E38DEAA0144A77120F39C /* PureMac */;
+			target = B19E38DEAA0144A77120F39C /* Vervain */;
 			targetProxy = 945446BD29D986737D70F235 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -671,10 +671,10 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.puremac.UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.vervain.UITests;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 6.0;
-				TEST_TARGET_NAME = PureMac;
+				TEST_TARGET_NAME = Vervain;
 			};
 			name = Debug;
 		};
@@ -682,21 +682,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PureMac/PureMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Vervain/Vervain.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = DP95N34FAN;
 				ENABLE_HARDENED_RUNTIME = NO;
-				INFOPLIST_FILE = PureMac/Info.plist;
+				INFOPLIST_FILE = Vervain/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
-				PRODUCT_BUNDLE_IDENTIFIER = app.puremac;
+				PRODUCT_BUNDLE_IDENTIFIER = app.vervain;
 				SDKROOT = macosx;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 6.0;
@@ -715,11 +715,11 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.puremac.Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.vervain.Tests;
 				SDKROOT = macosx;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 6.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PureMac.app/Contents/MacOS/PureMac";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vervain.app/Contents/MacOS/Vervain";
 			};
 			name = Debug;
 		};
@@ -735,11 +735,11 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.puremac.Tests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.vervain.Tests;
 				SDKROOT = macosx;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 6.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PureMac.app/Contents/MacOS/PureMac";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vervain.app/Contents/MacOS/Vervain";
 			};
 			name = Release;
 		};
@@ -755,10 +755,10 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.puremac.UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.vervain.UITests;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 6.0;
-				TEST_TARGET_NAME = PureMac;
+				TEST_TARGET_NAME = Vervain;
 			};
 			name = Release;
 		};
@@ -827,21 +827,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PureMac/PureMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Vervain/Vervain.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = DP95N34FAN;
 				ENABLE_HARDENED_RUNTIME = NO;
-				INFOPLIST_FILE = PureMac/Info.plist;
+				INFOPLIST_FILE = Vervain/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
-				PRODUCT_BUNDLE_IDENTIFIER = app.puremac;
+				PRODUCT_BUNDLE_IDENTIFIER = app.vervain;
 				SDKROOT = macosx;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 6.0;
@@ -851,7 +851,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		25F40856927F2EE5BC50A0FB /* Build configuration list for PBXNativeTarget "PureMacTests" */ = {
+		25F40856927F2EE5BC50A0FB /* Build configuration list for PBXNativeTarget "VervainTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6AC7FF3E26B642C05D435ADB /* Debug */,
@@ -860,7 +860,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		2754925F163D15C85EDF494D /* Build configuration list for PBXNativeTarget "PureMac" */ = {
+		2754925F163D15C85EDF494D /* Build configuration list for PBXNativeTarget "Vervain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				62DEA95205CFC6624F5AE4DA /* Debug */,
@@ -869,7 +869,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		2ABAFAE07AA42044AE58F688 /* Build configuration list for PBXProject "PureMac" */ = {
+		2ABAFAE07AA42044AE58F688 /* Build configuration list for PBXProject "Vervain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0794DC5454CB748EC1374422 /* Debug */,
@@ -878,7 +878,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		91ED7AE24D42A1D8D36C0A34 /* Build configuration list for PBXNativeTarget "PureMacUITests" */ = {
+		91ED7AE24D42A1D8D36C0A34 /* Build configuration list for PBXNativeTarget "VervainUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4201C8649386F8090FBE15E5 /* Debug */,
