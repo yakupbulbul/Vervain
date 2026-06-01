@@ -103,7 +103,7 @@ struct AppUninstallerView: View {
     private var splitView: some View {
         HSplitView {
             appListPane
-                .frame(minWidth: 360, idealWidth: 420)
+                .frame(minWidth: 480, idealWidth: 540)
             detailPane
                 .frame(minWidth: 320)
         }
@@ -145,22 +145,32 @@ struct AppUninstallerView: View {
 
             Divider().background(Theme.divider)
 
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    ForEach(filteredApps) { app in
-                        AppRow(
-                            app: app,
-                            isSelected: vm.selectedIDs.contains(app.id),
-                            isDetailSelected: selectedDetailID == app.id,
-                            isScanningLeftovers: vm.scanningLeftoversID == app.id,
-                            onToggle: { vm.toggleSelection(app.id) },
-                            onSelect: { selectedDetailID = app.id },
-                            onScanLeftovers: { vm.scanLeftovers(for: app) }
-                        )
-                        Divider().background(Theme.divider)
-                    }
-                }
+            List(filteredApps, selection: $selectedDetailID) { app in
+                AppRow(
+                    app: app,
+                    isSelected: vm.selectedIDs.contains(app.id),
+                    isDetailSelected: selectedDetailID == app.id,
+                    isScanningLeftovers: vm.scanningLeftoversID == app.id,
+                    onToggle: {
+                        vm.toggleSelection(app.id)
+                        selectedDetailID = app.id
+                    },
+                    onSelect: { selectedDetailID = app.id },
+                    onScanLeftovers: { vm.scanLeftovers(for: app) }
+                )
+                .tag(app.id)
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(
+                    selectedDetailID == app.id
+                        ? Theme.divider
+                        : (vm.selectedIDs.contains(app.id) ? Theme.appUninstallerAccent.opacity(0.06) : Theme.background)
+                )
+                .listRowSeparator(.visible)
+                .listRowSeparatorTint(Theme.divider)
             }
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .background(Theme.background)
 
             if !vm.selectedIDs.isEmpty {
                 uninstallBar
@@ -249,10 +259,14 @@ struct AppRow: View {
     var body: some View {
         HStack(spacing: 12) {
             // Checkbox
-            Button(action: onToggle) {
+            Button {
+                onToggle()
+            } label: {
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                     .foregroundStyle(isSelected ? Theme.appUninstallerAccent : Theme.textFaint)
                     .font(.system(size: 20))
+                    .frame(width: 30, height: 30)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
 
@@ -311,19 +325,12 @@ struct AppRow: View {
                             .font(.system(size: 10, weight: .medium))
                             .foregroundStyle(Theme.textMuted)
                     }
-                    .buttonStyle(.borderless)
+                    .buttonStyle(.plain)
                 }
             }
             .frame(width: 70, alignment: .trailing)
         }
         .padding(.horizontal, 14).padding(.vertical, 8)
-        .background(
-            isDetailSelected
-                ? Theme.divider
-                : (isSelected ? Theme.appUninstallerAccent.opacity(0.06) : Color.clear)
-        )
-        .contentShape(Rectangle())
-        .onTapGesture { onSelect() }
     }
 
     private func sizeColor(_ bytes: Int64) -> Color {
