@@ -47,7 +47,7 @@ brew install yakupbulbul/vervain/vervain
 
 **Direct download:**
 
-> [Download Vervain-1.0.0.dmg](https://github.com/yakupbulbul/Vervain/releases/latest/download/Vervain-1.0.0.dmg) — Signed & notarized by Apple.
+> [Download Vervain-1.1.0.dmg](https://github.com/yakupbulbul/Vervain/releases/latest/download/Vervain-1.1.0.dmg) — Signed & notarized by Apple.
 
 ## Features
 
