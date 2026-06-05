@@ -37,6 +37,7 @@ Every Mac cleaner I tried either wanted a subscription, phoned home with analyti
 | App uninstaller with leftovers | **Yes** | Yes | No |
 | Disk analyzer | **Yes** | Yes | No |
 | Review before cleanup | **Always** | Partial | Partial |
+| Multi-language | **6 languages** | Yes | No |
 
 ## Install
 
@@ -97,6 +98,14 @@ Donut chart of what's eating your disk, with drill-down into folders and largest
 </td>
 </tr>
 </table>
+
+## Languages
+
+Available in 6 languages — switch anytime via **Settings** (⌘,):
+
+🇬🇧 English · 🇫🇷 Français · 🇩🇪 Deutsch · 🇹🇷 Türkçe · 🇪🇸 Español · 🇨🇳 中文(简体)
+
+Vervain automatically uses your Mac's system language, or you can choose a different one in the app.
 
 ## Three Promises
 
