@@ -89,13 +89,14 @@ final class AppUninstallerViewModel {
 
             let subtitle: String = {
                 if app.leftoverScanned {
-                    return "Bundle + \(app.leftoverItems.count) leftover item\(app.leftoverItems.count == 1 ? "" : "s")"
+                    return String(localized: "Bundle + \(app.leftoverItems.count) leftover items")
                 } else {
-                    return "Bundle only — leftovers not scanned"
+                    return String(localized: "Bundle only — leftovers not scanned")
                 }
             }()
 
             cats.append(CleanupCategory(
+                kind: .appLeftovers,
                 title: app.name,
                 subtitle: subtitle,
                 icon: "xmark.app.fill",

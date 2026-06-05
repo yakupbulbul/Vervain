@@ -105,7 +105,7 @@ struct SidebarRow: View {
     var body: some View {
         Label {
             VStack(alignment: .leading, spacing: 1) {
-                Text(feature.rawValue)
+                Text(feature.displayName)
                     .font(.system(size: 13, weight: .medium))
                     .foregroundStyle(Theme.textPrimary)
                 Text(feature.description)

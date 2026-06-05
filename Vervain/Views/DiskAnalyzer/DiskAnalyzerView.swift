@@ -293,13 +293,12 @@ struct DiskAnalyzerView: View {
 
     private var inaccessibleMessage: String {
         let count = vm.metadata.inaccessibleCount
-        let folders = count == 1 ? "folder" : "folders"
         // With FDA denied, typically 50+ folders are inaccessible.
         // With FDA granted, only ~20-30 SIP-protected folders remain.
         if count <= 40 {
-            return "\(count) system-protected \(folders) couldn't be read. This is normal — macOS protects these with SIP."
+            return String(localized: "\(count) system-protected folders couldn't be read. This is normal — macOS protects these with SIP.")
         } else {
-            return "\(count) \(folders) couldn't be read. Grant Full Disk Access for a complete picture."
+            return String(localized: "\(count) folders couldn't be read. Grant Full Disk Access for a complete picture.")
         }
     }
 

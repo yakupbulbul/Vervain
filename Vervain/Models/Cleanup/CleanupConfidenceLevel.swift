@@ -12,10 +12,10 @@ enum CleanupConfidenceLevel: String, CaseIterable, Sendable, Hashable {
 
     var label: String {
         switch self {
-        case .high:    return "High"
-        case .medium:  return "Medium"
-        case .low:     return "Low"
-        case .unknown: return "Unknown"
+        case .high:    return String(localized: "High")
+        case .medium:  return String(localized: "Medium")
+        case .low:     return String(localized: "Low")
+        case .unknown: return String(localized: "Unknown")
         }
     }
 
@@ -30,10 +30,10 @@ enum CleanupConfidenceLevel: String, CaseIterable, Sendable, Hashable {
 
     var description: String {
         switch self {
-        case .high:    return "Exact match — very likely correct"
-        case .medium:  return "Strong match — likely correct"
-        case .low:     return "Weak match — please verify"
-        case .unknown: return "Insufficient metadata to grade"
+        case .high:    return String(localized: "Exact match — very likely correct")
+        case .medium:  return String(localized: "Strong match — likely correct")
+        case .low:     return String(localized: "Weak match — please verify")
+        case .unknown: return String(localized: "Insufficient metadata to grade")
         }
     }
 }

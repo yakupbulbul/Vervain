@@ -101,7 +101,7 @@ struct CleanupConfirmationSheet: View {
     private func sectionHeader(_ title: String, icon: String, color: Color, count: Int) -> some View {
         HStack(spacing: 6) {
             Image(systemName: icon).foregroundStyle(color)
-            Text("\(title) — \(count) item\(count == 1 ? "" : "s")")
+            Text("\(title) — \(count) items")
                 .font(.subheadline.bold())
         }
     }

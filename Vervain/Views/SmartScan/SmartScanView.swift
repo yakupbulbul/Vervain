@@ -187,7 +187,7 @@ struct SmartScanView: View {
     private var inaccessibleNote: some View {
         HStack(spacing: 6) {
             Image(systemName: "lock.fill").foregroundStyle(Theme.fdaBannerAccent)
-            Text("\(vm.scanMetadata.inaccessibleCount) folder\(vm.scanMetadata.inaccessibleCount == 1 ? " was" : "s were") inaccessible — grant Full Disk Access for complete results.")
+            Text("\(vm.scanMetadata.inaccessibleCount) folders were inaccessible — grant Full Disk Access for complete results.")
                 .font(.caption)
                 .foregroundStyle(Theme.textSecondary)
         }

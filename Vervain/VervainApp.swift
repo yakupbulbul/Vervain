@@ -11,7 +11,6 @@ struct VervainApp: App {
     @State private var fdaVM            = FullDiskAccessViewModel()
     @State private var showOnboarding   = !OnboardingView.hasShown
     @State private var showAbout        = false
-
     var body: some Scene {
         WindowGroup {
             ContentView(showAbout: $showAbout)
@@ -44,6 +43,10 @@ struct VervainApp: App {
             CommandGroup(replacing: .appInfo) {
                 Button("About Vervain") { showAbout = true }
             }
+        }
+
+        Settings {
+            SettingsView()
         }
     }
 }

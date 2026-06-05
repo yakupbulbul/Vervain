@@ -12,9 +12,9 @@ enum CleanupRiskLevel: String, CaseIterable, Sendable, Comparable, Hashable {
 
     var label: String {
         switch self {
-        case .safe:   return "Safe"
-        case .review: return "Review"
-        case .risky:  return "Risky"
+        case .safe:   return String(localized: "Safe")
+        case .review: return String(localized: "Review")
+        case .risky:  return String(localized: "Risky")
         }
     }
 

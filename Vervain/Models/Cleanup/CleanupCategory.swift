@@ -4,6 +4,7 @@ import SwiftUI
 /// E.g. "User Caches", "Old Logs", or per-app "Spotify · Leftovers".
 struct CleanupCategory: Identifiable, Sendable {
     let id: UUID
+    let kind: CleanupCategoryKind
     let title: String
     let subtitle: String?
     /// SF Symbol name.
@@ -13,6 +14,7 @@ struct CleanupCategory: Identifiable, Sendable {
 
     init(
         id: UUID = UUID(),
+        kind: CleanupCategoryKind,
         title: String,
         subtitle: String? = nil,
         icon: String,
@@ -20,6 +22,7 @@ struct CleanupCategory: Identifiable, Sendable {
         items: [CleanupItem]
     ) {
         self.id = id
+        self.kind = kind
         self.title = title
         self.subtitle = subtitle
         self.icon = icon

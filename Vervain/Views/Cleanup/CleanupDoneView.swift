@@ -39,7 +39,7 @@ struct CleanupDoneView: View {
             Text(coord.result?.freedBytes.formattedBytes ?? "0 bytes")
                 .font(.system(size: 32, weight: .bold, design: .rounded))
                 .foregroundStyle(Theme.systemJunkAccent)
-            Text("freed by moving \(coord.result?.successCount ?? 0) item\((coord.result?.successCount ?? 0) == 1 ? "" : "s") to Trash")
+            Text("Freed by moving \(coord.result?.successCount ?? 0) items to Trash")
                 .font(.subheadline)
                 .foregroundStyle(Theme.textSecondary)
             if let res = coord.result, res.duration > 0 {
@@ -54,7 +54,7 @@ struct CleanupDoneView: View {
             HStack(spacing: 6) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(Theme.fdaBannerAccent)
-                Text("\(failures.count) item\(failures.count == 1 ? "" : "s") could not be removed")
+                Text("\(failures.count) items could not be removed")
                     .font(.subheadline.bold())
             }
             VStack(spacing: 4) {

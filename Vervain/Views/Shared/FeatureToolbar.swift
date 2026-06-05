@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct FeatureToolbar<Actions: View>: View {
-    let title: String
-    let subtitle: String?
+    let title: LocalizedStringKey
+    let subtitle: LocalizedStringKey?
     @ViewBuilder let actions: () -> Actions
 
     init(
-        title: String,
-        subtitle: String? = nil,
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey? = nil,
         @ViewBuilder actions: @escaping () -> Actions
     ) {
         self.title    = title
@@ -38,7 +38,7 @@ struct FeatureToolbar<Actions: View>: View {
 
 // MARK: - Convenience initialiser (no subtitle)
 extension FeatureToolbar where Actions == EmptyView {
-    init(title: String) {
+    init(title: LocalizedStringKey) {
         self.title    = title
         self.subtitle = nil
         self.actions  = { EmptyView() }

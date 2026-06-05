@@ -200,7 +200,7 @@ struct CleanupReviewView: View {
     private var footer: some View {
         HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(coord.totalSelectedCount) item\(coord.totalSelectedCount == 1 ? "" : "s") selected")
+                Text("\(coord.totalSelectedCount) items selected")
                     .font(.caption).foregroundStyle(Theme.textSecondary)
                 if coord.totalSelectedCount == 0 {
                     Text("Select items above to clean")

@@ -86,6 +86,7 @@ actor JunkScanner {
         var cats: [CleanupCategory] = []
         if !oldItems.isEmpty {
             cats.append(CleanupCategory(
+                kind: .oldCaches,
                 title: "Old Caches",
                 subtitle: "Not accessed in over 30 days",
                 icon: "internaldrive",
@@ -95,6 +96,7 @@ actor JunkScanner {
         }
         if !recentItems.isEmpty {
             cats.append(CleanupCategory(
+                kind: .recentCaches,
                 title: "Recent Caches",
                 subtitle: "Apps may regenerate these — review before removing",
                 icon: "internaldrive.fill",
@@ -149,6 +151,7 @@ actor JunkScanner {
         var cats: [CleanupCategory] = []
         if !oldItems.isEmpty {
             cats.append(CleanupCategory(
+                kind: .oldLogs,
                 title: "Old Logs",
                 subtitle: "Older than 7 days",
                 icon: "doc.text.fill",
@@ -158,6 +161,7 @@ actor JunkScanner {
         }
         if !recentItems.isEmpty {
             cats.append(CleanupCategory(
+                kind: .recentLogs,
                 title: "Recent Logs",
                 subtitle: "May still be useful for diagnostics",
                 icon: "doc.text",
@@ -220,6 +224,7 @@ actor JunkScanner {
         meta.scannedCount = items.count
         if items.isEmpty { return ScanProduct(categories: [], meta: meta) }
         let cats = [CleanupCategory(
+            kind: .languageFiles,
             title: "Language Files",
             subtitle: "Removing these invalidates app code signatures — review carefully",
             icon: "globe",
@@ -341,6 +346,7 @@ actor JunkScanner {
         var cats: [CleanupCategory] = []
         if !devItems.isEmpty {
             cats.append(CleanupCategory(
+                kind: .developerCaches,
                 title: "Developer Caches",
                 subtitle: "Xcode, simulators, and dev tool data",
                 icon: "hammer.fill",
@@ -350,6 +356,7 @@ actor JunkScanner {
         }
         if !packageItems.isEmpty {
             cats.append(CleanupCategory(
+                kind: .packageManagerCaches,
                 title: "Package Manager Caches",
                 subtitle: "Homebrew, npm, pip, CocoaPods, and others",
                 icon: "shippingbox.fill",
@@ -384,6 +391,7 @@ actor JunkScanner {
         if items.isEmpty { return ScanProduct(categories: [], meta: meta) }
         return ScanProduct(
             categories: [CleanupCategory(
+                kind: .trashContents,
                 title: "Trash Contents",
                 subtitle: "Already in Trash — confirm to remove from disk",
                 icon: "trash.fill",
@@ -458,6 +466,7 @@ actor JunkScanner {
         var cats: [CleanupCategory] = []
         if !oldInstallers.isEmpty {
             cats.append(CleanupCategory(
+                kind: .oldInstallers,
                 title: "Old Installers",
                 subtitle: ".dmg / .pkg / .iso files older than 30 days",
                 icon: "shippingbox.fill",
@@ -467,6 +476,7 @@ actor JunkScanner {
         }
         if !otherItems.isEmpty {
             cats.append(CleanupCategory(
+                kind: .otherDownloads,
                 title: "Other Downloads",
                 subtitle: "User-owned files — never auto-selected",
                 icon: "arrow.down.circle.fill",

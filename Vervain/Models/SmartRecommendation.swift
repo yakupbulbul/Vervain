@@ -66,8 +66,8 @@ struct SmartRecommendation: Identifiable, Sendable {
 
         var ctaLabel: String {
             switch self {
-            case .openCleanupReview: return "Review & Clean"
-            case .openModule:        return "Open"
+            case .openCleanupReview: return String(localized: "Review & Clean")
+            case .openModule:        return String(localized: "Open")
             }
         }
     }

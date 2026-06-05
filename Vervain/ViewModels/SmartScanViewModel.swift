@@ -73,7 +73,7 @@ final class SmartScanViewModel {
 
             // Old downloads contribution to the score breakdown
             let oldDownloadBytes = cats
-                .filter { $0.title == "Old Installers" }
+                .filter { $0.kind == .oldInstallers }
                 .reduce(Int64(0)) { $0 + $1.totalSize }
 
             let breakdown = HealthScoreBreakdown.compute(
@@ -121,25 +121,25 @@ final class SmartScanViewModel {
         // Critical: disk dangerously full.
         if diskFraction > 0.90 {
             recs.append(.init(
-                title: "Disk Critically Full",
-                description: "Your startup disk is over 90% full. Review and remove cached files and old downloads.",
+                title: String(localized: "Disk Critically Full"),
+                description: String(localized: "Your startup disk is over 90% full. Review and remove cached files and old downloads."),
                 severity: .critical,
                 sourceModule: .smartScan,
                 action: .openCleanupReview(
                     categories: categories.filter { $0.sourceModule == .systemJunk },
-                    title: "Free Disk Space"
+                    title: String(localized: "Free Disk Space")
                 ),
                 estimatedRecoverableBytes: categories.reduce(0) { $0 + $1.totalSize }
             ))
         } else if diskFraction > 0.80 {
             recs.append(.init(
-                title: "Disk Getting Full",
-                description: "Your startup disk is over 80% full. Cleaning system junk can free space.",
+                title: String(localized: "Disk Getting Full"),
+                description: String(localized: "Your startup disk is over 80% full. Cleaning system junk can free space."),
                 severity: .warning,
                 sourceModule: .smartScan,
                 action: .openCleanupReview(
                     categories: categories.filter { $0.sourceModule == .systemJunk },
-                    title: "Free Disk Space"
+                    title: String(localized: "Free Disk Space")
                 ),
                 estimatedRecoverableBytes: categories.reduce(0) { $0 + $1.totalSize }
             ))
@@ -147,34 +147,34 @@ final class SmartScanViewModel {
 
         // Caches recommendation (only if there's meaningful junk).
         let cacheCats = categories.filter {
-            $0.title == "Old Caches" || $0.title == "Old Logs"
+            $0.kind == .oldCaches || $0.kind == .oldLogs
         }
         let cacheBytes = cacheCats.reduce(Int64(0)) { $0 + $1.totalSize }
         if cacheBytes > 500_000_000 {
             recs.append(.init(
-                title: "Clean Old Caches & Logs",
-                description: "Found \(cacheBytes.compactBytes) of caches and logs unused for a while. Safe to remove.",
+                title: String(localized: "Clean Old Caches & Logs"),
+                description: String(localized: "Found \(cacheBytes.compactBytes) of caches and logs unused for a while. Safe to remove."),
                 severity: cacheBytes > 5_000_000_000 ? .warning : .info,
                 sourceModule: .systemJunk,
                 action: .openCleanupReview(
                     categories: cacheCats,
-                    title: "Clean Caches & Logs"
+                    title: String(localized: "Clean Caches & Logs")
                 ),
                 estimatedRecoverableBytes: cacheBytes
             ))
         }
 
         // Old installers (.dmg/.pkg)
-        if let installers = categories.first(where: { $0.title == "Old Installers" }),
+        if let installers = categories.first(where: { $0.kind == .oldInstallers }),
            installers.totalSize > 200_000_000 {
             recs.append(.init(
-                title: "Remove Old Installers",
-                description: "Old .dmg / .pkg installers totalling \(installers.totalSize.compactBytes) — these can usually be re-downloaded.",
+                title: String(localized: "Remove Old Installers"),
+                description: String(localized: "Old .dmg / .pkg installers totalling \(installers.totalSize.compactBytes) — these can usually be re-downloaded."),
                 severity: .info,
                 sourceModule: .systemJunk,
                 action: .openCleanupReview(
                     categories: [installers],
-                    title: "Remove Old Installers"
+                    title: String(localized: "Remove Old Installers")
                 ),
                 estimatedRecoverableBytes: installers.totalSize
             ))
@@ -183,8 +183,8 @@ final class SmartScanViewModel {
         // Lots of apps installed
         if appCount > 100 {
             recs.append(.init(
-                title: "Review Installed Apps",
-                description: "You have \(appCount) applications installed. Removing unused ones can free space and reduce background activity.",
+                title: String(localized: "Review Installed Apps"),
+                description: String(localized: "You have \(appCount) applications installed. Removing unused ones can free space and reduce background activity."),
                 severity: .info,
                 sourceModule: .appUninstaller,
                 action: .openModule(.appUninstaller),

@@ -43,7 +43,7 @@ struct JunkCategoryRow: View {
                         .foregroundStyle(Theme.textMuted)
                         .lineLimit(1)
                 }
-                Text("\(category.itemCount) \(category.itemCount == 1 ? "item" : "items") · \(category.selectedCount) selected")
+                Text("\(category.itemCount) items · \(category.selectedCount) selected")
                     .font(.system(size: 10))
                     .foregroundStyle(Theme.textMuted)
             }

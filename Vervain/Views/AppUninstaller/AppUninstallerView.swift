@@ -215,7 +215,7 @@ struct AppUninstallerView: View {
     private var uninstallBar: some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(vm.selectedIDs.count) app\(vm.selectedIDs.count == 1 ? "" : "s") selected")
+                Text("\(vm.selectedIDs.count) apps selected")
                     .font(.system(size: 12, weight: .medium)).foregroundStyle(Theme.textSecondary)
                 Text(vm.totalSelectedSize.formattedBytes)
                     .font(.system(size: 16, weight: .bold, design: .rounded)).foregroundStyle(Theme.appUninstallerAccent)

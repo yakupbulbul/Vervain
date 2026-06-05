@@ -84,7 +84,7 @@ struct AboutView: View {
         .padding(.vertical, 14)
     }
 
-    private func linkRow(icon: String, label: String, url: String) -> some View {
+    private func linkRow(icon: String, label: LocalizedStringKey, url: String) -> some View {
         Button {
             if let u = URL(string: url) { NSWorkspace.shared.open(u) }
         } label: {

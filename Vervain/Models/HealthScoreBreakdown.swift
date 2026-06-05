@@ -35,14 +35,14 @@ struct HealthScoreBreakdown: Sendable {
 
             var displayText: String {
                 switch self {
-                case .junkOver1GB(let b):   return "Over 1 GB of junk found (\(b.compactBytes))"
-                case .junkOver5GB(let b):   return "Over 5 GB of junk found (\(b.compactBytes))"
-                case .junkOver10GB(let b):  return "Over 10 GB of junk found (\(b.compactBytes))"
-                case .diskOver80(let p):    return "Disk is \(p)% full"
-                case .diskOver90(let p):    return "Disk is \(p)% full — critically low"
-                case .manyApps(let c):      return "\(c) applications installed"
-                case .manyLeftovers(let c): return "\(c) leftover items from uninstalled apps"
-                case .oldDownloads(let b):  return "\(b.compactBytes) of old downloads"
+                case .junkOver1GB(let b):   return String(localized: "Over 1 GB of junk found (\(b.compactBytes))")
+                case .junkOver5GB(let b):   return String(localized: "Over 5 GB of junk found (\(b.compactBytes))")
+                case .junkOver10GB(let b):  return String(localized: "Over 10 GB of junk found (\(b.compactBytes))")
+                case .diskOver80(let p):    return String(localized: "Disk is \(p)% full")
+                case .diskOver90(let p):    return String(localized: "Disk is \(p)% full — critically low")
+                case .manyApps(let c):      return String(localized: "\(c) applications installed")
+                case .manyLeftovers(let c): return String(localized: "\(c) leftover items from uninstalled apps")
+                case .oldDownloads(let b):  return String(localized: "\(b.compactBytes) of old downloads")
                 }
             }
 
@@ -107,8 +107,8 @@ struct HealthScoreBreakdown: Sendable {
         let final = max(0, base - totalDeducted)
         let tier = HealthScore(value: final).tier
         let explanation: String = deductions.isEmpty
-            ? "Your Mac is in great shape — no significant issues found."
-            : "\(deductions.count) issue\(deductions.count == 1 ? "" : "s") found that affect your score."
+            ? String(localized: "Your Mac is in great shape — no significant issues found.")
+            : String(localized: "\(deductions.count) issues found that affect your score.")
 
         return HealthScoreBreakdown(
             baseScore: base,

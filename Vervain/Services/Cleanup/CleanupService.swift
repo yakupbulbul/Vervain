@@ -152,9 +152,9 @@ struct CleanupFailure: Sendable, Identifiable {
 
         var displayText: String {
             switch self {
-            case .permissionDenied:  return "Permission denied"
-            case .notFound:          return "File no longer exists"
-            case .fileInUse:         return "File is in use"
+            case .permissionDenied:  return String(localized: "Permission denied")
+            case .notFound:          return String(localized: "File no longer exists")
+            case .fileInUse:         return String(localized: "File is in use")
             case .other(let m):      return m
             }
         }

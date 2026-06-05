@@ -122,7 +122,7 @@ struct SystemJunkView: View {
     private var bottomBar: some View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(vm.totalSelectedCount) item\(vm.totalSelectedCount == 1 ? "" : "s") selected")
+                Text("\(vm.totalSelectedCount) items selected")
                     .font(.caption).foregroundStyle(Theme.textSecondary)
                 HStack(spacing: 6) {
                     Text(vm.totalSelectedSize.formattedBytes)
@@ -150,7 +150,7 @@ struct SystemJunkView: View {
     private var inaccessibleBanner: some View {
         HStack(spacing: 10) {
             Image(systemName: "lock.fill").foregroundStyle(Theme.fdaBannerAccent)
-            Text("\(vm.metadata.inaccessibleCount) folder\(vm.metadata.inaccessibleCount == 1 ? " was" : "s were") inaccessible — grant Full Disk Access for complete results.")
+            Text("\(vm.metadata.inaccessibleCount) folders were inaccessible — grant Full Disk Access for complete results.")
                 .font(.caption).foregroundStyle(Theme.textSecondary)
             Spacer()
         }

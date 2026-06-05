@@ -135,6 +135,7 @@ final class DiskAnalyzerViewModel {
         }
         guard !items.isEmpty else { return [] }
         return [CleanupCategory(
+            kind: .largeFiles,
             title: "Large Files",
             subtitle: "User-owned files — review carefully before removing",
             icon: "doc.zipper",
