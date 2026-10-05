@@ -27,7 +27,7 @@ def find_child_group(s, parent_id, name):
     for line in m.group(2).splitlines():
         cm = re.match(r"\t+([0-9A-F]{24}) /\* (.*) \*/,", line)
         if cm and cm.group(2) == name:
-            body = re.search(r"\t\t%s /\*.*?\*/ = \{\n\t\t\tisa = PBXGroup;.*?\n\t\t\};" % cm.group(1), s, re.S)
+            body = re.search(r"^\t\t%s /\*[^*]*\*/ = \{\n\t\t\tisa = PBXGroup;.*?\n\t\t\};" % cm.group(1), s, re.S | re.M)
             if body and "path = %s;" % name in body.group(0):
                 return cm.group(1)
     return None

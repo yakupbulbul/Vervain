@@ -318,7 +318,6 @@
 				39940F8EB8BD7EF196F2480C /* ExclusionList.swift */,
 				CBC212C41466CCBC66AFE471 /* LoginItem.swift */,
 				6E8C763E02EAB518337D3AB4 /* TrashedItem.swift */,
-				D351593BD18C93F05627E83C /* Cleanup */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -346,14 +345,12 @@
 				2D28D00936EE3BD785FEA342 /* SystemJunk */,
 				6621A21B973F4B0D84D7C82C /* About */,
 				6587E435689598A28F6F82EE /* Settings */,
-				39F6F30968F9FD85AE321EB5 /* Shared */,
 				52778CABFCC5B9D44BB547FD /* LargeFiles */,
 				C6B40EB52B5F36EA5DF40456 /* Duplicates */,
 				02EB31970C98B47C0668FF98 /* Privacy */,
 				8EECD1AB3C67344AA7378E3B /* LoginItems */,
 				92790C3AB67C451CB4A66163 /* MenuBar */,
 				59AA45812AF8406B16C1D7FC /* History */,
-				39F6F30968F9FD85AE321EB5 /* Shared */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -491,6 +488,8 @@
 		D18A15E6D4B763B76B4A34B1 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2BB9A96D8BBD8576D67C3E36 /* ModuleScanView.swift */,
+				E8E8275A463B4EA83A831BAC /* ItemActions.swift */,
 				86A94BA422B9696F2F6DCE21 /* DoneView.swift */,
 				12886648D5489FFE73D0F3EB /* FeatureToolbar.swift */,
 				F6CFC69969E13F905E4493A7 /* FullDiskAccessBanner.swift */,
@@ -521,6 +520,7 @@
 		F9F01EE06562DF8641E5BC90 /* Cleanup */ = {
 			isa = PBXGroup;
 			children = (
+				C32B2235DDBFA90105CE7CEF /* ReviewFilter.swift */,
 				D48324FC861F3CC710AA704D /* CleanupCategory.swift */,
 				4689E00FD56AB04B20435ADE /* CleanupConfidenceLevel.swift */,
 				C1388EAC19AA6EA1D5261AAB /* CleanupItem.swift */,
@@ -531,15 +531,6 @@
 				40DAE31E5506F0D7FD9EE512 /* CleanupCategoryKind.swift */,
 			);
 			path = Cleanup;
-			sourceTree = "<group>";
-		};
-		39F6F30968F9FD85AE321EB5 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				2BB9A96D8BBD8576D67C3E36 /* ModuleScanView.swift */,
-				E8E8275A463B4EA83A831BAC /* ItemActions.swift */,
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		52778CABFCC5B9D44BB547FD /* LargeFiles */ = {
@@ -588,21 +579,6 @@
 				6684F9F40D32307B79DFFD31 /* HistoryView.swift */,
 			);
 			path = History;
-			sourceTree = "<group>";
-		};
-		D351593BD18C93F05627E83C /* Cleanup */ = {
-			isa = PBXGroup;
-			children = (
-				C32B2235DDBFA90105CE7CEF /* ReviewFilter.swift */,
-			);
-			path = Cleanup;
-			sourceTree = "<group>";
-		};
-		39F6F30968F9FD85AE321EB5 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
