@@ -1,5 +1,7 @@
 # Vervain — Phase 0 Audit
 
+> **Historical document.** This describes the pre-1.0 baseline (28 files); the risks below were fixed in later phases. The v2 safety work (path guard in `CleanupService`, AppScanner/JunkScanner hardening) is tracked in the v2 plan and commit history.
+
 **Baseline:** `main` @ `0e5d3ad` · 28 Swift files · macOS 15 · Swift 6 strict concurrency · BUILD SUCCEEDED · 0 warnings
 
 ## Inventory

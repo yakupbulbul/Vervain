@@ -125,7 +125,8 @@ This is out of scope for the current release and explicitly **not** added withou
 Run through this before every tag:
 
 - [ ] `xcodebuild ... test` — all unit tests pass
-- [ ] `grep -r "removeItem\|unlink\b" Vervain/` — must return no hits except inside `CleanupService` (currently: zero hits anywhere — only `trashItem` is used)
+- [ ] `grep -rn "NSAppleScript\|Process()" Vervain/` — must return no hits
+- [ ] `grep -r "removeItem\|unlink\b" Vervain/` — must return no hits except inside `CleanupService` (currently: zero hits anywhere — only `trashItem` / `NSWorkspace.recycle` are used)
 - [ ] `grep -r "Process()\|URLSession\|URLRequest" Vervain/` — should be empty (no network, no shell)
 - [ ] Onboarding sheet promises still match behavior
 - [ ] AUDIT.md risk register has no new red rows
@@ -142,7 +143,7 @@ $ grep -rn "Process()\|URLSession\|URLRequest" Vervain/
 # (no output — clean)
 ```
 
-All deletion goes through `CleanupService.execute()` which calls `FileManager.trashItem` exclusively. There is no network code in the entire codebase. The only `NSWorkspace.shared.open` calls are:
+All deletion goes through `CleanupService.execute()` which calls `FileManager.trashItem` (with an `NSWorkspace.recycle` fallback for items that need authorization) exclusively. There is no network code in the entire codebase. The only `NSWorkspace.shared.open` calls are:
 1. `FullDiskAccessProbe.openSystemSettings()` — `x-apple.systempreferences:` deep link
 2. `SystemJunkView.openTrash()` / `CleanupDoneView.openTrash()` — open `~/.Trash`
 

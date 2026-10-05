@@ -109,7 +109,7 @@ Vervain automatically uses your Mac's system language, or you can choose a diffe
 
 ## Three Promises
 
-1. **Nothing gets permanently deleted.** Every cleanup goes through `trashItem`. You can always restore from Trash.
+1. **Nothing gets permanently deleted.** Every cleanup moves items to the Trash. You can always restore from Trash.
 2. **Nothing gets cleaned without your say-so.** Every module goes through a review → confirm → clean flow. Risky items are never pre-selected.
 3. **Nothing leaves your Mac.** No analytics, no accounts, no network calls. Zero.
 
@@ -130,7 +130,7 @@ Vervain works without Full Disk Access — it just skips protected folders and t
 
 ## How It's Built
 
-Swift 6 with strict concurrency. SwiftUI for the UI, actor-isolated services for file system work, `@Observable` view models on the main actor. The only deletion primitive in the entire codebase is `FileManager.trashItem`, called from a single `CleanupService` — everything else routes through it.
+Swift 6 with strict concurrency. SwiftUI for the UI, actor-isolated services for file system work, `@Observable` view models on the main actor. The only deletion primitives in the entire codebase are `FileManager.trashItem` and `NSWorkspace.recycle` (both move items to the Trash), called from a single `CleanupService` — everything else routes through it. No AppleScript and no shell commands are used.
 
 The `CleanupCoordinator` owns the review flow state machine (idle → reviewing → confirming → executing → done) and is shared across all modules.
 
@@ -144,7 +144,7 @@ The `CleanupCoordinator` owns the review flow state machine (idle → reviewing 
 
 ## Contributing
 
-Pull requests are welcome. If you're adding a new cleanup module, all deletion must go through `CleanupService.trashItem` — this is how the safety model works. Items need a risk level and a confidence level so the review UI can make good default selections.
+Pull requests are welcome. If you're adding a new cleanup module, all deletion must go through `CleanupService` — this is how the safety model works. Items need a risk level and a confidence level so the review UI can make good default selections.
 
 Have a look at `CleanupSelectionPolicy` to understand which items get pre-selected and which don't.
 
