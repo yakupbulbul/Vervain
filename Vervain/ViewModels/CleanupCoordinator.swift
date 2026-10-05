@@ -16,17 +16,6 @@ final class CleanupCoordinator {
         case confirming
         case executing
         case done
-
-        static func == (lhs: State, rhs: State) -> Bool {
-            switch (lhs, rhs) {
-            case (.idle, .idle), (.reviewing, .reviewing),
-                 (.confirming, .confirming), (.executing, .executing),
-                 (.done, .done):
-                return true
-            default:
-                return false
-            }
-        }
     }
 
     var state: State = .idle
@@ -36,7 +25,7 @@ final class CleanupCoordinator {
     var errorMessage: String?
 
     /// Title shown in the review header — set by the calling module.
-    var presentationTitle: String = "Review Cleanup"
+    var presentationTitle: String = String(localized: "Review Cleanup")
 
     /// True if the review sheet should be presented.
     var isReviewPresented: Bool {
@@ -79,7 +68,7 @@ final class CleanupCoordinator {
 
     /// Module entry point: opens the universal review sheet with these
     /// categories pre-loaded.
-    func startReview(_ categories: [CleanupCategory], title: String = "Review Cleanup", onComplete: (() -> Void)? = nil) {
+    func startReview(_ categories: [CleanupCategory], title: String = String(localized: "Review Cleanup"), onComplete: (() -> Void)? = nil) {
         self.onComplete = onComplete
         self.categories = categories
         self.presentationTitle = title
