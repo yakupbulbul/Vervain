@@ -1,8 +1,14 @@
 name: Strings report
 
-# Run by hand (Actions → Strings report → Run workflow). Exports Xcode's view
-# of every localizable string and prints the ones that lack a translation.
-on: workflow_dispatch
+# Exports Xcode's view of every localizable string and prints the ones that
+# lack a translation. Runs when this file changes, or by hand from the
+# Actions tab once it exists on the default branch.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/strings-report.yml"
+      - "scripts/untranslated.py"
 
 permissions:
   contents: read
