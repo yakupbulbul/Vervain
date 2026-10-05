@@ -124,6 +124,11 @@
 		585E2E73D64B60F2BCB9B792 /* ScanRoots.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B0425594FFE4C5244DD35 /* ScanRoots.swift */; };
 		6E73FC738BAA1E06792F5610 /* DuplicateKeepRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B6494D62E17EF678FC46A /* DuplicateKeepRule.swift */; };
 		C6F44D8FF8C96D8B19EB320A /* OrphanedDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C56838F81566593EBF5D96 /* OrphanedDataView.swift */; };
+		7CC821FCC506582735A9171F /* AutomationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99A0319052C7A662DC38237 /* AutomationTests.swift */; };
+		A684F312A4CA11F4D5646902 /* DiskMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582C716A44E7D22202E22D /* DiskMonitor.swift */; };
+		C2AE25A01F0767871E0958D2 /* MemoryUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA56FF3A08F2FDE5EC6A327 /* MemoryUsage.swift */; };
+		B19EFCE7A3CB171B546E010E /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA887C1CB28DB2A66977290 /* LaunchAtLogin.swift */; };
+		F6633370BF93E59534BA724C /* VervainIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E84170DC67FA99F0BD075E /* VervainIntents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,6 +271,11 @@
 		EB8B0425594FFE4C5244DD35 /* ScanRoots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanRoots.swift; sourceTree = "<group>"; };
 		CE5B6494D62E17EF678FC46A /* DuplicateKeepRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateKeepRule.swift; sourceTree = "<group>"; };
 		23C56838F81566593EBF5D96 /* OrphanedDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrphanedDataView.swift; sourceTree = "<group>"; };
+		A99A0319052C7A662DC38237 /* AutomationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationTests.swift; sourceTree = "<group>"; };
+		80582C716A44E7D22202E22D /* DiskMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskMonitor.swift; sourceTree = "<group>"; };
+		7BA56FF3A08F2FDE5EC6A327 /* MemoryUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUsage.swift; sourceTree = "<group>"; };
+		4CA887C1CB28DB2A66977290 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
+		E6E84170DC67FA99F0BD075E /* VervainIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VervainIntents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -308,6 +318,7 @@
 				2BEB18C4C39CA508EC52D72D /* DiskAnalyzerTests.swift */,
 				D6893D60D75D04E7E81784E7 /* OrphanDataScannerTests.swift */,
 				BEA0270E1842AD14F29463FC /* ScanRootsTests.swift */,
+				A99A0319052C7A662DC38237 /* AutomationTests.swift */,
 			);
 			path = VervainTests;
 			sourceTree = "<group>";
@@ -407,6 +418,9 @@
 				67B5D769C10C5E477B4DA023 /* CleanupHistoryStore.swift */,
 				9E87A27FD8E70E8C5FB3D47C /* ReportExporter.swift */,
 				153D434337B15D9664DF1E7E /* OrphanDataScanner.swift */,
+				80582C716A44E7D22202E22D /* DiskMonitor.swift */,
+				7BA56FF3A08F2FDE5EC6A327 /* MemoryUsage.swift */,
+				4CA887C1CB28DB2A66977290 /* LaunchAtLogin.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -546,6 +560,7 @@
 				45B485C4ACB5B08C1B87917F /* Views */,
 				FB05F0EB89FE996D5DDF3286 /* Localizable.xcstrings */,
 				FDC77E7649B6BC2B4B9CC7B0 /* InfoPlist.xcstrings */,
+				A16B88BF9CFAE77EC36155FC /* Intents */,
 			);
 			path = Vervain;
 			sourceTree = "<group>";
@@ -620,6 +635,14 @@
 				23C56838F81566593EBF5D96 /* OrphanedDataView.swift */,
 			);
 			path = Orphans;
+			sourceTree = "<group>";
+		};
+		A16B88BF9CFAE77EC36155FC /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				E6E84170DC67FA99F0BD075E /* VervainIntents.swift */,
+			);
+			path = Intents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -831,6 +854,10 @@
 				585E2E73D64B60F2BCB9B792 /* ScanRoots.swift in Sources */,
 				6E73FC738BAA1E06792F5610 /* DuplicateKeepRule.swift in Sources */,
 				C6F44D8FF8C96D8B19EB320A /* OrphanedDataView.swift in Sources */,
+				A684F312A4CA11F4D5646902 /* DiskMonitor.swift in Sources */,
+				C2AE25A01F0767871E0958D2 /* MemoryUsage.swift in Sources */,
+				B19EFCE7A3CB171B546E010E /* LaunchAtLogin.swift in Sources */,
+				F6633370BF93E59534BA724C /* VervainIntents.swift in Sources */,
 				F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */,
 				6E6E0F0D8D11AF6A3047C388 /* Theme.swift in Sources */,
 				9BF49DB56B3AEC55F6E74A35 /* CleanupCategoryKind.swift in Sources */,
@@ -863,6 +890,7 @@
 				6FF1BE28B579E144B8F03F83 /* DiskAnalyzerTests.swift in Sources */,
 				5DB21467AC53127B7865FA0D /* OrphanDataScannerTests.swift in Sources */,
 				D7C640CB23C8DF56543021D6 /* ScanRootsTests.swift in Sources */,
+				7CC821FCC506582735A9171F /* AutomationTests.swift in Sources */,
 				2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* CleanupServiceSafetyTests.swift in Sources */,
 				E4EECC430E06D628D7D9810B /* CleanupSelectionPolicyTests.swift in Sources */,

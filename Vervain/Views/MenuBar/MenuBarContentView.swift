@@ -5,6 +5,8 @@ import SwiftUI
 struct MenuBarContentView: View {
     @Environment(SystemJunkViewModel.self) private var junk
     @State private var usage = DiskUsage.current()
+    @State private var memory = MemoryUsage.current()
+    @State private var topApps: [AppMemory] = []
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -17,6 +19,32 @@ struct MenuBarContentView: View {
                         .font(.caption).foregroundStyle(.secondary)
                     Text("\(usage.available.formattedBytes) available")
                         .font(.caption).foregroundStyle(.secondary)
+                }
+            }
+
+            if let memory {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Memory").font(.headline)
+                    ProgressView(value: memory.usedFraction)
+                        .tint(memory.usedFraction > 0.9 ? Theme.statusRisky : Theme.smartScanAccent)
+                    Text("\(Int64(memory.used).formattedBytes) of \(Int64(memory.total).formattedBytes) in use")
+                        .font(.caption).foregroundStyle(.secondary)
+                    ForEach(topApps) { app in
+                        HStack {
+                            Text(app.name).font(.caption).lineLimit(1)
+                            Spacer()
+                            Text(Int64(app.bytes).compactBytes).font(.caption).foregroundStyle(.secondary)
+                            Button {
+                                NSRunningApplication(processIdentifier: app.pid)?.terminate()
+                                refresh()
+                            } label: {
+                                Image(systemName: "xmark.circle")
+                            }
+                            .buttonStyle(.borderless)
+                            .help("Quit \(app.name)")
+                            .accessibilityLabel("Quit \(app.name)")
+                        }
+                    }
                 }
             }
 
@@ -40,7 +68,13 @@ struct MenuBarContentView: View {
         }
         .padding(14)
         .frame(width: 270)
-        .onAppear { usage = DiskUsage.current() }
+        .onAppear { refresh() }
+    }
+
+    private func refresh() {
+        usage = DiskUsage.current()
+        memory = MemoryUsage.current()
+        topApps = AppMemory.topApps()
     }
 
     private static func showMainWindow() {

@@ -30,6 +30,10 @@ struct ContentView: View {
         }
         .navigationSplitViewStyle(.prominentDetail)
         .onChange(of: nav.rescanTick) { _, _ in rescanCurrentModule() }
+        .onReceive(NotificationCenter.default.publisher(for: NotificationRouter.startScanNotification)) { _ in
+            nav.selected = .smartScan
+            smartScanVM.startScan()
+        }
         .toolbar(removing: .sidebarToggle)
         .onAppear {
             // Force-hide any toolbar the system adds (sidebar toggle)

@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 @main
 struct VervainApp: App {
@@ -29,7 +30,12 @@ struct VervainApp: App {
                 .environment(nav)
                 .environment(cleanupCoord)
                 .environment(fdaVM)
-                .task { fdaVM.refresh() }
+                .task {
+                    fdaVM.refresh()
+                    UNUserNotificationCenter.current().delegate = NotificationRouter.shared
+                    DiskMonitor.shared.start()
+                    if UserDefaults.standard.bool(forKey: "scanOnLaunch") { smartScanVM.startScan() }
+                }
                 .sheet(isPresented: $showAbout) {
                     AboutView()
                 }
