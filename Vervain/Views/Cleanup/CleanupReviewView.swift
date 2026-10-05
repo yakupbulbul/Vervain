@@ -7,6 +7,8 @@ struct CleanupReviewView: View {
 
     @State private var expanded: Set<UUID> = []
     @State private var showAllItems: Set<UUID> = []
+    @State private var filter = ReviewFilter()
+    @FocusState private var searchFocused: Bool
 
     private static let maxVisibleItems = 200
 
@@ -61,9 +63,15 @@ struct CleanupReviewView: View {
                 .font(.title3.bold())
             Spacer()
             if displayedState == .reviewing {
-                Button("Reset Defaults") { coord.resetToDefaults() }
-                    .buttonStyle(.bordered).controlSize(.small)
-                    .foregroundStyle(Theme.textPrimary)
+                Menu("Select") {
+                    Button("Only Safe Items") { coord.selectOnlySafe() }
+                    Button("Clear Selection") { coord.clearSelection() }
+                    Divider()
+                    Button("Reset Defaults") { coord.resetToDefaults() }
+                }
+                .menuStyle(.borderlessButton)
+                .fixedSize()
+                .foregroundStyle(Theme.textPrimary)
             }
             Button {
                 coord.cancel()
@@ -75,32 +83,72 @@ struct CleanupReviewView: View {
                     .background(Theme.divider, in: Circle())
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Close")
         }
         .padding(.horizontal, 20).padding(.vertical, 14)
+    }
+
+    // MARK: - Search / sort / filter
+
+    private var filterBar: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "magnifyingglass").foregroundStyle(Theme.textMuted)
+            TextField("Search name or path", text: $filter.query)
+                .textFieldStyle(.plain)
+                .focused($searchFocused)
+                .accessibilityIdentifier("review-search")
+            if !filter.query.isEmpty {
+                Button { filter.query = "" } label: {
+                    Image(systemName: "xmark.circle.fill").foregroundStyle(Theme.textMuted)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Clear search")
+            }
+            Picker("Type", selection: $filter.kind) {
+                ForEach(ReviewFilter.FileKind.allCases) { Text($0.label).tag($0) }
+            }
+            .labelsHidden().fixedSize()
+            Picker("Sort", selection: $filter.sort) {
+                ForEach(ReviewFilter.Sort.allCases) { Text($0.label).tag($0) }
+            }
+            .labelsHidden().fixedSize()
+            // ⌘F focuses the search field.
+            Button("") { searchFocused = true }
+                .keyboardShortcut("f", modifiers: .command)
+                .frame(width: 0, height: 0).opacity(0)
+                .accessibilityHidden(true)
+        }
+        .padding(.horizontal, 16).padding(.vertical, 8)
+        .background(Theme.surfaceOverlay)
     }
 
     // MARK: - Review body
 
     private var reviewBody: some View {
         VStack(spacing: 0) {
+            filterBar
+            Divider().background(Theme.divider)
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(coord.categories) { category in
-                        categoryHeader(category)
-                        if expanded.contains(category.id) {
-                            let showAll = showAllItems.contains(category.id)
-                            let visible = showAll
-                                ? category.items
-                                : Array(category.items.prefix(Self.maxVisibleItems))
-                            ForEach(visible) { item in
-                                CleanupItemRow(item: item) {
-                                    coord.toggleItem(categoryID: category.id, itemID: item.id)
+                        let matching = filter.apply(to: category.items)
+                        if !filter.isActive || !matching.isEmpty {
+                            categoryHeader(category, matching: matching)
+                            if expanded.contains(category.id) || filter.isActive {
+                                let showAll = showAllItems.contains(category.id)
+                                let visible = showAll
+                                    ? matching
+                                    : Array(matching.prefix(Self.maxVisibleItems))
+                                ForEach(visible) { item in
+                                    CleanupItemRow(item: item) {
+                                        coord.toggleItem(categoryID: category.id, itemID: item.id)
+                                    }
+                                    .background(Theme.surfaceOverlay)
+                                    Divider().background(Theme.divider)
                                 }
-                                .background(Theme.surfaceOverlay)
-                                Divider().background(Theme.divider)
-                            }
-                            if !showAll && category.items.count > Self.maxVisibleItems {
-                                showMoreButton(category: category)
+                                if !showAll && matching.count > Self.maxVisibleItems {
+                                    showMoreButton(category: category, total: matching.count)
+                                }
                             }
                         }
                     }
@@ -111,8 +159,8 @@ struct CleanupReviewView: View {
         }
     }
 
-    private func showMoreButton(category: CleanupCategory) -> some View {
-        let remaining = category.items.count - Self.maxVisibleItems
+    private func showMoreButton(category: CleanupCategory, total: Int) -> some View {
+        let remaining = total - Self.maxVisibleItems
         return Button {
             showAllItems.insert(category.id)
         } label: {
@@ -129,8 +177,8 @@ struct CleanupReviewView: View {
         .background(Theme.surfaceOverlay)
     }
 
-    private func categoryHeader(_ category: CleanupCategory) -> some View {
-        let isOpen = expanded.contains(category.id)
+    private func categoryHeader(_ category: CleanupCategory, matching: [CleanupItem]) -> some View {
+        let isOpen = expanded.contains(category.id) || filter.isActive
         return HStack(spacing: 12) {
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -145,7 +193,15 @@ struct CleanupReviewView: View {
             }
             .buttonStyle(.plain)
 
-            Button { coord.toggleCategory(category.id) } label: {
+            Button {
+                if filter.isActive {
+                    // Only touch what the filter is showing.
+                    let ids = Set(matching.map(\.id))
+                    coord.setSelected(!matching.allSatisfy(\.isSelected), ids: ids)
+                } else {
+                    coord.toggleCategory(category.id)
+                }
+            } label: {
                 Image(systemName: category.allSelected
                       ? "checkmark.circle.fill"
                       : (category.noneSelected ? "circle" : "minus.circle.fill"))
@@ -156,6 +212,7 @@ struct CleanupReviewView: View {
                     .font(.system(size: 16))
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Select category \(category.title)")
 
             Image(systemName: category.icon)
                 .foregroundStyle(Theme.textSecondary)
@@ -226,12 +283,15 @@ struct CleanupReviewView: View {
             Spacer()
             Button("Cancel") { coord.cancel() }
                 .buttonStyle(.bordered).foregroundStyle(Theme.textPrimary)
+                .keyboardShortcut(.cancelAction)
             Button(coord.hasAnyRiskySelected || coord.hasAnyReviewSelected
                    ? "Continue…" : "Clean \(coord.totalSelectedSize.compactBytes)") {
                 coord.confirm()
             }
             .buttonStyle(.borderedProminent).tint(Theme.systemJunkAccent)
+            .keyboardShortcut(.defaultAction)
             .disabled(coord.totalSelectedSize == 0)
+            .accessibilityIdentifier("review-confirm")
         }
         .padding(.horizontal, 20).padding(.vertical, 14)
     }

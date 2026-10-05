@@ -27,6 +27,15 @@ struct SystemJunkView: View {
             ProgressView().controlSize(.small).tint(Theme.systemJunkAccent)
         case .results:
             HStack(spacing: 8) {
+                Menu("Export…") {
+                    Button("CSV") {
+                        ReportExporter.save(categories: vm.categories, title: "System Junk", format: .csv)
+                    }
+                    Button("Markdown") {
+                        ReportExporter.save(categories: vm.categories, title: "System Junk", format: .markdown)
+                    }
+                }
+                .menuStyle(.borderlessButton).fixedSize()
                 Button("Reset Defaults") { vm.resetToDefaults() }
                     .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
                 Button("Re-Scan") { vm.scan() }

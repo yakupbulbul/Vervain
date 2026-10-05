@@ -378,6 +378,8 @@ struct DiskNodeRow: View {
         .padding(.vertical, 6)
         .contentShape(Rectangle())
         .cursor(node.isDirectory ? .pointingHand : .arrow)
+        .itemContextMenu(url: node.url)
+        .accessibilityElement(children: .combine)
     }
 }
 
@@ -394,6 +396,9 @@ struct LargeFileRow: View {
                     .font(.system(size: 16))
             }
             .buttonStyle(.plain)
+            .accessibilityLabel(isSelected
+                                ? String(localized: "Deselect \(node.name)")
+                                : String(localized: "Select \(node.name)"))
 
             Image(systemName: "doc.fill")
                 .foregroundStyle(Theme.textMuted)
@@ -416,6 +421,7 @@ struct LargeFileRow: View {
         .padding(.vertical, 4)
         .contentShape(Rectangle())
         .onTapGesture { onToggle() }
+        .itemContextMenu(url: node.url)
     }
 }
 

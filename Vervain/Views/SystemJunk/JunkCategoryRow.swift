@@ -24,6 +24,9 @@ struct JunkCategoryRow: View {
                     .font(.system(size: 18))
             }
             .buttonStyle(.plain)
+            .accessibilityLabel(isSelected
+                                ? String(localized: "Deselect \(category.title)")
+                                : String(localized: "Select \(category.title)"))
 
             Image(systemName: category.icon)
                 .font(.system(size: 16))

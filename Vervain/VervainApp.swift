@@ -10,6 +10,7 @@ struct VervainApp: App {
     @State private var loginItemsVM     = LoginItemsViewModel()
     @State private var moduleStore      = ModuleScanStore()
     @State private var historyVM        = HistoryViewModel()
+    @State private var nav              = NavigationModel()
     @State private var cleanupCoord     = CleanupCoordinator()
     @State private var fdaVM            = FullDiskAccessViewModel()
     @State private var showOnboarding   = !OnboardingView.hasShown
@@ -25,6 +26,7 @@ struct VervainApp: App {
                 .environment(loginItemsVM)
                 .environment(moduleStore)
                 .environment(historyVM)
+                .environment(nav)
                 .environment(cleanupCoord)
                 .environment(fdaVM)
                 .task { fdaVM.refresh() }
@@ -49,6 +51,15 @@ struct VervainApp: App {
             CommandGroup(replacing: .newItem) {}
             CommandGroup(replacing: .appInfo) {
                 Button("About Vervain") { showAbout = true }
+            }
+            CommandMenu("Go") {
+                ForEach(Array(AppFeature.allCases.prefix(9).enumerated()), id: \.element) { index, feature in
+                    Button(feature.displayName) { nav.selected = feature }
+                        .keyboardShortcut(KeyEquivalent(Character(String(index + 1))), modifiers: .command)
+                }
+                Divider()
+                Button("Rescan") { nav.requestRescan() }
+                    .keyboardShortcut("r", modifiers: .command)
             }
         }
 

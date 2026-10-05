@@ -269,6 +269,9 @@ struct AppRow: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
+            .accessibilityLabel(isSelected
+                                ? String(localized: "Deselect \(app.name)")
+                                : String(localized: "Select \(app.name)"))
 
             // App icon
             AppIconView(appURL: app.url)

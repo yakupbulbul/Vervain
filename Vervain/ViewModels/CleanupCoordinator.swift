@@ -195,6 +195,28 @@ final class CleanupCoordinator {
         }
     }
 
+    /// Sets the selection of exactly these items, leaving the rest untouched.
+    func setSelected(_ selected: Bool, ids: Set<UUID>) {
+        for c in categories.indices {
+            for i in categories[c].items.indices where ids.contains(categories[c].items[i].id) {
+                categories[c].items[i].isSelected = selected
+            }
+        }
+    }
+
+    /// Selects every item whose risk is `.safe` and nothing else.
+    func selectOnlySafe() {
+        for c in categories.indices {
+            for i in categories[c].items.indices {
+                categories[c].items[i].isSelected = categories[c].items[i].riskLevel == .safe
+            }
+        }
+    }
+
+    func clearSelection() {
+        for c in categories.indices { categories[c].deselectAll() }
+    }
+
     func resetToDefaults() {
         for idx in categories.indices { categories[idx].resetToDefaults() }
     }

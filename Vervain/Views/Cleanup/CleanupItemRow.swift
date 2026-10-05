@@ -15,6 +15,10 @@ struct CleanupItemRow: View {
                     .font(.system(size: 16))
             }
             .buttonStyle(.plain)
+            .accessibilityLabel(item.isSelected
+                                ? String(localized: "Deselect \(item.name)")
+                                : String(localized: "Select \(item.name)"))
+            .accessibilityIdentifier("cleanup-item-checkbox")
 
             // Confidence dot
             Circle()
@@ -59,6 +63,7 @@ struct CleanupItemRow: View {
         .padding(.horizontal, 16)
         .contentShape(Rectangle())
         .onTapGesture(perform: onToggle)
+        .itemContextMenu(url: item.url)
     }
 
     @ViewBuilder

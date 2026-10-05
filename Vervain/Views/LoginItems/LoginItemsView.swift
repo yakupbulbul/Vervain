@@ -62,6 +62,9 @@ struct LoginItemsView: View {
                         .font(.system(size: 18))
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(vm.selectedIDs.contains(item.id)
+                                    ? String(localized: "Deselect \(item.label)")
+                                    : String(localized: "Select \(item.label)"))
             } else {
                 Image(systemName: "lock.fill").foregroundStyle(Theme.textFaint).frame(width: 18)
             }
@@ -84,8 +87,10 @@ struct LoginItemsView: View {
             }
             .buttonStyle(.borderless)
             .help("Reveal in Finder")
+            .accessibilityLabel("Reveal in Finder")
         }
         .padding(.vertical, 2)
+        .itemContextMenu(url: item.plistURL, allowExclude: false)
     }
 
     private var bottomBar: some View {

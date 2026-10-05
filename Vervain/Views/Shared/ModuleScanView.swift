@@ -62,8 +62,21 @@ struct ModuleScanView<Options: View>: View {
         case .scanning:
             ProgressView().controlSize(.small).tint(accent)
         case .results:
-            Button("Re-Scan") { vm.scan() }
-                .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
+            HStack(spacing: 8) {
+                if !vm.categories.isEmpty {
+                    Menu("Export…") {
+                        Button("CSV") {
+                            ReportExporter.save(categories: vm.categories, title: reviewTitle, format: .csv)
+                        }
+                        Button("Markdown") {
+                            ReportExporter.save(categories: vm.categories, title: reviewTitle, format: .markdown)
+                        }
+                    }
+                    .menuStyle(.borderlessButton).fixedSize()
+                }
+                Button("Re-Scan") { vm.scan() }
+                    .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
+            }
         default:
             Button(scanButtonTitle) { vm.scan() }
                 .buttonStyle(.borderedProminent).tint(accent)
