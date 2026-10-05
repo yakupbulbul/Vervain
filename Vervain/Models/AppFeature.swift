@@ -5,6 +5,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     case systemJunk
     case appUninstaller
     case diskAnalyzer
+    case largeOldFiles
 
     var id: String { rawValue }
 
@@ -14,6 +15,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .systemJunk:     return String(localized: "System Junk")
         case .appUninstaller: return String(localized: "App Uninstaller")
         case .diskAnalyzer:   return String(localized: "Disk Analyzer")
+        case .largeOldFiles:  return String(localized: "Large & Old Files")
         }
     }
 
@@ -23,6 +25,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .systemJunk:     return "arrow.3.trianglepath"
         case .appUninstaller: return "leaf.arrow.circlepath"
         case .diskAnalyzer:   return "tree.fill"
+        case .largeOldFiles:  return "doc.badge.clock"
         }
     }
 
@@ -32,6 +35,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .systemJunk:     return Theme.systemJunkAccent
         case .appUninstaller: return Theme.appUninstallerAccent
         case .diskAnalyzer:   return Theme.diskAnalyzerAccent
+        case .largeOldFiles:  return Theme.largeFilesAccent
         }
     }
 
@@ -41,6 +45,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .systemJunk:     return String(localized: "Recycle unused files")
         case .appUninstaller: return String(localized: "Gently remove apps")
         case .diskAnalyzer:   return String(localized: "See what's growing")
+        case .largeOldFiles:  return String(localized: "Find forgotten giants")
         }
     }
 }

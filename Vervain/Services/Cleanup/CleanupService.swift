@@ -50,6 +50,13 @@ actor CleanupService {
                 ))
                 continue
             }
+            guard !ExclusionList.isExcluded(item.url) else {
+                failures.append(CleanupFailure(
+                    item: item,
+                    reason: .other(message: String(localized: "Excluded in Settings"))
+                ))
+                continue
+            }
             do {
                 // Try FileManager first (works for user-owned files)
                 try fm.trashItem(at: item.url, resultingItemURL: nil)

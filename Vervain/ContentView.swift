@@ -4,6 +4,9 @@ struct ContentView: View {
     @Binding var showAbout: Bool
     @State private var selectedFeature: AppFeature? = .smartScan
     @Environment(FullDiskAccessViewModel.self) private var fda
+    @State private var largeFilesVM = ModuleScanViewModel {
+        try await LargeFilesScanner().scan(config: LargeFilesConfig.fromDefaults())
+    }
 
     var body: some View {
         NavigationSplitView(columnVisibility: .constant(.all)) {
@@ -46,6 +49,8 @@ struct ContentView: View {
             AppUninstallerView()
         case .diskAnalyzer:
             DiskAnalyzerView()
+        case .largeOldFiles:
+            LargeFilesView(vm: largeFilesVM)
         }
     }
 }

@@ -78,3 +78,53 @@ func directoryStats(at url: URL) -> DirectoryStats {
     stats.inaccessibleCount = counter.count
     return stats
 }
+
+/// Walks `base` recursively and calls `handle` for every regular,
+/// non-symlink file. Packages (e.g. `.app`, `.photoslibrary`) are not entered.
+/// Folders that cannot be read are returned as `ScanError`s instead of
+/// being silently dropped. Throws `CancellationError` if the task is cancelled.
+func walkRegularFiles(
+    at base: URL,
+    keys: Set<URLResourceKey>,
+    skipHidden: Bool = true,
+    handle: (URL, URLResourceValues) throws -> Void
+) throws -> [ScanError] {
+    let fm = FileManager.default
+    guard fm.fileExists(atPath: base.path) else { return [] }
+
+    final class ErrorBox: @unchecked Sendable { var errors: [ScanError] = [] }
+    let box = ErrorBox()
+
+    var allKeys = keys
+    allKeys.insert(.isRegularFileKey)
+    allKeys.insert(.isSymbolicLinkKey)
+
+    var options: FileManager.DirectoryEnumerationOptions = [.skipsPackageDescendants]
+    if skipHidden { options.insert(.skipsHiddenFiles) }
+
+    guard let enumerator = fm.enumerator(
+        at: base,
+        includingPropertiesForKeys: Array(allKeys),
+        options: options,
+        errorHandler: { url, _ in
+            box.errors.append(ScanError(path: url.path, reason: .permissionDenied))
+            return true
+        }
+    ) else { return [] }
+
+    while let next = enumerator.nextObject() {
+        try Task.checkCancellation()
+        guard let url = next as? URL,
+              let rv = try? url.resourceValues(forKeys: allKeys) else { continue }
+        guard rv.isSymbolicLink != true, rv.isRegularFile == true else { continue }
+        try handle(url, rv)
+    }
+    return box.errors
+}
+
+/// The user folders that hold personal files. Shared by the Large & Old Files
+/// and Duplicates scanners.
+func personalFolderRoots(home: URL = FileManager.default.homeDirectoryForCurrentUser) -> [URL] {
+    ["Downloads", "Documents", "Desktop", "Movies", "Music", "Pictures"]
+        .map { home.appendingPathComponent($0) }
+}

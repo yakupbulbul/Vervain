@@ -70,7 +70,7 @@ final class CleanupCoordinator {
     /// categories pre-loaded.
     func startReview(_ categories: [CleanupCategory], title: String = String(localized: "Review Cleanup"), onComplete: (() -> Void)? = nil) {
         self.onComplete = onComplete
-        self.categories = categories
+        self.categories = ModuleScanViewModel.applyExclusions(categories, excluded: ExclusionList.paths())
         self.presentationTitle = title
         self.progress = nil
         self.result = nil
