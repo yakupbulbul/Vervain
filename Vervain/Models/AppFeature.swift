@@ -8,6 +8,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     case largeOldFiles
     case duplicates
     case privacy
+    case loginItems
 
     var id: String { rawValue }
 
@@ -20,6 +21,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .largeOldFiles:  return String(localized: "Large & Old Files")
         case .duplicates:     return String(localized: "Duplicates")
         case .privacy:        return String(localized: "Privacy")
+        case .loginItems:     return String(localized: "Login Items")
         }
     }
 
@@ -32,6 +34,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .largeOldFiles:  return "doc.badge.clock"
         case .duplicates:     return "square.on.square"
         case .privacy:        return "hand.raised.fill"
+        case .loginItems:     return "power"
         }
     }
 
@@ -44,6 +47,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .largeOldFiles:  return Theme.largeFilesAccent
         case .duplicates:     return Theme.duplicatesAccent
         case .privacy:        return Theme.privacyAccent
+        case .loginItems:     return Theme.loginItemsAccent
         }
     }
 
@@ -56,6 +60,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .largeOldFiles:  return String(localized: "Find forgotten giants")
         case .duplicates:     return String(localized: "Keep one, free the rest")
         case .privacy:        return String(localized: "Clear browsing traces")
+        case .loginItems:     return String(localized: "Review what starts at login")
         }
     }
 }

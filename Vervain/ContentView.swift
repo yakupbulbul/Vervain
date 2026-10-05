@@ -61,6 +61,8 @@ struct ContentView: View {
             DuplicatesView(vm: duplicatesVM)
         case .privacy:
             PrivacyView(vm: privacyVM)
+        case .loginItems:
+            LoginItemsView()
         }
     }
 }

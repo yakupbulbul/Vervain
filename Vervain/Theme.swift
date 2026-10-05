@@ -84,6 +84,9 @@ enum Theme {
     /// Privacy — deep teal (discretion).
     static let privacyAccent = Color(red: 0.20, green: 0.46, blue: 0.50)
 
+    /// Login Items — ochre (startup, energy).
+    static let loginItemsAccent = Color(red: 0.62, green: 0.50, blue: 0.20)
+
     /// Large & Old Files — slate blue (settled, forgotten).
     static let largeFilesAccent = Color(red: 0.36, green: 0.50, blue: 0.62)
 
