@@ -24,6 +24,15 @@ jobs:
       - name: Install create-dmg
         run: brew install create-dmg
 
+      - name: Run unit tests
+        run: |
+          xcodebuild test \
+            -project Vervain.xcodeproj \
+            -scheme Vervain \
+            -destination 'platform=macOS' \
+            -only-testing:VervainTests \
+            CODE_SIGNING_ALLOWED=NO
+
       - name: Import Developer ID certificate
         env:
           CERTIFICATE_P12: ${{ secrets.DEVELOPER_ID_APPLICATION_CERT }}
