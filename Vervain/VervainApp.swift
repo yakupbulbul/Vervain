@@ -8,6 +8,7 @@ struct VervainApp: App {
     @State private var appUninstallerVM = AppUninstallerViewModel()
     @State private var diskAnalyzerVM   = DiskAnalyzerViewModel()
     @State private var loginItemsVM     = LoginItemsViewModel()
+    @State private var moduleStore      = ModuleScanStore()
     @State private var cleanupCoord     = CleanupCoordinator()
     @State private var fdaVM            = FullDiskAccessViewModel()
     @State private var showOnboarding   = !OnboardingView.hasShown
@@ -21,6 +22,7 @@ struct VervainApp: App {
                 .environment(appUninstallerVM)
                 .environment(diskAnalyzerVM)
                 .environment(loginItemsVM)
+                .environment(moduleStore)
                 .environment(cleanupCoord)
                 .environment(fdaVM)
                 .task { fdaVM.refresh() }

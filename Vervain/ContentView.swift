@@ -4,15 +4,7 @@ struct ContentView: View {
     @Binding var showAbout: Bool
     @State private var selectedFeature: AppFeature? = .smartScan
     @Environment(FullDiskAccessViewModel.self) private var fda
-    @State private var privacyVM = ModuleScanViewModel {
-        try await PrivacyScanner().scan()
-    }
-    @State private var duplicatesVM = ModuleScanViewModel {
-        try await DuplicateScanner().scan()
-    }
-    @State private var largeFilesVM = ModuleScanViewModel {
-        try await LargeFilesScanner().scan(config: LargeFilesConfig.fromDefaults())
-    }
+    @Environment(ModuleScanStore.self) private var modules
 
     var body: some View {
         NavigationSplitView(columnVisibility: .constant(.all)) {
@@ -56,11 +48,11 @@ struct ContentView: View {
         case .diskAnalyzer:
             DiskAnalyzerView()
         case .largeOldFiles:
-            LargeFilesView(vm: largeFilesVM)
+            LargeFilesView(vm: modules.largeFiles)
         case .duplicates:
-            DuplicatesView(vm: duplicatesVM)
+            DuplicatesView(vm: modules.duplicates)
         case .privacy:
-            PrivacyView(vm: privacyVM)
+            PrivacyView(vm: modules.privacy)
         case .loginItems:
             LoginItemsView()
         }

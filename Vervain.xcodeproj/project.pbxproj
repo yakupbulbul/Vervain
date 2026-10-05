@@ -97,6 +97,7 @@
 		FFADB5F259455B9D59D2E46F /* ReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F02F724D763A521F0BAE5E /* ReminderScheduler.swift */; };
 		C6B11EF4D739492A83A932E6 /* UpdateCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4559643B3BF66437BF242EA /* UpdateCheckerTests.swift */; };
 		F502B068F2B6C82268B2E1AB /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889D66DD8C8353B3B7F58E9 /* UpdateChecker.swift */; };
+		0D358704965E57024C16CFF0 /* ModuleScanStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594707F501477A34DF9C012 /* ModuleScanStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -212,6 +213,7 @@
 		03F02F724D763A521F0BAE5E /* ReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderScheduler.swift; sourceTree = "<group>"; };
 		D4559643B3BF66437BF242EA /* UpdateCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheckerTests.swift; sourceTree = "<group>"; };
 		7889D66DD8C8353B3B7F58E9 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
+		D594707F501477A34DF9C012 /* ModuleScanStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleScanStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -408,6 +410,7 @@
 				0B58940879213198AAB30244 /* SystemJunkViewModel.swift */,
 				98E359530800AFED9A6D854B /* ModuleScanViewModel.swift */,
 				DE4B6FE247029B41D3634475 /* LoginItemsViewModel.swift */,
+				D594707F501477A34DF9C012 /* ModuleScanStore.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -727,6 +730,7 @@
 				49D7239C985AAAD81FF9CA62 /* MenuBarContentView.swift in Sources */,
 				FFADB5F259455B9D59D2E46F /* ReminderScheduler.swift in Sources */,
 				F502B068F2B6C82268B2E1AB /* UpdateChecker.swift in Sources */,
+				0D358704965E57024C16CFF0 /* ModuleScanStore.swift in Sources */,
 				F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */,
 				6E6E0F0D8D11AF6A3047C388 /* Theme.swift in Sources */,
 				9BF49DB56B3AEC55F6E74A35 /* CleanupCategoryKind.swift in Sources */,
