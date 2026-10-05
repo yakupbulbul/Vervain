@@ -30,7 +30,7 @@ def main() -> None:
                 continue
             loc[lang] = {"stringUnit": {"state": "translated", "value": value}}
             updated += 1
-    CATALOG.write_text(json.dumps(catalog, ensure_ascii=False, indent=2, sort_keys=True, separators=(",", " : ")) + "\n")
+    CATALOG.write_text(json.dumps(catalog, ensure_ascii=False, indent=2, sort_keys=True))
     print(f"added {added} keys, wrote {updated} translations")
 
 
