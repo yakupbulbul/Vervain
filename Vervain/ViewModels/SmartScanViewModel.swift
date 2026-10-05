@@ -40,6 +40,7 @@ final class SmartScanViewModel {
     private let junkScanner = JunkScanner()
     private let diskService = DiskAnalyzerService()
     private let appScanner  = AppScanner()
+    private let privacyScanner = PrivacyScanner()
     private var scanTask: Task<Void, Never>?
 
     func startScan() {
@@ -68,6 +69,11 @@ final class SmartScanViewModel {
 
             guard !Task.isCancelled else { return }
 
+            // Browser caches feed a recommendation only; a failure here
+            // must not fail the whole Smart Scan.
+            let browserCacheCats = ((try? await privacyScanner.scan())?.categories ?? [])
+                .filter { $0.kind == .browserCaches }
+
             let total = cats.reduce(Int64(0)) { $0 + $1.totalSize }
             let summary = cats.map { (title: $0.title, icon: $0.icon, size: $0.totalSize) }
 
@@ -93,6 +99,7 @@ final class SmartScanViewModel {
             self.breakdown    = breakdown
             recommendations   = buildRecommendations(
                 categories: cats,
+                browserCacheCategories: browserCacheCats,
                 diskFraction: diskFraction,
                 appCount: installedApps.count
             )
@@ -109,9 +116,10 @@ final class SmartScanViewModel {
     // MARK: - Recommendations
 
     /// Build the top-N actionable suggestions surfaced as cards in Smart Scan.
-    /// Currently emits up to 3, prioritised by severity then recoverable size.
+    /// Currently emits up to 4, prioritised by severity then recoverable size.
     private func buildRecommendations(
         categories: [CleanupCategory],
+        browserCacheCategories: [CleanupCategory] = [],
         diskFraction: Double,
         appCount: Int
     ) -> [SmartRecommendation] {
@@ -180,6 +188,42 @@ final class SmartScanViewModel {
             ))
         }
 
+        // Browser caches (Privacy module)
+        let browserCacheBytes = browserCacheCategories.reduce(Int64(0)) { $0 + $1.totalSize }
+        if browserCacheBytes > 200_000_000 {
+            recs.append(.init(
+                title: String(localized: "Clear Browser Caches"),
+                description: String(localized: "Browsers are holding \(browserCacheBytes.compactBytes) of cached pages and images. They rebuild this automatically."),
+                severity: .info,
+                sourceModule: .privacy,
+                action: .openCleanupReview(
+                    categories: browserCacheCategories,
+                    title: String(localized: "Clear Browser Caches")
+                ),
+                estimatedRecoverableBytes: browserCacheBytes
+            ))
+        }
+
+        // Disk getting full: point at the modules that find the big wins.
+        if diskFraction > 0.80 {
+            recs.append(.init(
+                title: String(localized: "Find Large & Old Files"),
+                description: String(localized: "Big files you have not opened in months are often the quickest way to free space."),
+                severity: .info,
+                sourceModule: .largeOldFiles,
+                action: .openModule(.largeOldFiles),
+                estimatedRecoverableBytes: 0
+            ))
+            recs.append(.init(
+                title: String(localized: "Look for Duplicates"),
+                description: String(localized: "Identical copies of the same file may be taking up space twice."),
+                severity: .info,
+                sourceModule: .duplicates,
+                action: .openModule(.duplicates),
+                estimatedRecoverableBytes: 0
+            ))
+        }
+
         // Lots of apps installed
         if appCount > 100 {
             recs.append(.init(
@@ -192,13 +236,13 @@ final class SmartScanViewModel {
             ))
         }
 
-        // Sort: severity desc, then size desc; take top 3.
+        // Sort: severity desc, then size desc; take top 4.
         return recs
             .sorted { lhs, rhs in
                 if lhs.severity != rhs.severity { return lhs.severity > rhs.severity }
                 return lhs.estimatedRecoverableBytes > rhs.estimatedRecoverableBytes
             }
-            .prefix(3)
+            .prefix(4)
             .map { $0 }
     }
 
