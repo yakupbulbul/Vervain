@@ -6,6 +6,8 @@ struct SettingsView: View {
     @AppStorage("weeklyReminder") private var weeklyReminder = false
     @State private var needsRestart = false
     @State private var exclusions = ExclusionList.paths()
+    @State private var updateOutcome: UpdateChecker.Outcome?
+    @State private var isCheckingForUpdates = false
 
     var body: some View {
         Form {
@@ -60,6 +62,20 @@ struct SettingsView: View {
             }
 
             Section {
+                HStack {
+                    Button("Check for Updates…") { checkForUpdates() }
+                        .disabled(isCheckingForUpdates)
+                    if isCheckingForUpdates { ProgressView().controlSize(.small) }
+                    Spacer()
+                    updateStatus
+                }
+            } header: {
+                Text("Updates")
+            } footer: {
+                Text("Vervain only contacts the network when you press this button.")
+            }
+
+            Section {
                 if exclusions.isEmpty {
                     Text("Nothing is excluded.")
                         .font(.callout).foregroundStyle(.secondary)
@@ -88,6 +104,31 @@ struct SettingsView: View {
         }
         .formStyle(.grouped)
         .frame(width: 460)
+    }
+
+    @ViewBuilder
+    private var updateStatus: some View {
+        switch updateOutcome {
+        case .upToDate:
+            Text("You are up to date.").font(.callout).foregroundStyle(.secondary)
+        case .available(let version, let url):
+            Link("Version \(version) is available", destination: url).font(.callout)
+        case .failed:
+            Text("Could not check for updates.").font(.callout).foregroundStyle(.secondary)
+        case nil:
+            EmptyView()
+        }
+    }
+
+    private func checkForUpdates() {
+        isCheckingForUpdates = true
+        updateOutcome = nil
+        let current = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0"
+        Task {
+            let outcome = await UpdateChecker.check(current: current)
+            updateOutcome = outcome
+            isCheckingForUpdates = false
+        }
     }
 
     private func chooseFolders() {
