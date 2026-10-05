@@ -36,6 +36,11 @@ final class VervainUITests: XCTestCase {
     /// Dismiss the "Welcome to Vervain" onboarding sheet if it's visible.
     private func dismissOnboardingIfPresent() {
         let getStarted = app.buttons["Get Started"]
+        let skip = app.buttons["Skip Tour"]
+        if skip.waitForExistence(timeout: 3) {
+            skip.click()
+            return
+        }
         if getStarted.waitForExistence(timeout: 3) {
             getStarted.click()
             // Wait for sheet to dismiss

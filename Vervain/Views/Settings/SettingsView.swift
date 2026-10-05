@@ -10,6 +10,8 @@ struct SettingsView: View {
     @AppStorage(LowDiskPolicy.thresholdKey) private var lowDiskThreshold = LowDiskPolicy.defaultThreshold
     @AppStorage("scanOnLaunch") private var scanOnLaunch = false
     @State private var launchAtLogin = LaunchAtLogin.isEnabled
+    @AppStorage(CleanupCoordinator.alwaysConfirmKey) private var alwaysConfirm = false
+    @State private var fda = FullDiskAccessViewModel()
     @State private var needsRestart = false
     @State private var exclusions = ExclusionList.paths()
     @State private var extraRoots = ScanRoots.extras()
@@ -56,6 +58,26 @@ struct SettingsView: View {
 
             Section("Menu Bar") {
                 Toggle("Show disk usage in the menu bar", isOn: $showMenuBarExtra)
+            }
+
+            Section {
+                HStack {
+                    Image(systemName: fda.status == .likelyGranted ? "checkmark.circle.fill" : "exclamationmark.circle")
+                        .foregroundStyle(fda.status == .likelyGranted ? Color.green : Color.orange)
+                    Text(fda.status == .likelyGranted
+                         ? "Full Disk Access appears granted"
+                         : "Full Disk Access is not granted yet")
+                    Spacer()
+                    Button("Open System Settings") { fda.openSystemSettings() }
+                }
+                Toggle("Always ask me to confirm before cleaning", isOn: $alwaysConfirm)
+                Button("Show Welcome Tour Again") {
+                    NotificationCenter.default.post(name: OnboardingView.replayNotification, object: nil)
+                }
+            } header: {
+                Text("Safety")
+            } footer: {
+                Text("Items marked risky or review always need confirmation.")
             }
 
             Section("Startup") {
@@ -171,11 +193,17 @@ struct SettingsView: View {
             } header: {
                 Text("Excluded Folders")
             } footer: {
-                Text("Vervain never offers files in these folders for cleanup.")
+                Text("Vervain never offers files in these folders for cleanup. You can also drop folders here.")
+            }
+            .dropDestination(for: URL.self) { urls, _ in
+                for url in urls { ExclusionList.add(url.path) }
+                exclusions = ExclusionList.paths()
+                return !urls.isEmpty
             }
         }
         .formStyle(.grouped)
-        .frame(width: 460)
+        .frame(width: 480, minHeight: 420, maxHeight: 700)
+        .task { fda.refresh() }
     }
 
     @ViewBuilder

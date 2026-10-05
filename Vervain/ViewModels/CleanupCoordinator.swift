@@ -18,6 +18,9 @@ final class CleanupCoordinator {
         case done
     }
 
+    /// "Always ask me to confirm" in Settings.
+    static let alwaysConfirmKey = "alwaysConfirmCleanup"
+
     var state: State = .idle
     var categories: [CleanupCategory] = []
     var progress: CleanupProgress?
@@ -85,7 +88,8 @@ final class CleanupCoordinator {
     /// User pressed "Clean N items" on the review screen.
     /// Routes to a confirmation sheet if anything risky is selected.
     func confirm() {
-        if hasAnyRiskySelected || hasAnyReviewSelected {
+        let alwaysConfirm = UserDefaults.standard.bool(forKey: Self.alwaysConfirmKey)
+        if alwaysConfirm || hasAnyRiskySelected || hasAnyReviewSelected {
             state = .confirming
         } else {
             executeNow()

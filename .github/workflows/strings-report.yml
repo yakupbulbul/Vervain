@@ -1,0 +1,26 @@
+name: Strings report
+
+# Run by hand (Actions → Strings report → Run workflow). Exports Xcode's view
+# of every localizable string and prints the ones that lack a translation.
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Export localizations
+        run: |
+          xcodebuild -exportLocalizations \
+            -project Vervain.xcodeproj \
+            -localizationPath build/loc \
+            -exportLanguage tr -exportLanguage de -exportLanguage es \
+            -exportLanguage fr -exportLanguage zh-Hans \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: List untranslated strings
+        run: python3 scripts/untranslated.py build/loc || true

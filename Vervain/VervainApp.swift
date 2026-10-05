@@ -36,11 +36,15 @@ struct VervainApp: App {
                     DiskMonitor.shared.start()
                     if UserDefaults.standard.bool(forKey: "scanOnLaunch") { smartScanVM.startScan() }
                 }
+                .onReceive(NotificationCenter.default.publisher(for: OnboardingView.replayNotification)) { _ in
+                    showOnboarding = true
+                }
                 .sheet(isPresented: $showAbout) {
                     AboutView()
                 }
                 .sheet(isPresented: $showOnboarding) {
                     OnboardingView(isPresented: $showOnboarding)
+                        .environment(fdaVM)
                 }
                 .sheet(isPresented: Binding(
                     get: { cleanupCoord.isReviewPresented },
@@ -57,6 +61,11 @@ struct VervainApp: App {
             CommandGroup(replacing: .newItem) {}
             CommandGroup(replacing: .appInfo) {
                 Button("About Vervain") { showAbout = true }
+            }
+            CommandGroup(after: .help) {
+                Button("Welcome Tour") {
+                    NotificationCenter.default.post(name: OnboardingView.replayNotification, object: nil)
+                }
             }
             CommandMenu("Go") {
                 ForEach(Array(AppFeature.allCases.prefix(9).enumerated()), id: \.element) { index, feature in
