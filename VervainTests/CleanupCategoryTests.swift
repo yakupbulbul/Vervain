@@ -24,7 +24,7 @@ final class CleanupCategoryTests: XCTestCase {
 
     func test_totalSize_sumsAllItems() {
         let cat = CleanupCategory(
-            title: "Test", icon: "doc", sourceModule: .systemJunk,
+            kind: .oldCaches, title: "Test", icon: "doc", sourceModule: .systemJunk,
             items: [
                 makeItem(risk: .safe, size: 100),
                 makeItem(risk: .safe, size: 200),
@@ -35,7 +35,7 @@ final class CleanupCategoryTests: XCTestCase {
 
     func test_selectedSize_onlyCountsSelected() {
         var cat = CleanupCategory(
-            title: "Test", icon: "doc", sourceModule: .systemJunk,
+            kind: .oldCaches, title: "Test", icon: "doc", sourceModule: .systemJunk,
             items: [
                 makeItem(risk: .safe, size: 100),  // auto-on
                 makeItem(risk: .risky, size: 200), // auto-off
@@ -49,7 +49,7 @@ final class CleanupCategoryTests: XCTestCase {
 
     func test_toggleItem_flipsSingleItem() {
         var cat = CleanupCategory(
-            title: "Test", icon: "doc", sourceModule: .systemJunk,
+            kind: .oldCaches, title: "Test", icon: "doc", sourceModule: .systemJunk,
             items: [makeItem(risk: .safe)])
         XCTAssertTrue(cat.items[0].isSelected, "Safe/high auto-on")
         cat.toggle(itemID: cat.items[0].id)
@@ -58,7 +58,7 @@ final class CleanupCategoryTests: XCTestCase {
 
     func test_resetToDefaults_appliesPolicy() {
         var cat = CleanupCategory(
-            title: "Test", icon: "doc", sourceModule: .systemJunk,
+            kind: .oldCaches, title: "Test", icon: "doc", sourceModule: .systemJunk,
             items: [
                 makeItem(risk: .risky),  // off
                 makeItem(risk: .safe),   // on
@@ -72,7 +72,7 @@ final class CleanupCategoryTests: XCTestCase {
 
     func test_maxSelectedRisk_returnsHighest() {
         var cat = CleanupCategory(
-            title: "Test", icon: "doc", sourceModule: .systemJunk,
+            kind: .oldCaches, title: "Test", icon: "doc", sourceModule: .systemJunk,
             items: [
                 makeItem(risk: .safe),
                 makeItem(risk: .review),
