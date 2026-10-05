@@ -10,6 +10,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     case privacy
     case loginItems
     case history
+    case orphanedData
 
     var id: String { rawValue }
 
@@ -24,6 +25,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .privacy:        return String(localized: "Privacy")
         case .loginItems:     return String(localized: "Login Items")
         case .history:        return String(localized: "History")
+        case .orphanedData:   return String(localized: "Leftovers")
         }
     }
 
@@ -38,6 +40,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .privacy:        return "hand.raised.fill"
         case .loginItems:     return "power"
         case .history:        return "clock.arrow.circlepath"
+        case .orphanedData:   return "archivebox"
         }
     }
 
@@ -52,6 +55,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .privacy:        return Theme.privacyAccent
         case .loginItems:     return Theme.loginItemsAccent
         case .history:        return Theme.smartScanAccent
+        case .orphanedData:   return Theme.appUninstallerAccent
         }
     }
 
@@ -66,6 +70,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .privacy:        return String(localized: "Clear browsing traces")
         case .loginItems:     return String(localized: "Review what starts at login")
         case .history:        return String(localized: "Undo and review cleanups")
+        case .orphanedData:   return String(localized: "Data of removed apps")
         }
     }
 }

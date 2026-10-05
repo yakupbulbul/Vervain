@@ -6,6 +6,7 @@ struct SettingsView: View {
     @AppStorage("weeklyReminder") private var weeklyReminder = false
     @State private var needsRestart = false
     @State private var exclusions = ExclusionList.paths()
+    @State private var extraRoots = ScanRoots.extras()
     @State private var updateOutcome: UpdateChecker.Outcome?
     @State private var isCheckingForUpdates = false
 
@@ -76,6 +77,29 @@ struct SettingsView: View {
             }
 
             Section {
+                ForEach(extraRoots, id: \.self) { path in
+                    HStack {
+                        Text(CleanupItem.makeDisplayPath(url: URL(fileURLWithPath: path)))
+                            .lineLimit(1).truncationMode(.middle)
+                        Spacer()
+                        Button {
+                            ScanRoots.remove(path)
+                            extraRoots = ScanRoots.extras()
+                        } label: {
+                            Image(systemName: "minus.circle")
+                        }
+                        .buttonStyle(.borderless)
+                        .accessibilityLabel("Stop scanning this folder")
+                    }
+                }
+                Button("Add Folder…") { chooseScanFolders() }
+            } header: {
+                Text("Extra Folders to Scan")
+            } footer: {
+                Text("Large & Old Files and Duplicates also look in these folders, next to Downloads, Documents, Desktop, Movies, Music and Pictures.")
+            }
+
+            Section {
                 if exclusions.isEmpty {
                     Text("Nothing is excluded.")
                         .font(.callout).foregroundStyle(.secondary)
@@ -129,6 +153,17 @@ struct SettingsView: View {
             updateOutcome = outcome
             isCheckingForUpdates = false
         }
+    }
+
+    private func chooseScanFolders() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.allowsMultipleSelection = true
+        panel.prompt = String(localized: "Scan")
+        guard panel.runModal() == .OK else { return }
+        for url in panel.urls { ScanRoots.add(url.path) }
+        extraRoots = ScanRoots.extras()
     }
 
     private func chooseFolders() {

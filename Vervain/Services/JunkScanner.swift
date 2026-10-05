@@ -360,6 +360,10 @@ actor JunkScanner {
                   title: "pnpm Cache",
                   reason: .custom("JavaScript package cache — re-downloaded on install"),
                   risk: .safe, confidence: .high),
+            .init(path: "Library/Application Support/MobileSync/Backup",
+                  title: "iPhone & iPad Backups",
+                  reason: .custom("Local device backups — the only copy if you do not use iCloud Backup"),
+                  risk: .risky, confidence: .high),
             .init(path: "Library/Developer/Xcode/UserData/IB Support",
                   title: String(localized: "Interface Builder Cache"),
                   reason: .custom("Interface Builder support files — recreated on demand"),
@@ -368,6 +372,7 @@ actor JunkScanner {
 
         var devItems: [CleanupItem] = []
         var packageItems: [CleanupItem] = []
+        var backupItems: [CleanupItem] = []
 
         for target in targets {
             try Task.checkCancellation()
@@ -390,7 +395,9 @@ actor JunkScanner {
             let devMarkers = ["Developer", "Android", "docker", ".gradle", ".cargo", ".m2",
                               "go-build", "JetBrains"]
             let isDev = devMarkers.contains { target.path.contains($0) }
-            if isDev {
+            if target.path.contains("MobileSync") {
+                backupItems.append(item)
+            } else if isDev {
                 devItems.append(item)
             } else {
                 packageItems.append(item)
@@ -417,6 +424,16 @@ actor JunkScanner {
                 icon: "shippingbox.fill",
                 sourceModule: .systemJunk,
                 items: packageItems.sorted { $0.size > $1.size }
+            ))
+        }
+        if !backupItems.isEmpty {
+            cats.append(CleanupCategory(
+                kind: .deviceBackups,
+                title: String(localized: "Device Backups"),
+                subtitle: String(localized: "Old iPhone and iPad backups — review carefully"),
+                icon: "iphone",
+                sourceModule: .systemJunk,
+                items: backupItems
             ))
         }
         return ScanProduct(categories: cats, meta: meta)

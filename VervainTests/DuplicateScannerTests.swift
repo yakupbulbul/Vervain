@@ -71,3 +71,54 @@ final class DuplicateScannerTests: XCTestCase {
         XCTAssertTrue(cats.flatMap(\.items).allSatisfy { !$0.isSelected })
     }
 }
+
+final class DuplicateKeepRuleTests: XCTestCase {
+
+    private var root: URL!
+
+    override func setUpWithError() throws {
+        root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("vervain-keep-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: root.appendingPathComponent("deep/er"), withIntermediateDirectories: true)
+    }
+
+    override func tearDownWithError() throws {
+        try? FileManager.default.removeItem(at: root)
+    }
+
+    private func write(_ relative: String, daysOld: Int) throws {
+        let url = root.appendingPathComponent(relative)
+        try Data(repeating: 4, count: 2_000).write(to: url)
+        try FileManager.default.setAttributes(
+            [.modificationDate: Date(timeIntervalSinceNow: -Double(daysOld) * 86_400)], ofItemAtPath: url.path)
+    }
+
+    func testNewestRuleKeepsTheNewestCopy() async throws {
+        try write("old.bin", daysOld: 100)
+        try write("new.bin", daysOld: 1)
+        let (cats, _) = try await DuplicateScanner().scan(roots: [root], minSize: 1_000, keepRule: .newest)
+        XCTAssertEqual(cats.first?.items.map(\.name), ["old.bin"])
+    }
+
+    func testShallowestRuleKeepsTheCopyClosestToTheRoot() async throws {
+        try write("top.bin", daysOld: 1)
+        try write("deep/er/nested.bin", daysOld: 500)
+        let (cats, _) = try await DuplicateScanner().scan(roots: [root], minSize: 1_000, keepRule: .shortestPath)
+        XCTAssertEqual(cats.first?.items.map(\.name), ["nested.bin"])
+    }
+
+    func testHardLinksAreNotReportedAsDuplicates() async throws {
+        try write("original.bin", daysOld: 10)
+        try FileManager.default.linkItem(at: root.appendingPathComponent("original.bin"),
+                                         to: root.appendingPathComponent("hardlink.bin"))
+        let (cats, _) = try await DuplicateScanner().scan(roots: [root], minSize: 1_000)
+        XCTAssertTrue(cats.isEmpty, "a hard link frees no space when trashed")
+    }
+
+    func testRuleOrdering() {
+        let early = Date(timeIntervalSince1970: 1_000), late = Date(timeIntervalSince1970: 2_000)
+        XCTAssertTrue(DuplicateKeepRule.oldest.isBetterToKeep("/a", early, than: "/b", late))
+        XCTAssertTrue(DuplicateKeepRule.newest.isBetterToKeep("/a", late, than: "/b", early))
+        XCTAssertTrue(DuplicateKeepRule.shortestPath.isBetterToKeep("/a", late, than: "/a/b/c", early))
+    }
+}

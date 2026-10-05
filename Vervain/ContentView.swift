@@ -52,6 +52,7 @@ struct ContentView: View {
         case .duplicates:        modules.duplicates.scan()
         case .privacy:           modules.privacy.scan()
         case .loginItems:        loginItemsVM.scan()
+        case .orphanedData:      modules.orphans.scan()
         case .history:           break
         }
     }
@@ -79,6 +80,8 @@ struct ContentView: View {
             LoginItemsView()
         case .history:
             HistoryView()
+        case .orphanedData:
+            OrphanedDataView(vm: modules.orphans)
         }
     }
 }

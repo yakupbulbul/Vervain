@@ -15,4 +15,6 @@ enum CleanupCategoryKind: String, Sendable {
     case duplicates
     case browserCaches, browserHistory, browserCookies
     case launchAgents
+    case orphanedData
+    case deviceBackups
 }

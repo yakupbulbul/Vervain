@@ -16,14 +16,32 @@ actor DuplicateScanner {
         let url: URL
         let size: Int64
         let modified: Date
+        /// Identifies the underlying file; hard links share it.
+        let identifier: (any NSObjectProtocol)?
+
+        var path: String { url.path }
+    }
+
+    /// Drops entries that are hard links to a file already in the list:
+    /// trashing one frees nothing, so it is not a real duplicate.
+    private static func uniqueFiles(_ group: [Entry]) -> [Entry] {
+        var unique: [Entry] = []
+        for entry in group {
+            if let id = entry.identifier,
+               unique.contains(where: { $0.identifier?.isEqual(id) == true }) { continue }
+            unique.append(entry)
+        }
+        return unique
     }
 
     func scan(
         roots: [URL]? = nil,
-        minSize: Int64? = nil
+        minSize: Int64? = nil,
+        keepRule: DuplicateKeepRule? = nil
     ) async throws -> (categories: [CleanupCategory], metadata: ScanMetadata) {
-        let roots = roots ?? personalFolderRoots()
+        let roots = roots ?? ScanRoots.all()
         let minSize = minSize ?? Self.minSizeBytes
+        let keepRule = keepRule ?? .oldest
         let started = Date()
         var meta = ScanMetadata()
         var bySize: [Int64: [Entry]] = [:]
@@ -32,12 +50,14 @@ actor DuplicateScanner {
         for root in roots {
             let errors = try walkRegularFiles(
                 at: root,
-                keys: [.fileSizeKey, .contentModificationDateKey]
+                keys: [.fileSizeKey, .contentModificationDateKey, .fileResourceIdentifierKey]
             ) { url, rv in
                 let size = Int64(rv.fileSize ?? 0)
                 guard size >= minSize, seen.insert(url.path).inserted else { return }
                 bySize[size, default: []].append(
-                    Entry(url: url, size: size, modified: rv.contentModificationDate ?? .distantPast)
+                    Entry(url: url, size: size,
+                          modified: rv.contentModificationDate ?? .distantPast,
+                          identifier: rv.fileResourceIdentifier)
                 )
             }
             meta.errors.append(contentsOf: errors)
@@ -73,7 +93,8 @@ actor DuplicateScanner {
         }
 
         let ranked = groups
-            .map { $0.sorted { $0.modified < $1.modified } }
+            .map { Self.uniqueFiles($0).sorted { keepRule.isBetterToKeep($0.path, $0.modified, than: $1.path, $1.modified) } }
+            .filter { $0.count > 1 }
             .sorted { wasted($0) > wasted($1) }
             .prefix(Self.maxGroups)
 
@@ -95,7 +116,7 @@ actor DuplicateScanner {
             return CleanupCategory(
                 kind: .duplicates,
                 title: keeper.url.lastPathComponent,
-                subtitle: String(localized: "\(copies.count) copies · the oldest is kept in \(keptIn)"),
+                subtitle: String(localized: "\(copies.count) copies · \(keepRule.keptDescription) in \(keptIn)"),
                 icon: "square.on.square",
                 sourceModule: .duplicates,
                 items: Array(copies)

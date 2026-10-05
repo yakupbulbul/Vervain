@@ -10,16 +10,20 @@ final class ModuleScanStore {
     let largeFiles: ModuleScanViewModel
     let duplicates: ModuleScanViewModel
     let privacy: ModuleScanViewModel
+    let orphans: ModuleScanViewModel
 
     init() {
         largeFiles = ModuleScanViewModel {
             try await LargeFilesScanner().scan(config: LargeFilesConfig.fromDefaults())
         }
         duplicates = ModuleScanViewModel {
-            try await DuplicateScanner().scan()
+            try await DuplicateScanner().scan(keepRule: DuplicateKeepRule.fromDefaults())
         }
         privacy = ModuleScanViewModel {
             try await PrivacyScanner().scan()
+        }
+        orphans = ModuleScanViewModel {
+            try await OrphanDataScanner().scan()
         }
     }
 }

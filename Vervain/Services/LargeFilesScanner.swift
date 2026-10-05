@@ -29,7 +29,7 @@ actor LargeFilesScanner {
         roots: [URL]? = nil,
         now: Date? = nil
     ) async throws -> (categories: [CleanupCategory], metadata: ScanMetadata) {
-        let roots = roots ?? personalFolderRoots()
+        let roots = roots ?? ScanRoots.all()
         let now = now ?? Date()
         let started = Date()
         var meta = ScanMetadata()
