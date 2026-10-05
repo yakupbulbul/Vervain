@@ -109,6 +109,12 @@ Donut chart of what's eating your disk, with drill-down into folders and largest
 - **Menu bar monitor** — optional startup-disk gauge and a quick junk scan.
 - **Weekly reminder** and an **exclusion list** for folders Vervain must never touch, both in Settings.
 - **More developer caches** — Gradle, Cargo, Maven, Go, JetBrains, pnpm, Xcode documentation and simulators.
+- **Undo and History** — every cleanup is recorded; put items back from the done screen or the History module.
+- **Smarter review** — search, sort, filter by file type, "only safe items", Quick Look and Reveal in Finder, export as CSV or Markdown.
+- **Smarter uninstaller** — last-opened date, "not opened in 6 months" filter, drag an `.app` onto the window, quit running apps first.
+- **Leftovers** of apps you already removed, found by bundle identifier (never pre-selected).
+- **Disk Analyzer** — analyze any folder or external disk, accurate sizes below the depth limit, send any file or folder to review.
+- **Automation** — configurable weekly reminder, low-disk alert, memory view in the menu bar, Shortcuts actions, open at login.
 - Safer deletion: protected-path guard, files changed since the scan are refused, and the Finder/AppleScript fallback is gone.
 
 ## Languages
@@ -153,9 +159,10 @@ The `CleanupCoordinator` owns the review flow state machine (idle → reviewing 
 - [x] Duplicate file finder
 - [x] Privacy cleanup (browser caches, history, cookies)
 - [x] Menu bar disk monitor
-- [ ] Memory monitor and maintenance tasks
+- [x] Memory view in the menu bar
+- [ ] Maintenance tasks (they need shell access, which Vervain deliberately never uses)
 - [ ] Toggle launch agents on and off (currently view and remove only)
-- [ ] Translations for the new v2 screens
+- [x] Translations for the v2 screens (Turkish, German, Spanish, French, Chinese)
 
 ## Contributing
 
