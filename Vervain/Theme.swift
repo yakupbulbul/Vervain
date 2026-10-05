@@ -81,6 +81,9 @@ enum Theme {
     /// Duplicates — dusty rose (twins).
     static let duplicatesAccent = Color(red: 0.66, green: 0.42, blue: 0.48)
 
+    /// Privacy — deep teal (discretion).
+    static let privacyAccent = Color(red: 0.20, green: 0.46, blue: 0.50)
+
     /// Large & Old Files — slate blue (settled, forgotten).
     static let largeFilesAccent = Color(red: 0.36, green: 0.50, blue: 0.62)
 
