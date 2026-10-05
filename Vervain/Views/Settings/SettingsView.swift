@@ -202,7 +202,7 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 480, minHeight: 420, maxHeight: 700)
+        .frame(minWidth: 480, maxWidth: 480, minHeight: 420, maxHeight: 700)
         .task { fda.refresh() }
     }
 
