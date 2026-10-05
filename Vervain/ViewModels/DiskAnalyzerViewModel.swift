@@ -83,9 +83,98 @@ final class DiskAnalyzerViewModel {
         }
     }
 
+    /// Analyzes a single folder instead of the whole disk.
+    func analyzeFolder(_ url: URL) {
+        analyzeTask?.cancel()
+        scanningPath = String(localized: "Scanning \(url.lastPathComponent)…")
+        analyzeTask = Task {
+            state = .analyzing
+            do {
+                let result = try await service.analyze(root: url, maxDepth: 5)
+                rootNode        = result.root
+                selectedNode    = result.root
+                breadcrumbs     = [result.root]
+                metadata        = result.metadata
+                scannedFolders  = result.scannedFolders
+                scannedFiles    = result.scannedFiles
+                skippedSymlinks = result.skippedSymlinks
+                largestFiles    = result.largestFiles
+                diskTotalBytes  = 0     // hides the whole-disk capacity bar
+                diskFreeBytes   = 0
+                selectedFileIDs.removeAll()
+                state = .results
+            } catch is CancellationError {
+                state = rootNode == nil ? .idle : .results
+            } catch {
+                state = .error(error.localizedDescription)
+            }
+        }
+    }
+
+    /// Drops nodes whose files no longer exist (after a cleanup) instead of
+    /// re-scanning the whole disk.
+    func pruneMissing() {
+        guard let root = rootNode else { return }
+        Self.prune(root)
+        largestFiles.removeAll { !FileManager.default.fileExists(atPath: $0.url.path) }
+        selectedFileIDs = selectedFileIDs.intersection(Set(largestFiles.map(\.id)))
+        // Re-assigning makes observers re-read the (reference-type) tree.
+        rootNode = root
+        selectedNode = selectedNode
+    }
+
+    /// Removes missing children recursively and shrinks sizes to match.
+    /// Returns the number of bytes removed below `node`.
+    @discardableResult
+    nonisolated static func prune(_ node: DiskNode, fileManager: FileManager = .default) -> Int64 {
+        guard node.isDirectory else { return 0 }
+        var removed: Int64 = 0
+        var kept: [DiskNode] = []
+        for child in node.children {
+            if fileManager.fileExists(atPath: child.url.path) {
+                removed += prune(child, fileManager: fileManager)
+                kept.append(child)
+            } else {
+                removed += child.size
+            }
+        }
+        node.children = kept
+        node.size -= removed
+        return removed
+    }
+
+    /// A one-item review category for any file or folder in the tree.
+    func reviewCategories(for node: DiskNode) -> [CleanupCategory] {
+        let modified = Self.modificationDate(of: node.url)
+        let item = CleanupItem(
+            url: node.url,
+            size: node.size,
+            category: node.isDirectory ? "Folders" : "Files",
+            reason: .custom(node.isDirectory
+                            ? String(localized: "Folder chosen in Disk Analyzer")
+                            : String(localized: "File chosen in Disk Analyzer")),
+            riskLevel: .review,
+            confidenceLevel: .medium,
+            lastModifiedDate: modified,
+            sourceModule: .diskAnalyzer
+        )
+        return [CleanupCategory(
+            kind: .largeFiles,
+            title: node.name,
+            subtitle: String(localized: "Chosen in Disk Analyzer — review carefully before removing"),
+            icon: node.isDirectory ? "folder.fill" : "doc.fill",
+            sourceModule: .diskAnalyzer,
+            items: [item]
+        )]
+    }
+
+    nonisolated static func modificationDate(of url: URL) -> Date? {
+        try? url.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
+    }
+
     func cancelAnalyze() {
         analyzeTask?.cancel()
-        state = .idle
+        state = rootNode == nil ? .idle : .results
     }
 
     // MARK: - Navigation
@@ -118,10 +207,8 @@ final class DiskAnalyzerViewModel {
     /// can push the selection into the universal review/confirmation flow.
     func buildLargeFileCleanupCategory() -> [CleanupCategory] {
         let items = selectedLargeFiles.map { node -> CleanupItem in
-            let ageDays = max(0, Int(Date().timeIntervalSince(
-                (try? node.url.resourceValues(forKeys: [.contentModificationDateKey])
-                    .contentModificationDate) ?? Date()
-            ) / 86_400))
+            let modified = Self.modificationDate(of: node.url)
+            let ageDays = max(0, Int(Date().timeIntervalSince(modified ?? Date()) / 86_400))
             return CleanupItem(
                 url: node.url,
                 size: node.size,
@@ -129,7 +216,7 @@ final class DiskAnalyzerViewModel {
                 reason: .largeOldFile(ageDays: ageDays),
                 riskLevel: .review,
                 confidenceLevel: .medium,
-                lastModifiedDate: nil,
+                lastModifiedDate: modified,
                 sourceModule: .diskAnalyzer
             )
         }

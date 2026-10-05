@@ -29,6 +29,8 @@ final class QuickLookCoordinator: NSObject, @preconcurrency QLPreviewPanelDataSo
 struct ItemContextMenu: ViewModifier {
     let url: URL
     let allowExclude: Bool
+    /// When set, the menu offers "Move to Trash…" which should open the review flow.
+    let onTrash: (() -> Void)?
 
     func body(content: Content) -> some View {
         content.contextMenu {
@@ -37,6 +39,10 @@ struct ItemContextMenu: ViewModifier {
             Button("Copy Path") {
                 NSPasteboard.general.clearContents()
                 NSPasteboard.general.setString(url.path, forType: .string)
+            }
+            if let onTrash {
+                Divider()
+                Button("Move to Trash…", action: onTrash)
             }
             if allowExclude {
                 Divider()
@@ -47,7 +53,7 @@ struct ItemContextMenu: ViewModifier {
 }
 
 extension View {
-    func itemContextMenu(url: URL, allowExclude: Bool = true) -> some View {
-        modifier(ItemContextMenu(url: url, allowExclude: allowExclude))
+    func itemContextMenu(url: URL, allowExclude: Bool = true, onTrash: (() -> Void)? = nil) -> some View {
+        modifier(ItemContextMenu(url: url, allowExclude: allowExclude, onTrash: onTrash))
     }
 }
