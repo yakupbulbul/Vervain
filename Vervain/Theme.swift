@@ -78,6 +78,9 @@ enum Theme {
     /// Disk Analyzer — sage (growth, organic data).
     static let diskAnalyzerAccent = Color(red: 0.40, green: 0.58, blue: 0.44)
 
+    /// Duplicates — dusty rose (twins).
+    static let duplicatesAccent = Color(red: 0.66, green: 0.42, blue: 0.48)
+
     /// Large & Old Files — slate blue (settled, forgotten).
     static let largeFilesAccent = Color(red: 0.36, green: 0.50, blue: 0.62)
 

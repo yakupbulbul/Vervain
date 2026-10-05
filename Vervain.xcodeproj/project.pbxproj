@@ -80,6 +80,9 @@
 		AC50DC32F57CF765FDF438EE /* ModuleScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E359530800AFED9A6D854B /* ModuleScanViewModel.swift */; };
 		D3739658444A3C0E813B6795 /* ModuleScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9A96D8BBD8576D67C3E36 /* ModuleScanView.swift */; };
 		C251E9279FE9F98D898D1227 /* LargeFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1DDFFD936A1F3142CD82D2 /* LargeFilesView.swift */; };
+		10E36A764BD5C4F592E402CC /* DuplicateScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8892A8F6AFF5FD302018C6A1 /* DuplicateScannerTests.swift */; };
+		0E087B37F81B840BDEE36119 /* DuplicateScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DF308BCCA291B4410DAE4 /* DuplicateScanner.swift */; };
+		F3E51D60126D22DA79EB3F98 /* DuplicatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4297487CFC2B0DFB44709055 /* DuplicatesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +181,9 @@
 		98E359530800AFED9A6D854B /* ModuleScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleScanViewModel.swift; sourceTree = "<group>"; };
 		2BB9A96D8BBD8576D67C3E36 /* ModuleScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleScanView.swift; sourceTree = "<group>"; };
 		EC1DDFFD936A1F3142CD82D2 /* LargeFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeFilesView.swift; sourceTree = "<group>"; };
+		8892A8F6AFF5FD302018C6A1 /* DuplicateScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateScannerTests.swift; sourceTree = "<group>"; };
+		0B3DF308BCCA291B4410DAE4 /* DuplicateScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateScanner.swift; sourceTree = "<group>"; };
+		4297487CFC2B0DFB44709055 /* DuplicatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -203,6 +209,7 @@
 				6C2B2972FB89AEE9ED682651 /* DirectoryStatsTests.swift */,
 				F4C2588BBDDC9860981BF43F /* LargeFilesScannerTests.swift */,
 				4E0292E7D631CE26404E4FA9 /* ExclusionListTests.swift */,
+				8892A8F6AFF5FD302018C6A1 /* DuplicateScannerTests.swift */,
 			);
 			path = VervainTests;
 			sourceTree = "<group>";
@@ -268,6 +275,7 @@
 				6587E435689598A28F6F82EE /* Settings */,
 				39F6F30968F9FD85AE321EB5 /* Shared */,
 				52778CABFCC5B9D44BB547FD /* LargeFiles */,
+				C6B40EB52B5F36EA5DF40456 /* Duplicates */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 				CF2436C0411B3B105B995EA8 /* JunkScanner.swift */,
 				B7AEA7E485C8E66088475ECB /* Cleanup */,
 				0B54E473EBD8098329CA0282 /* LargeFilesScanner.swift */,
+				0B3DF308BCCA291B4410DAE4 /* DuplicateScanner.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -448,6 +457,14 @@
 				EC1DDFFD936A1F3142CD82D2 /* LargeFilesView.swift */,
 			);
 			path = LargeFiles;
+			sourceTree = "<group>";
+		};
+		C6B40EB52B5F36EA5DF40456 /* Duplicates */ = {
+			isa = PBXGroup;
+			children = (
+				4297487CFC2B0DFB44709055 /* DuplicatesView.swift */,
+			);
+			path = Duplicates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -632,6 +649,8 @@
 				AC50DC32F57CF765FDF438EE /* ModuleScanViewModel.swift in Sources */,
 				D3739658444A3C0E813B6795 /* ModuleScanView.swift in Sources */,
 				C251E9279FE9F98D898D1227 /* LargeFilesView.swift in Sources */,
+				0E087B37F81B840BDEE36119 /* DuplicateScanner.swift in Sources */,
+				F3E51D60126D22DA79EB3F98 /* DuplicatesView.swift in Sources */,
 				F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */,
 				6E6E0F0D8D11AF6A3047C388 /* Theme.swift in Sources */,
 				9BF49DB56B3AEC55F6E74A35 /* CleanupCategoryKind.swift in Sources */,
@@ -647,6 +666,7 @@
 				8DF77E58AB26F4237E0C701F /* DirectoryStatsTests.swift in Sources */,
 				F59F1C5D2D0CAC021C150DCD /* LargeFilesScannerTests.swift in Sources */,
 				EF6CB5E0608648B6C7B9A8E4 /* ExclusionListTests.swift in Sources */,
+				10E36A764BD5C4F592E402CC /* DuplicateScannerTests.swift in Sources */,
 				2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* CleanupServiceSafetyTests.swift in Sources */,
 				E4EECC430E06D628D7D9810B /* CleanupSelectionPolicyTests.swift in Sources */,

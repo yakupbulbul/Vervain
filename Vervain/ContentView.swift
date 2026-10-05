@@ -4,6 +4,9 @@ struct ContentView: View {
     @Binding var showAbout: Bool
     @State private var selectedFeature: AppFeature? = .smartScan
     @Environment(FullDiskAccessViewModel.self) private var fda
+    @State private var duplicatesVM = ModuleScanViewModel {
+        try await DuplicateScanner().scan()
+    }
     @State private var largeFilesVM = ModuleScanViewModel {
         try await LargeFilesScanner().scan(config: LargeFilesConfig.fromDefaults())
     }
@@ -51,6 +54,8 @@ struct ContentView: View {
             DiskAnalyzerView()
         case .largeOldFiles:
             LargeFilesView(vm: largeFilesVM)
+        case .duplicates:
+            DuplicatesView(vm: duplicatesVM)
         }
     }
 }
