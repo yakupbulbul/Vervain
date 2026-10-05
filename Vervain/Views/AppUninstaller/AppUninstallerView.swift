@@ -228,7 +228,7 @@ struct AppUninstallerView: View {
             Button("Review & Uninstall") {
                 coord.startReview(
                     vm.buildCleanupCategories(),
-                    title: "Review Uninstall"
+                    title: String(localized: "Review Uninstall")
                 ) {
                     vm.scan()
                 }

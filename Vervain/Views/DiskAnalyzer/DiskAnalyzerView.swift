@@ -252,7 +252,9 @@ struct DiskAnalyzerView: View {
                         .font(.caption).foregroundStyle(Theme.systemJunkAccent)
                     Button("Send to Review") {
                         let cats = vm.buildLargeFileCleanupCategory()
-                        coord.startReview(cats, title: "Review Large Files")
+                        coord.startReview(cats, title: String(localized: "Review Large Files")) {
+                            vm.analyze()
+                        }
                     }
                     .buttonStyle(.borderedProminent).tint(Theme.diskAnalyzerAccent).controlSize(.small)
                 }

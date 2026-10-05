@@ -135,7 +135,7 @@ struct SystemJunkView: View {
             }
             Spacer()
             Button("Review & Clean \(vm.totalSelectedSize.compactBytes)") {
-                coord.startReview(vm.categories, title: "Review System Junk") {
+                coord.startReview(vm.categories, title: String(localized: "Review System Junk")) {
                     vm.scan()   // refresh after coordinator cleanup completes
                 }
             }
