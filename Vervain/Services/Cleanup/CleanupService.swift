@@ -4,9 +4,11 @@ import AppKit
 /// The single chokepoint through which every cleanup action in the app runs.
 ///
 /// **Invariants** (audited by code review, not by the compiler):
-/// - The only deletion primitive used is `FileManager.trashItem` — no module
-///   anywhere in the codebase should ever call `removeItem`, `unlink`, or
-///   shell-out to `rm`.
+/// - The only deletion primitives used are `FileManager.trashItem` and
+///   `NSWorkspace.recycle` (both move to the Trash) — no module anywhere in
+///   the codebase should ever call `removeItem`, `unlink`, run AppleScript,
+///   or shell-out to `rm`.
+/// - Every item passes `isSafeToTrash` immediately before it is trashed.
 /// - Cleanup work happens off the `@MainActor`.
 /// - Cancellation is supported via `Task.checkCancellation`.
 /// - Per-item failures are recorded, never silently swallowed.
@@ -41,17 +43,23 @@ actor CleanupService {
                 bytesFreed: freedBytes,
                 totalBytes: totalBytes
             ))
+            guard Self.isSafeToTrash(item.url) else {
+                failures.append(CleanupFailure(
+                    item: item,
+                    reason: .other(message: String(localized: "Protected location"))
+                ))
+                continue
+            }
             do {
                 // Try FileManager first (works for user-owned files)
                 try fm.trashItem(at: item.url, resultingItemURL: nil)
                 freedBytes += item.size
                 successCount += 1
             } catch {
-                // Fall back to Finder via AppleScript — Finder has the
-                // privileges to trash items in /Applications and will
-                // show a system auth dialog if needed.
+                // Fall back to NSWorkspace, which can show a system auth
+                // dialog for items in /Applications.
                 do {
-                    try Self.trashViaFinder(item.url)
+                    try await Self.trashViaWorkspace(item.url)
                     freedBytes += item.size
                     successCount += 1
                 } catch let err as NSError {
@@ -83,29 +91,53 @@ actor CleanupService {
         )
     }
 
-    /// Uses Finder via AppleScript to move a file to Trash.
-    /// Finder has the privilege to trash items in /Applications and will
-    /// show a system authentication dialog when needed.
-    private static func trashViaFinder(_ url: URL) throws {
-        let posixPath = url.path.replacingOccurrences(of: "\"", with: "\\\"")
-        let script = """
-        tell application "Finder"
-            move POSIX file "\(posixPath)" to trash
-        end tell
-        """
-        guard let appleScript = NSAppleScript(source: script) else {
-            throw NSError(domain: NSCocoaErrorDomain, code: NSFileWriteNoPermissionError)
+    /// Moves an item to the Trash through `NSWorkspace`, which can prompt for
+    /// authorization for items (e.g. in /Applications) that `FileManager`
+    /// cannot trash. This replaces the former AppleScript/Finder fallback, so
+    /// no script is built from file names and no Apple Events entitlement is
+    /// needed under the hardened runtime.
+    private static func trashViaWorkspace(_ url: URL) async throws {
+        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
+            NSWorkspace.shared.recycle([url]) { _, error in
+                if let error {
+                    cont.resume(throwing: error)
+                } else {
+                    cont.resume()
+                }
+            }
         }
-        var errorInfo: NSDictionary?
-        appleScript.executeAndReturnError(&errorInfo)
-        if let errorInfo {
-            let message = errorInfo[NSAppleScript.errorMessage] as? String ?? "Unknown error"
-            throw NSError(
-                domain: NSCocoaErrorDomain,
-                code: NSFileWriteNoPermissionError,
-                userInfo: [NSLocalizedDescriptionKey: message]
-            )
-        }
+    }
+
+    /// Last line of defence before anything is trashed. Scanners are expected
+    /// to never produce these paths; this makes sure a bug or a stale item can
+    /// never take out a protected location.
+    nonisolated static func isSafeToTrash(
+        _ url: URL,
+        home: URL = FileManager.default.homeDirectoryForCurrentUser
+    ) -> Bool {
+        guard url.isFileURL else { return false }
+        let path = url.standardizedFileURL.path
+        let homePath = home.standardizedFileURL.path
+
+        let protectedExact: Set<String> = [
+            "/", "/Applications", "/Library", "/System", "/Users", "/Volumes",
+            "/usr", "/bin", "/sbin", "/etc", "/var", "/private", "/opt",
+            homePath,
+            homePath + "/Library",
+            homePath + "/Desktop",
+            homePath + "/Documents",
+            homePath + "/Downloads",
+            homePath + "/Movies",
+            homePath + "/Music",
+            homePath + "/Pictures",
+            homePath + "/.Trash",
+        ]
+        if protectedExact.contains(path) { return false }
+
+        let protectedPrefixes = ["/System/", "/usr/", "/bin/", "/sbin/", "/etc/", "/private/etc/"]
+        if protectedPrefixes.contains(where: { path.hasPrefix($0) }) { return false }
+
+        return true
     }
 
     /// Map a Cocoa `NSError` to our user-friendly failure reason.
