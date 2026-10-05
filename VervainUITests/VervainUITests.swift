@@ -278,6 +278,42 @@ final class VervainUITests: XCTestCase {
 
     // MARK: - 06: Sidebar navigation round-trip
 
+    // MARK: - 07: New modules open
+
+    func test07_NewModulesOpenWithTheirStartScreen() {
+        let modules: [(sidebar: String, marker: String)] = [
+            ("Large & Old Files", "Find Forgotten Giants"),
+            ("Duplicates", "Find Duplicate Files"),
+            ("Privacy", "Tidy Your Browsing Traces"),
+            ("Leftovers", "Find Leftovers of Removed Apps"),
+        ]
+        for module in modules {
+            let item = app.staticTexts[module.sidebar].firstMatch
+            XCTAssertTrue(item.waitForExistence(timeout: 3), "'\(module.sidebar)' missing from the sidebar")
+            item.click()
+            XCTAssertTrue(app.staticTexts[module.marker].waitForExistence(timeout: 3),
+                          "'\(module.sidebar)' did not show its start screen")
+            screenshot("07_\(module.sidebar.replacingOccurrences(of: " ", with: "_"))")
+        }
+    }
+
+    func test08_HistoryAndLoginItemsOpen() {
+        let history = app.staticTexts["History"].firstMatch
+        XCTAssertTrue(history.waitForExistence(timeout: 3))
+        history.click()
+        // Either the empty state or a list of earlier cleanups.
+        XCTAssertTrue(
+            app.staticTexts["No Cleanups Yet"].waitForExistence(timeout: 3)
+                || app.buttons["Put Back All"].exists,
+            "History shows neither its empty state nor entries"
+        )
+
+        let loginItems = app.staticTexts["Login Items"].firstMatch
+        XCTAssertTrue(loginItems.waitForExistence(timeout: 3))
+        loginItems.click()
+        screenshot("08_login_items")
+    }
+
     func test06_SidebarNavigation() {
         let navItems: [String] = [
             "System Junk", "App Uninstaller", "Disk Analyzer", "Smart Scan"

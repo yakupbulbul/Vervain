@@ -113,7 +113,7 @@ struct CleanupReviewView: View {
             }
             .labelsHidden().fixedSize()
             // ⌘F focuses the search field.
-            Button("") { searchFocused = true }
+            Button { searchFocused = true } label: { EmptyView() }
                 .keyboardShortcut("f", modifiers: .command)
                 .frame(width: 0, height: 0).opacity(0)
                 .accessibilityHidden(true)

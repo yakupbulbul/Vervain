@@ -129,6 +129,7 @@
 		C2AE25A01F0767871E0958D2 /* MemoryUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA56FF3A08F2FDE5EC6A327 /* MemoryUsage.swift */; };
 		B19EFCE7A3CB171B546E010E /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA887C1CB28DB2A66977290 /* LaunchAtLogin.swift */; };
 		F6633370BF93E59534BA724C /* VervainIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E84170DC67FA99F0BD075E /* VervainIntents.swift */; };
+		062A8CFB99E1B921E234E972 /* ModuleScanViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CEC2A77C4DE22BC98E07D0 /* ModuleScanViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -276,6 +277,7 @@
 		7BA56FF3A08F2FDE5EC6A327 /* MemoryUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUsage.swift; sourceTree = "<group>"; };
 		4CA887C1CB28DB2A66977290 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
 		E6E84170DC67FA99F0BD075E /* VervainIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VervainIntents.swift; sourceTree = "<group>"; };
+		94CEC2A77C4DE22BC98E07D0 /* ModuleScanViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleScanViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -319,6 +321,7 @@
 				D6893D60D75D04E7E81784E7 /* OrphanDataScannerTests.swift */,
 				BEA0270E1842AD14F29463FC /* ScanRootsTests.swift */,
 				A99A0319052C7A662DC38237 /* AutomationTests.swift */,
+				94CEC2A77C4DE22BC98E07D0 /* ModuleScanViewModelTests.swift */,
 			);
 			path = VervainTests;
 			sourceTree = "<group>";
@@ -891,6 +894,7 @@
 				5DB21467AC53127B7865FA0D /* OrphanDataScannerTests.swift in Sources */,
 				D7C640CB23C8DF56543021D6 /* ScanRootsTests.swift in Sources */,
 				7CC821FCC506582735A9171F /* AutomationTests.swift in Sources */,
+				062A8CFB99E1B921E234E972 /* ModuleScanViewModelTests.swift in Sources */,
 				2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* CleanupServiceSafetyTests.swift in Sources */,
 				E4EECC430E06D628D7D9810B /* CleanupSelectionPolicyTests.swift in Sources */,

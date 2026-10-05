@@ -25,4 +25,25 @@ jobs:
             -scheme Vervain \
             -destination 'platform=macOS' \
             -only-testing:VervainTests \
+            -derivedDataPath build/dd \
+            -resultBundlePath build/tests.xcresult \
+            -enableCodeCoverage YES \
+            SWIFT_EMIT_LOC_STRINGS=YES \
             CODE_SIGNING_ALLOWED=NO
+
+      - name: Coverage summary
+        if: always()
+        run: |
+          if [ -d build/tests.xcresult ]; then
+            {
+              echo "### Unit test coverage"
+              echo '```'
+              xcrun xccov view --report --only-targets build/tests.xcresult || true
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Check translations
+        run: |
+          python3 scripts/localization_gaps.py build/dd \
+            || echo "::warning::Some strings used in code have no translation in Localizable.xcstrings (see the log)"
