@@ -43,10 +43,18 @@ actor CleanupService {
                 bytesFreed: freedBytes,
                 totalBytes: totalBytes
             ))
-            guard Self.isSafeToTrash(item.url) else {
+            guard Self.isSafeToTrash(item.url),
+                  Self.isSafeToTrash(Self.resolvingParentSymlinks(item.url)) else {
                 failures.append(CleanupFailure(
                     item: item,
                     reason: .other(message: String(localized: "Protected location"))
+                ))
+                continue
+            }
+            guard !Self.hasChangedSinceScan(item) else {
+                failures.append(CleanupFailure(
+                    item: item,
+                    reason: .other(message: String(localized: "Changed since the scan — scan again"))
                 ))
                 continue
             }
@@ -113,6 +121,25 @@ actor CleanupService {
                 }
             }
         }
+    }
+
+    /// The item's location with symlinks in its *parent* folders resolved, so a
+    /// symlinked directory cannot smuggle a protected path past the guard. The
+    /// item itself is not followed: trashing a symlink only moves the link.
+    nonisolated static func resolvingParentSymlinks(_ url: URL) -> URL {
+        url.deletingLastPathComponent()
+            .resolvingSymlinksInPath()
+            .appendingPathComponent(url.lastPathComponent)
+    }
+
+    /// True if a regular file was modified after the scan recorded it, in
+    /// which case the user reviewed something that is no longer what is on disk.
+    nonisolated static func hasChangedSinceScan(_ item: CleanupItem) -> Bool {
+        guard let scanned = item.lastModifiedDate,
+              let rv = try? item.url.resourceValues(forKeys: [.isRegularFileKey, .contentModificationDateKey]),
+              rv.isRegularFile == true,
+              let current = rv.contentModificationDate else { return false }
+        return current.timeIntervalSince(scanned) > 1
     }
 
     /// Last line of defence before anything is trashed. Scanners are expected
