@@ -36,6 +36,7 @@ Every Mac cleaner I tried either wanted a subscription, phoned home with analyti
 | Deletes to Trash (undoable) | **Yes** | No | No |
 | App uninstaller with leftovers | **Yes** | Yes | No |
 | Disk analyzer | **Yes** | Yes | No |
+| Duplicate finder | **Yes** | Yes | No |
 | Review before cleanup | **Always** | Partial | Partial |
 | Multi-language | **6 languages** | Yes | No |
 
@@ -99,6 +100,17 @@ Donut chart of what's eating your disk, with drill-down into folders and largest
 </tr>
 </table>
 
+### New in 2.0
+
+- **Large & Old Files** — big files you have not touched in months, with size and age thresholds you choose. Nothing is pre-selected.
+- **Duplicates** — byte-identical files found by size, partial hash and SHA-256. The oldest copy is always kept and never listed.
+- **Privacy** — Safari, Chrome, Firefox, Edge and Brave caches (pre-selected), history (review) and cookies (risky, never pre-selected).
+- **Login Items** — see third-party launch agents and daemons; remove your own through the normal review flow.
+- **Menu bar monitor** — optional startup-disk gauge and a quick junk scan.
+- **Weekly reminder** and an **exclusion list** for folders Vervain must never touch, both in Settings.
+- **More developer caches** — Gradle, Cargo, Maven, Go, JetBrains, pnpm, Xcode documentation and simulators.
+- Safer deletion: protected-path guard, files changed since the scan are refused, and the Finder/AppleScript fallback is gone.
+
 ## Languages
 
 Available in 6 languages — switch anytime via **Settings** (⌘,):
@@ -111,7 +123,7 @@ Vervain automatically uses your Mac's system language, or you can choose a diffe
 
 1. **Nothing gets permanently deleted.** Every cleanup moves items to the Trash. You can always restore from Trash.
 2. **Nothing gets cleaned without your say-so.** Every module goes through a review → confirm → clean flow. Risky items are never pre-selected.
-3. **Nothing leaves your Mac.** No analytics, no accounts, no network calls. Zero.
+3. **Nothing leaves your Mac.** No analytics, no accounts, no background network calls. The only request Vervain ever makes is the optional **Check for Updates** button in Settings.
 
 ## Building from Source
 
@@ -136,11 +148,14 @@ The `CleanupCoordinator` owns the review flow state machine (idle → reviewing 
 
 ## Roadmap
 
-- [ ] Login items viewer and maintenance tasks
-- [ ] Large & old files scanner
-- [ ] Duplicate file finder
-- [ ] Privacy cleanup (browser caches, cookies)
-- [ ] Menu bar disk/memory monitor
+- [x] Login items viewer
+- [x] Large & old files scanner
+- [x] Duplicate file finder
+- [x] Privacy cleanup (browser caches, history, cookies)
+- [x] Menu bar disk monitor
+- [ ] Memory monitor and maintenance tasks
+- [ ] Toggle launch agents on and off (currently view and remove only)
+- [ ] Translations for the new v2 screens
 
 ## Contributing
 

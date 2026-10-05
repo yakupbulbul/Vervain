@@ -127,7 +127,7 @@ Run through this before every tag:
 - [ ] `xcodebuild ... test` — all unit tests pass
 - [ ] `grep -rn "NSAppleScript\|Process()" Vervain/` — must return no hits
 - [ ] `grep -r "removeItem\|unlink\b" Vervain/` — must return no hits except inside `CleanupService` (currently: zero hits anywhere — only `trashItem` / `NSWorkspace.recycle` are used)
-- [ ] `grep -r "Process()\|URLSession\|URLRequest" Vervain/` — should be empty (no network, no shell)
+- [ ] `grep -r "Process()\|URLSession\|URLRequest" Vervain/` — only `Services/UpdateChecker.swift` may match (user-triggered update check); no shell
 - [ ] Onboarding sheet promises still match behavior
 - [ ] AUDIT.md risk register has no new red rows
 - [ ] FDA banner only appears when probe denies (`FullDiskAccessProbe` heuristic)
@@ -139,11 +139,11 @@ Run through this before every tag:
 $ grep -rn "removeItem\|unlink\b" Vervain/
 # (no output — clean)
 
-$ grep -rn "Process()\|URLSession\|URLRequest" Vervain/
-# (no output — clean)
+$ grep -rln "Process()\|URLSession\|URLRequest" Vervain/
+Vervain/Services/UpdateChecker.swift
 ```
 
-All deletion goes through `CleanupService.execute()` which calls `FileManager.trashItem` (with an `NSWorkspace.recycle` fallback for items that need authorization) exclusively. There is no network code in the entire codebase. The only `NSWorkspace.shared.open` calls are:
+All deletion goes through `CleanupService.execute()` which calls `FileManager.trashItem` (with an `NSWorkspace.recycle` fallback for items that need authorization) exclusively. The only network code is `UpdateChecker`, which runs solely when the user presses "Check for Updates…" in Settings (one GET to the GitHub releases API). The only `NSWorkspace.shared.open` calls are:
 1. `FullDiskAccessProbe.openSystemSettings()` — `x-apple.systempreferences:` deep link
 2. `SystemJunkView.openTrash()` / `CleanupDoneView.openTrash()` — open `~/.Trash`
 
@@ -155,9 +155,9 @@ All deletion goes through `CleanupService.execute()` which calls `FileManager.tr
 |---|---|---|
 | FDA probe | Heuristic (no first-party API) | Status documented in code + UI says "appears granted" |
 | Sandboxing | Not feasible | Documented in §2 above |
-| Sparkle updater | Not implemented | Manual download for v1; Sparkle in v2 |
+| Updates | No auto-update (by design, to stay offline) | Manual "Check for Updates…" in Settings opens the release page |
 | Language-file removal | Invalidates app signature | UI tags as `.review` with explicit subtitle warning |
-| Post-cleanup VM refresh | User must press Re-Scan after closing review sheet | Tracked as follow-up; doesn't affect safety |
+| Post-cleanup refresh | Resolved in 2.0 — every module re-scans after the review sheet completes | — |
 
 ---
 
