@@ -29,13 +29,15 @@ actor CleanupService {
         let totalCount = allSelected.count
         let totalBytes = allSelected.reduce(Int64(0)) { $0 + $1.size }
         var freedBytes: Int64 = 0
-        var successCount = 0
+        var trashed: [TrashedItem] = []
         var failures: [CleanupFailure] = []
+        var cancelled = false
         let started = Date()
         let fm = FileManager.default
 
         for (idx, item) in allSelected.enumerated() {
-            try Task.checkCancellation()
+            // Stop cleanly: what is already in the Trash is reported, not lost.
+            if Task.isCancelled { cancelled = true; break }
             progress?(CleanupProgress(
                 currentIndex: idx,
                 totalCount: totalCount,
@@ -65,18 +67,21 @@ actor CleanupService {
                 ))
                 continue
             }
+
+            let sizeNow = Self.currentSize(of: item)
             do {
                 // Try FileManager first (works for user-owned files)
-                try fm.trashItem(at: item.url, resultingItemURL: nil)
-                freedBytes += item.size
-                successCount += 1
+                var resulting: NSURL?
+                try fm.trashItem(at: item.url, resultingItemURL: &resulting)
+                freedBytes += sizeNow
+                trashed.append(TrashedItem(item: item, size: sizeNow, trashURL: resulting as URL?))
             } catch {
                 // Fall back to NSWorkspace, which can show a system auth
                 // dialog for items in /Applications.
                 do {
-                    try await Self.trashViaWorkspace(item.url)
-                    freedBytes += item.size
-                    successCount += 1
+                    let trashURL = try await Self.trashViaWorkspace(item.url)
+                    freedBytes += sizeNow
+                    trashed.append(TrashedItem(item: item, size: sizeNow, trashURL: trashURL))
                 } catch let err as NSError {
                     failures.append(CleanupFailure(
                         item: item,
@@ -88,7 +93,7 @@ actor CleanupService {
 
         // Final tick so consumers can show 100%.
         progress?(CleanupProgress(
-            currentIndex: totalCount,
+            currentIndex: cancelled ? trashed.count + failures.count : totalCount,
             totalCount: totalCount,
             currentItem: nil,
             bytesFreed: freedBytes,
@@ -97,13 +102,26 @@ actor CleanupService {
 
         return CleanupResult(
             requestedCount: totalCount,
-            successCount: successCount,
+            successCount: trashed.count,
             failedCount: failures.count,
             requestedBytes: totalBytes,
             freedBytes: freedBytes,
             failures: failures,
-            duration: Date().timeIntervalSince(started)
+            duration: Date().timeIntervalSince(started),
+            trashed: trashed,
+            wasCancelled: cancelled
         )
+    }
+
+    /// Size of what is about to be trashed. Regular files are re-measured so
+    /// "freed" reflects the file as it is now; folders keep the scanned size
+    /// (re-walking a large tree just to report a number would double the work).
+    nonisolated static func currentSize(of item: CleanupItem) -> Int64 {
+        let keys: Set<URLResourceKey> = [.isRegularFileKey, .totalFileAllocatedSizeKey]
+        guard let rv = try? item.url.resourceValues(forKeys: keys),
+              rv.isRegularFile == true,
+              let size = rv.totalFileAllocatedSize else { return item.size }
+        return Int64(size)
     }
 
     /// Moves an item to the Trash through `NSWorkspace`, which can prompt for
@@ -111,14 +129,14 @@ actor CleanupService {
     /// cannot trash. This replaces the former AppleScript/Finder fallback, so
     /// no script is built from file names and no Apple Events entitlement is
     /// needed under the hardened runtime.
-    private static func trashViaWorkspace(_ url: URL) async throws {
-        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
+    private static func trashViaWorkspace(_ url: URL) async throws -> URL? {
+        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<URL?, Error>) in
             // Built here, outside any actor, so AppKit may call it on any queue.
-            let done: @Sendable ([URL: URL], Error?) -> Void = { _, error in
+            let done: @Sendable ([URL: URL], Error?) -> Void = { newURLs, error in
                 if let error {
                     cont.resume(throwing: error)
                 } else {
-                    cont.resume()
+                    cont.resume(returning: newURLs[url])
                 }
             }
             Task { @MainActor in
@@ -206,8 +224,12 @@ struct CleanupResult: Sendable {
     let freedBytes: Int64
     let failures: [CleanupFailure]
     let duration: TimeInterval
+    /// Everything that reached the Trash, with where it went, so it can be put back.
+    var trashed: [TrashedItem] = []
+    /// True if the user cancelled part-way; `trashed` still lists what was moved.
+    var wasCancelled: Bool = false
 
-    var allSucceeded: Bool { failedCount == 0 }
+    var allSucceeded: Bool { failedCount == 0 && !wasCancelled }
 }
 
 struct CleanupFailure: Sendable, Identifiable {

@@ -23,6 +23,9 @@ final class CleanupCoordinator {
     var progress: CleanupProgress?
     var result: CleanupResult?
     var errorMessage: String?
+    /// Outcome line shown on the done screen after "Undo".
+    var undoSummary: String?
+    var isUndoing = false
 
     /// Title shown in the review header — set by the calling module.
     var presentationTitle: String = String(localized: "Review Cleanup")
@@ -74,6 +77,7 @@ final class CleanupCoordinator {
         self.presentationTitle = title
         self.progress = nil
         self.result = nil
+        self.undoSummary = nil
         self.errorMessage = nil
         self.state = .reviewing
     }
@@ -96,21 +100,59 @@ final class CleanupCoordinator {
             do {
                 let snapshot = categories
                 let res = try await service.execute(snapshot) { [weak self] p in
-                    Task { @MainActor in self?.progress = p }
+                    Task { @MainActor in
+                        // Ticks hop actors and can arrive out of order; never go backwards.
+                        if let current = self?.progress, current.currentIndex > p.currentIndex { return }
+                        self?.progress = p
+                    }
                 }
-                // Remove cleaned items from the in-flight categories
+                // Remove only what reached the Trash; failed items stay visible.
+                let movedIDs = Set(res.trashed.map(\.id))
                 for idx in categories.indices {
-                    categories[idx].items.removeAll { $0.isSelected }
+                    categories[idx].items.removeAll { movedIDs.contains($0.id) }
                 }
                 categories.removeAll { $0.items.isEmpty }
                 self.result = res
-                self.state = .done
+                if res.wasCancelled && res.trashed.isEmpty {
+                    self.state = .reviewing
+                } else {
+                    self.state = .done
+                    recordHistory(res)
+                }
             } catch is CancellationError {
                 self.state = .reviewing
             } catch {
                 self.errorMessage = error.localizedDescription
                 self.state = .reviewing
             }
+        }
+    }
+
+    private func recordHistory(_ result: CleanupResult) {
+        guard !result.trashed.isEmpty else { return }
+        let entry = CleanupHistoryEntry(
+            id: UUID(), date: Date(), title: presentationTitle, items: result.trashed)
+        Task { await CleanupHistoryStore.shared.append(entry) }
+    }
+
+    /// Puts everything from the last cleanup back where it was.
+    func undoLastCleanup() {
+        guard let items = result?.trashed, !items.isEmpty, !isUndoing else { return }
+        isUndoing = true
+        Task {
+            let outcome = await Task.detached { TrashRestorer.restoreAll(items) }.value
+            await CleanupHistoryStore.shared.removeItems(Set(outcome.restored))
+            let restored = outcome.restored.count
+            let failed = outcome.failed.count
+            undoSummary = failed == 0
+                ? String(localized: "Put back \(restored) items.")
+                : String(localized: "Put back \(restored) items. \(failed) could not be restored — check the Trash.")
+            if var res = result {
+                let back = Set(outcome.restored)
+                res.trashed.removeAll { back.contains($0.id) }
+                result = res
+            }
+            isUndoing = false
         }
     }
 
@@ -126,6 +168,8 @@ final class CleanupCoordinator {
         categories = []
         progress = nil
         result = nil
+        undoSummary = nil
+        isUndoing = false
     }
 
     /// User pressed Done on the result screen.

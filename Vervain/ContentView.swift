@@ -55,6 +55,8 @@ struct ContentView: View {
             PrivacyView(vm: modules.privacy)
         case .loginItems:
             LoginItemsView()
+        case .history:
+            HistoryView()
         }
     }
 }

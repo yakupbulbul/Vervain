@@ -98,6 +98,14 @@
 		C6B11EF4D739492A83A932E6 /* UpdateCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4559643B3BF66437BF242EA /* UpdateCheckerTests.swift */; };
 		F502B068F2B6C82268B2E1AB /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889D66DD8C8353B3B7F58E9 /* UpdateChecker.swift */; };
 		0D358704965E57024C16CFF0 /* ModuleScanStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594707F501477A34DF9C012 /* ModuleScanStore.swift */; };
+		2C58528F9B64BB7C8CBA344B /* TrashRestorerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F38DCD303163FC85FDCADF /* TrashRestorerTests.swift */; };
+		9620D26223AF9E37006D7F87 /* CleanupHistoryStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A943600E9211D6ED7BF2F619 /* CleanupHistoryStoreTests.swift */; };
+		C7B771E9A8834434EF664282 /* CleanupServiceTrashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2E2167669805A0269FA8B4 /* CleanupServiceTrashTests.swift */; };
+		40E7CE986BD4AEE6EBC64F1E /* TrashedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C763E02EAB518337D3AB4 /* TrashedItem.swift */; };
+		382D10443404F37A95B57C86 /* TrashRestorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB016768AE92FBE27EF48FC /* TrashRestorer.swift */; };
+		3BE95A6B6C86479729C34E5A /* CleanupHistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B5D769C10C5E477B4DA023 /* CleanupHistoryStore.swift */; };
+		50D90E5DCD2D595F4CFFF1BF /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3251262CA5629865D7883CBD /* HistoryViewModel.swift */; };
+		8A998B3C7F83DA1281930953 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6684F9F40D32307B79DFFD31 /* HistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +222,14 @@
 		D4559643B3BF66437BF242EA /* UpdateCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheckerTests.swift; sourceTree = "<group>"; };
 		7889D66DD8C8353B3B7F58E9 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		D594707F501477A34DF9C012 /* ModuleScanStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleScanStore.swift; sourceTree = "<group>"; };
+		A1F38DCD303163FC85FDCADF /* TrashRestorerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashRestorerTests.swift; sourceTree = "<group>"; };
+		A943600E9211D6ED7BF2F619 /* CleanupHistoryStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupHistoryStoreTests.swift; sourceTree = "<group>"; };
+		8F2E2167669805A0269FA8B4 /* CleanupServiceTrashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupServiceTrashTests.swift; sourceTree = "<group>"; };
+		6E8C763E02EAB518337D3AB4 /* TrashedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashedItem.swift; sourceTree = "<group>"; };
+		ACB016768AE92FBE27EF48FC /* TrashRestorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashRestorer.swift; sourceTree = "<group>"; };
+		67B5D769C10C5E477B4DA023 /* CleanupHistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupHistoryStore.swift; sourceTree = "<group>"; };
+		3251262CA5629865D7883CBD /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		6684F9F40D32307B79DFFD31 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -244,6 +260,9 @@
 				ED3357F64B8BFFD46184569E /* LoginItemsScannerTests.swift */,
 				D9B3DDD222E7B37653429D67 /* DiskUsageTests.swift */,
 				D4559643B3BF66437BF242EA /* UpdateCheckerTests.swift */,
+				A1F38DCD303163FC85FDCADF /* TrashRestorerTests.swift */,
+				A943600E9211D6ED7BF2F619 /* CleanupHistoryStoreTests.swift */,
+				8F2E2167669805A0269FA8B4 /* CleanupServiceTrashTests.swift */,
 			);
 			path = VervainTests;
 			sourceTree = "<group>";
@@ -281,6 +300,7 @@
 				F9F01EE06562DF8641E5BC90 /* Cleanup */,
 				39940F8EB8BD7EF196F2480C /* ExclusionList.swift */,
 				CBC212C41466CCBC66AFE471 /* LoginItem.swift */,
+				6E8C763E02EAB518337D3AB4 /* TrashedItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -314,6 +334,7 @@
 				02EB31970C98B47C0668FF98 /* Privacy */,
 				8EECD1AB3C67344AA7378E3B /* LoginItems */,
 				92790C3AB67C451CB4A66163 /* MenuBar */,
+				59AA45812AF8406B16C1D7FC /* History */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +355,8 @@
 				0BFBF96AE46D8FAC3557C3B3 /* DiskUsage.swift */,
 				03F02F724D763A521F0BAE5E /* ReminderScheduler.swift */,
 				7889D66DD8C8353B3B7F58E9 /* UpdateChecker.swift */,
+				ACB016768AE92FBE27EF48FC /* TrashRestorer.swift */,
+				67B5D769C10C5E477B4DA023 /* CleanupHistoryStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -411,6 +434,7 @@
 				98E359530800AFED9A6D854B /* ModuleScanViewModel.swift */,
 				DE4B6FE247029B41D3634475 /* LoginItemsViewModel.swift */,
 				D594707F501477A34DF9C012 /* ModuleScanStore.swift */,
+				3251262CA5629865D7883CBD /* HistoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -534,6 +558,14 @@
 				156992B6639D769B45B0C561 /* MenuBarContentView.swift */,
 			);
 			path = MenuBar;
+			sourceTree = "<group>";
+		};
+		59AA45812AF8406B16C1D7FC /* History */ = {
+			isa = PBXGroup;
+			children = (
+				6684F9F40D32307B79DFFD31 /* HistoryView.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -731,6 +763,11 @@
 				FFADB5F259455B9D59D2E46F /* ReminderScheduler.swift in Sources */,
 				F502B068F2B6C82268B2E1AB /* UpdateChecker.swift in Sources */,
 				0D358704965E57024C16CFF0 /* ModuleScanStore.swift in Sources */,
+				40E7CE986BD4AEE6EBC64F1E /* TrashedItem.swift in Sources */,
+				382D10443404F37A95B57C86 /* TrashRestorer.swift in Sources */,
+				3BE95A6B6C86479729C34E5A /* CleanupHistoryStore.swift in Sources */,
+				50D90E5DCD2D595F4CFFF1BF /* HistoryViewModel.swift in Sources */,
+				8A998B3C7F83DA1281930953 /* HistoryView.swift in Sources */,
 				F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */,
 				6E6E0F0D8D11AF6A3047C388 /* Theme.swift in Sources */,
 				9BF49DB56B3AEC55F6E74A35 /* CleanupCategoryKind.swift in Sources */,
@@ -751,6 +788,9 @@
 				EDA33010C5196FBC21AD43EE /* LoginItemsScannerTests.swift in Sources */,
 				AC990E9628C960B22B0B2D37 /* DiskUsageTests.swift in Sources */,
 				C6B11EF4D739492A83A932E6 /* UpdateCheckerTests.swift in Sources */,
+				2C58528F9B64BB7C8CBA344B /* TrashRestorerTests.swift in Sources */,
+				9620D26223AF9E37006D7F87 /* CleanupHistoryStoreTests.swift in Sources */,
+				C7B771E9A8834434EF664282 /* CleanupServiceTrashTests.swift in Sources */,
 				2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* CleanupServiceSafetyTests.swift in Sources */,
 				E4EECC430E06D628D7D9810B /* CleanupSelectionPolicyTests.swift in Sources */,

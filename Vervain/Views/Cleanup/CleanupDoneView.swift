@@ -11,6 +11,15 @@ struct CleanupDoneView: View {
                 VStack(spacing: 24) {
                     headerIcon
                     summaryBlock
+                    if coord.result?.wasCancelled == true {
+                        Text("Cleanup was stopped. Items already moved to the Trash are listed below.")
+                            .font(.callout).foregroundStyle(Theme.textSecondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    if let summary = coord.undoSummary {
+                        Text(summary).font(.callout).foregroundStyle(Theme.statusSafe)
+                    }
+                    breakdownBlock
                     if let failures = coord.result?.failures, !failures.isEmpty {
                         failuresBlock(failures)
                     }
@@ -49,6 +58,29 @@ struct CleanupDoneView: View {
         }
     }
 
+    /// Freed space per category, largest first.
+    @ViewBuilder
+    private var breakdownBlock: some View {
+        let trashed = coord.result?.trashed ?? []
+        let grouped = Dictionary(grouping: trashed, by: \.category)
+            .map { (name: $0.key, count: $0.value.count, bytes: $0.value.reduce(Int64(0)) { $0 + $1.size }) }
+            .sorted { $0.bytes > $1.bytes }
+        if grouped.count > 1 {
+            VStack(spacing: 4) {
+                ForEach(grouped, id: \.name) { row in
+                    HStack {
+                        Text(row.name).font(.system(size: 12, weight: .medium))
+                        Text("\(row.count)").font(.caption).foregroundStyle(Theme.textMuted)
+                        Spacer()
+                        Text(row.bytes.formattedBytes).font(.caption).foregroundStyle(Theme.textSecondary)
+                    }
+                }
+            }
+            .padding(10)
+            .background(Theme.surfaceOverlay, in: RoundedRectangle(cornerRadius: 8))
+        }
+    }
+
     private func failuresBlock(_ failures: [CleanupFailure]) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
@@ -58,7 +90,7 @@ struct CleanupDoneView: View {
                     .font(.subheadline.bold())
             }
             VStack(spacing: 4) {
-                ForEach(failures.prefix(8)) { f in
+                ForEach(failures) { f in
                     HStack(spacing: 8) {
                         Text(f.item.name)
                             .font(.system(size: 12, weight: .medium))
@@ -69,25 +101,43 @@ struct CleanupDoneView: View {
                     }
                     .padding(.vertical, 3)
                 }
-                if failures.count > 8 {
-                    Text("and \(failures.count - 8) more…")
-                        .font(.caption).foregroundStyle(Theme.textMuted)
-                }
             }
             .padding(10)
             .background(Theme.fdaBannerAccent.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
+            HStack(spacing: 8) {
+                Button("Copy List") { copyFailures(failures) }
+                    .buttonStyle(.bordered).controlSize(.small)
+                if failures.contains(where: { $0.reason == .permissionDenied }) {
+                    Button("Open Full Disk Access Settings") { FullDiskAccessProbe.openSystemSettings() }
+                        .buttonStyle(.bordered).controlSize(.small)
+                }
+            }
         }
     }
 
     private var footer: some View {
         HStack {
             Spacer()
+            if !(coord.result?.trashed.isEmpty ?? true) {
+                Button("Undo") { coord.undoLastCleanup() }
+                    .buttonStyle(.bordered).foregroundStyle(Theme.textPrimary)
+                    .disabled(coord.isUndoing)
+                    .help("Put everything from this cleanup back where it was")
+            }
             Button("Open Trash") { openTrash() }
                 .buttonStyle(.bordered).foregroundStyle(Theme.textPrimary)
             Button("Done") { coord.finish() }
                 .buttonStyle(.borderedProminent).tint(Theme.systemJunkAccent)
         }
         .padding(.horizontal, 20).padding(.vertical, 14)
+    }
+
+    private func copyFailures(_ failures: [CleanupFailure]) {
+        let text = failures
+            .map { "\($0.item.displayPath)\t\($0.reason.displayText)" }
+            .joined(separator: "\n")
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
     }
 
     private func openTrash() {
