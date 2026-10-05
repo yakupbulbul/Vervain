@@ -5,9 +5,11 @@ import Foundation
 actor LoginItemsScanner {
 
     func scan(
-        home: URL = FileManager.default.homeDirectoryForCurrentUser,
-        systemRoot: URL = URL(fileURLWithPath: "/")
+        home: URL? = nil,
+        systemRoot: URL? = nil
     ) async throws -> [LoginItem] {
+        let home = home ?? FileManager.default.homeDirectoryForCurrentUser
+        let systemRoot = systemRoot ?? URL(fileURLWithPath: "/")
         let locations: [(URL, LoginItem.Scope)] = [
             (home.appendingPathComponent("Library/LaunchAgents"), .userAgent),
             (systemRoot.appendingPathComponent("Library/LaunchAgents"), .systemAgent),

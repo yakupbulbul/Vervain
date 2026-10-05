@@ -14,8 +14,9 @@ actor PrivacyScanner {
     }
 
     func scan(
-        home: URL = FileManager.default.homeDirectoryForCurrentUser
+        home: URL? = nil
     ) async throws -> (categories: [CleanupCategory], metadata: ScanMetadata) {
+        let home = home ?? FileManager.default.homeDirectoryForCurrentUser
         let started = Date()
         var meta = ScanMetadata()
         var caches: [CleanupItem] = []

@@ -19,9 +19,11 @@ actor DuplicateScanner {
     }
 
     func scan(
-        roots: [URL] = personalFolderRoots(),
-        minSize: Int64 = DuplicateScanner.minSizeBytes
+        roots: [URL]? = nil,
+        minSize: Int64? = nil
     ) async throws -> (categories: [CleanupCategory], metadata: ScanMetadata) {
+        let roots = roots ?? personalFolderRoots()
+        let minSize = minSize ?? Self.minSizeBytes
         let started = Date()
         var meta = ScanMetadata()
         var bySize: [Int64: [Entry]] = [:]

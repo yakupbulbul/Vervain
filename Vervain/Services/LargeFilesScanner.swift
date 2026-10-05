@@ -26,9 +26,11 @@ actor LargeFilesScanner {
 
     func scan(
         config: LargeFilesConfig,
-        roots: [URL] = personalFolderRoots(),
-        now: Date = Date()
+        roots: [URL]? = nil,
+        now: Date? = nil
     ) async throws -> (categories: [CleanupCategory], metadata: ScanMetadata) {
+        let roots = roots ?? personalFolderRoots()
+        let now = now ?? Date()
         let started = Date()
         var meta = ScanMetadata()
         var items: [CleanupItem] = []

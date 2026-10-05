@@ -151,8 +151,9 @@ actor CleanupService {
     /// never take out a protected location.
     nonisolated static func isSafeToTrash(
         _ url: URL,
-        home: URL = FileManager.default.homeDirectoryForCurrentUser
+        home: URL? = nil
     ) -> Bool {
+        let home = home ?? FileManager.default.homeDirectoryForCurrentUser
         guard url.isFileURL else { return false }
         let path = url.standardizedFileURL.path
         let homePath = home.standardizedFileURL.path
