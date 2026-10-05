@@ -328,6 +328,38 @@ actor JunkScanner {
                   title: String(localized: "Xcode Internal Cache"),
                   reason: .custom("Xcode internal caches — rebuilt automatically"),
                   risk: .safe, confidence: .high),
+            .init(path: "Library/Developer/Xcode/DocumentationCache",
+                  title: "Xcode Documentation Cache",
+                  reason: .custom("Downloaded documentation — re-downloaded on demand"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Developer/CoreSimulator/Devices",
+                  title: "iOS Simulator Devices",
+                  reason: .custom("Simulator devices and the app data inside them"),
+                  risk: .risky, confidence: .high),
+            .init(path: ".gradle/caches",
+                  title: "Gradle Cache",
+                  reason: .custom("Build and dependency cache — re-downloaded on build"),
+                  risk: .safe, confidence: .high),
+            .init(path: ".cargo/registry",
+                  title: "Cargo Registry Cache",
+                  reason: .custom("Rust crate downloads — re-downloaded on build"),
+                  risk: .safe, confidence: .high),
+            .init(path: ".m2/repository",
+                  title: "Maven Repository",
+                  reason: .custom("Java dependencies — re-downloaded on build"),
+                  risk: .review, confidence: .high),
+            .init(path: "Library/Caches/go-build",
+                  title: "Go Build Cache",
+                  reason: .custom("Go compiler cache — rebuilt automatically"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Caches/JetBrains",
+                  title: "JetBrains IDE Cache",
+                  reason: .custom("IDE indexes and caches — rebuilt on next launch"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Caches/pnpm",
+                  title: "pnpm Cache",
+                  reason: .custom("JavaScript package cache — re-downloaded on install"),
+                  risk: .safe, confidence: .high),
             .init(path: "Library/Developer/Xcode/UserData/IB Support",
                   title: String(localized: "Interface Builder Cache"),
                   reason: .custom("Interface Builder support files — recreated on demand"),
@@ -355,8 +387,9 @@ actor JunkScanner {
                 sourceModule: .systemJunk
             )
 
-            let isDev = target.path.contains("Developer") || target.path.contains("Android")
-                     || target.path.contains("docker")
+            let devMarkers = ["Developer", "Android", "docker", ".gradle", ".cargo", ".m2",
+                              "go-build", "JetBrains"]
+            let isDev = devMarkers.contains { target.path.contains($0) }
             if isDev {
                 devItems.append(item)
             } else {
@@ -370,7 +403,7 @@ actor JunkScanner {
             cats.append(CleanupCategory(
                 kind: .developerCaches,
                 title: String(localized: "Developer Caches"),
-                subtitle: String(localized: "Xcode, simulators, and dev tool data"),
+                subtitle: String(localized: "Xcode, simulators, IDEs, and build tool data"),
                 icon: "hammer.fill",
                 sourceModule: .systemJunk,
                 items: devItems.sorted { $0.size > $1.size }
@@ -380,7 +413,7 @@ actor JunkScanner {
             cats.append(CleanupCategory(
                 kind: .packageManagerCaches,
                 title: String(localized: "Package Manager Caches"),
-                subtitle: String(localized: "Homebrew, npm, pip, CocoaPods, and others"),
+                subtitle: String(localized: "Homebrew, npm, pnpm, pip, CocoaPods, and others"),
                 icon: "shippingbox.fill",
                 sourceModule: .systemJunk,
                 items: packageItems.sorted { $0.size > $1.size }

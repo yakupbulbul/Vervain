@@ -35,7 +35,7 @@ final class LoginItemsViewModel {
         let order: [LoginItem.Scope] = [.userAgent, .systemAgent, .systemDaemon]
         return order.compactMap { scope in
             let matching = items.filter { $0.scope == scope }
-            return matching.isEmpty ? nil : (scope, matching)
+            return matching.isEmpty ? nil : (scope: scope, items: matching)
         }
     }
 
