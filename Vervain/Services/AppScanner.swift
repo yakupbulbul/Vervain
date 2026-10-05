@@ -1,12 +1,15 @@
 import Foundation
+import CoreServices
 
 /// Scans installed applications and produces `AppInfo` records with
 /// graded-confidence leftover detection.
 ///
 /// **Safety guards**:
-/// - Apple system apps (bundleID starting with `com.apple.`) are skipped.
+/// - Protected Apple apps (`com.apple.*`, except Xcode, iWork, GarageBand and
+///   iMovie) are skipped.
 /// - Apps outside the standard locations (`/Applications`,
-///   `~/Applications`, `/Applications/Utilities`) are skipped.
+///   `~/Applications`, `/Applications/Utilities`, or one vendor folder deep
+///   such as `/Applications/Setapp`) are skipped.
 /// - All deletion runs through `CleanupService` — this scanner only
 ///   identifies candidates.
 actor AppScanner {
@@ -24,18 +27,24 @@ actor AppScanner {
 
         var seen = Set<URL>()
         var bundles: [URL] = []
-        for root in roots {
+        func collect(from root: URL, descend: Bool) {
             let entries = (try? fm.contentsOfDirectory(
                 at: root,
                 includingPropertiesForKeys: [.isDirectoryKey],
                 options: [.skipsHiddenFiles]
             )) ?? []
-            for entry in entries where entry.pathExtension == "app" {
-                if seen.insert(entry).inserted {
-                    bundles.append(entry)
+            for entry in entries {
+                if entry.pathExtension == "app" {
+                    if seen.insert(entry).inserted { bundles.append(entry) }
+                } else if descend,
+                          entry.lastPathComponent != "Utilities",
+                          (try? entry.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true {
+                    // One level of vendor folders, e.g. /Applications/Setapp.
+                    collect(from: entry, descend: false)
                 }
             }
         }
+        for root in roots { collect(from: root, descend: root.lastPathComponent != "Utilities") }
 
         return try await withThrowingTaskGroup(of: AppInfo?.self) { group in
             for url in bundles {
@@ -64,6 +73,13 @@ actor AppScanner {
             home.appendingPathComponent("Library/Application Scripts"),
             home.appendingPathComponent("Library/Saved Application State"),
             home.appendingPathComponent("Library/Logs"),
+            home.appendingPathComponent("Library/LaunchAgents"),
+            home.appendingPathComponent("Library/Group Containers"),
+            home.appendingPathComponent("Library/HTTPStorages"),
+            home.appendingPathComponent("Library/WebKit"),
+            home.appendingPathComponent("Library/Cookies"),
+            home.appendingPathComponent("Library/Preferences/ByHost"),
+            home.appendingPathComponent("Library/Application Support/CrashReporter"),
         ]
 
         let bundleID    = app.bundleID
@@ -82,7 +98,7 @@ actor AppScanner {
                 let nameStem  = url.deletingPathExtension().lastPathComponent.lowercased()
                 let parent    = url.deletingLastPathComponent().lastPathComponent
 
-                guard let confidence = matchConfidence(
+                guard let confidence = Self.matchConfidence(
                     nameLower: nameLower,
                     nameStem: nameStem,
                     parent: parent,
@@ -115,7 +131,7 @@ actor AppScanner {
 
     // MARK: - Confidence matching
 
-    private func matchConfidence(
+    static func matchConfidence(
         nameLower: String,
         nameStem: String,
         parent: String,
@@ -145,10 +161,15 @@ actor AppScanner {
             return .medium
         }
 
-        // LOW — substring match on bundleID or app name. Multi-word names
-        // shorter than 4 chars are ignored to avoid false positives like
-        // an app called "Mail" matching every "mail*" file.
-        if appNameLow.count >= 4, nameLower.contains(appNameLow) {
+        // MEDIUM — shared group container: "group.<bundleID>" or "<TEAMID>.<bundleID>".
+        if !bundleIDLow.isEmpty, nameLower.hasSuffix("." + bundleIDLow) {
+            return .medium
+        }
+
+        // LOW — the app name as whole words, or the bundle ID as a substring.
+        // Names shorter than 4 characters are ignored, and "mail" no longer
+        // matches "mailchimp": the name must appear as separate words.
+        if appNameLow.count >= 4, containsWholeWords(nameLower, appNameLow) {
             return .low
         }
         if nameLower.contains(bundleIDLow) {
@@ -158,14 +179,58 @@ actor AppScanner {
         return nil
     }
 
+    /// True if `needle`'s words appear consecutively, as whole words, in `haystack`.
+    static func containsWholeWords(_ haystack: String, _ needle: String) -> Bool {
+        let h = tokens(haystack)
+        let n = tokens(needle)
+        guard !n.isEmpty, n.count <= h.count else { return false }
+        for start in 0...(h.count - n.count) where Array(h[start..<(start + n.count)]) == n {
+            return true
+        }
+        return false
+    }
+
+    private static func tokens(_ text: String) -> [String] {
+        text.split(whereSeparator: { !$0.isLetter && !$0.isNumber }).map(String.init)
+    }
+
+    /// Apple apps the user may remove; everything else from Apple is protected.
+    static let removableAppleBundleIDs: Set<String> = [
+        "com.apple.dt.xcode",
+        "com.apple.iwork.pages",
+        "com.apple.iwork.numbers",
+        "com.apple.iwork.keynote",
+        "com.apple.garageband10",
+        "com.apple.imovieapp",
+    ]
+
+    static func isProtectedAppleApp(bundleID: String) -> Bool {
+        let id = bundleID.lowercased()
+        return id.hasPrefix("com.apple.") && !removableAppleBundleIDs.contains(id)
+    }
+
+    private static func lastUsedDate(of url: URL) -> Date? {
+        guard let item = MDItemCreateWithURL(nil, url as CFURL),
+              let value = MDItemCopyAttribute(item, kMDItemLastUsedDate) else { return nil }
+        return value as? Date
+    }
+
+    private static func source(of url: URL, bundleID: String) -> AppSource {
+        if url.path.contains("/Setapp/") || bundleID.lowercased().hasPrefix("com.setapp.") { return .setapp }
+        if FileManager.default.fileExists(atPath: url.appendingPathComponent("Contents/_MASReceipt/receipt").path) {
+            return .appStore
+        }
+        return .other
+    }
+
     // MARK: - Private
 
     private func buildAppInfo(url: URL) async -> AppInfo? {
         guard let bundle = Bundle(url: url),
               let bundleID = bundle.bundleIdentifier else { return nil }
 
-        // Skip Apple system apps.
-        if bundleID.lowercased().hasPrefix("com.apple.") {
+        // Skip protected Apple system apps (Safari, Mail, …).
+        if Self.isProtectedAppleApp(bundleID: bundleID) {
             return nil
         }
         // Skip apps outside the standard locations.
@@ -213,7 +278,10 @@ actor AppScanner {
             developer: developer,
             url: url,
             bundleSize: size,
-            lastModifiedDate: modDate
+            lastModifiedDate: modDate,
+            lastUsedDate: Self.lastUsedDate(of: url),
+            source: Self.source(of: url, bundleID: bundleID),
+            isAppleApp: bundleID.lowercased().hasPrefix("com.apple.")
         )
     }
 
@@ -226,6 +294,9 @@ actor AppScanner {
             "/Applications/Utilities",
             home + "/Applications"
         ]
-        return allowed.contains(parent)
+        if allowed.contains(parent) { return true }
+        // One vendor folder deep, e.g. /Applications/Setapp/Foo.app
+        let grandparent = URL(fileURLWithPath: parent).deletingLastPathComponent().path
+        return grandparent == "/Applications" || grandparent == home + "/Applications"
     }
 }

@@ -4,15 +4,10 @@ struct AppUninstallerView: View {
     @Environment(AppUninstallerViewModel.self) private var vm
     @Environment(CleanupCoordinator.self) private var coord
 
-    @State private var searchText: String = ""
+    @State private var filter = AppListFilter()
     @State private var selectedDetailID: UUID?
-    @State private var sortOrder: SortOrder = .size
-
-    enum SortOrder: String, CaseIterable {
-        case size = "Size"
-        case name = "Name"
-        case date = "Date"
-    }
+    @State private var runningNames: [String] = []
+    @State private var showQuitAlert = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -21,12 +16,43 @@ struct AppUninstallerView: View {
                 toolbarButtons
             }
             Divider().background(Theme.divider)
+            if let message = vm.errorMessage {
+                HStack(spacing: 8) {
+                    Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(Theme.fdaBannerAccent)
+                    Text(message).font(.caption).foregroundStyle(Theme.textSecondary)
+                    Spacer()
+                    Button("Dismiss") { vm.errorMessage = nil }
+                        .buttonStyle(.borderless).font(.caption)
+                }
+                .padding(.horizontal, 16).padding(.vertical, 8)
+                .background(Theme.fdaBannerBackground)
+            }
             mainContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .animation(.easeInOut(duration: 0.2), value: vm.isScanning)
         }
         .background(Theme.background)
         .foregroundStyle(Theme.textPrimary)
+        .dropDestination(for: URL.self) { urls, _ in
+            var handled = false
+            for url in urls where url.pathExtension == "app" {
+                if let app = vm.selectApp(at: url) {
+                    selectedDetailID = app.id
+                    handled = true
+                }
+            }
+            return handled
+        }
+        .alert("Quit running apps?", isPresented: $showQuitAlert) {
+            Button("Quit and Continue") {
+                vm.quitRunningSelectedApps()
+                openUninstallReview()
+            }
+            Button("Continue Without Quitting") { openUninstallReview() }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("\(runningNames.joined(separator: ", ")) is still running. Quitting it first avoids leaving files behind.")
+        }
     }
 
     // MARK: - Toolbar
@@ -35,7 +61,11 @@ struct AppUninstallerView: View {
     private var toolbarButtons: some View {
         switch vm.state {
         case .scanning:
-            ProgressView().controlSize(.small).tint(Theme.appUninstallerAccent)
+            HStack(spacing: 8) {
+                ProgressView().controlSize(.small).tint(Theme.appUninstallerAccent)
+                Button("Cancel") { vm.cancelScan() }
+                    .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
+            }
         case .results:
             Button("Re-Scan") { vm.scan() }
                 .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
@@ -115,19 +145,35 @@ struct AppUninstallerView: View {
             HStack(spacing: 8) {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(Theme.textMuted)
-                TextField("Search apps…", text: $searchText)
+                TextField("Search apps…", text: $filter.query)
                     .textFieldStyle(.plain)
                     .foregroundStyle(Theme.textPrimary)
                 Spacer()
-                Picker("Sort", selection: $sortOrder) {
-                    ForEach(SortOrder.allCases, id: \.self) { order in
-                        Text(order.rawValue).tag(order)
-                    }
+                Picker("Sort", selection: $filter.sort) {
+                    ForEach(AppListFilter.Sort.allCases) { Text($0.label).tag($0) }
                 }
-                .pickerStyle(.segmented)
-                .frame(width: 160)
+                .labelsHidden().fixedSize()
+                Button {
+                    filter.reversed.toggle()
+                } label: {
+                    Image(systemName: "arrow.up.arrow.down")
+                }
+                .buttonStyle(.borderless)
+                .help("Reverse order")
+                .accessibilityLabel("Reverse order")
             }
             .padding(.horizontal, 14).padding(.vertical, 8)
+            .background(Theme.surfaceOverlay)
+
+            // Quick filters
+            HStack(spacing: 8) {
+                Toggle("Not opened in \(filter.unusedMonths)+ months", isOn: $filter.unusedOnly)
+                Toggle("Has leftovers", isOn: $filter.leftoversOnly)
+                Spacer()
+            }
+            .toggleStyle(.button)
+            .controlSize(.small)
+            .padding(.horizontal, 14).padding(.bottom, 6)
             .background(Theme.surfaceOverlay)
 
             // Stats bar
@@ -159,6 +205,7 @@ struct AppUninstallerView: View {
                     onScanLeftovers: { vm.scanLeftovers(for: app) }
                 )
                 .tag(app.id)
+                .itemContextMenu(url: app.url, allowExclude: false)
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(
                     selectedDetailID == app.id
@@ -179,14 +226,25 @@ struct AppUninstallerView: View {
     }
 
     private var filteredApps: [AppInfo] {
-        let q = searchText.lowercased()
-        let base = q.isEmpty ? vm.apps : vm.apps.filter {
-            $0.name.lowercased().contains(q) || $0.bundleID.lowercased().contains(q)
+        filter.apply(to: vm.apps)
+    }
+
+    private func startUninstallReview() {
+        let running = vm.runningSelectedApps()
+        if running.isEmpty {
+            openUninstallReview()
+        } else {
+            runningNames = running.compactMap(\.localizedName)
+            showQuitAlert = true
         }
-        switch sortOrder {
-        case .size: return base.sorted { $0.bundleSize > $1.bundleSize }
-        case .name: return base.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
-        case .date: return base.sorted { ($0.lastModifiedDate ?? .distantPast) > ($1.lastModifiedDate ?? .distantPast) }
+    }
+
+    private func openUninstallReview() {
+        coord.startReview(
+            vm.buildCleanupCategories(),
+            title: String(localized: "Review Uninstall")
+        ) {
+            vm.scan()
         }
     }
 
@@ -225,14 +283,7 @@ struct AppUninstallerView: View {
                 vm.selectedIDs.removeAll()
             }
             .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
-            Button("Review & Uninstall") {
-                coord.startReview(
-                    vm.buildCleanupCategories(),
-                    title: String(localized: "Review Uninstall")
-                ) {
-                    vm.scan()
-                }
-            }
+            Button("Review & Uninstall") { startUninstallReview() }
             .buttonStyle(.borderedProminent).tint(Theme.appUninstallerAccent)
         }
         .padding(.horizontal, 16).padding(.vertical, 12)
@@ -248,6 +299,11 @@ struct AppUninstallerView: View {
 // MARK: - App Row
 
 struct AppRow: View {
+    private var lastOpenedText: String {
+        guard let date = app.lastUsedDate else { return String(localized: "Never opened") }
+        return String(localized: "Opened \(date.formatted(.relative(presentation: .named)))")
+    }
+
     let app: AppInfo
     let isSelected: Bool
     let isDetailSelected: Bool
@@ -295,6 +351,25 @@ struct AppRow: View {
                     .font(.system(size: 10, design: .monospaced))
                     .foregroundStyle(Theme.textMuted)
                     .lineLimit(1)
+                HStack(spacing: 6) {
+                    Text(lastOpenedText)
+                        .font(.system(size: 10))
+                        .foregroundStyle(Theme.textMuted)
+                    if let source = app.source.label {
+                        Text(source)
+                            .font(.system(size: 9, weight: .semibold))
+                            .padding(.horizontal, 5).padding(.vertical, 1)
+                            .background(Theme.divider, in: Capsule())
+                            .foregroundStyle(Theme.textSecondary)
+                    }
+                    if app.isAppleApp {
+                        Text("Apple")
+                            .font(.system(size: 9, weight: .semibold))
+                            .padding(.horizontal, 5).padding(.vertical, 1)
+                            .background(Theme.divider, in: Capsule())
+                            .foregroundStyle(Theme.textSecondary)
+                    }
+                }
             }
 
             Spacer()

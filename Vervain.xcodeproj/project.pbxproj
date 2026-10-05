@@ -113,6 +113,10 @@
 		6DEB76E091CD1128BA21EB3D /* ReportExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E87A27FD8E70E8C5FB3D47C /* ReportExporter.swift */; };
 		38510D9EBDDA6BD040C5FBCA /* ItemActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E8275A463B4EA83A831BAC /* ItemActions.swift */; };
 		BE1292201D6C0B86672D25A9 /* NavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08185E82D761218BBAF02EA /* NavigationModel.swift */; };
+		33BF1752D26597322A0191E6 /* AppListFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48BC798A685233470B3ADB /* AppListFilterTests.swift */; };
+		D7D1D9EF2244B82EC3F7D640 /* AppScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D56EE544CA052CF316FDA /* AppScannerTests.swift */; };
+		C91C78A1BFB342CFC47A336A /* AppUninstallerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5895C1CB9D34253AC38205 /* AppUninstallerViewModelTests.swift */; };
+		CF30C7316D44E0736AF466E4 /* AppListFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F5DF6E1A6126C03D6CAFE /* AppListFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,6 +248,10 @@
 		9E87A27FD8E70E8C5FB3D47C /* ReportExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportExporter.swift; sourceTree = "<group>"; };
 		E8E8275A463B4EA83A831BAC /* ItemActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemActions.swift; sourceTree = "<group>"; };
 		F08185E82D761218BBAF02EA /* NavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModel.swift; sourceTree = "<group>"; };
+		5D48BC798A685233470B3ADB /* AppListFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListFilterTests.swift; sourceTree = "<group>"; };
+		1F2D56EE544CA052CF316FDA /* AppScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScannerTests.swift; sourceTree = "<group>"; };
+		9D5895C1CB9D34253AC38205 /* AppUninstallerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUninstallerViewModelTests.swift; sourceTree = "<group>"; };
+		F54F5DF6E1A6126C03D6CAFE /* AppListFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -280,6 +288,9 @@
 				63360764D344501E85D63FC7 /* ReviewFilterTests.swift */,
 				38BB75192B8A8A80F2180B8B /* ReportExporterTests.swift */,
 				E5385C97476AAF5ACD157A3A /* NavigationModelTests.swift */,
+				5D48BC798A685233470B3ADB /* AppListFilterTests.swift */,
+				1F2D56EE544CA052CF316FDA /* AppScannerTests.swift */,
+				9D5895C1CB9D34253AC38205 /* AppUninstallerViewModelTests.swift */,
 			);
 			path = VervainTests;
 			sourceTree = "<group>";
@@ -318,6 +329,7 @@
 				39940F8EB8BD7EF196F2480C /* ExclusionList.swift */,
 				CBC212C41466CCBC66AFE471 /* LoginItem.swift */,
 				6E8C763E02EAB518337D3AB4 /* TrashedItem.swift */,
+				F54F5DF6E1A6126C03D6CAFE /* AppListFilter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -785,6 +797,7 @@
 				6DEB76E091CD1128BA21EB3D /* ReportExporter.swift in Sources */,
 				38510D9EBDDA6BD040C5FBCA /* ItemActions.swift in Sources */,
 				BE1292201D6C0B86672D25A9 /* NavigationModel.swift in Sources */,
+				CF30C7316D44E0736AF466E4 /* AppListFilter.swift in Sources */,
 				F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */,
 				6E6E0F0D8D11AF6A3047C388 /* Theme.swift in Sources */,
 				9BF49DB56B3AEC55F6E74A35 /* CleanupCategoryKind.swift in Sources */,
@@ -811,6 +824,9 @@
 				B083A582A35A0124E8AD7670 /* ReviewFilterTests.swift in Sources */,
 				28EF4F88E7406491278FAA8C /* ReportExporterTests.swift in Sources */,
 				C4E3A4D1D7D6584D3BFAB0FF /* NavigationModelTests.swift in Sources */,
+				33BF1752D26597322A0191E6 /* AppListFilterTests.swift in Sources */,
+				D7D1D9EF2244B82EC3F7D640 /* AppScannerTests.swift in Sources */,
+				C91C78A1BFB342CFC47A336A /* AppUninstallerViewModelTests.swift in Sources */,
 				2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* CleanupServiceSafetyTests.swift in Sources */,
 				E4EECC430E06D628D7D9810B /* CleanupSelectionPolicyTests.swift in Sources */,
