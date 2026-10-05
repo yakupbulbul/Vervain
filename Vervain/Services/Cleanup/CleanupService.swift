@@ -113,12 +113,16 @@ actor CleanupService {
     /// needed under the hardened runtime.
     private static func trashViaWorkspace(_ url: URL) async throws {
         try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
-            NSWorkspace.shared.recycle([url]) { _, error in
+            // Built here, outside any actor, so AppKit may call it on any queue.
+            let done: @Sendable ([URL: URL], Error?) -> Void = { _, error in
                 if let error {
                     cont.resume(throwing: error)
                 } else {
                     cont.resume()
                 }
+            }
+            Task { @MainActor in
+                NSWorkspace.shared.recycle([url], completionHandler: done)
             }
         }
     }
