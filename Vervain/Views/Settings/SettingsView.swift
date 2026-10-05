@@ -2,54 +2,110 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage("appLanguage") private var appLanguage: String = ""
+    @AppStorage("showMenuBarExtra") private var showMenuBarExtra = false
+    @AppStorage("weeklyReminder") private var weeklyReminder = false
     @State private var needsRestart = false
+    @State private var exclusions = ExclusionList.paths()
 
     var body: some View {
         Form {
-            Picker("Language", selection: $appLanguage) {
-                Text("System Default").tag("")
-                Divider()
-                Text("English").tag("en")
-                Text("Français").tag("fr")
-                Text("Deutsch").tag("de")
-                Text("Türkçe").tag("tr")
-                Text("Español").tag("es")
-                Text("中文(简体)").tag("zh-Hans")
-            }
-            .onChange(of: appLanguage) { _, newValue in
-                if newValue.isEmpty {
-                    UserDefaults.standard.removeObject(forKey: "AppleLanguages")
-                } else {
-                    UserDefaults.standard.set([newValue], forKey: "AppleLanguages")
+            Section("General") {
+                Picker("Language", selection: $appLanguage) {
+                    Text("System Default").tag("")
+                    Divider()
+                    Text("English").tag("en")
+                    Text("Français").tag("fr")
+                    Text("Deutsch").tag("de")
+                    Text("Türkçe").tag("tr")
+                    Text("Español").tag("es")
+                    Text("中文(简体)").tag("zh-Hans")
                 }
-                needsRestart = true
+                .onChange(of: appLanguage) { _, newValue in
+                    if newValue.isEmpty {
+                        UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+                    } else {
+                        UserDefaults.standard.set([newValue], forKey: "AppleLanguages")
+                    }
+                    needsRestart = true
+                }
+
+                if needsRestart {
+                    HStack(spacing: 12) {
+                        Image(systemName: "arrow.clockwise.circle.fill")
+                            .foregroundStyle(.orange)
+                        Text("Restart Vervain to apply the new language.")
+                            .font(.callout)
+                        Spacer()
+                        Button("Restart Now") {
+                            restartApp()
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.orange)
+                    }
+                }
             }
 
-            if needsRestart {
-                HStack(spacing: 12) {
-                    Image(systemName: "arrow.clockwise.circle.fill")
-                        .foregroundStyle(.orange)
-                    Text("Restart Vervain to apply the new language.")
-                        .font(.callout)
-                    Spacer()
-                    Button("Restart Now") {
-                        restartApp()
+            Section("Menu Bar") {
+                Toggle("Show disk usage in the menu bar", isOn: $showMenuBarExtra)
+            }
+
+            Section("Reminders") {
+                Toggle("Remind me every Monday to run a scan", isOn: $weeklyReminder)
+                    .onChange(of: weeklyReminder) { _, enabled in
+                        Task {
+                            let ok = await ReminderScheduler.setEnabled(enabled)
+                            if !ok { weeklyReminder = false }
+                        }
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.orange)
+            }
+
+            Section {
+                if exclusions.isEmpty {
+                    Text("Nothing is excluded.")
+                        .font(.callout).foregroundStyle(.secondary)
                 }
+                ForEach(exclusions, id: \.self) { path in
+                    HStack {
+                        Text(CleanupItem.makeDisplayPath(url: URL(fileURLWithPath: path)))
+                            .lineLimit(1).truncationMode(.middle)
+                        Spacer()
+                        Button {
+                            ExclusionList.remove(path)
+                            exclusions = ExclusionList.paths()
+                        } label: {
+                            Image(systemName: "minus.circle")
+                        }
+                        .buttonStyle(.borderless)
+                        .help("Stop excluding this folder")
+                    }
+                }
+                Button("Add Folder…") { chooseFolders() }
+            } header: {
+                Text("Excluded Folders")
+            } footer: {
+                Text("Vervain never offers files in these folders for cleanup.")
             }
         }
         .formStyle(.grouped)
-        .frame(width: 400)
+        .frame(width: 460)
+    }
+
+    private func chooseFolders() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.allowsMultipleSelection = true
+        panel.prompt = String(localized: "Exclude")
+        guard panel.runModal() == .OK else { return }
+        for url in panel.urls { ExclusionList.add(url.path) }
+        exclusions = ExclusionList.paths()
     }
 
     private func restartApp() {
-        let url = Bundle.main.bundleURL
-        let task = Process()
-        task.executableURL = URL(fileURLWithPath: "/usr/bin/open")
-        task.arguments = ["-n", url.path]
-        try? task.run()
-        NSApplication.shared.terminate(nil)
+        let config = NSWorkspace.OpenConfiguration()
+        config.createsNewApplicationInstance = true
+        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: config) { _, _ in
+            DispatchQueue.main.async { NSApplication.shared.terminate(nil) }
+        }
     }
 }

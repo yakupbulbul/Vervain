@@ -91,6 +91,10 @@
 		0AA3B7EC2299809E294C0F52 /* LoginItemsScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63FD337EE84DA8DC043BD36 /* LoginItemsScanner.swift */; };
 		CB683AB7351D7D9702281ACC /* LoginItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4B6FE247029B41D3634475 /* LoginItemsViewModel.swift */; };
 		F1D12393B2D06FB58F5FB716 /* LoginItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B0C13B17F7686BC73DA160 /* LoginItemsView.swift */; };
+		AC990E9628C960B22B0B2D37 /* DiskUsageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B3DDD222E7B37653429D67 /* DiskUsageTests.swift */; };
+		9442CEE0C25D64A2C9E6A57D /* DiskUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFBF96AE46D8FAC3557C3B3 /* DiskUsage.swift */; };
+		49D7239C985AAAD81FF9CA62 /* MenuBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156992B6639D769B45B0C561 /* MenuBarContentView.swift */; };
+		FFADB5F259455B9D59D2E46F /* ReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F02F724D763A521F0BAE5E /* ReminderScheduler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +204,10 @@
 		E63FD337EE84DA8DC043BD36 /* LoginItemsScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemsScanner.swift; sourceTree = "<group>"; };
 		DE4B6FE247029B41D3634475 /* LoginItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemsViewModel.swift; sourceTree = "<group>"; };
 		B4B0C13B17F7686BC73DA160 /* LoginItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemsView.swift; sourceTree = "<group>"; };
+		D9B3DDD222E7B37653429D67 /* DiskUsageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskUsageTests.swift; sourceTree = "<group>"; };
+		0BFBF96AE46D8FAC3557C3B3 /* DiskUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskUsage.swift; sourceTree = "<group>"; };
+		156992B6639D769B45B0C561 /* MenuBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContentView.swift; sourceTree = "<group>"; };
+		03F02F724D763A521F0BAE5E /* ReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderScheduler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -228,6 +236,7 @@
 				8892A8F6AFF5FD302018C6A1 /* DuplicateScannerTests.swift */,
 				120E76A702F6295D180C20C5 /* PrivacyScannerTests.swift */,
 				ED3357F64B8BFFD46184569E /* LoginItemsScannerTests.swift */,
+				D9B3DDD222E7B37653429D67 /* DiskUsageTests.swift */,
 			);
 			path = VervainTests;
 			sourceTree = "<group>";
@@ -297,6 +306,7 @@
 				C6B40EB52B5F36EA5DF40456 /* Duplicates */,
 				02EB31970C98B47C0668FF98 /* Privacy */,
 				8EECD1AB3C67344AA7378E3B /* LoginItems */,
+				92790C3AB67C451CB4A66163 /* MenuBar */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -314,6 +324,8 @@
 				0B3DF308BCCA291B4410DAE4 /* DuplicateScanner.swift */,
 				BA215852495637F62A3B0708 /* PrivacyScanner.swift */,
 				E63FD337EE84DA8DC043BD36 /* LoginItemsScanner.swift */,
+				0BFBF96AE46D8FAC3557C3B3 /* DiskUsage.swift */,
+				03F02F724D763A521F0BAE5E /* ReminderScheduler.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -507,6 +519,14 @@
 			path = LoginItems;
 			sourceTree = "<group>";
 		};
+		92790C3AB67C451CB4A66163 /* MenuBar */ = {
+			isa = PBXGroup;
+			children = (
+				156992B6639D769B45B0C561 /* MenuBarContentView.swift */,
+			);
+			path = MenuBar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -697,6 +717,9 @@
 				0AA3B7EC2299809E294C0F52 /* LoginItemsScanner.swift in Sources */,
 				CB683AB7351D7D9702281ACC /* LoginItemsViewModel.swift in Sources */,
 				F1D12393B2D06FB58F5FB716 /* LoginItemsView.swift in Sources */,
+				9442CEE0C25D64A2C9E6A57D /* DiskUsage.swift in Sources */,
+				49D7239C985AAAD81FF9CA62 /* MenuBarContentView.swift in Sources */,
+				FFADB5F259455B9D59D2E46F /* ReminderScheduler.swift in Sources */,
 				F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */,
 				6E6E0F0D8D11AF6A3047C388 /* Theme.swift in Sources */,
 				9BF49DB56B3AEC55F6E74A35 /* CleanupCategoryKind.swift in Sources */,
@@ -715,6 +738,7 @@
 				10E36A764BD5C4F592E402CC /* DuplicateScannerTests.swift in Sources */,
 				4AC98E24E114F1A4414C6773 /* PrivacyScannerTests.swift in Sources */,
 				EDA33010C5196FBC21AD43EE /* LoginItemsScannerTests.swift in Sources */,
+				AC990E9628C960B22B0B2D37 /* DiskUsageTests.swift in Sources */,
 				2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* CleanupServiceSafetyTests.swift in Sources */,
 				E4EECC430E06D628D7D9810B /* CleanupSelectionPolicyTests.swift in Sources */,

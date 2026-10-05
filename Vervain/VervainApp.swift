@@ -12,6 +12,7 @@ struct VervainApp: App {
     @State private var fdaVM            = FullDiskAccessViewModel()
     @State private var showOnboarding   = !OnboardingView.hasShown
     @State private var showAbout        = false
+    @AppStorage("showMenuBarExtra") private var showMenuBarExtra = false
     var body: some Scene {
         WindowGroup {
             ContentView(showAbout: $showAbout)
@@ -46,6 +47,12 @@ struct VervainApp: App {
                 Button("About Vervain") { showAbout = true }
             }
         }
+
+        MenuBarExtra("Vervain", systemImage: "leaf.fill", isInserted: $showMenuBarExtra) {
+            MenuBarContentView()
+                .environment(systemJunkVM)
+        }
+        .menuBarExtraStyle(.window)
 
         Settings {
             SettingsView()
