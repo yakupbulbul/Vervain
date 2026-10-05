@@ -40,6 +40,10 @@ targets:
         CODE_SIGN_STYLE: Manual
         DEVELOPMENT_TEAM: ""
         OTHER_CODE_SIGN_FLAGS: "--deep"
+      configs:
+        Release:
+          CODE_SIGN_ENTITLEMENTS: Vervain/Vervain.Release.entitlements
+          ENABLE_HARDENED_RUNTIME: YES
 
   VervainTests:
     type: bundle.unit-test
