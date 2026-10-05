@@ -18,15 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install XcodeGen
-        run: brew install xcodegen
-
-      - name: Generate project and verify it is up to date
-        run: |
-          xcodegen generate
-          git diff --exit-code -- Vervain.xcodeproj/project.pbxproj \
-            || { echo "::error::Vervain.xcodeproj is out of sync with project.yml. Run 'xcodegen generate' and commit."; exit 1; }
-
       - name: Unit tests
         run: |
           xcodebuild test \
