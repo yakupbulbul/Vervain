@@ -15,9 +15,9 @@ struct ScanMetadata: Sendable {
 
     /// Convenience for displaying a one-line summary in the UI.
     var summary: String {
-        var parts: [String] = ["Scanned \(scannedCount) items"]
-        if inaccessibleCount > 0 { parts.append("\(inaccessibleCount) inaccessible") }
-        if skippedCount > 0      { parts.append("\(skippedCount) skipped") }
+        var parts: [String] = [String(localized: "Scanned \(scannedCount) items")]
+        if inaccessibleCount > 0 { parts.append(String(localized: "\(inaccessibleCount) inaccessible")) }
+        if skippedCount > 0      { parts.append(String(localized: "\(skippedCount) skipped")) }
         return parts.joined(separator: " · ")
     }
 }
@@ -37,9 +37,9 @@ struct ScanError: Sendable, Identifiable, Hashable {
 
         var displayText: String {
             switch self {
-            case .permissionDenied:        return "Permission denied"
-            case .notFound:                return "Path no longer exists"
-            case .ioError(let msg):        return "I/O error: \(msg)"
+            case .permissionDenied:        return String(localized: "Permission denied")
+            case .notFound:                return String(localized: "Path no longer exists")
+            case .ioError(let msg):        return String(localized: "I/O error: \(msg)")
             case .other(let msg):          return msg
             }
         }

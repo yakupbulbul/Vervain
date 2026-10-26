@@ -53,15 +53,37 @@ actor JunkScanner {
         var oldItems: [CleanupItem] = []
         var recentItems: [CleanupItem] = []
 
-        try enumerate(at: base, meta: &meta, skipDirNames: Self.tccSensitiveCacheDirs) { url, attrs in
-            let modified = attrs.contentModificationDate ?? attrs.creationDate ?? .distantPast
+        // One item per top-level cache folder (usually one per app) rather
+        // than one per file: far fewer items, a readable review list, and
+        // trashing a folder is a single operation.
+        let entries = (try? FileManager.default.contentsOfDirectory(
+            at: base,
+            includingPropertiesForKeys: [.isSymbolicLinkKey],
+            options: []
+        )) ?? []
+
+        for url in entries {
+            try Task.checkCancellation()
+            if Self.tccSensitiveCacheDirs.contains(url.lastPathComponent) {
+                meta.skippedCount += 1
+                continue
+            }
+            if (try? url.resourceValues(forKeys: [.isSymbolicLinkKey]))?.isSymbolicLink == true {
+                continue
+            }
+            let stats = directoryStats(at: url)
+            if stats.inaccessibleCount > 0 {
+                meta.inaccessibleCount += stats.inaccessibleCount
+                meta.errors.append(ScanError(path: url.path, reason: .permissionDenied))
+            }
+            guard stats.size > 0 else { continue }
+
+            let modified = stats.newestModification
             let ageDays = max(0, Int(now.timeIntervalSince(modified) / 86_400))
-            let size = Int64(attrs.fileSize ?? 0)
-            guard size > 0 else { return }
 
             if ageDays > 30 {
                 oldItems.append(CleanupItem(
-                    url: url, size: size,
+                    url: url, size: stats.size,
                     category: "User Caches",
                     reason: .oldCache(ageDays: ageDays),
                     riskLevel: .safe,
@@ -71,7 +93,7 @@ actor JunkScanner {
                 ))
             } else {
                 recentItems.append(CleanupItem(
-                    url: url, size: size,
+                    url: url, size: stats.size,
                     category: "User Caches",
                     reason: .recentCache,
                     riskLevel: .review,
@@ -87,21 +109,21 @@ actor JunkScanner {
         if !oldItems.isEmpty {
             cats.append(CleanupCategory(
                 kind: .oldCaches,
-                title: "Old Caches",
-                subtitle: "Not accessed in over 30 days",
+                title: String(localized: "Old Caches"),
+                subtitle: String(localized: "Folders untouched for over 30 days"),
                 icon: "internaldrive",
                 sourceModule: .systemJunk,
-                items: oldItems
+                items: oldItems.sorted { $0.size > $1.size }
             ))
         }
         if !recentItems.isEmpty {
             cats.append(CleanupCategory(
                 kind: .recentCaches,
-                title: "Recent Caches",
-                subtitle: "Apps may regenerate these — review before removing",
+                title: String(localized: "Recent Caches"),
+                subtitle: String(localized: "Apps may regenerate these — review before removing"),
                 icon: "internaldrive.fill",
                 sourceModule: .systemJunk,
-                items: recentItems
+                items: recentItems.sorted { $0.size > $1.size }
             ))
         }
         return ScanProduct(categories: cats, meta: meta)
@@ -152,8 +174,8 @@ actor JunkScanner {
         if !oldItems.isEmpty {
             cats.append(CleanupCategory(
                 kind: .oldLogs,
-                title: "Old Logs",
-                subtitle: "Older than 7 days",
+                title: String(localized: "Old Logs"),
+                subtitle: String(localized: "Older than 7 days"),
                 icon: "doc.text.fill",
                 sourceModule: .systemJunk,
                 items: oldItems
@@ -162,8 +184,8 @@ actor JunkScanner {
         if !recentItems.isEmpty {
             cats.append(CleanupCategory(
                 kind: .recentLogs,
-                title: "Recent Logs",
-                subtitle: "May still be useful for diagnostics",
+                title: String(localized: "Recent Logs"),
+                subtitle: String(localized: "May still be useful for diagnostics"),
                 icon: "doc.text",
                 sourceModule: .systemJunk,
                 items: recentItems
@@ -225,8 +247,8 @@ actor JunkScanner {
         if items.isEmpty { return ScanProduct(categories: [], meta: meta) }
         let cats = [CleanupCategory(
             kind: .languageFiles,
-            title: "Language Files",
-            subtitle: "Removing these invalidates app code signatures — review carefully",
+            title: String(localized: "Language Files"),
+            subtitle: String(localized: "Removing these invalidates app code signatures — review carefully"),
             icon: "globe",
             sourceModule: .systemJunk,
             items: items
@@ -251,69 +273,106 @@ actor JunkScanner {
 
         let targets: [SystemDataTarget] = [
             .init(path: "Library/Developer/Xcode/DerivedData",
-                  title: "Xcode Build Cache",
+                  title: String(localized: "Xcode Build Cache"),
                   reason: .custom("Xcode derived data — rebuilds automatically"),
                   risk: .safe, confidence: .high),
             .init(path: "Library/Developer/CoreSimulator/Caches",
-                  title: "Simulator Caches",
+                  title: String(localized: "Simulator Caches"),
                   reason: .custom("iOS Simulator caches — recreated on demand"),
                   risk: .safe, confidence: .high),
             .init(path: "Library/Developer/Xcode/iOS DeviceSupport",
-                  title: "iOS Device Support",
+                  title: String(localized: "iOS Device Support"),
                   reason: .custom("Debug symbols for connected devices — re-downloaded on next connect"),
                   risk: .review, confidence: .high),
             .init(path: "Library/Developer/Xcode/watchOS DeviceSupport",
-                  title: "watchOS Device Support",
+                  title: String(localized: "watchOS Device Support"),
                   reason: .custom("Debug symbols for Apple Watch — re-downloaded on next connect"),
                   risk: .review, confidence: .high),
             .init(path: "Library/Developer/Xcode/Archives",
-                  title: "Xcode Archives",
+                  title: String(localized: "Xcode Archives"),
                   reason: .custom("Archived app builds — only needed for App Store submissions"),
                   risk: .risky, confidence: .high),
             .init(path: "Library/Caches/Homebrew",
-                  title: "Homebrew Cache",
+                  title: String(localized: "Homebrew Cache"),
                   reason: .custom("Package manager download cache — re-downloaded on install"),
                   risk: .safe, confidence: .high),
             .init(path: "Library/Caches/pip",
-                  title: "Python pip Cache",
+                  title: String(localized: "Python pip Cache"),
                   reason: .custom("Python package cache — re-downloaded on install"),
                   risk: .safe, confidence: .high),
             .init(path: "Library/Caches/yarn",
-                  title: "Yarn Cache",
+                  title: String(localized: "Yarn Cache"),
                   reason: .custom("JavaScript package cache — re-downloaded on install"),
                   risk: .safe, confidence: .high),
             .init(path: ".npm/_cacache",
-                  title: "npm Cache",
+                  title: String(localized: "npm Cache"),
                   reason: .custom("Node.js package cache — re-downloaded on install"),
                   risk: .safe, confidence: .high),
             .init(path: "Library/Caches/CocoaPods",
-                  title: "CocoaPods Cache",
+                  title: String(localized: "CocoaPods Cache"),
                   reason: .custom("iOS dependency cache — re-downloaded on pod install"),
                   risk: .safe, confidence: .high),
             .init(path: "Library/Caches/org.carthage.CarthageKit",
-                  title: "Carthage Cache",
+                  title: String(localized: "Carthage Cache"),
                   reason: .custom("iOS dependency cache — re-downloaded on build"),
                   risk: .safe, confidence: .high),
             .init(path: "Library/Containers/com.docker.docker/Data",
-                  title: "Docker Data",
+                  title: String(localized: "Docker Data"),
                   reason: .custom("Docker images, containers, and volumes"),
                   risk: .risky, confidence: .high),
             .init(path: "Library/Android/sdk",
-                  title: "Android SDK",
+                  title: String(localized: "Android SDK"),
                   reason: .custom("Android development SDK — re-downloaded via SDK Manager"),
                   risk: .risky, confidence: .high),
             .init(path: "Library/Caches/com.apple.dt.Xcode",
-                  title: "Xcode Internal Cache",
+                  title: String(localized: "Xcode Internal Cache"),
                   reason: .custom("Xcode internal caches — rebuilt automatically"),
                   risk: .safe, confidence: .high),
+            .init(path: "Library/Developer/Xcode/DocumentationCache",
+                  title: "Xcode Documentation Cache",
+                  reason: .custom("Downloaded documentation — re-downloaded on demand"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Developer/CoreSimulator/Devices",
+                  title: "iOS Simulator Devices",
+                  reason: .custom("Simulator devices and the app data inside them"),
+                  risk: .risky, confidence: .high),
+            .init(path: ".gradle/caches",
+                  title: "Gradle Cache",
+                  reason: .custom("Build and dependency cache — re-downloaded on build"),
+                  risk: .safe, confidence: .high),
+            .init(path: ".cargo/registry",
+                  title: "Cargo Registry Cache",
+                  reason: .custom("Rust crate downloads — re-downloaded on build"),
+                  risk: .safe, confidence: .high),
+            .init(path: ".m2/repository",
+                  title: "Maven Repository",
+                  reason: .custom("Java dependencies — re-downloaded on build"),
+                  risk: .review, confidence: .high),
+            .init(path: "Library/Caches/go-build",
+                  title: "Go Build Cache",
+                  reason: .custom("Go compiler cache — rebuilt automatically"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Caches/JetBrains",
+                  title: "JetBrains IDE Cache",
+                  reason: .custom("IDE indexes and caches — rebuilt on next launch"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Caches/pnpm",
+                  title: "pnpm Cache",
+                  reason: .custom("JavaScript package cache — re-downloaded on install"),
+                  risk: .safe, confidence: .high),
+            .init(path: "Library/Application Support/MobileSync/Backup",
+                  title: "iPhone & iPad Backups",
+                  reason: .custom("Local device backups — the only copy if you do not use iCloud Backup"),
+                  risk: .risky, confidence: .high),
             .init(path: "Library/Developer/Xcode/UserData/IB Support",
-                  title: "Interface Builder Cache",
+                  title: String(localized: "Interface Builder Cache"),
                   reason: .custom("Interface Builder support files — recreated on demand"),
                   risk: .safe, confidence: .high),
         ]
 
         var devItems: [CleanupItem] = []
         var packageItems: [CleanupItem] = []
+        var backupItems: [CleanupItem] = []
 
         for target in targets {
             try Task.checkCancellation()
@@ -333,9 +392,12 @@ actor JunkScanner {
                 sourceModule: .systemJunk
             )
 
-            let isDev = target.path.contains("Developer") || target.path.contains("Android")
-                     || target.path.contains("docker")
-            if isDev {
+            let devMarkers = ["Developer", "Android", "docker", ".gradle", ".cargo", ".m2",
+                              "go-build", "JetBrains"]
+            let isDev = devMarkers.contains { target.path.contains($0) }
+            if target.path.contains("MobileSync") {
+                backupItems.append(item)
+            } else if isDev {
                 devItems.append(item)
             } else {
                 packageItems.append(item)
@@ -347,8 +409,8 @@ actor JunkScanner {
         if !devItems.isEmpty {
             cats.append(CleanupCategory(
                 kind: .developerCaches,
-                title: "Developer Caches",
-                subtitle: "Xcode, simulators, and dev tool data",
+                title: String(localized: "Developer Caches"),
+                subtitle: String(localized: "Xcode, simulators, IDEs, and build tool data"),
                 icon: "hammer.fill",
                 sourceModule: .systemJunk,
                 items: devItems.sorted { $0.size > $1.size }
@@ -357,11 +419,21 @@ actor JunkScanner {
         if !packageItems.isEmpty {
             cats.append(CleanupCategory(
                 kind: .packageManagerCaches,
-                title: "Package Manager Caches",
-                subtitle: "Homebrew, npm, pip, CocoaPods, and others",
+                title: String(localized: "Package Manager Caches"),
+                subtitle: String(localized: "Homebrew, npm, pnpm, pip, CocoaPods, and others"),
                 icon: "shippingbox.fill",
                 sourceModule: .systemJunk,
                 items: packageItems.sorted { $0.size > $1.size }
+            ))
+        }
+        if !backupItems.isEmpty {
+            cats.append(CleanupCategory(
+                kind: .deviceBackups,
+                title: String(localized: "Device Backups"),
+                subtitle: String(localized: "Old iPhone and iPad backups — review carefully"),
+                icon: "iphone",
+                sourceModule: .systemJunk,
+                items: backupItems
             ))
         }
         return ScanProduct(categories: cats, meta: meta)
@@ -392,8 +464,8 @@ actor JunkScanner {
         return ScanProduct(
             categories: [CleanupCategory(
                 kind: .trashContents,
-                title: "Trash Contents",
-                subtitle: "Already in Trash — confirm to remove from disk",
+                title: String(localized: "Trash Contents"),
+                subtitle: String(localized: "Already in Trash — confirm to remove from disk"),
                 icon: "trash.fill",
                 sourceModule: .systemJunk,
                 items: items
@@ -467,8 +539,8 @@ actor JunkScanner {
         if !oldInstallers.isEmpty {
             cats.append(CleanupCategory(
                 kind: .oldInstallers,
-                title: "Old Installers",
-                subtitle: ".dmg / .pkg / .iso files older than 30 days",
+                title: String(localized: "Old Installers"),
+                subtitle: String(localized: ".dmg / .pkg / .iso files older than 30 days"),
                 icon: "shippingbox.fill",
                 sourceModule: .systemJunk,
                 items: oldInstallers
@@ -477,8 +549,8 @@ actor JunkScanner {
         if !otherItems.isEmpty {
             cats.append(CleanupCategory(
                 kind: .otherDownloads,
-                title: "Other Downloads",
-                subtitle: "User-owned files — never auto-selected",
+                title: String(localized: "Other Downloads"),
+                subtitle: String(localized: "User-owned files — never auto-selected"),
                 icon: "arrow.down.circle.fill",
                 sourceModule: .systemJunk,
                 items: otherItems

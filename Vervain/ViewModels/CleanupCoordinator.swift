@@ -16,27 +16,22 @@ final class CleanupCoordinator {
         case confirming
         case executing
         case done
-
-        static func == (lhs: State, rhs: State) -> Bool {
-            switch (lhs, rhs) {
-            case (.idle, .idle), (.reviewing, .reviewing),
-                 (.confirming, .confirming), (.executing, .executing),
-                 (.done, .done):
-                return true
-            default:
-                return false
-            }
-        }
     }
+
+    /// "Always ask me to confirm" in Settings.
+    static let alwaysConfirmKey = "alwaysConfirmCleanup"
 
     var state: State = .idle
     var categories: [CleanupCategory] = []
     var progress: CleanupProgress?
     var result: CleanupResult?
     var errorMessage: String?
+    /// Outcome line shown on the done screen after "Undo".
+    var undoSummary: String?
+    var isUndoing = false
 
     /// Title shown in the review header — set by the calling module.
-    var presentationTitle: String = "Review Cleanup"
+    var presentationTitle: String = String(localized: "Review Cleanup")
 
     /// True if the review sheet should be presented.
     var isReviewPresented: Bool {
@@ -79,12 +74,13 @@ final class CleanupCoordinator {
 
     /// Module entry point: opens the universal review sheet with these
     /// categories pre-loaded.
-    func startReview(_ categories: [CleanupCategory], title: String = "Review Cleanup", onComplete: (() -> Void)? = nil) {
+    func startReview(_ categories: [CleanupCategory], title: String = String(localized: "Review Cleanup"), onComplete: (() -> Void)? = nil) {
         self.onComplete = onComplete
-        self.categories = categories
+        self.categories = ModuleScanViewModel.applyExclusions(categories, excluded: ExclusionList.paths())
         self.presentationTitle = title
         self.progress = nil
         self.result = nil
+        self.undoSummary = nil
         self.errorMessage = nil
         self.state = .reviewing
     }
@@ -92,7 +88,8 @@ final class CleanupCoordinator {
     /// User pressed "Clean N items" on the review screen.
     /// Routes to a confirmation sheet if anything risky is selected.
     func confirm() {
-        if hasAnyRiskySelected || hasAnyReviewSelected {
+        let alwaysConfirm = UserDefaults.standard.bool(forKey: Self.alwaysConfirmKey)
+        if alwaysConfirm || hasAnyRiskySelected || hasAnyReviewSelected {
             state = .confirming
         } else {
             executeNow()
@@ -107,21 +104,59 @@ final class CleanupCoordinator {
             do {
                 let snapshot = categories
                 let res = try await service.execute(snapshot) { [weak self] p in
-                    Task { @MainActor in self?.progress = p }
+                    Task { @MainActor in
+                        // Ticks hop actors and can arrive out of order; never go backwards.
+                        if let current = self?.progress, current.currentIndex > p.currentIndex { return }
+                        self?.progress = p
+                    }
                 }
-                // Remove cleaned items from the in-flight categories
+                // Remove only what reached the Trash; failed items stay visible.
+                let movedIDs = Set(res.trashed.map(\.id))
                 for idx in categories.indices {
-                    categories[idx].items.removeAll { $0.isSelected }
+                    categories[idx].items.removeAll { movedIDs.contains($0.id) }
                 }
                 categories.removeAll { $0.items.isEmpty }
                 self.result = res
-                self.state = .done
+                if res.wasCancelled && res.trashed.isEmpty {
+                    self.state = .reviewing
+                } else {
+                    self.state = .done
+                    recordHistory(res)
+                }
             } catch is CancellationError {
                 self.state = .reviewing
             } catch {
                 self.errorMessage = error.localizedDescription
                 self.state = .reviewing
             }
+        }
+    }
+
+    private func recordHistory(_ result: CleanupResult) {
+        guard !result.trashed.isEmpty else { return }
+        let entry = CleanupHistoryEntry(
+            id: UUID(), date: Date(), title: presentationTitle, items: result.trashed)
+        Task { await CleanupHistoryStore.shared.append(entry) }
+    }
+
+    /// Puts everything from the last cleanup back where it was.
+    func undoLastCleanup() {
+        guard let items = result?.trashed, !items.isEmpty, !isUndoing else { return }
+        isUndoing = true
+        Task {
+            let outcome = await Task.detached { TrashRestorer.restoreAll(items) }.value
+            await CleanupHistoryStore.shared.removeItems(Set(outcome.restored))
+            let restored = outcome.restored.count
+            let failed = outcome.failed.count
+            undoSummary = failed == 0
+                ? String(localized: "Put back \(restored) items.")
+                : String(localized: "Put back \(restored) items. \(failed) could not be restored — check the Trash.")
+            if var res = result {
+                let back = Set(outcome.restored)
+                res.trashed.removeAll { back.contains($0.id) }
+                result = res
+            }
+            isUndoing = false
         }
     }
 
@@ -137,6 +172,8 @@ final class CleanupCoordinator {
         categories = []
         progress = nil
         result = nil
+        undoSummary = nil
+        isUndoing = false
     }
 
     /// User pressed Done on the result screen.
@@ -160,6 +197,28 @@ final class CleanupCoordinator {
         } else {
             categories[idx].selectAll()
         }
+    }
+
+    /// Sets the selection of exactly these items, leaving the rest untouched.
+    func setSelected(_ selected: Bool, ids: Set<UUID>) {
+        for c in categories.indices {
+            for i in categories[c].items.indices where ids.contains(categories[c].items[i].id) {
+                categories[c].items[i].isSelected = selected
+            }
+        }
+    }
+
+    /// Selects every item whose risk is `.safe` and nothing else.
+    func selectOnlySafe() {
+        for c in categories.indices {
+            for i in categories[c].items.indices {
+                categories[c].items[i].isSelected = categories[c].items[i].riskLevel == .safe
+            }
+        }
+    }
+
+    func clearSelection() {
+        for c in categories.indices { categories[c].deselectAll() }
     }
 
     func resetToDefaults() {

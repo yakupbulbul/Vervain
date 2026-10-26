@@ -28,19 +28,56 @@ final class AppUninstallerViewModel {
     }
 
     private let scanner = AppScanner()
+    private var scanTask: Task<Void, Never>?
 
     func scan() {
-        Task {
+        scanTask?.cancel()
+        scanTask = Task {
             state = .scanning
             errorMessage = nil
             do {
                 apps = try await scanner.scanInstalledApps()
+                // Selection refers to ids of the previous scan; drop what is gone.
+                selectedIDs = selectedIDs.intersection(Set(apps.map(\.id)))
                 state = .results
+            } catch is CancellationError {
+                state = apps.isEmpty ? .idle : .results
             } catch {
                 errorMessage = error.localizedDescription
                 state = .idle
             }
         }
+    }
+
+    func cancelScan() {
+        scanTask?.cancel()
+        scanTask = nil
+        state = apps.isEmpty ? .idle : .results
+    }
+
+    /// Selects the app whose bundle is at `url` (drag & drop). Returns it, or
+    /// nil if it is not one of the scanned apps.
+    @discardableResult
+    func selectApp(at url: URL) -> AppInfo? {
+        let target = url.standardizedFileURL
+        guard let app = apps.first(where: { $0.url.standardizedFileURL == target }) else { return nil }
+        if selectedIDs.insert(app.id).inserted, !app.leftoverScanned {
+            scanLeftovers(for: app)
+        }
+        return app
+    }
+
+    /// Selected apps that are running right now.
+    func runningSelectedApps() -> [NSRunningApplication] {
+        let bundleIDs = Set(selectedApps.map(\.bundleID))
+        return NSWorkspace.shared.runningApplications.filter {
+            guard let id = $0.bundleIdentifier else { return false }
+            return bundleIDs.contains(id)
+        }
+    }
+
+    func quitRunningSelectedApps() {
+        runningSelectedApps().forEach { _ = $0.terminate() }
     }
 
     func scanLeftovers(for app: AppInfo) {
@@ -59,6 +96,11 @@ final class AppUninstallerViewModel {
             selectedIDs.remove(id)
         } else {
             selectedIDs.insert(id)
+            // Uninstalling without leftovers is rarely what people want, so
+            // look for them as soon as an app is ticked.
+            if let app = apps.first(where: { $0.id == id }), !app.leftoverScanned {
+                scanLeftovers(for: app)
+            }
         }
     }
 

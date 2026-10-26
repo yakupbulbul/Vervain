@@ -1,0 +1,34 @@
+name: Strings report
+
+# Builds the app with string extraction on and prints every localizable string
+# the code uses that Localizable.xcstrings does not translate yet. Runs when
+# this file or its script changes, or by hand once it exists on the default branch.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/strings-report.yml"
+      - "scripts/localization_gaps.py"
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build with string extraction
+        run: |
+          xcodebuild build \
+            -project Vervain.xcodeproj \
+            -scheme Vervain \
+            -destination 'platform=macOS' \
+            -derivedDataPath build/dd \
+            SWIFT_EMIT_LOC_STRINGS=YES \
+            CODE_SIGNING_ALLOWED=NO \
+            > build.log 2>&1 || { tail -50 build.log; exit 1; }
+
+      - name: List strings without translations
+        run: python3 scripts/localization_gaps.py build/dd || true

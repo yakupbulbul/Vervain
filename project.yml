@@ -31,6 +31,8 @@ targets:
         SWIFT_VERSION: "6.0"
         MACOSX_DEPLOYMENT_TARGET: "15.0"
         SWIFT_STRICT_CONCURRENCY: complete
+        MARKETING_VERSION: "2.0.0"
+        CURRENT_PROJECT_VERSION: "3"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         COMBINE_HIDPI_IMAGES: YES
         ENABLE_HARDENED_RUNTIME: NO
@@ -38,6 +40,10 @@ targets:
         CODE_SIGN_STYLE: Manual
         DEVELOPMENT_TEAM: ""
         OTHER_CODE_SIGN_FLAGS: "--deep"
+      configs:
+        Release:
+          CODE_SIGN_ENTITLEMENTS: Vervain/Vervain.Release.entitlements
+          ENABLE_HARDENED_RUNTIME: YES
 
   VervainTests:
     type: bundle.unit-test
@@ -66,7 +72,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.yakupbulbul.VervainUITests
-        SWIFT_VERSION: "6.0"
+        SWIFT_VERSION: "5.0"
         MACOSX_DEPLOYMENT_TARGET: "15.0"
         GENERATE_INFOPLIST_FILE: YES
         TEST_TARGET_NAME: Vervain

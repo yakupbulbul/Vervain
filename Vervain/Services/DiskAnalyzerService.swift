@@ -30,9 +30,11 @@ actor DiskAnalyzerService {
 
     // MARK: - Legacy single-root scan (unchanged for tests / HealthScore)
 
+    /// Analyzes one folder (used for "Analyze Folder…" and sub-folder rescans).
+    /// The detached work is cancelled together with the calling task.
     func analyze(root: URL, maxDepth: Int = 4) async throws -> AnalysisResult {
         let started = Date()
-        return try await Task.detached(priority: .userInitiated) {
+        let work = Task.detached(priority: .userInitiated) { () throws -> AnalysisResult in
             let counters = AnalysisCounters()
             let rootNode = try buildTree(
                 url: root, depth: 0, maxDepth: maxDepth,
@@ -59,7 +61,12 @@ actor DiskAnalyzerService {
                 largestFiles: largestFiles, largestFolders: largestFolders,
                 totalDiskBytes: 0, freeDiskBytes: 0
             )
-        }.value
+        }
+        return try await withTaskCancellationHandler {
+            try await work.value
+        } onCancel: {
+            work.cancel()
+        }
     }
 
     // MARK: - Whole-disk scan
@@ -276,7 +283,11 @@ private func buildTree(
             }
         }
         children.sort { $0.size > $1.size }
-        let totalSize = children.reduce(Int64(0)) { $0 + $1.size }
+        // Below the depth limit the tree stops, but the folder still takes up
+        // space: measure it in one pass instead of reporting 0 bytes.
+        let totalSize = depth < maxDepth
+            ? children.reduce(Int64(0)) { $0 + $1.size }
+            : try aggregateSize(of: url, counters: counters, skipNames: skipNames)
         return DiskNode(url: url, name: url.lastPathComponent,
                         size: totalSize, children: children, isDirectory: true)
     } else {
@@ -285,6 +296,45 @@ private func buildTree(
         return DiskNode(url: url, name: url.lastPathComponent,
                         size: size, children: [], isDirectory: false)
     }
+}
+
+/// Total allocated size of everything under `url`, without building nodes.
+/// Symlinks are not followed; unreadable folders are counted, not fatal.
+private func aggregateSize(
+    of url: URL,
+    counters: AnalysisCounters,
+    skipNames: Set<String>
+) throws -> Int64 {
+    let keys: Set<URLResourceKey> = [
+        .totalFileAllocatedSizeKey, .fileSizeKey, .isRegularFileKey, .isSymbolicLinkKey
+    ]
+    guard let enumerator = FileManager.default.enumerator(
+        at: url,
+        includingPropertiesForKeys: Array(keys),
+        options: [],
+        errorHandler: { _, _ in
+            counters.inaccessibleCount += 1
+            return true
+        }
+    ) else { return 0 }
+
+    var total: Int64 = 0
+    var visited = 0
+    while let next = enumerator.nextObject() {
+        visited += 1
+        if visited % 512 == 0 { try Task.checkCancellation() }
+        guard let child = next as? URL else { continue }
+        if !skipNames.isEmpty && skipNames.contains(child.lastPathComponent) {
+            enumerator.skipDescendants()
+            continue
+        }
+        guard let rv = try? child.resourceValues(forKeys: keys),
+              rv.isSymbolicLink != true,
+              rv.isRegularFile == true else { continue }
+        total += Int64(rv.totalFileAllocatedSize ?? rv.fileSize ?? 0)
+        counters.scannedFiles += 1
+    }
+    return total
 }
 
 private func collect(

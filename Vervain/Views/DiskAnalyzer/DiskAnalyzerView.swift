@@ -38,11 +38,37 @@ struct DiskAnalyzerView: View {
                     Text("Large files")
                         .font(.caption).foregroundStyle(Theme.textSecondary)
                 }
+                if case .results = vm.state,
+                   let selected = vm.selectedNode, selected.id != vm.rootNode?.id, selected.isDirectory {
+                    Button("Analyze This Folder") { vm.analyzeFolder(selected.url) }
+                        .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
+                }
+                Button("Analyze Folder…") { chooseFolderToAnalyze() }
+                    .buttonStyle(.bordered).controlSize(.small).foregroundStyle(Theme.textPrimary)
                 Button(vm.rootNode != nil ? "Re-Analyze" : "Analyze") {
                     vm.analyze()
                 }
                 .buttonStyle(.borderedProminent).tint(Theme.diskAnalyzerAccent)
             }
+        }
+    }
+
+    private func chooseFolderToAnalyze() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.allowsMultipleSelection = false
+        panel.directoryURL = URL(fileURLWithPath: "/Volumes")
+        panel.prompt = String(localized: "Analyze")
+        if panel.runModal() == .OK, let url = panel.url {
+            vm.analyzeFolder(url)
+        }
+    }
+
+    private func sendToReview(_ node: DiskNode) {
+        coord.startReview(vm.reviewCategories(for: node),
+                          title: String(localized: "Review \(node.name)")) {
+            vm.pruneMissing()
         }
     }
 
@@ -226,7 +252,8 @@ struct DiskAnalyzerView: View {
             } else {
                 ForEach(children, id: \.id) { node in
                     DiskNodeRow(node: node,
-                                parentSize: vm.selectedNode?.size ?? 1)
+                                parentSize: vm.selectedNode?.size ?? 1,
+                                onReview: { sendToReview(node) })
                         .listRowBackground(Theme.surfaceOverlay)
                         .listRowSeparatorTint(Theme.divider)
                         .onTapGesture {
@@ -252,7 +279,9 @@ struct DiskAnalyzerView: View {
                         .font(.caption).foregroundStyle(Theme.systemJunkAccent)
                     Button("Send to Review") {
                         let cats = vm.buildLargeFileCleanupCategory()
-                        coord.startReview(cats, title: "Review Large Files")
+                        coord.startReview(cats, title: String(localized: "Review Large Files")) {
+                            vm.pruneMissing()
+                        }
                     }
                     .buttonStyle(.borderedProminent).tint(Theme.diskAnalyzerAccent).controlSize(.small)
                 }
@@ -338,6 +367,7 @@ struct DiskAnalyzerView: View {
 struct DiskNodeRow: View {
     let node: DiskNode
     let parentSize: Int64
+    var onReview: (() -> Void)?
 
     private var fraction: Double {
         guard parentSize > 0 else { return 0 }
@@ -376,6 +406,8 @@ struct DiskNodeRow: View {
         .padding(.vertical, 6)
         .contentShape(Rectangle())
         .cursor(node.isDirectory ? .pointingHand : .arrow)
+        .itemContextMenu(url: node.url, onTrash: onReview)
+        .accessibilityElement(children: .combine)
     }
 }
 
@@ -392,6 +424,9 @@ struct LargeFileRow: View {
                     .font(.system(size: 16))
             }
             .buttonStyle(.plain)
+            .accessibilityLabel(isSelected
+                                ? String(localized: "Deselect \(node.name)")
+                                : String(localized: "Select \(node.name)"))
 
             Image(systemName: "doc.fill")
                 .foregroundStyle(Theme.textMuted)
@@ -414,6 +449,7 @@ struct LargeFileRow: View {
         .padding(.vertical, 4)
         .contentShape(Rectangle())
         .onTapGesture { onToggle() }
+        .itemContextMenu(url: node.url)
     }
 }
 

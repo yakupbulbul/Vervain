@@ -30,6 +30,8 @@ struct DiskPieChart: View {
             .chartLegend(.hidden)
             .chartAngleSelection(value: $selectedName)
             .frame(height: 240)
+            .accessibilityLabel("Disk usage by category")
+            .accessibilityValue(items.map { "\($0.name) \($0.size.formattedBytes)" }.joined(separator: ", "))
             .animation(.spring(.snappy), value: selectedName)
             .onChange(of: selectedName) { _, newName in
                 if let name = newName, let node = items.first(where: { $0.name == name }) {

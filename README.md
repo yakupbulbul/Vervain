@@ -36,6 +36,7 @@ Every Mac cleaner I tried either wanted a subscription, phoned home with analyti
 | Deletes to Trash (undoable) | **Yes** | No | No |
 | App uninstaller with leftovers | **Yes** | Yes | No |
 | Disk analyzer | **Yes** | Yes | No |
+| Duplicate finder | **Yes** | Yes | No |
 | Review before cleanup | **Always** | Partial | Partial |
 | Multi-language | **6 languages** | Yes | No |
 
@@ -48,7 +49,7 @@ brew install yakupbulbul/vervain/vervain
 
 **Direct download:**
 
-> [Download Vervain-1.1.0.dmg](https://github.com/yakupbulbul/Vervain/releases/latest/download/Vervain-1.1.0.dmg) — Signed & notarized by Apple.
+> [Download the latest Vervain DMG](https://github.com/yakupbulbul/Vervain/releases/latest) — Signed & notarized by Apple.
 
 ## Features
 
@@ -99,6 +100,23 @@ Donut chart of what's eating your disk, with drill-down into folders and largest
 </tr>
 </table>
 
+### New in 2.0
+
+- **Large & Old Files** — big files you have not touched in months, with size and age thresholds you choose. Nothing is pre-selected.
+- **Duplicates** — byte-identical files found by size, partial hash and SHA-256. The oldest copy is always kept and never listed.
+- **Privacy** — Safari, Chrome, Firefox, Edge and Brave caches (pre-selected), history (review) and cookies (risky, never pre-selected).
+- **Login Items** — see third-party launch agents and daemons; remove your own through the normal review flow.
+- **Menu bar monitor** — optional startup-disk gauge and a quick junk scan.
+- **Weekly reminder** and an **exclusion list** for folders Vervain must never touch, both in Settings.
+- **More developer caches** — Gradle, Cargo, Maven, Go, JetBrains, pnpm, Xcode documentation and simulators.
+- **Undo and History** — every cleanup is recorded; put items back from the done screen or the History module.
+- **Smarter review** — search, sort, filter by file type, "only safe items", Quick Look and Reveal in Finder, export as CSV or Markdown.
+- **Smarter uninstaller** — last-opened date, "not opened in 6 months" filter, drag an `.app` onto the window, quit running apps first.
+- **Leftovers** of apps you already removed, found by bundle identifier (never pre-selected).
+- **Disk Analyzer** — analyze any folder or external disk, accurate sizes below the depth limit, send any file or folder to review.
+- **Automation** — configurable weekly reminder, low-disk alert, memory view in the menu bar, Shortcuts actions, open at login.
+- Safer deletion: protected-path guard, files changed since the scan are refused, and the Finder/AppleScript fallback is gone.
+
 ## Languages
 
 Available in 6 languages — switch anytime via **Settings** (⌘,):
@@ -109,9 +127,9 @@ Vervain automatically uses your Mac's system language, or you can choose a diffe
 
 ## Three Promises
 
-1. **Nothing gets permanently deleted.** Every cleanup goes through `trashItem`. You can always restore from Trash.
+1. **Nothing gets permanently deleted.** Every cleanup moves items to the Trash. You can always restore from Trash.
 2. **Nothing gets cleaned without your say-so.** Every module goes through a review → confirm → clean flow. Risky items are never pre-selected.
-3. **Nothing leaves your Mac.** No analytics, no accounts, no network calls. Zero.
+3. **Nothing leaves your Mac.** No analytics, no accounts, no background network calls. The only request Vervain ever makes is the optional **Check for Updates** button in Settings.
 
 ## Building from Source
 
@@ -130,21 +148,25 @@ Vervain works without Full Disk Access — it just skips protected folders and t
 
 ## How It's Built
 
-Swift 6 with strict concurrency. SwiftUI for the UI, actor-isolated services for file system work, `@Observable` view models on the main actor. The only deletion primitive in the entire codebase is `FileManager.trashItem`, called from a single `CleanupService` — everything else routes through it.
+Swift 6 with strict concurrency. SwiftUI for the UI, actor-isolated services for file system work, `@Observable` view models on the main actor. The only deletion primitives in the entire codebase are `FileManager.trashItem` and `NSWorkspace.recycle` (both move items to the Trash), called from a single `CleanupService` — everything else routes through it. No AppleScript and no shell commands are used.
 
 The `CleanupCoordinator` owns the review flow state machine (idle → reviewing → confirming → executing → done) and is shared across all modules.
 
 ## Roadmap
 
-- [ ] Login items viewer and maintenance tasks
-- [ ] Large & old files scanner
-- [ ] Duplicate file finder
-- [ ] Privacy cleanup (browser caches, cookies)
-- [ ] Menu bar disk/memory monitor
+- [x] Login items viewer
+- [x] Large & old files scanner
+- [x] Duplicate file finder
+- [x] Privacy cleanup (browser caches, history, cookies)
+- [x] Menu bar disk monitor
+- [x] Memory view in the menu bar
+- [ ] Maintenance tasks (they need shell access, which Vervain deliberately never uses)
+- [ ] Toggle launch agents on and off (currently view and remove only)
+- [x] Translations for the v2 screens (Turkish, German, Spanish, French, Chinese)
 
 ## Contributing
 
-Pull requests are welcome. If you're adding a new cleanup module, all deletion must go through `CleanupService.trashItem` — this is how the safety model works. Items need a risk level and a confidence level so the review UI can make good default selections.
+Pull requests are welcome. If you're adding a new cleanup module, all deletion must go through `CleanupService` — this is how the safety model works. Items need a risk level and a confidence level so the review UI can make good default selections.
 
 Have a look at `CleanupSelectionPolicy` to understand which items get pre-selected and which don't.
 

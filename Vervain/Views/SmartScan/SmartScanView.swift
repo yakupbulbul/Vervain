@@ -120,8 +120,10 @@ struct SmartScanView: View {
                     Button {
                         coord.startReview(
                             vm.cleanupCategories,
-                            title: "Review Smart Scan Findings"
-                        )
+                            title: String(localized: "Review Smart Scan Findings")
+                        ) {
+                            vm.startScan()
+                        }
                     } label: {
                         Label("Review Cleanup", systemImage: "checklist")
                     }
@@ -198,7 +200,9 @@ struct SmartScanView: View {
     private func handle(_ action: SmartRecommendation.Action) {
         switch action {
         case .openCleanupReview(let cats, let title):
-            coord.startReview(cats, title: title)
+            coord.startReview(cats, title: title) {
+                vm.startScan()
+            }
         case .openModule(let feature):
             onNavigate?(feature)
         }
