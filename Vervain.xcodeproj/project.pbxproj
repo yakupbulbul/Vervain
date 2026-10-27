@@ -149,6 +149,8 @@
 		85D1575EEBCAA9DE3B1F4705 /* MaintenanceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14CC0DC3237EA7C5C48FC7A /* MaintenanceServiceTests.swift */; };
 		255B556425E8A967B55A61B8 /* MaintenanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A46C04273172465F876FF75 /* MaintenanceViewModel.swift */; };
 		6E51180ECB785100CDF5D1AE /* MaintenanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0D715AB251C53AC3D2D3A3 /* MaintenanceView.swift */; };
+		EBCECC3F51A48E438E6D2A24 /* DemoMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CF1FA3BDB3803A2786FD88 /* DemoMode.swift */; };
+		85F8944D734C50E7BC781AB9 /* DemoModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E5375E07278352D767492A /* DemoModeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -316,6 +318,8 @@
 		B14CC0DC3237EA7C5C48FC7A /* MaintenanceServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceServiceTests.swift; sourceTree = "<group>"; };
 		0A46C04273172465F876FF75 /* MaintenanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceViewModel.swift; sourceTree = "<group>"; };
 		0A0D715AB251C53AC3D2D3A3 /* MaintenanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceView.swift; sourceTree = "<group>"; };
+		77CF1FA3BDB3803A2786FD88 /* DemoMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMode.swift; sourceTree = "<group>"; };
+		80E5375E07278352D767492A /* DemoModeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoModeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -365,6 +369,7 @@
 				BEC8A468B022B91B9EA62576 /* LocalSnapshotsTests.swift */,
 				A62037D8F54E77E13E00430E /* SystemStatusTests.swift */,
 				B14CC0DC3237EA7C5C48FC7A /* MaintenanceServiceTests.swift */,
+				80E5375E07278352D767492A /* DemoModeTests.swift */,
 			);
 			path = VervainTests;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 				76E6B0F526594CA050300ED7 /* LocalSnapshotsService.swift */,
 				A8D96F3632C152DF239966C2 /* SystemStatusSampler.swift */,
 				625CCD6B7353F4A9E98DE998 /* MaintenanceService.swift */,
+				77CF1FA3BDB3803A2786FD88 /* DemoMode.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -972,6 +978,7 @@
 				60A8C6AF727A77382C1E79EE /* MaintenanceService.swift in Sources */,
 				255B556425E8A967B55A61B8 /* MaintenanceViewModel.swift in Sources */,
 				6E51180ECB785100CDF5D1AE /* MaintenanceView.swift in Sources */,
+				EBCECC3F51A48E438E6D2A24 /* DemoMode.swift in Sources */,
 				F8632D0C504F2B3FAD192540 /* SystemJunkViewModel.swift in Sources */,
 				6E6E0F0D8D11AF6A3047C388 /* Theme.swift in Sources */,
 				9BF49DB56B3AEC55F6E74A35 /* CleanupCategoryKind.swift in Sources */,
@@ -1011,6 +1018,7 @@
 				5A6E2830ABD0EA7AF717216A /* LocalSnapshotsTests.swift in Sources */,
 				AA75C20123FFBEB86300308A /* SystemStatusTests.swift in Sources */,
 				85D1575EEBCAA9DE3B1F4705 /* MaintenanceServiceTests.swift in Sources */,
+				85F8944D734C50E7BC781AB9 /* DemoModeTests.swift in Sources */,
 				2321D1CDB33195E66ED00CD7 /* CleanupCategoryTests.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* CleanupServiceSafetyTests.swift in Sources */,
 				E4EECC430E06D628D7D9810B /* CleanupSelectionPolicyTests.swift in Sources */,
