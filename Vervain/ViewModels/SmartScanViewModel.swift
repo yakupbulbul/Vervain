@@ -80,12 +80,16 @@ final class SmartScanViewModel {
 
             // Junk the review flow would pre-select counts in full; the rest
             // needs a human decision and weighs less.
-            let allItems = cats.flatMap(\.items)
-            let safeBytes = allItems.filter(\.canSelectByDefault).reduce(Int64(0)) { $0 + $1.size }
+            // The Trash is scored on its own: emptying it frees space at once.
+            let trashBytes = cats.filter { $0.kind == .trashContents }
+                .reduce(Int64(0)) { $0 + $1.totalSize }
+            let otherItems = cats.filter { $0.kind != .trashContents }.flatMap(\.items)
+            let safeBytes = otherItems.filter(\.canSelectByDefault).reduce(Int64(0)) { $0 + $1.size }
 
             let breakdown = HealthScoreBreakdown.compute(
                 safeJunkBytes: safeBytes,
-                reviewJunkBytes: max(0, total - safeBytes),
+                reviewJunkBytes: max(0, total - trashBytes - safeBytes),
+                trashBytes: trashBytes,
                 diskUsageFraction: diskFraction,
                 diskFreeBytes: diskSpace?.freeBytes,
                 appCount: installedApps.count

@@ -33,8 +33,8 @@ final class HealthScoreBreakdownTests: XCTestCase {
     }
 
     func test_junkPenalty_capsAtMax() {
-        XCTAssertEqual(HealthScoreBreakdown.junkPenalty(safeBytes: 15 * GB, reviewBytes: 0), 35, accuracy: 0.001)
-        XCTAssertEqual(HealthScoreBreakdown.junkPenalty(safeBytes: 500 * GB, reviewBytes: 0), 35, accuracy: 0.001)
+        XCTAssertEqual(HealthScoreBreakdown.junkPenalty(safeBytes: 15 * GB, reviewBytes: 0), 30, accuracy: 0.001)
+        XCTAssertEqual(HealthScoreBreakdown.junkPenalty(safeBytes: 500 * GB, reviewBytes: 0), 30, accuracy: 0.001)
     }
 
     func test_reviewJunkWeighsLessThanSafeJunk() {
@@ -76,6 +76,28 @@ final class HealthScoreBreakdownTests: XCTestCase {
         }
     }
 
+    // MARK: - Trash
+
+    func test_smallTrash_isNormal() {
+        XCTAssertEqual(HealthScoreBreakdown.trashPenalty(bytes: GB), 0)
+        XCTAssertEqual(HealthScoreBreakdown.trashPenalty(bytes: 0), 0)
+    }
+
+    func test_bigTrash_rampsToMax() {
+        XCTAssertEqual(HealthScoreBreakdown.trashPenalty(bytes: 20 * GB), 10, accuracy: 0.001)
+        XCTAssertEqual(HealthScoreBreakdown.trashPenalty(bytes: 500 * GB), 10, accuracy: 0.001)
+        let mid = HealthScoreBreakdown.trashPenalty(bytes: 10 * GB)
+        XCTAssertTrue((4...6).contains(mid))
+    }
+
+    func test_emptyingTrash_countsInPotentialScore() {
+        let b = HealthScoreBreakdown.compute(
+            safeJunkBytes: 0, trashBytes: 15 * GB,
+            diskUsageFraction: 0.5, appCount: 10)
+        XCTAssertGreaterThan(b.potentialScore, b.finalScore)
+        XCTAssertTrue(b.deductions.contains { if case .fullTrash = $0.reason { return true } else { return false } })
+    }
+
     // MARK: - Apps
 
     func test_appPenalty_rampsBetween100And200() {
@@ -86,11 +108,11 @@ final class HealthScoreBreakdownTests: XCTestCase {
 
     // MARK: - Combined
 
-    func test_worstCase_leavesFloorOf20() {
+    func test_worstCase_leavesFloorOf15() {
         let b = HealthScoreBreakdown.compute(
-            safeJunkBytes: 50 * GB, reviewJunkBytes: 50 * GB,
+            safeJunkBytes: 50 * GB, reviewJunkBytes: 50 * GB, trashBytes: 50 * GB,
             diskUsageFraction: 0.99, diskFreeBytes: GB, appCount: 250)
-        XCTAssertEqual(b.finalScore, 20)
+        XCTAssertEqual(b.finalScore, 15)
         XCTAssertEqual(b.tier, .critical)
     }
 

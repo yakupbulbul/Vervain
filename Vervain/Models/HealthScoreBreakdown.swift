@@ -33,6 +33,7 @@ struct HealthScoreBreakdown: Sendable {
         enum Reason: Sendable, Hashable {
             case storagePressure(percent: Int, freeBytes: Int64?)
             case reclaimableJunk(safeBytes: Int64, reviewBytes: Int64)
+            case fullTrash(bytes: Int64)
             case manyApps(count: Int)
 
             var displayText: String {
@@ -50,6 +51,8 @@ struct HealthScoreBreakdown: Sendable {
                         return String(localized: "\(safe.compactBytes) of junk that is safe to remove")
                     }
                     return String(localized: "\(review.compactBytes) of files worth reviewing")
+                case .fullTrash(let b):
+                    return String(localized: "\(b.compactBytes) sitting in the Trash")
                 case .manyApps(let c):
                     return String(localized: "\(c) applications installed")
                 }
@@ -59,6 +62,7 @@ struct HealthScoreBreakdown: Sendable {
                 switch self {
                 case .storagePressure:  return "externaldrive.fill"
                 case .reclaimableJunk:  return "trash.circle.fill"
+                case .fullTrash:        return "trash.fill"
                 case .manyApps:         return "app.badge"
                 }
             }
@@ -67,10 +71,11 @@ struct HealthScoreBreakdown: Sendable {
 
     // MARK: - Scoring
 
-    /// The most each factor can take off. Together they leave a floor of 20,
+    /// The most each factor can take off. Together they leave a floor of 15,
     /// so a full disk alone never reads as a broken Mac.
     static let maxStoragePenalty = 40.0
-    static let maxJunkPenalty = 35.0
+    static let maxJunkPenalty = 30.0
+    static let maxTrashPenalty = 10.0
     static let maxAppsPenalty = 5.0
 
     /// Junk you would have to look at first counts for a quarter of junk
@@ -80,18 +85,21 @@ struct HealthScoreBreakdown: Sendable {
     /// Computes a fully explained score.
     /// - safeJunkBytes: junk the review flow would pre-select.
     /// - reviewJunkBytes: junk that needs a human decision.
+    /// - trashBytes: what already sits in the Trash. Emptying it frees space
+    ///   right away, so it is scored apart from the junk above.
     /// - diskUsageFraction: 0...1, how full the startup disk is.
     /// - diskFreeBytes: free space on the startup disk, when known.
     static func compute(
         safeJunkBytes: Int64,
         reviewJunkBytes: Int64 = 0,
+        trashBytes: Int64 = 0,
         diskUsageFraction: Double,
         diskFreeBytes: Int64? = nil,
         appCount: Int
     ) -> HealthScoreBreakdown {
 
         let deductions = makeDeductions(
-            safeJunk: safeJunkBytes, reviewJunk: reviewJunkBytes,
+            safeJunk: safeJunkBytes, reviewJunk: reviewJunkBytes, trash: trashBytes,
             usedFraction: diskUsageFraction, freeBytes: diskFreeBytes, appCount: appCount)
         let final = max(0, 100 - deductions.reduce(0) { $0 + $1.points })
 
@@ -100,11 +108,11 @@ struct HealthScoreBreakdown: Sendable {
         var potentialFree = diskFreeBytes
         if let free = diskFreeBytes, free > 0, diskUsageFraction < 1 {
             let total = Double(free) / (1 - diskUsageFraction)
-            potentialFraction = max(0, diskUsageFraction - Double(safeJunkBytes) / total)
-            potentialFree = free + safeJunkBytes
+            potentialFraction = max(0, diskUsageFraction - Double(safeJunkBytes + trashBytes) / total)
+            potentialFree = free + safeJunkBytes + trashBytes
         }
         let potential = max(final, 100 - makeDeductions(
-            safeJunk: 0, reviewJunk: reviewJunkBytes,
+            safeJunk: 0, reviewJunk: reviewJunkBytes, trash: 0,
             usedFraction: potentialFraction, freeBytes: potentialFree, appCount: appCount)
             .reduce(0) { $0 + $1.points })
 
@@ -123,7 +131,7 @@ struct HealthScoreBreakdown: Sendable {
     }
 
     private static func makeDeductions(
-        safeJunk: Int64, reviewJunk: Int64,
+        safeJunk: Int64, reviewJunk: Int64, trash: Int64,
         usedFraction: Double, freeBytes: Int64?, appCount: Int
     ) -> [Deduction] {
         var result: [Deduction] = []
@@ -140,6 +148,11 @@ struct HealthScoreBreakdown: Sendable {
             result.append(.init(
                 reason: .reclaimableJunk(safeBytes: safeJunk, reviewBytes: reviewJunk),
                 points: junk))
+        }
+
+        let trashPoints = Int(trashPenalty(bytes: trash).rounded())
+        if trashPoints > 0 {
+            result.append(.init(reason: .fullTrash(bytes: trash), points: trashPoints))
         }
 
         let apps = Int(appsPenalty(count: appCount).rounded())
@@ -172,6 +185,11 @@ struct HealthScoreBreakdown: Sendable {
     static func junkPenalty(safeBytes: Int64, reviewBytes: Int64) -> Double {
         let weighted = Double(safeBytes) + reviewWeight * Double(reviewBytes)
         return maxJunkPenalty * ramp(weighted / 1_000_000_000, from: 0.5, to: 15)
+    }
+
+    /// A Trash under 1 GB is normal; 20 GB or more is a forgotten pile.
+    static func trashPenalty(bytes: Int64) -> Double {
+        maxTrashPenalty * ramp(Double(bytes) / 1_000_000_000, from: 1, to: 20)
     }
 
     /// 0 up to 100 apps, full at 200.
