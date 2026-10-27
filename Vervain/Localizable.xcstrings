@@ -1921,6 +1921,46 @@
         }
       }
     },
+    "AI Models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI-Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos de IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles d'IA"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yapay Zekâ Modelleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 模型"
+          }
+        }
+      }
+    },
     "About": {
       "localizations": {
         "de": {
@@ -2037,6 +2077,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "添加文件夹…"
+          }
+        }
+      }
+    },
+    "All Ollama models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Ollama-Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All Ollama models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los modelos de Ollama"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les modèles Ollama"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm Ollama modelleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有 Ollama 模型"
+          }
+        }
+      }
+    },
+    "All Ollama models in one item. To remove a single model, run ollama rm in Terminal.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Ollama-Modelle in einem Eintrag. Um ein einzelnes Modell zu entfernen, führen Sie ollama rm im Terminal aus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All Ollama models in one item. To remove a single model, run ollama rm in Terminal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los modelos de Ollama en un solo elemento. Para quitar uno, ejecuta ollama rm en Terminal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les modèles Ollama en un seul élément. Pour en retirer un, lancez ollama rm dans le Terminal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm Ollama modelleri tek öğede. Tek bir modeli silmek için Terminal'de ollama rm çalıştır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有 Ollama 模型合为一项。要删除单个模型，请在终端运行 ollama rm。"
           }
         }
       }
@@ -3557,6 +3677,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "缓存文件 %lld 天未使用"
+          }
+        }
+      }
+    },
+    "Cached models and datasets — downloaded again on first use": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwischengespeicherte Modelle und Datensätze — werden bei der ersten Nutzung erneut geladen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cached models and datasets — downloaded again on first use"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos y conjuntos de datos en caché — se vuelven a descargar al usarlos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles et jeux de données en cache — retéléchargés à la première utilisation"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önbelleğe alınmış modeller ve veri kümeleri — ilk kullanımda yeniden indirilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缓存的模型和数据集 — 首次使用时会重新下载"
           }
         }
       }
@@ -6081,6 +6241,46 @@
         }
       }
     },
+    "Downloaded model files — fetched again when a tool needs them": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heruntergeladene Modelldateien — werden bei Bedarf erneut geladen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloaded model files — fetched again when a tool needs them"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivos de modelos descargados — se vuelven a bajar cuando una herramienta los necesita"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichiers de modèles téléchargés — retéléchargés quand un outil en a besoin"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirilmiş model dosyaları — bir araç ihtiyaç duyunca yeniden indirilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已下载的模型文件 — 工具需要时会重新下载"
+          }
+        }
+      }
+    },
     "Duplicate of %@": {
       "localizations": {
         "de": {
@@ -7641,6 +7841,46 @@
         }
       }
     },
+    "GPT4All models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPT4All-Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPT4All models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos de GPT4All"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles GPT4All"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPT4All modelleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPT4All 模型"
+          }
+        }
+      }
+    },
     "General": {
       "localizations": {
         "de": {
@@ -8281,6 +8521,86 @@
         }
       }
     },
+    "Hugging Face": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        }
+      }
+    },
+    "Hugging Face download — fetched again the next time it is used": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging-Face-Download — wird bei der nächsten Nutzung erneut geladen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face download — fetched again the next time it is used"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descarga de Hugging Face — se vuelve a bajar la próxima vez que se use"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargement Hugging Face — retéléchargé à la prochaine utilisation"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face indirmesi — bir sonraki kullanımda yeniden indirilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face 下载 — 下次使用时会重新下载"
+          }
+        }
+      }
+    },
     "I've reviewed the items above and understand they will be moved to Trash.": {
       "localizations": {
         "de": {
@@ -8917,6 +9237,126 @@
           "stringUnit": {
             "state": "translated",
             "value": "保留位于最浅文件夹中的"
+          }
+        }
+      }
+    },
+    "Keras models and datasets": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keras-Modelle und Datensätze"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keras models and datasets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos y conjuntos de datos de Keras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles et jeux de données Keras"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keras modelleri ve veri kümeleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keras 模型和数据集"
+          }
+        }
+      }
+    },
+    "LM Studio": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        }
+      }
+    },
+    "LM Studio model — download it again from LM Studio": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM-Studio-Modell — in LM Studio erneut ladbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio model — download it again from LM Studio"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelo de LM Studio — puedes volver a descargarlo desde LM Studio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèle LM Studio — à retélécharger depuis LM Studio"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio modeli — LM Studio'dan yeniden indirebilirsin"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio 模型 — 可在 LM Studio 中重新下载"
           }
         }
       }
@@ -9801,6 +10241,46 @@
         }
       }
     },
+    "Looks for models from Hugging Face, LM Studio, Ollama, PyTorch, Whisper and similar tools.\nNothing is pre-selected, because downloading a model again can take a long time.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sucht nach Modellen von Hugging Face, LM Studio, Ollama, PyTorch, Whisper und ähnlichen Werkzeugen.\nNichts ist vorausgewählt, da das erneute Laden eines Modells lange dauern kann."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks for models from Hugging Face, LM Studio, Ollama, PyTorch, Whisper and similar tools.\nNothing is pre-selected, because downloading a model again can take a long time."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busca modelos de Hugging Face, LM Studio, Ollama, PyTorch, Whisper y herramientas similares.\nNo se preselecciona nada, porque volver a descargar un modelo puede tardar mucho."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche les modèles de Hugging Face, LM Studio, Ollama, PyTorch, Whisper et outils similaires.\nRien n'est présélectionné, car retélécharger un modèle peut prendre longtemps."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face, LM Studio, Ollama, PyTorch, Whisper ve benzeri araçların modellerini arar.\nHiçbir şey önceden seçilmez, çünkü bir modeli yeniden indirmek uzun sürebilir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找 Hugging Face、LM Studio、Ollama、PyTorch、Whisper 等工具的模型。\n不会预选任何内容，因为重新下载模型可能需要很长时间。"
+          }
+        }
+      }
+    },
     "Looks in your Library for preferences, caches and containers\nwhose app is no longer installed. Nothing is pre-selected.": {
       "localizations": {
         "de": {
@@ -10361,6 +10841,86 @@
         }
       }
     },
+    "Model downloads you can fetch again": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell-Downloads, die Sie erneut laden können"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model downloads you can fetch again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos descargados que puedes volver a bajar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles que vous pouvez retélécharger"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden indirilebilen model dosyaları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以重新下载的模型文件"
+          }
+        }
+      }
+    },
+    "Models you downloaded in LM Studio": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In LM Studio geladene Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Models you downloaded in LM Studio"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos que descargaste en LM Studio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles téléchargés dans LM Studio"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio'da indirdiğin modeller"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你在 LM Studio 中下载的模型"
+          }
+        }
+      }
+    },
     "Move to Trash…": {
       "localizations": {
         "de": {
@@ -10841,6 +11401,46 @@
         }
       }
     },
+    "No Models Found": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Modelle gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Models Found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontraron modelos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun modèle trouvé"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model Bulunamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到模型"
+          }
+        }
+      }
+    },
     "No Startup Items": {
       "localizations": {
         "de": {
@@ -11077,6 +11677,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "未发现残留文件"
+          }
+        }
+      }
+    },
+    "No local AI model downloads were found.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es wurden keine lokalen KI-Modell-Downloads gefunden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No local AI model downloads were found."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontraron modelos de IA descargados."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun modèle d'IA local n'a été trouvé."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yerel yapay zekâ modeli indirmesi bulunamadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到本地 AI 模型下载。"
           }
         }
       }
@@ -11961,6 +12601,86 @@
         }
       }
     },
+    "Ollama": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        }
+      }
+    },
+    "Ollama models — pull them again with ollama pull": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama-Modelle — mit ollama pull erneut ladbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama models — pull them again with ollama pull"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos de Ollama — vuelve a bajarlos con ollama pull"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles Ollama — à retélécharger avec ollama pull"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama modelleri — ollama pull ile yeniden indirilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama 模型 — 可用 ollama pull 重新下载"
+          }
+        }
+      }
+    },
     "Only Safe Items": {
       "localizations": {
         "de": {
@@ -12437,6 +13157,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "其他"
+          }
+        }
+      }
+    },
+    "Other AI Tools": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weitere KI-Werkzeuge"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other AI Tools"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otras herramientas de IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autres outils d'IA"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diğer Yapay Zekâ Araçları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "其他 AI 工具"
           }
         }
       }
@@ -13401,6 +14161,86 @@
         }
       }
     },
+    "PyTorch downloads": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch-Downloads"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch downloads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descargas de PyTorch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargements PyTorch"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch indirmeleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch 下载内容"
+          }
+        }
+      }
+    },
+    "PyTorch, Whisper, Keras, GPT4All and similar downloads": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch-, Whisper-, Keras-, GPT4All- und ähnliche Downloads"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch, Whisper, Keras, GPT4All and similar downloads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descargas de PyTorch, Whisper, Keras, GPT4All y similares"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargements PyTorch, Whisper, Keras, GPT4All et similaires"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch, Whisper, Keras, GPT4All ve benzeri indirmeler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch、Whisper、Keras、GPT4All 等下载内容"
+          }
+        }
+      }
+    },
     "Python package cache — re-downloaded on install": {
       "localizations": {
         "de": {
@@ -14077,6 +14917,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "近期访问的缓存"
+          }
+        }
+      }
+    },
+    "Reclaim Model Downloads": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell-Downloads freigeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaim Model Downloads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recuperar espacio de modelos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récupérer l'espace des modèles"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model İndirmelerinden Yer Aç"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回收模型下载空间"
+          }
+        }
+      }
+    },
+    "Reclaim model downloads": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell-Downloads freigeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaim model downloads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recupera espacio de modelos descargados"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récupérez l'espace des modèles téléchargés"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirilen modellerden yer aç"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回收已下载的模型"
           }
         }
       }
@@ -15037,6 +15957,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "检查并卸载"
+          }
+        }
+      }
+    },
+    "Review AI Models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI-Modelle prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review AI Models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar modelos de IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Examiner les modèles d'IA"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yapay Zekâ Modellerini İncele"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查 AI 模型"
           }
         }
       }
@@ -16317,6 +17277,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "扫描残留"
+          }
+        }
+      }
+    },
+    "Scan for Models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach Modellen suchen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan for Models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar modelos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher les modèles"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelleri Tara"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描模型"
           }
         }
       }
@@ -19997,6 +20997,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "保留哪一份"
+          }
+        }
+      }
+    },
+    "Whisper models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper-Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos de Whisper"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles Whisper"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper modelleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper 模型"
           }
         }
       }

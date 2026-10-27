@@ -7,6 +7,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     case diskAnalyzer
     case largeOldFiles
     case projectArtifacts
+    case aiModels
     case duplicates
     case privacy
     case loginItems
@@ -23,6 +24,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .diskAnalyzer:   return String(localized: "Disk Analyzer")
         case .largeOldFiles:  return String(localized: "Large & Old Files")
         case .projectArtifacts: return String(localized: "Project Artifacts")
+        case .aiModels:       return String(localized: "AI Models")
         case .duplicates:     return String(localized: "Duplicates")
         case .privacy:        return String(localized: "Privacy")
         case .loginItems:     return String(localized: "Login Items")
@@ -39,6 +41,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .diskAnalyzer:   return "tree.fill"
         case .largeOldFiles:  return "doc.badge.clock"
         case .projectArtifacts: return "shippingbox.fill"
+        case .aiModels:       return "brain"
         case .duplicates:     return "square.on.square"
         case .privacy:        return "hand.raised.fill"
         case .loginItems:     return "power"
@@ -55,6 +58,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .diskAnalyzer:   return Theme.diskAnalyzerAccent
         case .largeOldFiles:  return Theme.largeFilesAccent
         case .projectArtifacts: return Theme.projectArtifactsAccent
+        case .aiModels:       return Theme.aiModelsAccent
         case .duplicates:     return Theme.duplicatesAccent
         case .privacy:        return Theme.privacyAccent
         case .loginItems:     return Theme.loginItemsAccent
@@ -71,6 +75,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .diskAnalyzer:   return String(localized: "See what's growing")
         case .largeOldFiles:  return String(localized: "Find forgotten giants")
         case .projectArtifacts: return String(localized: "Clear old build folders")
+        case .aiModels:       return String(localized: "Reclaim model downloads")
         case .duplicates:     return String(localized: "Keep one, free the rest")
         case .privacy:        return String(localized: "Clear browsing traces")
         case .loginItems:     return String(localized: "Review what starts at login")

@@ -93,6 +93,9 @@ enum Theme {
     /// Project Artifacts — terracotta (fired clay, build output).
     static let projectArtifactsAccent = Color(red: 0.70, green: 0.40, blue: 0.28)
 
+    /// AI Models — soft violet (neural, abstract).
+    static let aiModelsAccent = Color(red: 0.50, green: 0.42, blue: 0.68)
+
     // MARK: - Brand
 
     /// Primary brand colour — forest green.

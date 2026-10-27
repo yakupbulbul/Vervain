@@ -10,6 +10,7 @@ enum CleanupSourceModule: String, CaseIterable, Sendable, Hashable {
     case largeOldFiles
     case duplicates
     case projectArtifacts
+    case aiModels
     case privacy
     case performance
 
@@ -22,6 +23,7 @@ enum CleanupSourceModule: String, CaseIterable, Sendable, Hashable {
         case .largeOldFiles:   return "Large & Old Files"
         case .duplicates:      return "Duplicates"
         case .projectArtifacts: return "Project Artifacts"
+        case .aiModels:        return "AI Models"
         case .privacy:         return "Privacy"
         case .performance:     return "Performance"
         }

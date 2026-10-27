@@ -55,6 +55,7 @@ struct ContentView: View {
         case .largeOldFiles:     modules.largeFiles.scan()
         case .duplicates:        modules.duplicates.scan()
         case .projectArtifacts:  modules.projectArtifacts.scan()
+        case .aiModels:          modules.aiModels.scan()
         case .privacy:           modules.privacy.scan()
         case .loginItems:        loginItemsVM.scan()
         case .orphanedData:      modules.orphans.scan()
@@ -81,6 +82,8 @@ struct ContentView: View {
             DuplicatesView(vm: modules.duplicates)
         case .projectArtifacts:
             ProjectArtifactsView(vm: modules.projectArtifacts)
+        case .aiModels:
+            AIModelsView(vm: modules.aiModels)
         case .privacy:
             PrivacyView(vm: modules.privacy)
         case .loginItems:

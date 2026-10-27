@@ -10,6 +10,7 @@ final class ModuleScanStore {
     let largeFiles: ModuleScanViewModel
     let duplicates: ModuleScanViewModel
     let projectArtifacts: ModuleScanViewModel
+    let aiModels: ModuleScanViewModel
     let privacy: ModuleScanViewModel
     let orphans: ModuleScanViewModel
 
@@ -22,6 +23,9 @@ final class ModuleScanStore {
         }
         projectArtifacts = ModuleScanViewModel {
             try await ProjectArtifactsScanner().scan(config: ProjectArtifactsConfig.fromDefaults())
+        }
+        aiModels = ModuleScanViewModel {
+            try await AIModelsScanner().scan()
         }
         privacy = ModuleScanViewModel {
             try await PrivacyScanner().scan()
