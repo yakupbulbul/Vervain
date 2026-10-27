@@ -7201,6 +7201,46 @@
         }
       }
     },
+    "Empty the Trash": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Papierkorb leeren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empty the Trash"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaciar la Papelera"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vider la Corbeille"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Kutusu'nu boşalt"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清倒废纸篓"
+          }
+        }
+      }
+    },
     "English": {
       "localizations": {
         "de": {
@@ -21601,6 +21641,46 @@
         }
       }
     },
+    "The Trash holds %@. That space comes back as soon as you empty it.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Papierkorb belegt %@. Dieser Platz ist sofort wieder frei, wenn Sie ihn leeren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Trash holds %@. That space comes back as soon as you empty it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La Papelera ocupa %@. Ese espacio vuelve en cuanto la vacías."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La Corbeille occupe %@. Cet espace est libéré dès que vous la videz."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Kutusu'nda %@ var. Boşalttığınız anda bu alan geri gelir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "废纸篓占用 %@。清倒后立即释放这部分空间。"
+          }
+        }
+      }
+    },
     "The disk information is not available.": {
       "localizations": {
         "de": {
@@ -24997,6 +25077,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "macOS 在需要空间时会自动删除本地快照，因此你很少需要手动操作。Vervain 自己从不删除它们：删除是永久的，并且需要管理员权限。"
+          }
+        }
+      }
+    },
+    "node_modules, build output and similar folders in your projects add up to %@. Your tools rebuild them.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "node_modules, Build-Ausgaben und ähnliche Ordner in Ihren Projekten belegen zusammen %@. Ihre Tools erzeugen sie neu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "node_modules, build output and similar folders in your projects add up to %@. Your tools rebuild them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "node_modules, resultados de compilación y carpetas similares de tus proyectos suman %@. Tus herramientas los regeneran."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "node_modules, sorties de build et dossiers similaires de vos projets totalisent %@. Vos outils les recréent."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projelerinizdeki node_modules, derleme çıktıları ve benzeri klasörler toplam %@ tutuyor. Araçlarınız bunları yeniden oluşturur."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你项目中的 node_modules、构建产物等文件夹共占用 %@，工具会重新生成它们。"
           }
         }
       }

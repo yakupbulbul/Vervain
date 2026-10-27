@@ -63,9 +63,11 @@ final class SmartScanViewModel {
             async let junkResult = junkScanner.scan()
             async let space      = diskService.getDiskSpace()
             async let apps       = appScanner.scanInstalledApps()
+            async let artifacts  = scanProjectArtifacts()
 
-            let ((cats, meta), diskSpace, installedApps) =
-                try await (junkResult, space, apps)
+            let ((junkCats, meta), diskSpace, installedApps, artifactCats) =
+                try await (junkResult, space, apps, artifacts)
+            let cats = junkCats + artifactCats
             let diskFraction = diskSpace?.usedFraction ?? 0
 
             guard !Task.isCancelled else { return }
@@ -118,10 +120,18 @@ final class SmartScanViewModel {
         }
     }
 
+    /// Old build folders feed the score and a recommendation only; like the
+    /// browser caches, a failure here must not fail the whole Smart Scan.
+    private func scanProjectArtifacts() async -> [CleanupCategory] {
+        let scanner = ProjectArtifactsScanner()
+        let config = ProjectArtifactsConfig.fromDefaults()
+        return (try? await scanner.scan(config: config))?.categories ?? []
+    }
+
     // MARK: - Recommendations
 
     /// Build the top-N actionable suggestions surfaced as cards in Smart Scan.
-    /// Currently emits up to 4, prioritised by severity then recoverable size.
+    /// Currently emits up to 5, prioritised by severity then recoverable size.
     private func buildRecommendations(
         categories: [CleanupCategory],
         browserCacheCategories: [CleanupCategory] = [],
@@ -193,6 +203,39 @@ final class SmartScanViewModel {
             ))
         }
 
+        // The Trash still holds the space until it is emptied.
+        if let trash = categories.first(where: { $0.kind == .trashContents }),
+           trash.totalSize > 1_000_000_000 {
+            recs.append(.init(
+                title: String(localized: "Empty the Trash"),
+                description: String(localized: "The Trash holds \(trash.totalSize.compactBytes). That space comes back as soon as you empty it."),
+                severity: trash.totalSize > 10_000_000_000 ? .warning : .info,
+                sourceModule: .systemJunk,
+                action: .openCleanupReview(
+                    categories: [trash],
+                    title: String(localized: "Empty the Trash")
+                ),
+                estimatedRecoverableBytes: trash.totalSize
+            ))
+        }
+
+        // Old build folders (Project Artifacts module)
+        let artifactCats = categories.filter { $0.sourceModule == .projectArtifacts }
+        let artifactBytes = artifactCats.reduce(Int64(0)) { $0 + $1.totalSize }
+        if artifactBytes > 500_000_000 {
+            recs.append(.init(
+                title: String(localized: "Clear Old Build Folders"),
+                description: String(localized: "node_modules, build output and similar folders in your projects add up to \(artifactBytes.compactBytes). Your tools rebuild them."),
+                severity: artifactBytes > 5_000_000_000 ? .warning : .info,
+                sourceModule: .projectArtifacts,
+                action: .openCleanupReview(
+                    categories: artifactCats,
+                    title: String(localized: "Clear Old Build Folders")
+                ),
+                estimatedRecoverableBytes: artifactBytes
+            ))
+        }
+
         // Browser caches (Privacy module)
         let browserCacheBytes = browserCacheCategories.reduce(Int64(0)) { $0 + $1.totalSize }
         if browserCacheBytes > 200_000_000 {
@@ -247,7 +290,7 @@ final class SmartScanViewModel {
                 if lhs.severity != rhs.severity { return lhs.severity > rhs.severity }
                 return lhs.estimatedRecoverableBytes > rhs.estimatedRecoverableBytes
             }
-            .prefix(4)
+            .prefix(5)
             .map { $0 }
     }
 
