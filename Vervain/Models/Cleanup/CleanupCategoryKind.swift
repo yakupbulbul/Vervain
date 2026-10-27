@@ -13,6 +13,7 @@ enum CleanupCategoryKind: String, Sendable {
     case appLeftovers
     case largeFiles
     case duplicates
+    case projectArtifacts
     case browserCaches, browserHistory, browserCookies
     case launchAgents
     case orphanedData

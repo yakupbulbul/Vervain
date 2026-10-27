@@ -54,6 +54,7 @@ struct ContentView: View {
         case .diskAnalyzer:      diskAnalyzerVM.analyze()
         case .largeOldFiles:     modules.largeFiles.scan()
         case .duplicates:        modules.duplicates.scan()
+        case .projectArtifacts:  modules.projectArtifacts.scan()
         case .privacy:           modules.privacy.scan()
         case .loginItems:        loginItemsVM.scan()
         case .orphanedData:      modules.orphans.scan()
@@ -78,6 +79,8 @@ struct ContentView: View {
             LargeFilesView(vm: modules.largeFiles)
         case .duplicates:
             DuplicatesView(vm: modules.duplicates)
+        case .projectArtifacts:
+            ProjectArtifactsView(vm: modules.projectArtifacts)
         case .privacy:
             PrivacyView(vm: modules.privacy)
         case .loginItems:

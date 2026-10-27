@@ -90,6 +90,9 @@ enum Theme {
     /// Large & Old Files — slate blue (settled, forgotten).
     static let largeFilesAccent = Color(red: 0.36, green: 0.50, blue: 0.62)
 
+    /// Project Artifacts — terracotta (fired clay, build output).
+    static let projectArtifactsAccent = Color(red: 0.70, green: 0.40, blue: 0.28)
+
     // MARK: - Brand
 
     /// Primary brand colour — forest green.

@@ -601,6 +601,86 @@
         }
       }
     },
+    "%@ — not in .gitignore, check that it is not part of the project": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — nicht in .gitignore, prüfen Sie, dass es nicht zum Projekt gehört"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — not in .gitignore, check that it is not part of the project"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — no está en .gitignore, comprueba que no sea parte del proyecto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — absent de .gitignore, vérifiez qu'il ne fait pas partie du projet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — .gitignore içinde değil, projenin parçası olmadığından emin ol"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 不在 .gitignore 中，请确认它不是项目的一部分"
+          }
+        }
+      }
+    },
+    "%@ — rebuilt by your tools · project idle for %lld days": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — wird von Ihren Werkzeugen neu erzeugt · Projekt seit %lld Tagen inaktiv"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — rebuilt by your tools · project idle for %lld days"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — lo recrean tus herramientas · proyecto inactivo desde hace %lld días"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — recréé par vos outils · projet inactif depuis %lld jours"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — araçların tarafından yeniden oluşturulur · proje %lld gündür etkin değil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 由你的工具重新生成 · 项目已闲置 %lld 天"
+          }
+        }
+      }
+    },
     "%lld": {
       "localizations": {
         "de": {
@@ -2481,6 +2561,46 @@
         }
       }
     },
+    "Angular build cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angular-Build-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angular build cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de compilación de Angular"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache de build Angular"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angular derleme önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angular 构建缓存"
+          }
+        }
+      }
+    },
     "App Store": {
       "localizations": {
         "de": {
@@ -3157,6 +3277,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "浏览历史记录"
+          }
+        }
+      }
+    },
+    "Build folders your tools can recreate": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build-Ordner, die Ihre Werkzeuge neu erzeugen können"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build folders your tools can recreate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carpetas de compilación que tus herramientas pueden recrear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dossiers de build que vos outils peuvent recréer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Araçlarının yeniden oluşturabildiği derleme klasörleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工具可重新生成的构建文件夹"
+          }
+        }
+      }
+    },
+    "Build output": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build-Ausgabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build output"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado de compilación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie de build"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derleme çıktısı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "构建输出"
           }
         }
       }
@@ -4041,6 +4241,46 @@
         }
       }
     },
+    "Clear Old Build Folders": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alte Build-Ordner entfernen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear Old Build Folders"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limpiar carpetas de compilación antiguas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nettoyer les anciens dossiers de build"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski Derleme Klasörlerini Temizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理旧的构建文件夹"
+          }
+        }
+      }
+    },
     "Clear Selection": {
       "localizations": {
         "de": {
@@ -4117,6 +4357,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "清除浏览痕迹"
+          }
+        }
+      }
+    },
+    "Clear old build folders": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alte Build-Ordner entfernen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear old build folders"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina carpetas de compilación antiguas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimez les anciens dossiers de build"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski derleme klasörlerini temizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理旧的构建文件夹"
           }
         }
       }
@@ -4237,6 +4517,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "CocoaPods 缓存"
+          }
+        }
+      }
+    },
+    "CocoaPods dependencies": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CocoaPods-Abhängigkeiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CocoaPods dependencies"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dependencias de CocoaPods"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépendances CocoaPods"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CocoaPods bağımlılıkları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CocoaPods 依赖"
           }
         }
       }
@@ -4637,6 +4957,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法检查更新。"
+          }
+        }
+      }
+    },
+    "Dart tool cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dart-Tool-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dart tool cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de herramientas de Dart"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache des outils Dart"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dart araç önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dart 工具缓存"
           }
         }
       }
@@ -6161,6 +6521,46 @@
         }
       }
     },
+    "Expo cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expo-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expo cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de Expo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache Expo"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expo önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expo 缓存"
+          }
+        }
+      }
+    },
     "Export…": {
       "localizations": {
         "de": {
@@ -6717,6 +7117,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "查找 Safari、Chrome、Firefox、Edge 和 Brave 留下的数据。\n默认只选中缓存，历史记录和 Cookie 由您决定。"
+          }
+        }
+      }
+    },
+    "Finds node_modules, target, .build, Pods, virtual environments and similar folders in your projects.\nOnly git-ignored folders of idle projects are pre-selected. Everything goes to the Trash.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Findet node_modules, target, .build, Pods, virtuelle Umgebungen und ähnliche Ordner in Ihren Projekten.\nNur von Git ignorierte Ordner inaktiver Projekte sind vorausgewählt. Alles landet im Papierkorb."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finds node_modules, target, .build, Pods, virtual environments and similar folders in your projects.\nOnly git-ignored folders of idle projects are pre-selected. Everything goes to the Trash."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encuentra node_modules, target, .build, Pods, entornos virtuales y carpetas similares en tus proyectos.\nSolo se preseleccionan las carpetas ignoradas por git de proyectos inactivos. Todo va a la Papelera."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trouve node_modules, target, .build, Pods, environnements virtuels et dossiers similaires dans vos projets.\nSeuls les dossiers ignorés par git des projets inactifs sont présélectionnés. Tout va à la Corbeille."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projelerindeki node_modules, target, .build, Pods, sanal ortamlar ve benzeri klasörleri bulur.\nYalnızca etkin olmayan projelerin git tarafından yok sayılan klasörleri önceden seçilir. Her şey Çöp Sepeti'ne gider."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找项目中的 node_modules、target、.build、Pods、虚拟环境等文件夹。\n只会预选不活跃项目中被 git 忽略的文件夹。所有内容都会移到废纸篓。"
           }
         }
       }
@@ -7437,6 +7877,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "前往"
+          }
+        }
+      }
+    },
+    "Gradle cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gradle-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gradle cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de Gradle"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache Gradle"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gradle önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gradle 缓存"
           }
         }
       }
@@ -9681,6 +10161,46 @@
         }
       }
     },
+    "Maven build output": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maven-Build-Ausgabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maven build output"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado de compilación de Maven"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie de build Maven"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maven derleme çıktısı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maven 构建输出"
+          }
+        }
+      }
+    },
     "May still be useful for diagnostics": {
       "localizations": {
         "de": {
@@ -10041,6 +10561,46 @@
         }
       }
     },
+    "Next.js build cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next.js-Build-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next.js build cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de compilación de Next.js"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache de build Next.js"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next.js derleme önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next.js 构建缓存"
+          }
+        }
+      }
+    },
     "No Apps Found": {
       "localizations": {
         "de": {
@@ -10077,6 +10637,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "未找到应用"
+          }
+        }
+      }
+    },
+    "No Build Folders Found": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Build-Ordner gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Build Folders Found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontraron carpetas de compilación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun dossier de build trouvé"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derleme Klasörü Bulunamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到构建文件夹"
           }
         }
       }
@@ -10521,6 +11121,46 @@
         }
       }
     },
+    "Node.js dependencies": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node.js-Abhängigkeiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node.js dependencies"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dependencias de Node.js"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépendances Node.js"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node.js bağımlılıkları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node.js 依赖"
+          }
+        }
+      }
+    },
     "Node.js package cache — re-downloaded on install": {
       "localizations": {
         "de": {
@@ -10841,6 +11481,46 @@
         }
       }
     },
+    "Nothing rebuildable was found in your project folders.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Ihren Projektordnern wurde nichts Neuerzeugbares gefunden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing rebuildable was found in your project folders."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró nada recreable en tus carpetas de proyectos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien de reconstructible n'a été trouvé dans vos dossiers de projets."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proje klasörlerinde yeniden oluşturulabilir bir şey bulunamadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在你的项目文件夹中没有找到可重新生成的内容。"
+          }
+        }
+      }
+    },
     "Nothing to Clean": {
       "localizations": {
         "de": {
@@ -10957,6 +11637,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "守护 Mac 的健康"
+          }
+        }
+      }
+    },
+    "Nuxt build cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuxt-Build-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuxt build cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de compilación de Nuxt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache de build Nuxt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuxt derleme önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuxt 构建缓存"
           }
         }
       }
@@ -12001,6 +12721,46 @@
         }
       }
     },
+    "Parcel cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcel-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcel cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de Parcel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache Parcel"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcel önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcel 缓存"
+          }
+        }
+      }
+    },
     "Path no longer exists": {
       "localizations": {
         "de": {
@@ -12277,6 +13037,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "隐私优先。开源透明。\\n不收集任何数据."
+          }
+        }
+      }
+    },
+    "Project Artifacts": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt-Artefakte"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project Artifacts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artefactos de proyectos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artefacts de projets"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proje Artıkları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目构建产物"
+          }
+        }
+      }
+    },
+    "Project idle for": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt inaktiv seit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project idle for"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyecto inactivo desde hace"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projet inactif depuis"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proje şu süredir etkin değil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目闲置超过"
           }
         }
       }
@@ -12637,6 +13477,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Python pip 缓存"
+          }
+        }
+      }
+    },
+    "Python virtual environment": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python-Umgebung (virtuell)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python virtual environment"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entorno virtual de Python"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Environnement virtuel Python"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python sanal ortamı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python 虚拟环境"
           }
         }
       }
@@ -14481,6 +15361,46 @@
         }
       }
     },
+    "Review Project Artifacts": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt-Artefakte prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review Project Artifacts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar artefactos de proyectos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Examiner les artefacts de projets"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proje Artıklarını İncele"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查项目构建产物"
+          }
+        }
+      }
+    },
     "Review Smart Scan Findings": {
       "localizations": {
         "de": {
@@ -14841,6 +15761,46 @@
         }
       }
     },
+    "Rust build output": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust-Build-Ausgabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust build output"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado de compilación de Rust"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie de build Rust"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust derleme çıktısı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust 构建输出"
+          }
+        }
+      }
+    },
     "Safe": {
       "localizations": {
         "de": {
@@ -15157,6 +16117,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "立即扫描"
+          }
+        }
+      }
+    },
+    "Scan Projects": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekte scannen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan Projects"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar en proyectos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyser les projets"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projeleri Tara"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描项目"
           }
         }
       }
@@ -17001,6 +18001,86 @@
         }
       }
     },
+    "SvelteKit build cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SvelteKit-Build-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SvelteKit build cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de compilación de SvelteKit"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache de build SvelteKit"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SvelteKit derleme önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SvelteKit 构建缓存"
+          }
+        }
+      }
+    },
+    "Swift package build output": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swift-Paket-Build-Ausgabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swift package build output"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado de compilación de paquete Swift"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie de build du paquet Swift"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swift paketi derleme çıktısı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swift 包构建输出"
+          }
+        }
+      }
+    },
     "Symlinks skipped": {
       "localizations": {
         "de": {
@@ -17637,6 +18717,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "仅移到废纸篓——不会永久删除任何内容"
+          }
+        }
+      }
+    },
+    "Turborepo cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turborepo-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turborepo cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de Turborepo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache Turborepo"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turborepo önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turborepo 缓存"
           }
         }
       }
