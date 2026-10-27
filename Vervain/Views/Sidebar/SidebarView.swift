@@ -42,13 +42,13 @@ struct SidebarView: View {
             }
             .buttonStyle(.plain)
             .padding(.horizontal, 16)
-            .padding(.bottom, 8)
+            .padding(.bottom, 6)
 
             // Health badge
             if let score = smartScanVM.breakdown?.asHealthScore {
                 healthBadge(score: score)
                     .padding(.horizontal, 16)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 10)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
@@ -117,6 +117,6 @@ struct SidebarRow: View {
                 .foregroundStyle(feature.accentColor)
                 .frame(width: 20)
         }
-        .padding(.vertical, 1)
+        .padding(.vertical, 0)
     }
 }
