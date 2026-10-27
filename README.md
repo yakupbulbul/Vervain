@@ -26,7 +26,7 @@
 
 ## Why Vervain?
 
-Every Mac cleaner I tried either wanted a subscription, phoned home with analytics, or auto-deleted files I didn't ask it to touch. Vervain does none of that. It moves things to Trash so you can undo, it shows you everything before acting, and it never talks to a server.
+Vervain finds what you can safely clear, shows you all of it first, and moves only what you choose to the Trash, so every cleanup can be undone. There are no analytics and no accounts. The only network request is the optional Check for Updates button in Settings.
 
 | | Vervain | CleanMyMac | OnyX |
 |---|:---:|:---:|:---:|
