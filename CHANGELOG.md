@@ -3,6 +3,10 @@
 ## 2.0.0 (continued)
 
 ### Added since the first 2.0 draft
+- Project Artifacts module: finds `node_modules`, `target`, `.build`, `Pods`, Python virtual environments, `dist` and `build` folders inside your projects, grouped by project. A folder only counts when a project file next to it (`package.json`, `Cargo.toml`, `Package.swift`, `Podfile` …) shows what it is. Only git-ignored folders of projects idle for 7 days or more (configurable) are pre-selected; folders git does not ignore are low confidence and never pre-selected. Symlinks and nested repositories are skipped, and everything goes to the Trash.
+- AI Models module: lists model downloads from Hugging Face (per repository), LM Studio (per model), Ollama (one item, because its blobs are shared), PyTorch, Whisper, Keras and GPT4All. Nothing is pre-selected, since downloading a model again can take a long time.
+- Local Snapshots module: shows Time Machine local snapshots and the space macOS can free on its own. It is read-only: removing a snapshot is permanent and needs administrator rights, so Vervain copies the exact `tmutil` command for you to run in Terminal instead.
+- System Status module: a live view of CPU (per core, load average), memory, startup disk, network rates, battery (charge, maximum capacity, cycles, temperature, time remaining), thermal state, uptime and the busiest processes. It refreshes every two seconds while open and does nothing otherwise.
 - Undo: the done screen can put everything back, and a History module lists past cleanups with Put Back.
 - Review sheet: search, sort, file-type filter, "only safe items", Quick Look, Reveal in Finder, Never offer this; Cmd-1…9, Cmd-R, Cmd-F shortcuts.
 - Export scan results as CSV or Markdown.

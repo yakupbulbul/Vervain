@@ -104,6 +104,10 @@ Donut chart of what's eating your disk, with drill-down into folders and largest
 
 - **Large & Old Files** — big files you have not touched in months, with size and age thresholds you choose. Nothing is pre-selected.
 - **Duplicates** — byte-identical files found by size, partial hash and SHA-256. The oldest copy is always kept and never listed.
+- **Project Artifacts** — `node_modules`, `target`, `.build`, `Pods`, virtual environments and other build folders in your projects, grouped by project. Only git-ignored folders of idle projects are pre-selected; everything goes to the Trash.
+- **AI Models** — Hugging Face, LM Studio, Ollama, PyTorch, Whisper, Keras and GPT4All downloads. Nothing is pre-selected, because fetching a model again can be slow.
+- **Local Snapshots** — Time Machine snapshots on this Mac and the space macOS can free by itself. Read-only: Vervain copies the `tmutil` command instead of deleting anything permanently.
+- **System Status** — live CPU, memory, disk, network, battery and thermal state, plus the busiest processes. It only runs while the screen is open.
 - **Privacy** — Safari, Chrome, Firefox, Edge and Brave caches (pre-selected), history (review) and cookies (risky, never pre-selected).
 - **Login Items** — see third-party launch agents and daemons; remove your own through the normal review flow.
 - **Menu bar monitor** — optional startup-disk gauge and a quick junk scan.
