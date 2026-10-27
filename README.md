@@ -19,7 +19,7 @@
 <br>
 
 <p align="center">
-  <img src="https://vervain.app/images/screenshots/smart-scan-dark.png" width="720" alt="Vervain Smart Scan" />
+  <img src="docs/vervain-demo.gif" width="720" alt="Vervain walkthrough: Smart Scan and Project Artifacts" />
 </p>
 
 <br>
