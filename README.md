@@ -100,6 +100,31 @@ Donut chart of what's eating your disk, with drill-down into folders and largest
 </tr>
 </table>
 
+<table>
+<tr>
+<td width="50%">
+
+### Project Artifacts
+Old `node_modules`, `target`, `.build` and `Pods` folders, grouped by project. Only the ones git ignores, in projects you haven't touched for a week, start out selected.
+
+</td>
+<td width="50%">
+
+### System Status
+CPU, memory, disk, network and battery, live while the screen is open. It stops sampling when you leave it.
+
+</td>
+</tr>
+<tr>
+<td>
+<img src="docs/screenshots/project-artifacts-dark.png" width="100%" alt="Project Artifacts" />
+</td>
+<td>
+<img src="docs/screenshots/system-status-dark.png" width="100%" alt="System Status" />
+</td>
+</tr>
+</table>
+
 ### New in 2.0
 
 2.0 is mostly about reaching the places other cleaners skip, with the same rules about review and Trash as before.
