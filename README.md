@@ -58,7 +58,7 @@ brew install yakupbulbul/vervain/vervain
 <td width="50%">
 
 ### Smart Scan
-Health score with a transparent breakdown. Every deduction is explained, and each recommendation links directly to the thing it found.
+Health score with a transparent breakdown. Every deduction is explained, and Vervain tells you what the score would be after you clean the safe items.
 
 </td>
 <td width="50%">
