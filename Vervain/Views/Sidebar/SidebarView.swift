@@ -9,8 +9,8 @@ struct SidebarView: View {
         VStack(spacing: 0) {
             // App header
             appHeader
-                .padding(.top, 24)
-                .padding(.bottom, 16)
+                .padding(.top, 20)
+                .padding(.bottom, 12)
 
             Divider()
                 .background(Theme.divider)
@@ -117,6 +117,6 @@ struct SidebarRow: View {
                 .foregroundStyle(feature.accentColor)
                 .frame(width: 20)
         }
-        .padding(.vertical, 3)
+        .padding(.vertical, 1)
     }
 }
