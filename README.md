@@ -24,145 +24,75 @@
 
 <br>
 
-## Why Vervain?
-
-Vervain finds what you can safely clear, shows you all of it first, and moves only what you choose to the Trash, so every cleanup can be undone. There are no analytics and no accounts. The only network request is the optional Check for Updates button in Settings.
-
-| | Vervain | CleanMyMac | OnyX |
-|---|:---:|:---:|:---:|
-| Price | **Free forever** | $40/year | Free |
-| Open source | **Yes** | No | No |
-| Analytics/tracking | **None** | Yes | None |
-| Deletes to Trash (undoable) | **Yes** | No | No |
-| App uninstaller with leftovers | **Yes** | Yes | No |
-| Disk analyzer | **Yes** | Yes | No |
-| Duplicate finder | **Yes** | Yes | No |
-| Review before cleanup | **Always** | Partial | Partial |
-| Multi-language | **6 languages** | Yes | No |
+Vervain finds what you can safely clear on your Mac, shows you all of it first, and moves only what you choose to the Trash, so every cleanup can be undone. There are no analytics and no accounts. The only network request is the optional Check for Updates button in Settings.
 
 ## Install
 
-**Homebrew:**
+With Homebrew:
+
 ```bash
 brew install yakupbulbul/vervain/vervain
 ```
 
-**Direct download:**
+Or [download the latest DMG](https://github.com/yakupbulbul/Vervain/releases/latest). It is signed and notarized by Apple.
 
-> [Download the latest Vervain DMG](https://github.com/yakupbulbul/Vervain/releases/latest), signed and notarized by Apple.
+## What's inside
 
-## Features
+Smart Scan gives your Mac a health score and explains every point it takes off. It also tells you what the score would be after you clean the safe items.
 
-<table>
-<tr>
-<td width="50%">
+Most of the rest works the same way: scan, review, then confirm.
 
-### Smart Scan
-Health score with a transparent breakdown. Every deduction is explained, and Vervain tells you what the score would be after you clean the safe items.
+- System Junk: caches, logs, old installers and other leftovers, sorted by how safe they are to remove.
+- App Uninstaller: removes an app together with the files it leaves behind, and shows when you last opened it.
+- Disk Analyzer: shows what is using your storage, folder by folder.
+- Project Artifacts: old `node_modules`, `target`, `Pods` and other build folders, grouped by project.
+- AI Models: model downloads from Hugging Face, Ollama, LM Studio and similar tools. Nothing here is ever pre-selected.
+- System Status and Maintenance: live CPU, memory, network and battery, plus a few quick fixes. Anything that needs administrator rights is shown as a command you copy yourself.
+- Also: large and old files, duplicates, browser traces, login items, leftovers from apps you already removed, and a menu bar monitor.
 
-</td>
-<td width="50%">
-
-### System Junk
-Finds caches, logs, leftover language files, old installers, and stale downloads. Downloads are never pre-selected. You pick what goes.
-
-</td>
-</tr>
-<tr>
-<td>
-<img src="https://vervain.app/images/screenshots/smart-scan-dark.png" width="100%" alt="Smart Scan" />
-</td>
-<td>
-<img src="https://vervain.app/images/screenshots/system-junk-dark.png" width="100%" alt="System Junk" />
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### App Uninstaller
-Shows installed apps with leftover files tagged by confidence level (high, medium, low). Apple system apps are protected and can't be uninstalled.
-
-</td>
-<td width="50%">
-
-### Disk Analyzer
-Donut chart of what's eating your disk, with drill-down into folders and largest files list. Honest about folders it can't access.
-
-</td>
-</tr>
-<tr>
-<td>
-<img src="https://vervain.app/images/screenshots/app-uninstaller-dark.png" width="100%" alt="App Uninstaller" />
-</td>
-<td>
-<img src="https://vervain.app/images/screenshots/disk-analyzer-dark.png" width="100%" alt="Disk Analyzer" />
-</td>
-</tr>
-</table>
+Safe items start ticked. Anything riskier waits for you, and the History screen can put cleaned items back.
 
 <table>
 <tr>
-<td width="50%">
-
-### Project Artifacts
-Old `node_modules`, `target`, `.build` and `Pods` folders, grouped by project. Only the ones git ignores, in projects you haven't touched for a week, start out selected.
-
-</td>
-<td width="50%">
-
-### System Status
-CPU, memory, disk, network and battery, live while the screen is open. It stops sampling when you leave it.
-
-</td>
+<td width="50%"><img src="https://vervain.app/images/screenshots/system-junk-dark.png" width="100%" alt="System Junk" /></td>
+<td width="50%"><img src="https://vervain.app/images/screenshots/project-artifacts-dark.png" width="100%" alt="Project Artifacts" /></td>
 </tr>
 <tr>
-<td>
-<img src="docs/screenshots/project-artifacts-dark.png" width="100%" alt="Project Artifacts" />
-</td>
-<td>
-<img src="docs/screenshots/system-status-dark.png" width="100%" alt="System Status" />
-</td>
+<td><img src="https://vervain.app/images/screenshots/app-uninstaller-dark.png" width="100%" alt="App Uninstaller" /></td>
+<td><img src="https://vervain.app/images/screenshots/disk-analyzer-dark.png" width="100%" alt="Disk Analyzer" /></td>
 </tr>
 </table>
 
-### New in 2.0
+Version 2.0 added Project Artifacts, AI Models, System Status, Maintenance and undo through History. The [changelog](CHANGELOG.md) has the full list.
 
-2.0 is mostly about reaching the places other cleaners skip, with the same rules about review and Trash as before.
+## Vervain and Mole
 
-If you write code, there are a few new places to look. Project Artifacts finds `node_modules`, `target`, `.build`, `Pods`, virtual environments and other build folders and groups them by project. Only folders that git ignores, in projects you haven't touched for a week, start out selected. Everything else waits for you. AI Models lists what Hugging Face, LM Studio, Ollama, PyTorch, Whisper, Keras and GPT4All have downloaded. I left all of it unselected, because finding out you have to fetch a 20 GB model again is a bad surprise. The developer caches also grew: Gradle, Cargo, Maven, Go, JetBrains, pnpm, Xcode documentation and simulators.
+[Mole](https://github.com/tw93/Mole) is the other free, open-source Mac cleaner worth knowing. It is a terminal tool (`mo`), much bigger than Vervain, and a good fit if you like working from the command line. Vervain is a regular Mac app for people who would rather look at a list, tick what should go, and know it ends up in the Trash.
 
-System Status shows CPU, memory, disk, network, battery and thermal state live, plus the busiest processes. It only samples while the screen is open. Maintenance resets Quick Look previews and restarts Finder, the Dock or the menu bar. Anything that needs administrator rights (flushing DNS, rebuilding the Spotlight index, purging memory) shows up as a Terminal command you can copy. Vervain doesn't run those itself, and I'd rather keep it that way than ask for your password. Time Machine local snapshots are listed in Maintenance too, read-only, for the same reason.
+| | Vervain | Mole |
+|---|---|---|
+| How you use it | Mac app | Terminal command (`mo`), plus a separate Mac app |
+| License | MIT | GPL-3.0 |
+| Deleting | Always to the Trash, with History to put things back | Uninstalls and the disk analyzer use the Trash, but `clean`, `purge` and `installer` delete permanently |
+| Reviewing | A review screen before anything is cleaned | `--dry-run` previews, then a confirmation |
+| Administrator tasks | Shows the command and never runs it | Asks for administrator access when it needs it |
+| Needs | macOS 15 or later | macOS 12 or later |
 
-Cleanups got easier to undo. Every one is recorded, so you can put items back from the done screen or from History. The review list has search, sorting, file type filters, an "only safe items" switch, Quick Look, Reveal in Finder and export to CSV or Markdown. A protected-path guard blocks system locations, files that changed since the scan are refused, and the Finder/AppleScript fallback is gone.
+Both can clear project build folders and show live system stats. Mole is also easier to script and runs on older Macs. Paid apps such as CleanMyMac are closed source, while Vervain is free and MIT.
 
-The rest of the list:
+## Three promises
 
-- Large & Old Files, with size and age thresholds you choose. Nothing is pre-selected.
-- Duplicates, matched by size, partial hash and SHA-256. The oldest copy is always kept and never listed.
-- Privacy, for Safari, Chrome, Firefox, Edge and Brave. Caches are pre-selected, history is for review, and cookies are never pre-selected.
-- Login Items, to see third-party launch agents and daemons. You can remove your own through the normal review flow.
-- Leftovers from apps you already removed, found by bundle identifier and never pre-selected.
-- A smarter uninstaller that shows when you last opened an app, filters ones untouched for six months, takes a dragged `.app` and quits running apps first.
-- A Disk Analyzer that can look at any folder or external disk, with accurate sizes below the depth limit.
-- A menu bar monitor with a startup-disk gauge and a quick junk scan, a weekly reminder, a low-disk alert, an exclusion list for folders Vervain must never touch, Shortcuts actions and open at login.
+1. Nothing is permanently deleted. Every cleanup moves items to the Trash, so you can restore them.
+2. Nothing is cleaned without your say-so. Every module goes through review and confirmation, and risky items are never pre-selected.
+3. Nothing leaves your Mac. No analytics, no accounts, no background network calls.
 
 ## Languages
 
-Vervain comes in 6 languages. You can switch anytime in **Settings** (⌘,):
+Vervain follows your Mac's language, or you can pick one in Settings (⌘,): English, Français, Deutsch, Türkçe, Español and 中文(简体).
 
-🇬🇧 English · 🇫🇷 Français · 🇩🇪 Deutsch · 🇹🇷 Türkçe · 🇪🇸 Español · 🇨🇳 中文(简体)
+## Building from source
 
-Vervain automatically uses your Mac's system language, or you can choose a different one in the app.
-
-## Three Promises
-
-1. **Nothing gets permanently deleted.** Every cleanup moves items to the Trash. You can always restore from Trash.
-2. **Nothing gets cleaned without your say-so.** Every module goes through a review → confirm → clean flow. Risky items are never pre-selected.
-3. **Nothing leaves your Mac.** No analytics, no accounts, no background network calls. The only request Vervain ever makes is the optional **Check for Updates** button in Settings.
-
-## Building from Source
-
-You need macOS 15+, Xcode 16+, and Swift 6.
+You need macOS 15+, Xcode 16+ and Swift 6.
 
 ```bash
 git clone https://github.com/yakupbulbul/Vervain.git
@@ -171,33 +101,19 @@ open Vervain.xcodeproj
 # ⌘R to run
 ```
 
-### Full Disk Access
+Vervain works without Full Disk Access. It skips protected folders and tells you what it couldn't reach. For a complete scan, add Vervain under System Settings → Privacy & Security → Full Disk Access. The app notices the change by itself.
 
-Vervain works without Full Disk Access. It skips protected folders and tells you what it couldn't reach. If you want a complete scan, go to **System Settings → Privacy & Security → Full Disk Access** and add Vervain. The app detects the change automatically.
+## How it's built
 
-## How It's Built
+Swift 6 with strict concurrency: SwiftUI for the UI, actor-isolated services for file system work, and `@Observable` view models on the main actor. The only deletion calls in the codebase are `FileManager.trashItem` and `NSWorkspace.recycle`, both of which move items to the Trash, and they live in a single `CleanupService` that every module goes through. There is no AppleScript and no shell. The few system tools Vervain starts (`qlmanage`, `killall`, `ps`, `tmutil` and `git`) come from a fixed list with fixed arguments, and nothing you type or read from disk becomes part of a command.
 
-Swift 6 with strict concurrency. SwiftUI for the UI, actor-isolated services for file system work, `@Observable` view models on the main actor. The only deletion primitives in the entire codebase are `FileManager.trashItem` and `NSWorkspace.recycle` (both move items to the Trash), called from a single `CleanupService`, and everything else routes through it. There is no AppleScript. Vervain never goes through a shell either. The few system tools it starts (`qlmanage`, `killall`, `ps`, `tmutil`, and `git` to check what a project ignores) come from a fixed list with fixed arguments, and nothing you type or read from disk becomes part of a command.
+## What's next
 
-The `CleanupCoordinator` owns the review flow state machine (idle → reviewing → confirming → executing → done) and is shared across all modules.
-
-## Roadmap
-
-- [x] Login items viewer
-- [x] Large & old files scanner
-- [x] Duplicate file finder
-- [x] Privacy cleanup (browser caches, history, cookies)
-- [x] Menu bar disk monitor
-- [x] Memory view in the menu bar
-- [ ] Maintenance tasks (they need shell access, which Vervain deliberately never uses)
-- [ ] Toggle launch agents on and off (currently view and remove only)
-- [x] Translations for the v2 screens (Turkish, German, Spanish, French, Chinese)
+Toggling launch agents on and off is next. Login Items can only view and remove them today. Ideas and bug reports are welcome in the [issues](https://github.com/yakupbulbul/Vervain/issues).
 
 ## Contributing
 
-Pull requests are welcome. If you're adding a new cleanup module, all deletion must go through `CleanupService`. That is how the safety model works. Items need a risk level and a confidence level so the review UI can make good default selections.
-
-Have a look at `CleanupSelectionPolicy` to understand which items get pre-selected and which don't.
+Pull requests are welcome. A new cleanup module has to send every deletion through `CleanupService`, because that is how the safety model works. Items also need a risk level and a confidence level so the review screen can choose sensible defaults. `CleanupSelectionPolicy` shows which items get pre-selected and which don't.
 
 ## License
 
