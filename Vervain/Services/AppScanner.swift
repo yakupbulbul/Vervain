@@ -287,7 +287,9 @@ actor AppScanner {
             url: url,
             bundleSize: size,
             lastModifiedDate: modDate,
-            lastUsedDate: Self.lastUsedDate(of: url),
+            // Made-up apps have no usage history, so demo mode borrows the
+            // bundle's date instead.
+            lastUsedDate: demoRoot == nil ? Self.lastUsedDate(of: url) : modDate,
             source: Self.source(of: url, bundleID: bundleID),
             isAppleApp: bundleID.lowercased().hasPrefix("com.apple.")
         )

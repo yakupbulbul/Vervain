@@ -57,6 +57,18 @@ final class DemoModeTests: XCTestCase {
         XCTAssertEqual(Set(found.map(\.name)), ["Lumen Notes", "Harbor VPN"])
     }
 
+    func test_appScanner_usesBundleDateAsLastOpenedInDemo() async throws {
+        let apps = root.appendingPathComponent("Applications")
+        try makeApp("Lumen Notes", bundleID: "com.example.lumennotes", in: apps)
+        let tenDaysAgo = Date().addingTimeInterval(-10 * 86400)
+        try FileManager.default.setAttributes(
+            [.modificationDate: tenDaysAgo],
+            ofItemAtPath: apps.appendingPathComponent("Lumen Notes.app").path)
+
+        let app = try await AppScanner(demoRoot: root).scanInstalledApps().first!
+        XCTAssertEqual(app.lastUsedDate?.timeIntervalSince1970 ?? 0, tenDaysAgo.timeIntervalSince1970, accuracy: 2)
+    }
+
     func test_appScanner_findsLeftoversInDemoLibrary() async throws {
         let apps = root.appendingPathComponent("Applications")
         try makeApp("Lumen Notes", bundleID: "com.example.lumennotes", in: apps)
