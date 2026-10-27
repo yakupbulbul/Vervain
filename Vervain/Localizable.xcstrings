@@ -5001,6 +5001,126 @@
         }
       }
     },
+    "Copied": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copied"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopyalandı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已复制"
+          }
+        }
+      }
+    },
+    "Copy Command": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehl kopieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy Command"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar comando"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier la commande"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komutu Kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制命令"
+          }
+        }
+      }
+    },
+    "Copy Command for All": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehl für alle kopieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy Command for All"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar comando para todas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier la commande pour tous"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tümü İçin Komutu Kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制全部命令"
+          }
+        }
+      }
+    },
     "Copy List": {
       "localizations": {
         "de": {
@@ -10081,6 +10201,46 @@
         }
       }
     },
+    "Local Snapshots": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lokale Schnappschüsse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local Snapshots"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instantáneas locales"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instantanés locaux"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yerel Anlık Görüntüler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本地快照"
+          }
+        }
+      }
+    },
     "Log file older than %lld days": {
       "localizations": {
         "de": {
@@ -11397,6 +11557,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "未发现残留"
+          }
+        }
+      }
+    },
+    "No Local Snapshots": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine lokalen Schnappschüsse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Local Snapshots"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin instantáneas locales"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun instantané local"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yerel Anlık Görüntü Yok"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有本地快照"
           }
         }
       }
@@ -13517,6 +13717,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Parcel 缓存"
+          }
+        }
+      }
+    },
+    "Paste the command into Terminal to remove a snapshot.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fügen Sie den Befehl im Terminal ein, um einen Schnappschuss zu entfernen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste the command into Terminal to remove a snapshot."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pega el comando en Terminal para eliminar una instantánea."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collez la commande dans le Terminal pour supprimer un instantané."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir anlık görüntüyü silmek için komutu Terminal'e yapıştır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将命令粘贴到“终端”即可删除快照。"
           }
         }
       }
@@ -17921,6 +18161,46 @@
         }
       }
     },
+    "See hidden backup copies": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versteckte Backup-Kopien ansehen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See hidden backup copies"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mira las copias de seguridad ocultas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir les copies de sauvegarde cachées"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizli yedek kopyalarını gör"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看隐藏的备份副本"
+          }
+        }
+      }
+    },
     "See what's growing": {
       "localizations": {
         "de": {
@@ -18557,6 +18837,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "智能扫描"
+          }
+        }
+      }
+    },
+    "Snapshots Unavailable": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnappschüsse nicht verfügbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snapshots Unavailable"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instantáneas no disponibles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instantanés indisponibles"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anlık Görüntüler Alınamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法获取快照"
           }
         }
       }
@@ -19557,6 +19877,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "时间"
+          }
+        }
+      }
+    },
+    "Time Machine copies kept on this Mac": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time-Machine-Kopien auf diesem Mac"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine copies kept on this Mac"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copias de Time Machine guardadas en este Mac"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copies Time Machine conservées sur ce Mac"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine'in bu Mac'te tuttuğu kopyalar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine 在此 Mac 上保留的副本"
+          }
+        }
+      }
+    },
+    "Time Machine has not kept any copies on this Mac.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine hat auf diesem Mac keine Kopien gespeichert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine has not kept any copies on this Mac."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine no ha guardado copias en este Mac."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine n'a conservé aucune copie sur ce Mac."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine bu Mac'te kopya tutmuyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine 没有在此 Mac 上保留任何副本。"
           }
         }
       }
@@ -22077,6 +22477,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "iOS 依赖缓存——pod install 时重新下载"
+          }
+        }
+      }
+    },
+    "macOS can free on its own": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kann macOS selbst freigeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS can free on its own"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que macOS puede liberar solo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que macOS peut libérer seul"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS'in kendiliğinden boşaltabileceği alan"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 可自行释放"
+          }
+        }
+      }
+    },
+    "macOS removes local snapshots automatically when it needs room, so you rarely have to. Vervain never deletes them itself: removal is permanent and needs administrator rights.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS entfernt lokale Schnappschüsse automatisch, wenn Platz gebraucht wird, Sie müssen das also selten selbst tun. Vervain löscht sie nie selbst: Das Entfernen ist endgültig und erfordert Administratorrechte."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS removes local snapshots automatically when it needs room, so you rarely have to. Vervain never deletes them itself: removal is permanent and needs administrator rights."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS elimina las instantáneas locales automáticamente cuando necesita espacio, así que rara vez hace falta hacerlo a mano. Vervain nunca las borra por sí mismo: la eliminación es permanente y requiere permisos de administrador."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS supprime automatiquement les instantanés locaux quand il a besoin de place, vous avez donc rarement à le faire. Vervain ne les supprime jamais lui-même : la suppression est définitive et exige des droits d'administrateur."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS yer gerektiğinde yerel anlık görüntüleri kendiliğinden siler, o yüzden nadiren elle silmen gerekir. Vervain bunları kendisi silmez: silme kalıcıdır ve yönetici yetkisi ister."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 在需要空间时会自动删除本地快照，因此你很少需要手动操作。Vervain 自己从不删除它们：删除是永久的，并且需要管理员权限。"
           }
         }
       }

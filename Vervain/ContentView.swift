@@ -56,6 +56,7 @@ struct ContentView: View {
         case .duplicates:        modules.duplicates.scan()
         case .projectArtifacts:  modules.projectArtifacts.scan()
         case .aiModels:          modules.aiModels.scan()
+        case .localSnapshots:    break
         case .privacy:           modules.privacy.scan()
         case .loginItems:        loginItemsVM.scan()
         case .orphanedData:      modules.orphans.scan()
@@ -84,6 +85,8 @@ struct ContentView: View {
             ProjectArtifactsView(vm: modules.projectArtifacts)
         case .aiModels:
             AIModelsView(vm: modules.aiModels)
+        case .localSnapshots:
+            LocalSnapshotsView()
         case .privacy:
             PrivacyView(vm: modules.privacy)
         case .loginItems:

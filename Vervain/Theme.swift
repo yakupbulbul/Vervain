@@ -96,6 +96,9 @@ enum Theme {
     /// AI Models — soft violet (neural, abstract).
     static let aiModelsAccent = Color(red: 0.50, green: 0.42, blue: 0.68)
 
+    /// Local Snapshots — steel teal (time, backup).
+    static let snapshotsAccent = Color(red: 0.28, green: 0.55, blue: 0.62)
+
     // MARK: - Brand
 
     /// Primary brand colour — forest green.
