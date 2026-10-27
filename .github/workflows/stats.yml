@@ -1,0 +1,40 @@
+name: Stats
+
+# Once a week, records download counts and stars. GitHub only shows the current
+# numbers, so this keeps a history in stats/history.csv on the `stats` branch.
+on:
+  schedule:
+    - cron: "11 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Record this week's numbers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # The script lives on main; keep a copy before switching branches.
+          cp scripts/record-stats.sh "$RUNNER_TEMP/record-stats.sh"
+
+          if git fetch origin stats; then
+            git checkout -q -B stats origin/stats
+          else
+            git checkout -q --orphan stats
+            git rm -rfq .
+          fi
+
+          mkdir -p stats
+          "$RUNNER_TEMP/record-stats.sh" stats/history.csv "$GITHUB_REPOSITORY"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stats/history.csv
+          git commit -m "Record stats for $(date -u +%F)"
+          git push origin stats
