@@ -4921,6 +4921,46 @@
         }
       }
     },
+    "Clears the thumbnail and preview cache that can show stale or broken previews.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leert den Miniatur- und Vorschau-Cache, der veraltete oder defekte Vorschauen zeigen kann."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clears the thumbnail and preview cache that can show stale or broken previews."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borra la caché de miniaturas y vistas previas que puede mostrar previsualizaciones antiguas o rotas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vide le cache des vignettes et aperçus, qui peut afficher des aperçus périmés ou cassés."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski veya bozuk önizleme gösterebilen küçük resim ve önizleme önbelleğini temizler."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除可能显示过期或损坏预览的缩略图和预览缓存。"
+          }
+        }
+      }
+    },
     "Close": {
       "localizations": {
         "de": {
@@ -6881,6 +6921,46 @@
         }
       }
     },
+    "Empties the disk cache held in memory. Apps may feel slower for a moment.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leert den im Speicher gehaltenen Disk-Cache. Apps wirken kurz langsamer."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empties the disk cache held in memory. Apps may feel slower for a moment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vacía la caché de disco en memoria. Las apps pueden ir más lentas un momento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vide le cache disque en mémoire. Les apps peuvent être plus lentes un instant."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bellekte tutulan disk önbelleğini boşaltır. Uygulamalar bir an yavaşlayabilir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清空内存中的磁盘缓存。应用可能会短暂变慢。"
+          }
+        }
+      }
+    },
     "English": {
       "localizations": {
         "de": {
@@ -7881,6 +7961,206 @@
         }
       }
     },
+    "Fixes Dock, Mission Control and Spaces glitches. The screen flickers for a moment.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behebt Probleme mit Dock, Mission Control und Spaces. Der Bildschirm flackert kurz."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixes Dock, Mission Control and Spaces glitches. The screen flickers for a moment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arregla fallos del Dock, Mission Control y Spaces. La pantalla parpadea un momento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige les problèmes du Dock, de Mission Control et des Spaces. L'écran scintille un instant."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock, Mission Control ve Spaces hatalarını düzeltir. Ekran bir an titrer."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "修复程序坞、调度中心和空间的问题。屏幕会短暂闪烁。"
+          }
+        }
+      }
+    },
+    "Fixes a stuck or glitchy Finder. Finder windows close and reopen.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behebt einen hängenden oder fehlerhaften Finder. Finder-Fenster schließen und öffnen sich neu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixes a stuck or glitchy Finder. Finder windows close and reopen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arregla un Finder bloqueado o con fallos. Las ventanas del Finder se cierran y se reabren."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige un Finder bloqué ou instable. Les fenêtres du Finder se ferment puis se rouvrent."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takılan veya hatalı çalışan Finder'ı düzeltir. Finder pencereleri kapanıp yeniden açılır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "修复卡住或异常的访达。访达窗口会关闭并重新打开。"
+          }
+        }
+      }
+    },
+    "Fixes menu bar icons and Control Center that stopped responding.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behebt nicht reagierende Menüleisten-Symbole und das Kontrollzentrum."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixes menu bar icons and Control Center that stopped responding."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arregla los iconos de la barra de menús y el Centro de control que no responden."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige les icônes de la barre des menus et le Centre de contrôle qui ne répondent plus."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yanıt vermeyen menü çubuğu simgelerini ve Denetim Merkezi'ni düzeltir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "修复无响应的菜单栏图标和控制中心。"
+          }
+        }
+      }
+    },
+    "Fixes missing search results. Indexing runs for hours and uses a lot of CPU.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behebt fehlende Suchergebnisse. Die Indizierung dauert Stunden und beansprucht viel CPU."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixes missing search results. Indexing runs for hours and uses a lot of CPU."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arregla resultados de búsqueda que faltan. La indexación dura horas y usa mucha CPU."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige les résultats de recherche manquants. L'indexation dure des heures et sollicite beaucoup le CPU."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksik arama sonuçlarını düzeltir. Dizinleme saatlerce sürer ve çok CPU kullanır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "修复缺失的搜索结果。索引会运行数小时并占用大量 CPU。"
+          }
+        }
+      }
+    },
+    "Flush DNS cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DNS-Cache leeren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flush DNS cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaciar la caché DNS"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vider le cache DNS"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DNS önbelleğini temizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除 DNS 缓存"
+          }
+        }
+      }
+    },
     "Folder chosen in Disk Analyzer": {
       "localizations": {
         "de": {
@@ -8157,6 +8437,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "可用空间"
+          }
+        }
+      }
+    },
+    "Free inactive memory": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inaktiven Speicher freigeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free inactive memory"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liberar memoria inactiva"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libérer la mémoire inactive"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etkin olmayan belleği boşalt"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "释放非活动内存"
           }
         }
       }
@@ -8797,6 +9117,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "健康评分"
+          }
+        }
+      }
+    },
+    "Helps when a website still resolves to an old address.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hilft, wenn eine Website noch auf eine alte Adresse zeigt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Helps when a website still resolves to an old address."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayuda cuando un sitio web sigue resolviendo a una dirección antigua."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utile quand un site pointe encore vers une ancienne adresse."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir web sitesi hâlâ eski adrese gidiyorsa işe yarar."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当网站仍解析到旧地址时很有用。"
           }
         }
       }
@@ -11281,6 +11641,46 @@
         }
       }
     },
+    "Maintenance": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wartung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenance"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantenimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenance"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bakım"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "维护"
+          }
+        }
+      }
+    },
     "Markdown": {
       "localizations": {
         "de": {
@@ -11797,6 +12197,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "名称"
+          }
+        }
+      }
+    },
+    "Needs Terminal": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfordert das Terminal"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs Terminal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requiere Terminal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nécessite le Terminal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminal gerektirir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要终端"
           }
         }
       }
@@ -15521,6 +15961,86 @@
         }
       }
     },
+    "Quick fixes": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnelle Lösungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick fixes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soluciones rápidas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solutions rapides"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hızlı çözümler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速修复"
+          }
+        }
+      }
+    },
+    "Quick fixes for a sluggish Mac": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnelle Hilfe für einen trägen Mac"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick fixes for a sluggish Mac"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soluciones rápidas para un Mac lento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solutions rapides pour un Mac lent"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yavaşlayan Mac için hızlı çözümler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "为变慢的 Mac 提供快速修复"
+          }
+        }
+      }
+    },
     "Quit %@": {
       "localizations": {
         "de": {
@@ -15837,6 +16357,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "准备就绪"
+          }
+        }
+      }
+    },
+    "Rebuild Spotlight index": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight-Index neu aufbauen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rebuild Spotlight index"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconstruir índice de Spotlight"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconstruire l'index Spotlight"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight dizinini yeniden oluştur"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重建聚焦索引"
           }
         }
       }
@@ -16521,6 +17081,166 @@
         }
       }
     },
+    "Reset Quick Look previews": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick-Look-Vorschauen zurücksetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset Quick Look previews"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restablecer vistas previas de Quick Look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réinitialiser les aperçus Quick Look"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick Look önizlemelerini sıfırla"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重置快速查看预览"
+          }
+        }
+      }
+    },
+    "Restart Dock": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock neu starten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart Dock"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reiniciar Dock"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relancer le Dock"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock'u yeniden başlat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重启程序坞"
+          }
+        }
+      }
+    },
+    "Restart Finder": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder neu starten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart Finder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reiniciar Finder"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relancer le Finder"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder'ı yeniden başlat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重启访达"
+          }
+        }
+      }
+    },
+    "Restart Finder, reset previews": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder neu starten, Vorschauen zurücksetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart Finder, reset previews"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reinicia Finder, restablece vistas previas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relancer le Finder, réinitialiser les aperçus"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder'ı yeniden başlat, önizlemeleri sıfırla"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重启访达，重置预览"
+          }
+        }
+      }
+    },
     "Restart Now": {
       "localizations": {
         "de": {
@@ -16597,6 +17317,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "重启 Vervain 以应用新语言。"
+          }
+        }
+      }
+    },
+    "Restart menu bar": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menüleiste neu starten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart menu bar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reiniciar barra de menús"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relancer la barre des menus"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menü çubuğunu yeniden başlat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重启菜单栏"
           }
         }
       }
@@ -17677,6 +18437,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "有风险"
+          }
+        }
+      }
+    },
+    "Run": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausführen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecutar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exécuter"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行"
           }
         }
       }
@@ -20641,6 +21441,86 @@
         }
       }
     },
+    "The task did not finish.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Aufgabe wurde nicht abgeschlossen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The task did not finish."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tarea no terminó."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tâche ne s'est pas terminée."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görev tamamlanamadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务未能完成。"
+          }
+        }
+      }
+    },
+    "The task took too long and was stopped.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Aufgabe dauerte zu lange und wurde gestoppt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The task took too long and was stopped."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tarea tardó demasiado y se detuvo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tâche a pris trop de temps et a été arrêtée."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görev çok uzun sürdü ve durduruldu."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务耗时过长，已停止。"
+          }
+        }
+      }
+    },
     "Thermal state": {
       "localizations": {
         "de": {
@@ -20677,6 +21557,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "热状态"
+          }
+        }
+      }
+    },
+    "These need administrator rights, so Vervain never runs them. Copy the command and paste it into Terminal.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese erfordern Administratorrechte, daher führt Vervain sie nie aus. Kopieren Sie den Befehl und fügen Sie ihn im Terminal ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These need administrator rights, so Vervain never runs them. Copy the command and paste it into Terminal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requieren permisos de administrador, así que Vervain nunca las ejecuta. Copia el comando y pégalo en Terminal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elles exigent des droits d'administrateur, Vervain ne les exécute donc jamais. Copiez la commande et collez-la dans le Terminal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bunlar yönetici yetkisi ister, bu yüzden Vervain çalıştırmaz. Komutu kopyalayıp Terminal'e yapıştır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这些需要管理员权限，所以 Vervain 从不运行它们。请复制命令并粘贴到“终端”。"
+          }
+        }
+      }
+    },
+    "These run right away and need no password.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese laufen sofort und brauchen kein Passwort."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These run right away and need no password."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se ejecutan al instante y no piden contraseña."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elles s'exécutent aussitôt et ne demandent aucun mot de passe."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bunlar hemen çalışır ve parola gerektirmez."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这些会立即运行，不需要密码。"
           }
         }
       }
@@ -20757,6 +21717,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "此空间由 macOS 系统数据占用——APFS 快照、虚拟内存、固件和其他无法单独列出的受保护资源。"
+          }
+        }
+      }
+    },
+    "This task needs Terminal.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Aufgabe erfordert das Terminal."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This task needs Terminal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta tarea requiere Terminal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette tâche nécessite le Terminal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu görev Terminal gerektirir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此任务需要终端。"
           }
         }
       }

@@ -102,6 +102,9 @@ enum Theme {
     /// System Status — sea green (vitals, calm).
     static let statusAccent = Color(red: 0.30, green: 0.62, blue: 0.52)
 
+    /// Maintenance — warm slate (tools, workshop).
+    static let maintenanceAccent = Color(red: 0.55, green: 0.52, blue: 0.62)
+
     // MARK: - Brand
 
     /// Primary brand colour — forest green.

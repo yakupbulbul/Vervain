@@ -9,7 +9,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     case largeOldFiles
     case projectArtifacts
     case aiModels
-    case localSnapshots
+    case maintenance
     case duplicates
     case privacy
     case loginItems
@@ -28,7 +28,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .largeOldFiles:  return String(localized: "Large & Old Files")
         case .projectArtifacts: return String(localized: "Project Artifacts")
         case .aiModels:       return String(localized: "AI Models")
-        case .localSnapshots: return String(localized: "Local Snapshots")
+        case .maintenance:    return String(localized: "Maintenance")
         case .duplicates:     return String(localized: "Duplicates")
         case .privacy:        return String(localized: "Privacy")
         case .loginItems:     return String(localized: "Login Items")
@@ -47,7 +47,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .largeOldFiles:  return "doc.badge.clock"
         case .projectArtifacts: return "shippingbox.fill"
         case .aiModels:       return "brain"
-        case .localSnapshots: return "clock.arrow.2.circlepath"
+        case .maintenance:    return "wrench.and.screwdriver"
         case .duplicates:     return "square.on.square"
         case .privacy:        return "hand.raised.fill"
         case .loginItems:     return "power"
@@ -66,7 +66,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .largeOldFiles:  return Theme.largeFilesAccent
         case .projectArtifacts: return Theme.projectArtifactsAccent
         case .aiModels:       return Theme.aiModelsAccent
-        case .localSnapshots: return Theme.snapshotsAccent
+        case .maintenance:    return Theme.maintenanceAccent
         case .duplicates:     return Theme.duplicatesAccent
         case .privacy:        return Theme.privacyAccent
         case .loginItems:     return Theme.loginItemsAccent
@@ -85,7 +85,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
         case .largeOldFiles:  return String(localized: "Find forgotten giants")
         case .projectArtifacts: return String(localized: "Clear old build folders")
         case .aiModels:       return String(localized: "Reclaim model downloads")
-        case .localSnapshots: return String(localized: "See hidden backup copies")
+        case .maintenance:    return String(localized: "Restart Finder, reset previews")
         case .duplicates:     return String(localized: "Keep one, free the rest")
         case .privacy:        return String(localized: "Clear browsing traces")
         case .loginItems:     return String(localized: "Review what starts at login")
