@@ -2,6 +2,7 @@ import SwiftUI
 
 enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     case smartScan
+    case systemStatus
     case systemJunk
     case appUninstaller
     case diskAnalyzer
@@ -20,6 +21,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     var displayName: String {
         switch self {
         case .smartScan:      return String(localized: "Smart Scan")
+        case .systemStatus:   return String(localized: "System Status")
         case .systemJunk:     return String(localized: "System Junk")
         case .appUninstaller: return String(localized: "App Uninstaller")
         case .diskAnalyzer:   return String(localized: "Disk Analyzer")
@@ -38,6 +40,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     var icon: String {
         switch self {
         case .smartScan:      return "leaf.fill"
+        case .systemStatus:   return "gauge.with.dots.needle.67percent"
         case .systemJunk:     return "arrow.3.trianglepath"
         case .appUninstaller: return "leaf.arrow.circlepath"
         case .diskAnalyzer:   return "tree.fill"
@@ -56,6 +59,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     var accentColor: Color {
         switch self {
         case .smartScan:      return Theme.smartScanAccent
+        case .systemStatus:   return Theme.statusAccent
         case .systemJunk:     return Theme.systemJunkAccent
         case .appUninstaller: return Theme.appUninstallerAccent
         case .diskAnalyzer:   return Theme.diskAnalyzerAccent
@@ -74,6 +78,7 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     var description: String {
         switch self {
         case .smartScan:      return String(localized: "Nurture your Mac's health")
+        case .systemStatus:   return String(localized: "Live CPU, memory and battery")
         case .systemJunk:     return String(localized: "Recycle unused files")
         case .appUninstaller: return String(localized: "Gently remove apps")
         case .diskAnalyzer:   return String(localized: "See what's growing")

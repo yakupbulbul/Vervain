@@ -49,6 +49,7 @@ struct ContentView: View {
     private func rescanCurrentModule() {
         switch nav.selected {
         case .smartScan, nil:    smartScanVM.startScan()
+        case .systemStatus:      break
         case .systemJunk:        systemJunkVM.scan()
         case .appUninstaller:    appUninstallerVM.scan()
         case .diskAnalyzer:      diskAnalyzerVM.analyze()
@@ -71,6 +72,8 @@ struct ContentView: View {
             SmartScanView(onNavigate: { feature in
                 nav.selected = feature
             })
+        case .systemStatus:
+            SystemStatusView()
         case .systemJunk:
             SystemJunkView()
         case .appUninstaller:

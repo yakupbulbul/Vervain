@@ -99,6 +99,9 @@ enum Theme {
     /// Local Snapshots — steel teal (time, backup).
     static let snapshotsAccent = Color(red: 0.28, green: 0.55, blue: 0.62)
 
+    /// System Status — sea green (vitals, calm).
+    static let statusAccent = Color(red: 0.30, green: 0.62, blue: 0.52)
+
     // MARK: - Brand
 
     /// Primary brand colour — forest green.
