@@ -61,11 +61,12 @@ final class SmartScanViewModel {
 
         do {
             async let junkResult = junkScanner.scan()
-            async let fraction   = diskService.getDiskUsageFraction()
+            async let space      = diskService.getDiskSpace()
             async let apps       = appScanner.scanInstalledApps()
 
-            let ((cats, meta), diskFraction, installedApps) =
-                try await (junkResult, fraction, apps)
+            let ((cats, meta), diskSpace, installedApps) =
+                try await (junkResult, space, apps)
+            let diskFraction = diskSpace?.usedFraction ?? 0
 
             guard !Task.isCancelled else { return }
 
@@ -77,17 +78,17 @@ final class SmartScanViewModel {
             let total = cats.reduce(Int64(0)) { $0 + $1.totalSize }
             let summary = cats.map { (title: $0.title, icon: $0.icon, size: $0.totalSize) }
 
-            // Old downloads contribution to the score breakdown
-            let oldDownloadBytes = cats
-                .filter { $0.kind == .oldInstallers }
-                .reduce(Int64(0)) { $0 + $1.totalSize }
+            // Junk the review flow would pre-select counts in full; the rest
+            // needs a human decision and weighs less.
+            let allItems = cats.flatMap(\.items)
+            let safeBytes = allItems.filter(\.canSelectByDefault).reduce(Int64(0)) { $0 + $1.size }
 
             let breakdown = HealthScoreBreakdown.compute(
-                junkBytes: total,
+                safeJunkBytes: safeBytes,
+                reviewJunkBytes: max(0, total - safeBytes),
                 diskUsageFraction: diskFraction,
-                appCount: installedApps.count,
-                leftoverCount: 0,
-                oldDownloadBytes: oldDownloadBytes
+                diskFreeBytes: diskSpace?.freeBytes,
+                appCount: installedApps.count
             )
 
             cleanupCategories = cats

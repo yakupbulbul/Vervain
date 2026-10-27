@@ -184,6 +184,12 @@ actor DiskAnalyzerService {
     // MARK: - Disk usage fraction (used by SmartScan / HealthScore)
 
     func getDiskUsageFraction() -> Double {
+        getDiskSpace()?.usedFraction ?? 0
+    }
+
+    /// Total and free space of the startup volume. "Free" counts space macOS
+    /// can reclaim on its own, the same figure Finder reports.
+    func getDiskSpace() -> (totalBytes: Int64, freeBytes: Int64, usedFraction: Double)? {
         let keys: Set<URLResourceKey> = [
             .volumeTotalCapacityKey,
             .volumeAvailableCapacityForImportantUsageKey
@@ -192,8 +198,8 @@ actor DiskAnalyzerService {
               let total = values.volumeTotalCapacity,
               let avail = values.volumeAvailableCapacityForImportantUsage,
               total > 0
-        else { return 0 }
-        return 1.0 - (Double(avail) / Double(total))
+        else { return nil }
+        return (Int64(total), avail, 1.0 - (Double(avail) / Double(total)))
     }
 }
 

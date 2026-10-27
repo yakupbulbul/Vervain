@@ -441,6 +441,46 @@
         }
       }
     },
+    "%@ of files worth reviewing": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ an Dateien, die eine Prüfung wert sind"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of files worth reviewing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de archivos que conviene revisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de fichiers à examiner"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ gözden geçirmeye değer dosya"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 值得检查的文件"
+          }
+        }
+      }
+    },
     "%@ of junk found": {
       "localizations": {
         "de": {
@@ -481,6 +521,46 @@
         }
       }
     },
+    "%@ of junk that is safe to remove": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Datenmüll, der sicher entfernt werden kann"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of junk that is safe to remove"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de basura que se puede quitar sin riesgo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de déchets qui peuvent être supprimés sans risque"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ güvenle silinebilir çöp"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 可安全移除的垃圾"
+          }
+        }
+      }
+    },
     "%@ of old downloads": {
       "localizations": {
         "de": {
@@ -517,6 +597,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ 的旧下载"
+          }
+        }
+      }
+    },
+    "%@ of safe junk and %@ to review": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sicherer Datenmüll und %@ zur Prüfung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of safe junk and %@ to review"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de basura segura y %@ por revisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de déchets sûrs et %@ à vérifier"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ güvenle silinebilir çöp ve %@ gözden geçirilecek"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 可安全清理的垃圾，另有 %@ 待检查"
           }
         }
       }
@@ -4521,6 +4641,46 @@
         }
       }
     },
+    "Cleaning the safe items would raise your score from %lld to %lld.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Entfernen der sicheren Objekte hebt Ihren Wert von %lld auf %lld."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleaning the safe items would raise your score from %lld to %lld."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limpiar los elementos seguros subiría tu puntuación de %lld a %lld."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nettoyer les éléments sûrs ferait passer votre score de %lld à %lld."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenli öğeleri temizlemek skorunuzu %lld'den %lld'ye çıkarır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理安全项目后，分数将从 %lld 提高到 %lld。"
+          }
+        }
+      }
+    },
     "Cleanup Complete": {
       "localizations": {
         "de": {
@@ -6397,6 +6557,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "磁盘已使用 %lld%%——严重不足"
+          }
+        }
+      }
+    },
+    "Disk is %lld%% full, %@ free": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenträger zu %lld%% voll, %@ frei"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk is %lld%% full, %@ free"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disco lleno al %lld%%, %@ libres"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disque plein à %lld%%, %@ libres"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk %lld%% dolu, %@ boş"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "磁盘已用 %lld%%，剩余 %@"
           }
         }
       }
@@ -24117,6 +24317,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "您的 Mac 状态良好——未发现明显问题。"
+          }
+        }
+      }
+    },
+    "Your Mac is in great shape. No significant issues found.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ihr Mac ist in bester Verfassung. Keine nennenswerten Probleme gefunden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Mac is in great shape. No significant issues found."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu Mac está en excelente estado. No se encontraron problemas importantes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre Mac est en pleine forme. Aucun problème important détecté."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'iniz harika durumda. Önemli bir sorun bulunmadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的 Mac 状态很好，没有发现明显问题。"
           }
         }
       }
