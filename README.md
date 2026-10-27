@@ -65,7 +65,9 @@ Safe items start ticked. Anything riskier waits for you, and the History screen 
 
 Version 2.0 added Project Artifacts, AI Models, System Status, Maintenance and undo through History. The [changelog](CHANGELOG.md) has the full list.
 
-## Vervain and Mole
+## How it compares
+
+### Mole
 
 [Mole](https://github.com/tw93/Mole) is the other free, open-source Mac cleaner worth knowing. It is a terminal tool (`mo`), much bigger than Vervain, and a good fit if you like working from the command line. Vervain is a regular Mac app for people who would rather look at a list, tick what should go, and know it ends up in the Trash.
 
@@ -78,7 +80,20 @@ Version 2.0 added Project Artifacts, AI Models, System Status, Maintenance and u
 | Administrator tasks | Shows the command and never runs it | Asks for administrator access when it needs it |
 | Needs | macOS 15 or later | macOS 12 or later |
 
-Both can clear project build folders and show live system stats. Mole is also easier to script and runs on older Macs. Paid apps such as CleanMyMac are closed source, while Vervain is free and MIT.
+Both can clear project build folders and show live system stats. Mole is also easier to script and runs on older Macs.
+
+### Other Mac apps
+
+CleanMyMac is the polished all-in-one option, and it is paid. OnyX is a long-standing free utility that leans toward maintenance and system settings more than cleaning. AppCleaner does one job, removing an app with its leftovers, and does it well.
+
+| | Price | Source | Mostly about |
+|---|---|---|---|
+| Vervain | Free | Open (MIT) | Cleaning, uninstalling, disk analysis, review before anything is removed |
+| CleanMyMac | Subscription or one-time purchase | Closed | Cleaning, uninstalling and maintenance in one polished app |
+| OnyX | Free (donations welcome) | Closed | Maintenance and system settings, with some cleaning |
+| AppCleaner | Free | Closed | Uninstalling apps |
+
+Vervain is the one that is free, open source and built around reviewing everything first. If you only need an uninstaller, or you want a full maintenance toolbox, one of the others may suit you better.
 
 ## Three promises
 
