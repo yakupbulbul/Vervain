@@ -66,10 +66,17 @@ jobs:
           chmod +x scripts/release.sh
           scripts/release.sh "${{ steps.version.outputs.version }}"
 
+      # Homebrew downloads this identical copy, so GitHub's download counter
+      # tells brew installs apart from direct downloads.
+      - name: Make the Homebrew copy of the DMG
+        run: cp "build/Vervain-${{ steps.version.outputs.version }}.dmg" "build/Vervain-${{ steps.version.outputs.version }}-homebrew.dmg"
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: build/Vervain-${{ steps.version.outputs.version }}.dmg
+          files: |
+            build/Vervain-${{ steps.version.outputs.version }}.dmg
+            build/Vervain-${{ steps.version.outputs.version }}-homebrew.dmg
           generate_release_notes: true
           draft: false
         env:
@@ -82,7 +89,7 @@ jobs:
           echo '```ruby' >> "$GITHUB_STEP_SUMMARY"
           echo "version \"${{ steps.version.outputs.version }}\"" >> "$GITHUB_STEP_SUMMARY"
           echo "sha256 \"${SHA256}\"" >> "$GITHUB_STEP_SUMMARY"
-          echo "url \"https://github.com/yakupbulbul/Vervain/releases/download/v${{ steps.version.outputs.version }}/Vervain-${{ steps.version.outputs.version }}.dmg\"" >> "$GITHUB_STEP_SUMMARY"
+          echo "url \"https://github.com/yakupbulbul/Vervain/releases/download/v${{ steps.version.outputs.version }}/Vervain-${{ steps.version.outputs.version }}-homebrew.dmg\"" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Cleanup keychain
