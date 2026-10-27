@@ -49,11 +49,15 @@ struct ContentView: View {
     private func rescanCurrentModule() {
         switch nav.selected {
         case .smartScan, nil:    smartScanVM.startScan()
+        case .systemStatus:      break
         case .systemJunk:        systemJunkVM.scan()
         case .appUninstaller:    appUninstallerVM.scan()
         case .diskAnalyzer:      diskAnalyzerVM.analyze()
         case .largeOldFiles:     modules.largeFiles.scan()
         case .duplicates:        modules.duplicates.scan()
+        case .projectArtifacts:  modules.projectArtifacts.scan()
+        case .aiModels:          modules.aiModels.scan()
+        case .maintenance:       break
         case .privacy:           modules.privacy.scan()
         case .loginItems:        loginItemsVM.scan()
         case .orphanedData:      modules.orphans.scan()
@@ -68,6 +72,8 @@ struct ContentView: View {
             SmartScanView(onNavigate: { feature in
                 nav.selected = feature
             })
+        case .systemStatus:
+            SystemStatusView()
         case .systemJunk:
             SystemJunkView()
         case .appUninstaller:
@@ -78,6 +84,12 @@ struct ContentView: View {
             LargeFilesView(vm: modules.largeFiles)
         case .duplicates:
             DuplicatesView(vm: modules.duplicates)
+        case .projectArtifacts:
+            ProjectArtifactsView(vm: modules.projectArtifacts)
+        case .aiModels:
+            AIModelsView(vm: modules.aiModels)
+        case .maintenance:
+            MaintenanceView()
         case .privacy:
             PrivacyView(vm: modules.privacy)
         case .loginItems:

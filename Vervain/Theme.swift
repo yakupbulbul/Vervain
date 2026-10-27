@@ -90,6 +90,21 @@ enum Theme {
     /// Large & Old Files — slate blue (settled, forgotten).
     static let largeFilesAccent = Color(red: 0.36, green: 0.50, blue: 0.62)
 
+    /// Project Artifacts — terracotta (fired clay, build output).
+    static let projectArtifactsAccent = Color(red: 0.70, green: 0.40, blue: 0.28)
+
+    /// AI Models — soft violet (neural, abstract).
+    static let aiModelsAccent = Color(red: 0.50, green: 0.42, blue: 0.68)
+
+    /// Local Snapshots — steel teal (time, backup).
+    static let snapshotsAccent = Color(red: 0.28, green: 0.55, blue: 0.62)
+
+    /// System Status — sea green (vitals, calm).
+    static let statusAccent = Color(red: 0.30, green: 0.62, blue: 0.52)
+
+    /// Maintenance — warm slate (tools, workshop).
+    static let maintenanceAccent = Color(red: 0.55, green: 0.52, blue: 0.62)
+
     // MARK: - Brand
 
     /// Primary brand colour — forest green.

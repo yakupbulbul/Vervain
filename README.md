@@ -49,7 +49,7 @@ brew install yakupbulbul/vervain/vervain
 
 **Direct download:**
 
-> [Download the latest Vervain DMG](https://github.com/yakupbulbul/Vervain/releases/latest) — Signed & notarized by Apple.
+> [Download the latest Vervain DMG](https://github.com/yakupbulbul/Vervain/releases/latest), signed and notarized by Apple.
 
 ## Features
 
@@ -58,13 +58,13 @@ brew install yakupbulbul/vervain/vervain
 <td width="50%">
 
 ### Smart Scan
-Health score with a transparent breakdown. Every deduction is explained, and each recommendation links directly to the thing it found.
+Health score with a transparent breakdown. Every deduction is explained, and Vervain tells you what the score would be after you clean the safe items.
 
 </td>
 <td width="50%">
 
 ### System Junk
-Finds caches, logs, leftover language files, old installers, and stale downloads. Downloads are never pre-selected — you pick what goes.
+Finds caches, logs, leftover language files, old installers, and stale downloads. Downloads are never pre-selected. You pick what goes.
 
 </td>
 </tr>
@@ -100,26 +100,55 @@ Donut chart of what's eating your disk, with drill-down into folders and largest
 </tr>
 </table>
 
+<table>
+<tr>
+<td width="50%">
+
+### Project Artifacts
+Old `node_modules`, `target`, `.build` and `Pods` folders, grouped by project. Only the ones git ignores, in projects you haven't touched for a week, start out selected.
+
+</td>
+<td width="50%">
+
+### System Status
+CPU, memory, disk, network and battery, live while the screen is open. It stops sampling when you leave it.
+
+</td>
+</tr>
+<tr>
+<td>
+<img src="docs/screenshots/project-artifacts-dark.png" width="100%" alt="Project Artifacts" />
+</td>
+<td>
+<img src="docs/screenshots/system-status-dark.png" width="100%" alt="System Status" />
+</td>
+</tr>
+</table>
+
 ### New in 2.0
 
-- **Large & Old Files** — big files you have not touched in months, with size and age thresholds you choose. Nothing is pre-selected.
-- **Duplicates** — byte-identical files found by size, partial hash and SHA-256. The oldest copy is always kept and never listed.
-- **Privacy** — Safari, Chrome, Firefox, Edge and Brave caches (pre-selected), history (review) and cookies (risky, never pre-selected).
-- **Login Items** — see third-party launch agents and daemons; remove your own through the normal review flow.
-- **Menu bar monitor** — optional startup-disk gauge and a quick junk scan.
-- **Weekly reminder** and an **exclusion list** for folders Vervain must never touch, both in Settings.
-- **More developer caches** — Gradle, Cargo, Maven, Go, JetBrains, pnpm, Xcode documentation and simulators.
-- **Undo and History** — every cleanup is recorded; put items back from the done screen or the History module.
-- **Smarter review** — search, sort, filter by file type, "only safe items", Quick Look and Reveal in Finder, export as CSV or Markdown.
-- **Smarter uninstaller** — last-opened date, "not opened in 6 months" filter, drag an `.app` onto the window, quit running apps first.
-- **Leftovers** of apps you already removed, found by bundle identifier (never pre-selected).
-- **Disk Analyzer** — analyze any folder or external disk, accurate sizes below the depth limit, send any file or folder to review.
-- **Automation** — configurable weekly reminder, low-disk alert, memory view in the menu bar, Shortcuts actions, open at login.
-- Safer deletion: protected-path guard, files changed since the scan are refused, and the Finder/AppleScript fallback is gone.
+2.0 is mostly about reaching the places other cleaners skip, with the same rules about review and Trash as before.
+
+If you write code, there are a few new places to look. Project Artifacts finds `node_modules`, `target`, `.build`, `Pods`, virtual environments and other build folders and groups them by project. Only folders that git ignores, in projects you haven't touched for a week, start out selected. Everything else waits for you. AI Models lists what Hugging Face, LM Studio, Ollama, PyTorch, Whisper, Keras and GPT4All have downloaded. I left all of it unselected, because finding out you have to fetch a 20 GB model again is a bad surprise. The developer caches also grew: Gradle, Cargo, Maven, Go, JetBrains, pnpm, Xcode documentation and simulators.
+
+System Status shows CPU, memory, disk, network, battery and thermal state live, plus the busiest processes. It only samples while the screen is open. Maintenance resets Quick Look previews and restarts Finder, the Dock or the menu bar. Anything that needs administrator rights (flushing DNS, rebuilding the Spotlight index, purging memory) shows up as a Terminal command you can copy. Vervain doesn't run those itself, and I'd rather keep it that way than ask for your password. Time Machine local snapshots are listed in Maintenance too, read-only, for the same reason.
+
+Cleanups got easier to undo. Every one is recorded, so you can put items back from the done screen or from History. The review list has search, sorting, file type filters, an "only safe items" switch, Quick Look, Reveal in Finder and export to CSV or Markdown. A protected-path guard blocks system locations, files that changed since the scan are refused, and the Finder/AppleScript fallback is gone.
+
+The rest of the list:
+
+- Large & Old Files, with size and age thresholds you choose. Nothing is pre-selected.
+- Duplicates, matched by size, partial hash and SHA-256. The oldest copy is always kept and never listed.
+- Privacy, for Safari, Chrome, Firefox, Edge and Brave. Caches are pre-selected, history is for review, and cookies are never pre-selected.
+- Login Items, to see third-party launch agents and daemons. You can remove your own through the normal review flow.
+- Leftovers from apps you already removed, found by bundle identifier and never pre-selected.
+- A smarter uninstaller that shows when you last opened an app, filters ones untouched for six months, takes a dragged `.app` and quits running apps first.
+- A Disk Analyzer that can look at any folder or external disk, with accurate sizes below the depth limit.
+- A menu bar monitor with a startup-disk gauge and a quick junk scan, a weekly reminder, a low-disk alert, an exclusion list for folders Vervain must never touch, Shortcuts actions and open at login.
 
 ## Languages
 
-Available in 6 languages — switch anytime via **Settings** (⌘,):
+Vervain comes in 6 languages. You can switch anytime in **Settings** (⌘,):
 
 🇬🇧 English · 🇫🇷 Français · 🇩🇪 Deutsch · 🇹🇷 Türkçe · 🇪🇸 Español · 🇨🇳 中文(简体)
 
@@ -144,11 +173,11 @@ open Vervain.xcodeproj
 
 ### Full Disk Access
 
-Vervain works without Full Disk Access — it just skips protected folders and tells you what it couldn't reach. If you want a complete scan, go to **System Settings → Privacy & Security → Full Disk Access** and add Vervain. The app detects the change automatically.
+Vervain works without Full Disk Access. It skips protected folders and tells you what it couldn't reach. If you want a complete scan, go to **System Settings → Privacy & Security → Full Disk Access** and add Vervain. The app detects the change automatically.
 
 ## How It's Built
 
-Swift 6 with strict concurrency. SwiftUI for the UI, actor-isolated services for file system work, `@Observable` view models on the main actor. The only deletion primitives in the entire codebase are `FileManager.trashItem` and `NSWorkspace.recycle` (both move items to the Trash), called from a single `CleanupService` — everything else routes through it. No AppleScript and no shell commands are used.
+Swift 6 with strict concurrency. SwiftUI for the UI, actor-isolated services for file system work, `@Observable` view models on the main actor. The only deletion primitives in the entire codebase are `FileManager.trashItem` and `NSWorkspace.recycle` (both move items to the Trash), called from a single `CleanupService`, and everything else routes through it. There is no AppleScript. Vervain never goes through a shell either. The few system tools it starts (`qlmanage`, `killall`, `ps`, `tmutil`, and `git` to check what a project ignores) come from a fixed list with fixed arguments, and nothing you type or read from disk becomes part of a command.
 
 The `CleanupCoordinator` owns the review flow state machine (idle → reviewing → confirming → executing → done) and is shared across all modules.
 
@@ -166,13 +195,13 @@ The `CleanupCoordinator` owns the review flow state machine (idle → reviewing 
 
 ## Contributing
 
-Pull requests are welcome. If you're adding a new cleanup module, all deletion must go through `CleanupService` — this is how the safety model works. Items need a risk level and a confidence level so the review UI can make good default selections.
+Pull requests are welcome. If you're adding a new cleanup module, all deletion must go through `CleanupService`. That is how the safety model works. Items need a risk level and a confidence level so the review UI can make good default selections.
 
 Have a look at `CleanupSelectionPolicy` to understand which items get pre-selected and which don't.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
 
 ---
 

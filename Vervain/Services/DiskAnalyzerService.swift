@@ -76,17 +76,21 @@ actor DiskAnalyzerService {
     /// Progress callback fires with a human-readable label before each root starts.
     func analyzeWholeDisk(
         maxDepth: Int = 5,
+        demoRoot: URL? = DemoMode.root(),
         progress: (@Sendable (String) async -> Void)? = nil
     ) async throws -> AnalysisResult {
         let started = Date()
 
-        // Disk capacity from the filesystem attributes of "/"
-        let attrs = (try? FileManager.default.attributesOfFileSystem(forPath: "/")) ?? [:]
+        // Disk capacity from the filesystem attributes of "/". Demo mode has
+        // no real disk to report, so it reports none rather than invent one.
+        let attrs = demoRoot == nil
+            ? ((try? FileManager.default.attributesOfFileSystem(forPath: "/")) ?? [:])
+            : [:]
         let totalBytes = (attrs[.systemSize]     as? Int64) ?? 0
         let freeBytes  = (attrs[.systemFreeSize] as? Int64) ?? 0
 
         // Top-level directories to scan, in priority order
-        let roots: [(path: String, label: String)] = [
+        let roots: [(path: String, label: String)] = demoRoot.map(DemoMode.diskAnalyzerRoots(in:)) ?? [
             ("/Users",        "Users"),
             ("/Applications", "Applications"),
             ("/Library",      "Library"),
@@ -140,7 +144,7 @@ actor DiskAnalyzerService {
         // Add "System & Other" to account for APFS snapshots, swap, firmware, etc.
         let usedBytes   = totalBytes - freeBytes
         let scannedSize = childNodes.reduce(Int64(0)) { $0 + $1.size }
-        let otherSize   = max(0, usedBytes - scannedSize)
+        let otherSize   = demoRoot == nil ? max(0, usedBytes - scannedSize) : 0
         if otherSize > 0 {
             childNodes.append(DiskNode(
                 url: URL(fileURLWithPath: "/"),
@@ -184,6 +188,12 @@ actor DiskAnalyzerService {
     // MARK: - Disk usage fraction (used by SmartScan / HealthScore)
 
     func getDiskUsageFraction() -> Double {
+        getDiskSpace()?.usedFraction ?? 0
+    }
+
+    /// Total and free space of the startup volume. "Free" counts space macOS
+    /// can reclaim on its own, the same figure Finder reports.
+    func getDiskSpace() -> (totalBytes: Int64, freeBytes: Int64, usedFraction: Double)? {
         let keys: Set<URLResourceKey> = [
             .volumeTotalCapacityKey,
             .volumeAvailableCapacityForImportantUsageKey
@@ -192,8 +202,8 @@ actor DiskAnalyzerService {
               let total = values.volumeTotalCapacity,
               let avail = values.volumeAvailableCapacityForImportantUsage,
               total > 0
-        else { return 0 }
-        return 1.0 - (Double(avail) / Double(total))
+        else { return nil }
+        return (Int64(total), avail, 1.0 - (Double(avail) / Double(total)))
     }
 }
 

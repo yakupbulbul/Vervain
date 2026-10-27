@@ -9,6 +9,8 @@ import SwiftUI
 final class ModuleScanStore {
     let largeFiles: ModuleScanViewModel
     let duplicates: ModuleScanViewModel
+    let projectArtifacts: ModuleScanViewModel
+    let aiModels: ModuleScanViewModel
     let privacy: ModuleScanViewModel
     let orphans: ModuleScanViewModel
 
@@ -18,6 +20,12 @@ final class ModuleScanStore {
         }
         duplicates = ModuleScanViewModel {
             try await DuplicateScanner().scan(keepRule: DuplicateKeepRule.fromDefaults())
+        }
+        projectArtifacts = ModuleScanViewModel {
+            try await ProjectArtifactsScanner().scan(config: ProjectArtifactsConfig.fromDefaults())
+        }
+        aiModels = ModuleScanViewModel {
+            try await AIModelsScanner().scan()
         }
         privacy = ModuleScanViewModel {
             try await PrivacyScanner().scan()

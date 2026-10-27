@@ -2,10 +2,14 @@ import SwiftUI
 
 enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     case smartScan
+    case systemStatus
     case systemJunk
     case appUninstaller
     case diskAnalyzer
     case largeOldFiles
+    case projectArtifacts
+    case aiModels
+    case maintenance
     case duplicates
     case privacy
     case loginItems
@@ -17,10 +21,14 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     var displayName: String {
         switch self {
         case .smartScan:      return String(localized: "Smart Scan")
+        case .systemStatus:   return String(localized: "System Status")
         case .systemJunk:     return String(localized: "System Junk")
         case .appUninstaller: return String(localized: "App Uninstaller")
         case .diskAnalyzer:   return String(localized: "Disk Analyzer")
         case .largeOldFiles:  return String(localized: "Large & Old Files")
+        case .projectArtifacts: return String(localized: "Project Artifacts")
+        case .aiModels:       return String(localized: "AI Models")
+        case .maintenance:    return String(localized: "Maintenance")
         case .duplicates:     return String(localized: "Duplicates")
         case .privacy:        return String(localized: "Privacy")
         case .loginItems:     return String(localized: "Login Items")
@@ -32,10 +40,14 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     var icon: String {
         switch self {
         case .smartScan:      return "leaf.fill"
+        case .systemStatus:   return "gauge.with.dots.needle.67percent"
         case .systemJunk:     return "arrow.3.trianglepath"
         case .appUninstaller: return "leaf.arrow.circlepath"
         case .diskAnalyzer:   return "tree.fill"
         case .largeOldFiles:  return "doc.badge.clock"
+        case .projectArtifacts: return "shippingbox.fill"
+        case .aiModels:       return "brain"
+        case .maintenance:    return "wrench.and.screwdriver"
         case .duplicates:     return "square.on.square"
         case .privacy:        return "hand.raised.fill"
         case .loginItems:     return "power"
@@ -47,10 +59,14 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     var accentColor: Color {
         switch self {
         case .smartScan:      return Theme.smartScanAccent
+        case .systemStatus:   return Theme.statusAccent
         case .systemJunk:     return Theme.systemJunkAccent
         case .appUninstaller: return Theme.appUninstallerAccent
         case .diskAnalyzer:   return Theme.diskAnalyzerAccent
         case .largeOldFiles:  return Theme.largeFilesAccent
+        case .projectArtifacts: return Theme.projectArtifactsAccent
+        case .aiModels:       return Theme.aiModelsAccent
+        case .maintenance:    return Theme.maintenanceAccent
         case .duplicates:     return Theme.duplicatesAccent
         case .privacy:        return Theme.privacyAccent
         case .loginItems:     return Theme.loginItemsAccent
@@ -62,10 +78,14 @@ enum AppFeature: String, CaseIterable, Identifiable, Hashable {
     var description: String {
         switch self {
         case .smartScan:      return String(localized: "Nurture your Mac's health")
+        case .systemStatus:   return String(localized: "Live CPU, memory and battery")
         case .systemJunk:     return String(localized: "Recycle unused files")
         case .appUninstaller: return String(localized: "Gently remove apps")
         case .diskAnalyzer:   return String(localized: "See what's growing")
         case .largeOldFiles:  return String(localized: "Find forgotten giants")
+        case .projectArtifacts: return String(localized: "Clear old build folders")
+        case .aiModels:       return String(localized: "Reclaim model downloads")
+        case .maintenance:    return String(localized: "Restart Finder, reset previews")
         case .duplicates:     return String(localized: "Keep one, free the rest")
         case .privacy:        return String(localized: "Clear browsing traces")
         case .loginItems:     return String(localized: "Review what starts at login")

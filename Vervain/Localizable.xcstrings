@@ -41,6 +41,46 @@
         }
       }
     },
+    "%@ available of %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ frei von %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ available of %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ disponibles de %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ disponibles sur %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@ içinde %1$@ boş"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@ 中可用 %1$@"
+          }
+        }
+      }
+    },
     "%@ browsing history": {
       "localizations": {
         "de": {
@@ -401,6 +441,46 @@
         }
       }
     },
+    "%@ of files worth reviewing": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ an Dateien, die eine Prüfung wert sind"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of files worth reviewing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de archivos que conviene revisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de fichiers à examiner"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ gözden geçirmeye değer dosya"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 值得检查的文件"
+          }
+        }
+      }
+    },
     "%@ of junk found": {
       "localizations": {
         "de": {
@@ -441,6 +521,46 @@
         }
       }
     },
+    "%@ of junk that is safe to remove": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Datenmüll, der sicher entfernt werden kann"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of junk that is safe to remove"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de basura que se puede quitar sin riesgo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de déchets qui peuvent être supprimés sans risque"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ güvenle silinebilir çöp"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 可安全移除的垃圾"
+          }
+        }
+      }
+    },
     "%@ of old downloads": {
       "localizations": {
         "de": {
@@ -477,6 +597,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ 的旧下载"
+          }
+        }
+      }
+    },
+    "%@ of safe junk and %@ to review": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sicherer Datenmüll und %@ zur Prüfung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of safe junk and %@ to review"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de basura segura y %@ por revisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de déchets sûrs et %@ à vérifier"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ güvenle silinebilir çöp ve %@ gözden geçirilecek"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 可安全清理的垃圾，另有 %@ 待检查"
+          }
+        }
+      }
+    },
+    "%@ sitting in the Trash": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ liegen im Papierkorb"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sitting in the Trash"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ en la Papelera"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dans la Corbeille"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Kutusu'nda %@ bekliyor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "废纸篓中有 %@"
           }
         }
       }
@@ -597,6 +797,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ — %lld 个项目"
+          }
+        }
+      }
+    },
+    "%@ — not in .gitignore, check that it is not part of the project": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — nicht in .gitignore, prüfen Sie, dass es nicht zum Projekt gehört"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — not in .gitignore, check that it is not part of the project"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — no está en .gitignore, comprueba que no sea parte del proyecto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — absent de .gitignore, vérifiez qu'il ne fait pas partie du projet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — .gitignore içinde değil, projenin parçası olmadığından emin ol"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 不在 .gitignore 中，请确认它不是项目的一部分"
+          }
+        }
+      }
+    },
+    "%@ — rebuilt by your tools · project idle for %lld days": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — wird von Ihren Werkzeugen neu erzeugt · Projekt seit %lld Tagen inaktiv"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — rebuilt by your tools · project idle for %lld days"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — lo recrean tus herramientas · proyecto inactivo desde hace %lld días"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — recréé par vos outils · projet inactif depuis %lld jours"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — araçların tarafından yeniden oluşturulur · proje %lld gündür etkin değil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — 由你的工具重新生成 · 项目已闲置 %lld 天"
           }
         }
       }
@@ -797,6 +1077,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "已选择 %lld 个应用"
+          }
+        }
+      }
+    },
+    "%lld charge cycles": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Ladezyklen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld charge cycles"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ciclos de carga"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld cycles de charge"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld şarj döngüsü"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 次充电循环"
           }
         }
       }
@@ -1841,6 +2161,46 @@
         }
       }
     },
+    "AI Models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI-Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos de IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles d'IA"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yapay Zekâ Modelleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 模型"
+          }
+        }
+      }
+    },
     "About": {
       "localizations": {
         "de": {
@@ -1957,6 +2317,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "添加文件夹…"
+          }
+        }
+      }
+    },
+    "All Ollama models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Ollama-Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All Ollama models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los modelos de Ollama"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les modèles Ollama"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm Ollama modelleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有 Ollama 模型"
+          }
+        }
+      }
+    },
+    "All Ollama models in one item. To remove a single model, run ollama rm in Terminal.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Ollama-Modelle in einem Eintrag. Um ein einzelnes Modell zu entfernen, führen Sie ollama rm im Terminal aus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All Ollama models in one item. To remove a single model, run ollama rm in Terminal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los modelos de Ollama en un solo elemento. Para quitar uno, ejecuta ollama rm en Terminal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les modèles Ollama en un seul élément. Pour en retirer un, lancez ollama rm dans le Terminal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm Ollama modelleri tek öğede. Tek bir modeli silmek için Terminal'de ollama rm çalıştır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有 Ollama 模型合为一项。要删除单个模型，请在终端运行 ollama rm。"
           }
         }
       }
@@ -2481,6 +2921,46 @@
         }
       }
     },
+    "Angular build cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angular-Build-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angular build cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de compilación de Angular"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache de build Angular"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angular derleme önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angular 构建缓存"
+          }
+        }
+      }
+    },
     "App Store": {
       "localizations": {
         "de": {
@@ -2921,6 +3401,86 @@
         }
       }
     },
+    "Battery": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akku"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Battery"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batería"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batterie"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "电池"
+          }
+        }
+      }
+    },
+    "Battery temperature %@ °C": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akkutemperatur %@ °C"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Battery temperature %@ °C"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temperatura de la batería %@ °C"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Température de la batterie %@ °C"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pil sıcaklığı %@ °C"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "电池温度 %@ °C"
+          }
+        }
+      }
+    },
     "Big files you have not opened in months are often the quickest way to free space.": {
       "localizations": {
         "de": {
@@ -3161,6 +3721,86 @@
         }
       }
     },
+    "Build folders your tools can recreate": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build-Ordner, die Ihre Werkzeuge neu erzeugen können"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build folders your tools can recreate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carpetas de compilación que tus herramientas pueden recrear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dossiers de build que vos outils peuvent recréer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Araçlarının yeniden oluşturabildiği derleme klasörleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工具可重新生成的构建文件夹"
+          }
+        }
+      }
+    },
+    "Build output": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build-Ausgabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build output"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado de compilación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie de build"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derleme çıktısı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "构建输出"
+          }
+        }
+      }
+    },
     "Bundle + %lld leftover items": {
       "localizations": {
         "de": {
@@ -3241,6 +3881,46 @@
         }
       }
     },
+    "Busiest Processes": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivste Prozesse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busiest Processes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesos más activos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processus les plus actifs"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Yoğun Süreçler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最繁忙的进程"
+          }
+        }
+      }
+    },
     "Buy Me a Coffee": {
       "localizations": {
         "de": {
@@ -3277,6 +3957,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "请我喝杯咖啡"
+          }
+        }
+      }
+    },
+    "CPU": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
           }
         }
       }
@@ -3357,6 +4077,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "缓存文件 %lld 天未使用"
+          }
+        }
+      }
+    },
+    "Cached models and datasets — downloaded again on first use": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwischengespeicherte Modelle und Datensätze — werden bei der ersten Nutzung erneut geladen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cached models and datasets — downloaded again on first use"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos y conjuntos de datos en caché — se vuelven a descargar al usarlos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles et jeux de données en cache — retéléchargés à la première utilisation"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önbelleğe alınmış modeller ve veri kümeleri — ilk kullanımda yeniden indirilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缓存的模型和数据集 — 首次使用时会重新下载"
           }
         }
       }
@@ -3517,6 +4277,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "扫描后已更改——请重新扫描"
+          }
+        }
+      }
+    },
+    "Charging": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lädt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Charging"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargando"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En charge"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şarj oluyor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "充电中"
+          }
+        }
+      }
+    },
+    "Charging · %@ to full": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lädt · %@ bis voll"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Charging · %@ to full"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargando · %@ hasta completar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En charge · %@ avant la charge complète"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şarj oluyor · dolmasına %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "充电中 · 还需 %@ 充满"
           }
         }
       }
@@ -3841,6 +4681,46 @@
         }
       }
     },
+    "Cleaning the safe items would raise your score from %lld to %lld.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Entfernen der sicheren Objekte hebt Ihren Wert von %lld auf %lld."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleaning the safe items would raise your score from %lld to %lld."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limpiar los elementos seguros subiría tu puntuación de %lld a %lld."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nettoyer les éléments sûrs ferait passer votre score de %lld à %lld."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenli öğeleri temizlemek skorunuzu %lld'den %lld'ye çıkarır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理安全项目后，分数将从 %lld 提高到 %lld。"
+          }
+        }
+      }
+    },
     "Cleanup Complete": {
       "localizations": {
         "de": {
@@ -4041,6 +4921,46 @@
         }
       }
     },
+    "Clear Old Build Folders": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alte Build-Ordner entfernen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear Old Build Folders"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limpiar carpetas de compilación antiguas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nettoyer les anciens dossiers de build"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski Derleme Klasörlerini Temizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理旧的构建文件夹"
+          }
+        }
+      }
+    },
     "Clear Selection": {
       "localizations": {
         "de": {
@@ -4121,6 +5041,46 @@
         }
       }
     },
+    "Clear old build folders": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alte Build-Ordner entfernen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear old build folders"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina carpetas de compilación antiguas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimez les anciens dossiers de build"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski derleme klasörlerini temizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理旧的构建文件夹"
+          }
+        }
+      }
+    },
     "Clear search": {
       "localizations": {
         "de": {
@@ -4157,6 +5117,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "清除搜索"
+          }
+        }
+      }
+    },
+    "Clears the thumbnail and preview cache that can show stale or broken previews.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leert den Miniatur- und Vorschau-Cache, der veraltete oder defekte Vorschauen zeigen kann."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clears the thumbnail and preview cache that can show stale or broken previews."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borra la caché de miniaturas y vistas previas que puede mostrar previsualizaciones antiguas o rotas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vide le cache des vignettes et aperçus, qui peut afficher des aperçus périmés ou cassés."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski veya bozuk önizleme gösterebilen küçük resim ve önizleme önbelleğini temizler."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除可能显示过期或损坏预览的缩略图和预览缓存。"
           }
         }
       }
@@ -4237,6 +5237,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "CocoaPods 缓存"
+          }
+        }
+      }
+    },
+    "CocoaPods dependencies": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CocoaPods-Abhängigkeiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CocoaPods dependencies"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dependencias de CocoaPods"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépendances CocoaPods"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CocoaPods bağımlılıkları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CocoaPods 依赖"
           }
         }
       }
@@ -4521,6 +5561,126 @@
         }
       }
     },
+    "Copied": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copied"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopyalandı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已复制"
+          }
+        }
+      }
+    },
+    "Copy Command": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehl kopieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy Command"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar comando"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier la commande"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komutu Kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制命令"
+          }
+        }
+      }
+    },
+    "Copy Command for All": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehl für alle kopieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy Command for All"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar comando para todas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier la commande pour tous"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tümü İçin Komutu Kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制全部命令"
+          }
+        }
+      }
+    },
     "Copy List": {
       "localizations": {
         "de": {
@@ -4637,6 +5797,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法检查更新。"
+          }
+        }
+      }
+    },
+    "Critical": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kritisch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Critical"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crítico"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Critique"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kritik"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "严重"
+          }
+        }
+      }
+    },
+    "Dart tool cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dart-Tool-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dart tool cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de herramientas de Dart"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache des outils Dart"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dart araç önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dart 工具缓存"
           }
         }
       }
@@ -5361,6 +6601,46 @@
         }
       }
     },
+    "Disk is %lld%% full, %@ free": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenträger zu %lld%% voll, %@ frei"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk is %lld%% full, %@ free"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disco lleno al %lld%%, %@ libres"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disque plein à %lld%%, %@ libres"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk %lld%% dolu, %@ boş"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "磁盘已用 %lld%%，剩余 %@"
+          }
+        }
+      }
+    },
     "Disk usage by category": {
       "localizations": {
         "de": {
@@ -5601,6 +6881,46 @@
         }
       }
     },
+    "Download": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descarga"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargement"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirme"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下载"
+          }
+        }
+      }
+    },
     "Download from %lld days ago": {
       "localizations": {
         "de": {
@@ -5721,6 +7041,46 @@
         }
       }
     },
+    "Downloaded model files — fetched again when a tool needs them": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heruntergeladene Modelldateien — werden bei Bedarf erneut geladen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloaded model files — fetched again when a tool needs them"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivos de modelos descargados — se vuelven a bajar cuando una herramienta los necesita"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichiers de modèles téléchargés — retéléchargés quand un outil en a besoin"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirilmiş model dosyaları — bir araç ihtiyaç duyunca yeniden indirilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已下载的模型文件 — 工具需要时会重新下载"
+          }
+        }
+      }
+    },
     "Duplicate of %@": {
       "localizations": {
         "de": {
@@ -5797,6 +7157,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "重复文件"
+          }
+        }
+      }
+    },
+    "Empties the disk cache held in memory. Apps may feel slower for a moment.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leert den im Speicher gehaltenen Disk-Cache. Apps wirken kurz langsamer."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empties the disk cache held in memory. Apps may feel slower for a moment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vacía la caché de disco en memoria. Las apps pueden ir más lentas un momento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vide le cache disque en mémoire. Les apps peuvent être plus lentes un instant."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bellekte tutulan disk önbelleğini boşaltır. Uygulamalar bir an yavaşlayabilir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清空内存中的磁盘缓存。应用可能会短暂变慢。"
+          }
+        }
+      }
+    },
+    "Empty the Trash": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Papierkorb leeren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empty the Trash"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaciar la Papelera"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vider la Corbeille"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Kutusu'nu boşalt"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清倒废纸篓"
           }
         }
       }
@@ -6157,6 +7597,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "已在设置中排除"
+          }
+        }
+      }
+    },
+    "Expo cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expo-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expo cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de Expo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache Expo"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expo önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expo 缓存"
           }
         }
       }
@@ -6721,6 +8201,246 @@
         }
       }
     },
+    "Finds node_modules, target, .build, Pods, virtual environments and similar folders in your projects.\nOnly git-ignored folders of idle projects are pre-selected. Everything goes to the Trash.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Findet node_modules, target, .build, Pods, virtuelle Umgebungen und ähnliche Ordner in Ihren Projekten.\nNur von Git ignorierte Ordner inaktiver Projekte sind vorausgewählt. Alles landet im Papierkorb."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finds node_modules, target, .build, Pods, virtual environments and similar folders in your projects.\nOnly git-ignored folders of idle projects are pre-selected. Everything goes to the Trash."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encuentra node_modules, target, .build, Pods, entornos virtuales y carpetas similares en tus proyectos.\nSolo se preseleccionan las carpetas ignoradas por git de proyectos inactivos. Todo va a la Papelera."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trouve node_modules, target, .build, Pods, environnements virtuels et dossiers similaires dans vos projets.\nSeuls les dossiers ignorés par git des projets inactifs sont présélectionnés. Tout va à la Corbeille."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projelerindeki node_modules, target, .build, Pods, sanal ortamlar ve benzeri klasörleri bulur.\nYalnızca etkin olmayan projelerin git tarafından yok sayılan klasörleri önceden seçilir. Her şey Çöp Sepeti'ne gider."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找项目中的 node_modules、target、.build、Pods、虚拟环境等文件夹。\n只会预选不活跃项目中被 git 忽略的文件夹。所有内容都会移到废纸篓。"
+          }
+        }
+      }
+    },
+    "Fixes Dock, Mission Control and Spaces glitches. The screen flickers for a moment.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behebt Probleme mit Dock, Mission Control und Spaces. Der Bildschirm flackert kurz."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixes Dock, Mission Control and Spaces glitches. The screen flickers for a moment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arregla fallos del Dock, Mission Control y Spaces. La pantalla parpadea un momento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige les problèmes du Dock, de Mission Control et des Spaces. L'écran scintille un instant."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock, Mission Control ve Spaces hatalarını düzeltir. Ekran bir an titrer."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "修复程序坞、调度中心和空间的问题。屏幕会短暂闪烁。"
+          }
+        }
+      }
+    },
+    "Fixes a stuck or glitchy Finder. Finder windows close and reopen.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behebt einen hängenden oder fehlerhaften Finder. Finder-Fenster schließen und öffnen sich neu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixes a stuck or glitchy Finder. Finder windows close and reopen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arregla un Finder bloqueado o con fallos. Las ventanas del Finder se cierran y se reabren."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige un Finder bloqué ou instable. Les fenêtres du Finder se ferment puis se rouvrent."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takılan veya hatalı çalışan Finder'ı düzeltir. Finder pencereleri kapanıp yeniden açılır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "修复卡住或异常的访达。访达窗口会关闭并重新打开。"
+          }
+        }
+      }
+    },
+    "Fixes menu bar icons and Control Center that stopped responding.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behebt nicht reagierende Menüleisten-Symbole und das Kontrollzentrum."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixes menu bar icons and Control Center that stopped responding."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arregla los iconos de la barra de menús y el Centro de control que no responden."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige les icônes de la barre des menus et le Centre de contrôle qui ne répondent plus."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yanıt vermeyen menü çubuğu simgelerini ve Denetim Merkezi'ni düzeltir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "修复无响应的菜单栏图标和控制中心。"
+          }
+        }
+      }
+    },
+    "Fixes missing search results. Indexing runs for hours and uses a lot of CPU.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behebt fehlende Suchergebnisse. Die Indizierung dauert Stunden und beansprucht viel CPU."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixes missing search results. Indexing runs for hours and uses a lot of CPU."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arregla resultados de búsqueda que faltan. La indexación dura horas y usa mucha CPU."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige les résultats de recherche manquants. L'indexation dure des heures et sollicite beaucoup le CPU."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksik arama sonuçlarını düzeltir. Dizinleme saatlerce sürer ve çok CPU kullanır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "修复缺失的搜索结果。索引会运行数小时并占用大量 CPU。"
+          }
+        }
+      }
+    },
+    "Flush DNS cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DNS-Cache leeren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flush DNS cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaciar la caché DNS"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vider le cache DNS"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DNS önbelleğini temizle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除 DNS 缓存"
+          }
+        }
+      }
+    },
     "Folder chosen in Disk Analyzer": {
       "localizations": {
         "de": {
@@ -7001,6 +8721,46 @@
         }
       }
     },
+    "Free inactive memory": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inaktiven Speicher freigeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free inactive memory"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liberar memoria inactiva"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libérer la mémoire inactive"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etkin olmayan belleği boşalt"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "释放非活动内存"
+          }
+        }
+      }
+    },
     "Freed by moving %lld items to Trash": {
       "localizations": {
         "de": {
@@ -7197,6 +8957,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "建议开启完全磁盘访问"
+          }
+        }
+      }
+    },
+    "GPT4All models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPT4All-Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPT4All models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos de GPT4All"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles GPT4All"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPT4All modelleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPT4All 模型"
           }
         }
       }
@@ -7441,6 +9241,46 @@
         }
       }
     },
+    "Gradle cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gradle-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gradle cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de Gradle"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache Gradle"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gradle önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gradle 缓存"
+          }
+        }
+      }
+    },
     "Grant Access": {
       "localizations": {
         "de": {
@@ -7557,6 +9397,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "健康评分"
+          }
+        }
+      }
+    },
+    "Helps when a website still resolves to an old address.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hilft, wenn eine Website noch auf eine alte Adresse zeigt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Helps when a website still resolves to an old address."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayuda cuando un sitio web sigue resolviendo a una dirección antigua."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utile quand un site pointe encore vers une ancienne adresse."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir web sitesi hâlâ eski adrese gidiyorsa işe yarar."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当网站仍解析到旧地址时很有用。"
           }
         }
       }
@@ -7761,6 +9641,46 @@
         }
       }
     },
+    "Hot": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heiß"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caliente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaud"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sıcak"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "过热"
+          }
+        }
+      }
+    },
     "How we calculated your score": {
       "localizations": {
         "de": {
@@ -7797,6 +9717,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "评分详情"
+          }
+        }
+      }
+    },
+    "Hugging Face": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face"
+          }
+        }
+      }
+    },
+    "Hugging Face download — fetched again the next time it is used": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging-Face-Download — wird bei der nächsten Nutzung erneut geladen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face download — fetched again the next time it is used"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descarga de Hugging Face — se vuelve a bajar la próxima vez que se use"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargement Hugging Face — retéléchargé à la prochaine utilisation"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face indirmesi — bir sonraki kullanımda yeniden indirilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face 下载 — 下次使用时会重新下载"
           }
         }
       }
@@ -8437,6 +10437,126 @@
           "stringUnit": {
             "state": "translated",
             "value": "保留位于最浅文件夹中的"
+          }
+        }
+      }
+    },
+    "Keras models and datasets": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keras-Modelle und Datensätze"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keras models and datasets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos y conjuntos de datos de Keras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles et jeux de données Keras"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keras modelleri ve veri kümeleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keras 模型和数据集"
+          }
+        }
+      }
+    },
+    "LM Studio": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio"
+          }
+        }
+      }
+    },
+    "LM Studio model — download it again from LM Studio": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM-Studio-Modell — in LM Studio erneut ladbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio model — download it again from LM Studio"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelo de LM Studio — puedes volver a descargarlo desde LM Studio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèle LM Studio — à retélécharger depuis LM Studio"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio modeli — LM Studio'dan yeniden indirebilirsin"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio 模型 — 可在 LM Studio 中重新下载"
           }
         }
       }
@@ -9161,6 +11281,166 @@
         }
       }
     },
+    "Live CPU, memory and battery": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, Speicher und Akku live"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live CPU, memory and battery"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, memoria y batería en vivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, mémoire et batterie en direct"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canlı CPU, bellek ve pil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "实时 CPU、内存和电池"
+          }
+        }
+      }
+    },
+    "Live view of your Mac": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live-Ansicht Ihres Mac"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live view of your Mac"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vista en vivo de tu Mac"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vue en direct de votre Mac"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'inin canlı görünümü"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac 实时概览"
+          }
+        }
+      }
+    },
+    "Load average %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durchschnittliche Last %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Load average %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carga media %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Charge moyenne %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ortalama yük %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "平均负载 %@"
+          }
+        }
+      }
+    },
+    "Local Snapshots": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lokale Schnappschüsse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local Snapshots"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instantáneas locales"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instantanés locaux"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yerel Anlık Görüntüler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本地快照"
+          }
+        }
+      }
+    },
     "Log file older than %lld days": {
       "localizations": {
         "de": {
@@ -9317,6 +11597,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在搜索 /Applications 和 ~/Applications。"
+          }
+        }
+      }
+    },
+    "Looks for models from Hugging Face, LM Studio, Ollama, PyTorch, Whisper and similar tools.\nNothing is pre-selected, because downloading a model again can take a long time.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sucht nach Modellen von Hugging Face, LM Studio, Ollama, PyTorch, Whisper und ähnlichen Werkzeugen.\nNichts ist vorausgewählt, da das erneute Laden eines Modells lange dauern kann."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks for models from Hugging Face, LM Studio, Ollama, PyTorch, Whisper and similar tools.\nNothing is pre-selected, because downloading a model again can take a long time."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busca modelos de Hugging Face, LM Studio, Ollama, PyTorch, Whisper y herramientas similares.\nNo se preselecciona nada, porque volver a descargar un modelo puede tardar mucho."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche les modèles de Hugging Face, LM Studio, Ollama, PyTorch, Whisper et outils similaires.\nRien n'est présélectionné, car retélécharger un modèle peut prendre longtemps."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face, LM Studio, Ollama, PyTorch, Whisper ve benzeri araçların modellerini arar.\nHiçbir şey önceden seçilmez, çünkü bir modeli yeniden indirmek uzun sürebilir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找 Hugging Face、LM Studio、Ollama、PyTorch、Whisper 等工具的模型。\n不会预选任何内容，因为重新下载模型可能需要很长时间。"
           }
         }
       }
@@ -9601,6 +11921,46 @@
         }
       }
     },
+    "Maintenance": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wartung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenance"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantenimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenance"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bakım"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "维护"
+          }
+        }
+      }
+    },
     "Markdown": {
       "localizations": {
         "de": {
@@ -9677,6 +12037,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "按 Bundle 标识符匹配——请逐项检查，默认不选中任何项目"
+          }
+        }
+      }
+    },
+    "Maven build output": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maven-Build-Ausgabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maven build output"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado de compilación de Maven"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie de build Maven"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maven derleme çıktısı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maven 构建输出"
+          }
+        }
+      }
+    },
+    "Maximum capacity %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximale Kapazität %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximum capacity %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capacidad máxima %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capacité maximale %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azami kapasite %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最大容量 %@"
           }
         }
       }
@@ -9841,6 +12281,86 @@
         }
       }
     },
+    "Model downloads you can fetch again": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell-Downloads, die Sie erneut laden können"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model downloads you can fetch again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos descargados que puedes volver a bajar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles que vous pouvez retélécharger"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden indirilebilen model dosyaları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以重新下载的模型文件"
+          }
+        }
+      }
+    },
+    "Models you downloaded in LM Studio": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In LM Studio geladene Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Models you downloaded in LM Studio"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos que descargaste en LM Studio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles téléchargés dans LM Studio"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LM Studio'da indirdiğin modeller"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你在 LM Studio 中下载的模型"
+          }
+        }
+      }
+    },
     "Move to Trash…": {
       "localizations": {
         "de": {
@@ -9961,6 +12481,86 @@
         }
       }
     },
+    "Needs Terminal": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfordert das Terminal"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs Terminal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requiere Terminal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nécessite le Terminal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminal gerektirir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要终端"
+          }
+        }
+      }
+    },
+    "Network": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netzwerk"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Network"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réseau"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ağ"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "网络"
+          }
+        }
+      }
+    },
     "Never Offer This for Cleanup": {
       "localizations": {
         "de": {
@@ -10041,6 +12641,46 @@
         }
       }
     },
+    "Next.js build cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next.js-Build-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next.js build cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de compilación de Next.js"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache de build Next.js"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next.js derleme önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next.js 构建缓存"
+          }
+        }
+      }
+    },
     "No Apps Found": {
       "localizations": {
         "de": {
@@ -10077,6 +12717,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "未找到应用"
+          }
+        }
+      }
+    },
+    "No Build Folders Found": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Build-Ordner gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Build Folders Found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontraron carpetas de compilación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun dossier de build trouvé"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derleme Klasörü Bulunamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到构建文件夹"
           }
         }
       }
@@ -10237,6 +12917,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "未发现残留"
+          }
+        }
+      }
+    },
+    "No Local Snapshots": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine lokalen Schnappschüsse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Local Snapshots"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin instantáneas locales"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun instantané local"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yerel Anlık Görüntü Yok"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有本地快照"
+          }
+        }
+      }
+    },
+    "No Models Found": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Modelle gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Models Found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontraron modelos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun modèle trouvé"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model Bulunamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到模型"
           }
         }
       }
@@ -10481,6 +13241,46 @@
         }
       }
     },
+    "No local AI model downloads were found.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es wurden keine lokalen KI-Modell-Downloads gefunden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No local AI model downloads were found."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontraron modelos de IA descargados."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun modèle d'IA local n'a été trouvé."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yerel yapay zekâ modeli indirmesi bulunamadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到本地 AI 模型下载。"
+          }
+        }
+      }
+    },
     "No third-party launch agents or daemons were found.": {
       "localizations": {
         "de": {
@@ -10521,6 +13321,46 @@
         }
       }
     },
+    "Node.js dependencies": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node.js-Abhängigkeiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node.js dependencies"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dependencias de Node.js"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépendances Node.js"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node.js bağımlılıkları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node.js 依赖"
+          }
+        }
+      }
+    },
     "Node.js package cache — re-downloaded on install": {
       "localizations": {
         "de": {
@@ -10557,6 +13397,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Node.js 包缓存——安装时重新下载"
+          }
+        }
+      }
+    },
+    "Normal": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正常"
           }
         }
       }
@@ -10841,6 +13721,46 @@
         }
       }
     },
+    "Nothing rebuildable was found in your project folders.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Ihren Projektordnern wurde nichts Neuerzeugbares gefunden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing rebuildable was found in your project folders."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró nada recreable en tus carpetas de proyectos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien de reconstructible n'a été trouvé dans vos dossiers de projets."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proje klasörlerinde yeniden oluşturulabilir bir şey bulunamadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在你的项目文件夹中没有找到可重新生成的内容。"
+          }
+        }
+      }
+    },
     "Nothing to Clean": {
       "localizations": {
         "de": {
@@ -10957,6 +13877,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "守护 Mac 的健康"
+          }
+        }
+      }
+    },
+    "Nuxt build cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuxt-Build-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuxt build cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de compilación de Nuxt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache de build Nuxt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuxt derleme önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuxt 构建缓存"
           }
         }
       }
@@ -11237,6 +14197,206 @@
           "stringUnit": {
             "state": "translated",
             "value": "最旧的优先"
+          }
+        }
+      }
+    },
+    "Ollama": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama"
+          }
+        }
+      }
+    },
+    "Ollama models — pull them again with ollama pull": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama-Modelle — mit ollama pull erneut ladbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama models — pull them again with ollama pull"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos de Ollama — vuelve a bajarlos con ollama pull"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles Ollama — à retélécharger avec ollama pull"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama modelleri — ollama pull ile yeniden indirilir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama 模型 — 可用 ollama pull 重新下载"
+          }
+        }
+      }
+    },
+    "On AC power": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netzbetrieb"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On AC power"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectado a la corriente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur secteur"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şebeke gücünde"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用电源适配器"
+          }
+        }
+      }
+    },
+    "On battery": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akkubetrieb"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On battery"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con batería"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur batterie"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilde"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用电池"
+          }
+        }
+      }
+    },
+    "On battery · %@ remaining": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akkubetrieb · noch %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On battery · %@ remaining"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con batería · quedan %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur batterie · %@ restantes"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilde · %@ kaldı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用电池 · 剩余 %@"
           }
         }
       }
@@ -11721,6 +14881,46 @@
         }
       }
     },
+    "Other AI Tools": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weitere KI-Werkzeuge"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other AI Tools"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otras herramientas de IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autres outils d'IA"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diğer Yapay Zekâ Araçları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "其他 AI 工具"
+          }
+        }
+      }
+    },
     "Other Downloads": {
       "localizations": {
         "de": {
@@ -12001,6 +15201,86 @@
         }
       }
     },
+    "Parcel cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcel-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcel cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de Parcel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache Parcel"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcel önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parcel 缓存"
+          }
+        }
+      }
+    },
+    "Paste the command into Terminal to remove a snapshot.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fügen Sie den Befehl im Terminal ein, um einen Schnappschuss zu entfernen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste the command into Terminal to remove a snapshot."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pega el comando en Terminal para eliminar una instantánea."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collez la commande dans le Terminal pour supprimer un instantané."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir anlık görüntüyü silmek için komutu Terminal'e yapıştır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将命令粘贴到“终端”即可删除快照。"
+          }
+        }
+      }
+    },
     "Path no longer exists": {
       "localizations": {
         "de": {
@@ -12037,6 +15317,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "路径已不存在"
+          }
+        }
+      }
+    },
+    "Per-core usage": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auslastung pro Kern"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per-core usage"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uso por núcleo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilisation par cœur"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çekirdek başına kullanım"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每核使用率"
           }
         }
       }
@@ -12277,6 +15597,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "隐私优先。开源透明。\\n不收集任何数据."
+          }
+        }
+      }
+    },
+    "Project Artifacts": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt-Artefakte"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project Artifacts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artefactos de proyectos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artefacts de projets"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proje Artıkları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目构建产物"
+          }
+        }
+      }
+    },
+    "Project idle for": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt inaktiv seit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project idle for"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyecto inactivo desde hace"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projet inactif depuis"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proje şu süredir etkin değil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目闲置超过"
           }
         }
       }
@@ -12561,6 +15961,86 @@
         }
       }
     },
+    "PyTorch downloads": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch-Downloads"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch downloads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descargas de PyTorch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargements PyTorch"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch indirmeleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch 下载内容"
+          }
+        }
+      }
+    },
+    "PyTorch, Whisper, Keras, GPT4All and similar downloads": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch-, Whisper-, Keras-, GPT4All- und ähnliche Downloads"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch, Whisper, Keras, GPT4All and similar downloads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descargas de PyTorch, Whisper, Keras, GPT4All y similares"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargements PyTorch, Whisper, Keras, GPT4All et similaires"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch, Whisper, Keras, GPT4All ve benzeri indirmeler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PyTorch、Whisper、Keras、GPT4All 等下载内容"
+          }
+        }
+      }
+    },
     "Python package cache — re-downloaded on install": {
       "localizations": {
         "de": {
@@ -12641,6 +16121,46 @@
         }
       }
     },
+    "Python virtual environment": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python-Umgebung (virtuell)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python virtual environment"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entorno virtual de Python"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Environnement virtuel Python"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python sanal ortamı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python 虚拟环境"
+          }
+        }
+      }
+    },
     "Quick Look": {
       "localizations": {
         "de": {
@@ -12717,6 +16237,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "快速扫描"
+          }
+        }
+      }
+    },
+    "Quick fixes": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnelle Lösungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick fixes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soluciones rápidas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solutions rapides"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hızlı çözümler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速修复"
+          }
+        }
+      }
+    },
+    "Quick fixes for a sluggish Mac": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnelle Hilfe für einen trägen Mac"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick fixes for a sluggish Mac"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soluciones rápidas para un Mac lento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solutions rapides pour un Mac lent"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yavaşlayan Mac için hızlı çözümler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "为变慢的 Mac 提供快速修复"
           }
         }
       }
@@ -13041,6 +16641,46 @@
         }
       }
     },
+    "Rebuild Spotlight index": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight-Index neu aufbauen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rebuild Spotlight index"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconstruir índice de Spotlight"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconstruire l'index Spotlight"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight dizinini yeniden oluştur"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重建聚焦索引"
+          }
+        }
+      }
+    },
     "Recent Caches": {
       "localizations": {
         "de": {
@@ -13197,6 +16837,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "近期访问的缓存"
+          }
+        }
+      }
+    },
+    "Reclaim Model Downloads": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell-Downloads freigeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaim Model Downloads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recuperar espacio de modelos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récupérer l'espace des modèles"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model İndirmelerinden Yer Aç"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回收模型下载空间"
+          }
+        }
+      }
+    },
+    "Reclaim model downloads": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell-Downloads freigeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaim model downloads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recupera espacio de modelos descargados"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récupérez l'espace des modèles téléchargés"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndirilen modellerden yer aç"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回收已下载的模型"
           }
         }
       }
@@ -13641,6 +17361,166 @@
         }
       }
     },
+    "Reset Quick Look previews": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick-Look-Vorschauen zurücksetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset Quick Look previews"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restablecer vistas previas de Quick Look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réinitialiser les aperçus Quick Look"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick Look önizlemelerini sıfırla"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重置快速查看预览"
+          }
+        }
+      }
+    },
+    "Restart Dock": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock neu starten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart Dock"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reiniciar Dock"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relancer le Dock"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock'u yeniden başlat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重启程序坞"
+          }
+        }
+      }
+    },
+    "Restart Finder": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder neu starten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart Finder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reiniciar Finder"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relancer le Finder"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder'ı yeniden başlat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重启访达"
+          }
+        }
+      }
+    },
+    "Restart Finder, reset previews": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder neu starten, Vorschauen zurücksetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart Finder, reset previews"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reinicia Finder, restablece vistas previas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relancer le Finder, réinitialiser les aperçus"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder'ı yeniden başlat, önizlemeleri sıfırla"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重启访达，重置预览"
+          }
+        }
+      }
+    },
     "Restart Now": {
       "localizations": {
         "de": {
@@ -13717,6 +17597,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "重启 Vervain 以应用新语言。"
+          }
+        }
+      }
+    },
+    "Restart menu bar": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menüleiste neu starten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart menu bar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reiniciar barra de menús"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relancer la barre des menus"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menü çubuğunu yeniden başlat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重启菜单栏"
           }
         }
       }
@@ -14161,6 +18081,46 @@
         }
       }
     },
+    "Review AI Models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI-Modelle prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review AI Models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar modelos de IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Examiner les modèles d'IA"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yapay Zekâ Modellerini İncele"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查 AI 模型"
+          }
+        }
+      }
+    },
     "Review Cleanup": {
       "localizations": {
         "de": {
@@ -14481,6 +18441,46 @@
         }
       }
     },
+    "Review Project Artifacts": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt-Artefakte prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review Project Artifacts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar artefactos de proyectos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Examiner les artefacts de projets"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proje Artıklarını İncele"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查项目构建产物"
+          }
+        }
+      }
+    },
     "Review Smart Scan Findings": {
       "localizations": {
         "de": {
@@ -14721,6 +18721,46 @@
         }
       }
     },
+    "Run": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausführen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecutar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exécuter"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalıştır"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行"
+          }
+        }
+      }
+    },
     "Run a Smart Scan when Vervain opens": {
       "localizations": {
         "de": {
@@ -14837,6 +18877,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "登录时运行"
+          }
+        }
+      }
+    },
+    "Rust build output": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust-Build-Ausgabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust build output"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado de compilación de Rust"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie de build Rust"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust derleme çıktısı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust 构建输出"
           }
         }
       }
@@ -15161,6 +19241,46 @@
         }
       }
     },
+    "Scan Projects": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekte scannen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan Projects"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar en proyectos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyser les projets"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projeleri Tara"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描项目"
+          }
+        }
+      }
+    },
     "Scan for Duplicates": {
       "localizations": {
         "de": {
@@ -15317,6 +19437,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "扫描残留"
+          }
+        }
+      }
+    },
+    "Scan for Models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach Modellen suchen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan for Models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar modelos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher les modèles"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelleri Tara"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描模型"
           }
         }
       }
@@ -15917,6 +20077,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "准确查看存储空间的占用情况——\\n所有文件夹、所有顶层目录。"
+          }
+        }
+      }
+    },
+    "See hidden backup copies": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versteckte Backup-Kopien ansehen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See hidden backup copies"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mira las copias de seguridad ocultas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir les copies de sauvegarde cachées"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizli yedek kopyalarını gör"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看隐藏的备份副本"
           }
         }
       }
@@ -16561,6 +20761,46 @@
         }
       }
     },
+    "Snapshots Unavailable": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnappschüsse nicht verfügbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snapshots Unavailable"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instantáneas no disponibles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instantanés indisponibles"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anlık Görüntüler Alınamadı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法获取快照"
+          }
+        }
+      }
+    },
     "Some items need a closer look": {
       "localizations": {
         "de": {
@@ -17001,6 +21241,86 @@
         }
       }
     },
+    "SvelteKit build cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SvelteKit-Build-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SvelteKit build cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de compilación de SvelteKit"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache de build SvelteKit"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SvelteKit derleme önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SvelteKit 构建缓存"
+          }
+        }
+      }
+    },
+    "Swift package build output": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swift-Paket-Build-Ausgabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swift package build output"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado de compilación de paquete Swift"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortie de build du paquet Swift"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swift paketi derleme çıktısı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swift 包构建输出"
+          }
+        }
+      }
+    },
     "Symlinks skipped": {
       "localizations": {
         "de": {
@@ -17037,6 +21357,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "跳过的符号链接"
+          }
+        }
+      }
+    },
+    "System": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistema"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Système"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "系统"
           }
         }
       }
@@ -17161,6 +21521,46 @@
         }
       }
     },
+    "System Status": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Systemstatus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System Status"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado del sistema"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "État du système"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem Durumu"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "系统状态"
+          }
+        }
+      }
+    },
     "System daemons": {
       "localizations": {
         "de": {
@@ -17237,6 +21637,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "系统级项目需要管理员权限，只能在访达中显示。"
+          }
+        }
+      }
+    },
+    "The Trash holds %@. That space comes back as soon as you empty it.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Papierkorb belegt %@. Dieser Platz ist sofort wieder frei, wenn Sie ihn leeren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Trash holds %@. That space comes back as soon as you empty it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La Papelera ocupa %@. Ese espacio vuelve en cuanto la vacías."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La Corbeille occupe %@. Cet espace est libéré dès que vous la videz."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çöp Kutusu'nda %@ var. Boşalttığınız anda bu alan geri gelir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "废纸篓占用 %@。清倒后立即释放这部分空间。"
           }
         }
       }
@@ -17321,6 +21761,206 @@
         }
       }
     },
+    "The task did not finish.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Aufgabe wurde nicht abgeschlossen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The task did not finish."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tarea no terminó."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tâche ne s'est pas terminée."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görev tamamlanamadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务未能完成。"
+          }
+        }
+      }
+    },
+    "The task took too long and was stopped.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Aufgabe dauerte zu lange und wurde gestoppt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The task took too long and was stopped."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tarea tardó demasiado y se detuvo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tâche a pris trop de temps et a été arrêtée."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görev çok uzun sürdü ve durduruldu."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务耗时过长，已停止。"
+          }
+        }
+      }
+    },
+    "Thermal state": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thermischer Zustand"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thermal state"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado térmico"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "État thermique"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isıl durum"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "热状态"
+          }
+        }
+      }
+    },
+    "These need administrator rights, so Vervain never runs them. Copy the command and paste it into Terminal.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese erfordern Administratorrechte, daher führt Vervain sie nie aus. Kopieren Sie den Befehl und fügen Sie ihn im Terminal ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These need administrator rights, so Vervain never runs them. Copy the command and paste it into Terminal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requieren permisos de administrador, así que Vervain nunca las ejecuta. Copia el comando y pégalo en Terminal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elles exigent des droits d'administrateur, Vervain ne les exécute donc jamais. Copiez la commande et collez-la dans le Terminal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bunlar yönetici yetkisi ister, bu yüzden Vervain çalıştırmaz. Komutu kopyalayıp Terminal'e yapıştır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这些需要管理员权限，所以 Vervain 从不运行它们。请复制命令并粘贴到“终端”。"
+          }
+        }
+      }
+    },
+    "These run right away and need no password.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese laufen sofort und brauchen kein Passwort."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These run right away and need no password."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se ejecutan al instante y no piden contraseña."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elles s'exécutent aussitôt et ne demandent aucun mot de passe."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bunlar hemen çalışır ve parola gerektirmez."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这些会立即运行，不需要密码。"
+          }
+        }
+      }
+    },
     "This app has a clean footprint.": {
       "localizations": {
         "de": {
@@ -17401,6 +22041,46 @@
         }
       }
     },
+    "This task needs Terminal.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Aufgabe erfordert das Terminal."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This task needs Terminal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta tarea requiere Terminal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette tâche nécessite le Terminal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu görev Terminal gerektirir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此任务需要终端。"
+          }
+        }
+      }
+    },
     "Tidy Your Browsing Traces": {
       "localizations": {
         "de": {
@@ -17477,6 +22157,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "时间"
+          }
+        }
+      }
+    },
+    "Time Machine copies kept on this Mac": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time-Machine-Kopien auf diesem Mac"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine copies kept on this Mac"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copias de Time Machine guardadas en este Mac"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copies Time Machine conservées sur ce Mac"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine'in bu Mac'te tuttuğu kopyalar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine 在此 Mac 上保留的副本"
+          }
+        }
+      }
+    },
+    "Time Machine has not kept any copies on this Mac.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine hat auf diesem Mac keine Kopien gespeichert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine has not kept any copies on this Mac."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine no ha guardado copias en este Mac."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine n'a conservé aucune copie sur ce Mac."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine bu Mac'te kopya tutmuyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Machine 没有在此 Mac 上保留任何副本。"
           }
         }
       }
@@ -17641,6 +22401,46 @@
         }
       }
     },
+    "Turborepo cache": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turborepo-Cache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turborepo cache"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caché de Turborepo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache Turborepo"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turborepo önbelleği"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turborepo 缓存"
+          }
+        }
+      }
+    },
     "Type": {
       "localizations": {
         "de": {
@@ -17717,6 +22517,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Türkçe"
+          }
+        }
+      }
+    },
+    "Unavailable": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht verfügbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unavailable"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No disponible"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indisponible"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanılamıyor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不可用"
           }
         }
       }
@@ -17917,6 +22757,126 @@
           "stringUnit": {
             "state": "translated",
             "value": "更新"
+          }
+        }
+      }
+    },
+    "Updates every 2 seconds": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktualisiert alle 2 Sekunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updates every 2 seconds"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se actualiza cada 2 segundos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mise à jour toutes les 2 secondes"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 saniyede bir güncellenir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每 2 秒更新一次"
+          }
+        }
+      }
+    },
+    "Upload": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upload"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upload"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subida"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoi"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükleme"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上传"
+          }
+        }
+      }
+    },
+    "Uptime": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laufzeit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uptime"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiempo activo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durée d'activité"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çalışma süresi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行时间"
           }
         }
       }
@@ -18561,6 +23521,46 @@
         }
       }
     },
+    "Warm": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Templado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiède"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ilık"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "偏热"
+          }
+        }
+      }
+    },
     "Warn at": {
       "localizations": {
         "de": {
@@ -18877,6 +23877,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "保留哪一份"
+          }
+        }
+      }
+    },
+    "Whisper models": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper-Modelle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper models"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos de Whisper"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles Whisper"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper modelleri"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper 模型"
           }
         }
       }
@@ -19401,6 +24441,46 @@
         }
       }
     },
+    "Your Mac is in great shape. No significant issues found.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ihr Mac ist in bester Verfassung. Keine nennenswerten Probleme gefunden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Mac is in great shape. No significant issues found."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu Mac está en excelente estado. No se encontraron problemas importantes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre Mac est en pleine forme. Aucun problème important détecté."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'iniz harika durumda. Önemli bir sorun bulunmadı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的 Mac 状态很好，没有发现明显问题。"
+          }
+        }
+      }
+    },
     "Your disk is almost full": {
       "localizations": {
         "de": {
@@ -19917,6 +24997,126 @@
           "stringUnit": {
             "state": "translated",
             "value": "iOS 依赖缓存——pod install 时重新下载"
+          }
+        }
+      }
+    },
+    "macOS can free on its own": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kann macOS selbst freigeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS can free on its own"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que macOS puede liberar solo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que macOS peut libérer seul"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS'in kendiliğinden boşaltabileceği alan"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 可自行释放"
+          }
+        }
+      }
+    },
+    "macOS removes local snapshots automatically when it needs room, so you rarely have to. Vervain never deletes them itself: removal is permanent and needs administrator rights.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS entfernt lokale Schnappschüsse automatisch, wenn Platz gebraucht wird, Sie müssen das also selten selbst tun. Vervain löscht sie nie selbst: Das Entfernen ist endgültig und erfordert Administratorrechte."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS removes local snapshots automatically when it needs room, so you rarely have to. Vervain never deletes them itself: removal is permanent and needs administrator rights."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS elimina las instantáneas locales automáticamente cuando necesita espacio, así que rara vez hace falta hacerlo a mano. Vervain nunca las borra por sí mismo: la eliminación es permanente y requiere permisos de administrador."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS supprime automatiquement les instantanés locaux quand il a besoin de place, vous avez donc rarement à le faire. Vervain ne les supprime jamais lui-même : la suppression est définitive et exige des droits d'administrateur."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS yer gerektiğinde yerel anlık görüntüleri kendiliğinden siler, o yüzden nadiren elle silmen gerekir. Vervain bunları kendisi silmez: silme kalıcıdır ve yönetici yetkisi ister."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 在需要空间时会自动删除本地快照，因此你很少需要手动操作。Vervain 自己从不删除它们：删除是永久的，并且需要管理员权限。"
+          }
+        }
+      }
+    },
+    "node_modules, build output and similar folders in your projects add up to %@. Your tools rebuild them.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "node_modules, Build-Ausgaben und ähnliche Ordner in Ihren Projekten belegen zusammen %@. Ihre Tools erzeugen sie neu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "node_modules, build output and similar folders in your projects add up to %@. Your tools rebuild them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "node_modules, resultados de compilación y carpetas similares de tus proyectos suman %@. Tus herramientas los regeneran."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "node_modules, sorties de build et dossiers similaires de vos projets totalisent %@. Vos outils les recréent."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projelerinizdeki node_modules, derleme çıktıları ve benzeri klasörler toplam %@ tutuyor. Araçlarınız bunları yeniden oluşturur."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你项目中的 node_modules、构建产物等文件夹共占用 %@，工具会重新生成它们。"
           }
         }
       }

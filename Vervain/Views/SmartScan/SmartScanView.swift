@@ -111,6 +111,11 @@ struct SmartScanView: View {
                         .font(.title3.bold())
                         .foregroundStyle(Theme.textPrimary)
                 }
+                if let bd = vm.breakdown, bd.potentialGain > 0 {
+                    Text("Cleaning the safe items would raise your score from \(bd.finalScore) to \(bd.potentialScore).")
+                        .font(.subheadline)
+                        .foregroundStyle(Theme.statusSafe)
+                }
                 if vm.totalJunkBytes > 0 {
                     Text("We found \(vm.totalJunkBytes.formattedBytes) that can be reviewed and cleaned.")
                         .font(.subheadline)

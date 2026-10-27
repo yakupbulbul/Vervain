@@ -14,12 +14,20 @@ import CoreServices
 ///   identifies candidates.
 actor AppScanner {
 
+    /// When set (see `DemoMode`), apps come from `<root>/Applications` and
+    /// leftovers from `<root>/Library`, and nothing else on the Mac is read.
+    private let demoRoot: URL?
+
+    init(demoRoot: URL? = DemoMode.root()) {
+        self.demoRoot = demoRoot
+    }
+
     // MARK: - Public API
 
     func scanInstalledApps() async throws -> [AppInfo] {
         let fm = FileManager.default
-        let home = fm.homeDirectoryForCurrentUser
-        let roots: [URL] = [
+        let home = demoRoot ?? fm.homeDirectoryForCurrentUser
+        let roots: [URL] = demoRoot.map { [$0.appendingPathComponent("Applications")] } ?? [
             URL(fileURLWithPath: "/Applications"),
             URL(fileURLWithPath: "/Applications/Utilities"),
             home.appendingPathComponent("Applications")
@@ -64,7 +72,7 @@ actor AppScanner {
     /// Returns an updated `AppInfo` whose `leftoverItems` are all `CleanupItem`s.
     func scanLeftovers(for app: AppInfo) async -> AppInfo {
         let fm = FileManager.default
-        let home = fm.homeDirectoryForCurrentUser
+        let home = demoRoot ?? fm.homeDirectoryForCurrentUser
         let searchRoots: [URL] = [
             home.appendingPathComponent("Library/Application Support"),
             home.appendingPathComponent("Library/Preferences"),
@@ -279,7 +287,9 @@ actor AppScanner {
             url: url,
             bundleSize: size,
             lastModifiedDate: modDate,
-            lastUsedDate: Self.lastUsedDate(of: url),
+            // Made-up apps have no usage history, so demo mode borrows the
+            // bundle's date instead.
+            lastUsedDate: demoRoot == nil ? Self.lastUsedDate(of: url) : modDate,
             source: Self.source(of: url, bundleID: bundleID),
             isAppleApp: bundleID.lowercased().hasPrefix("com.apple.")
         )
@@ -287,6 +297,11 @@ actor AppScanner {
 
     private func isAllowedAppLocation(_ url: URL) -> Bool {
         let parent = url.deletingLastPathComponent().standardizedFileURL.path
+        if let demoRoot {
+            let apps = demoRoot.appendingPathComponent("Applications").standardizedFileURL.path
+            return parent == apps
+                || URL(fileURLWithPath: parent).deletingLastPathComponent().path == apps
+        }
         let home = FileManager.default.homeDirectoryForCurrentUser
             .standardizedFileURL.path
         let allowed = [
