@@ -1,0 +1,28 @@
+name: Stale issues
+
+on:
+  schedule:
+    - cron: "37 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-issue-stale: 60
+          days-before-issue-close: 14
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+          exempt-issue-labels: "help wanted,good first issue,enhancement,security,pinned"
+          stale-issue-label: "stale"
+          stale-issue-message: >
+            There has been no activity on this issue for 60 days, so I'm marking it as stale.
+            If it still matters, leave a comment and it stays open. Otherwise it will be closed in 14 days.
+          close-issue-message: >
+            Closing this because it has been quiet for a while. Open a new issue
+            (or reopen this one) if it comes back.

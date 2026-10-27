@@ -1,0 +1,16 @@
+# Groups the notes GitHub generates for a release.
+changelog:
+  exclude:
+    labels:
+      - dependencies
+      - github_actions
+  categories:
+    - title: New
+      labels:
+        - enhancement
+    - title: Fixes
+      labels:
+        - bug
+    - title: Everything else
+      labels:
+        - "*"
