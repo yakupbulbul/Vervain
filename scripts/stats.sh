@@ -8,7 +8,9 @@ set -euo pipefail
 # Needs the GitHub CLI (`gh auth login`) with access to the repository.
 #
 # Notes
-# - Download counts include `brew install`, because Homebrew downloads the same DMG.
+# - Releases from 2.0.0 on carry a second, identical DMG named *-homebrew.dmg that only
+#   Homebrew downloads, so brew installs and direct downloads are counted apart. Older
+#   releases only have one file, so their numbers are all in the "direct" column.
 # - A download is not a launch. Vervain does not report usage, so this script
 #   cannot tell how many people use it, only how many fetched it.
 # - GitHub only keeps 14 days of traffic. Run this now and then if you want a longer history.
@@ -17,8 +19,13 @@ REPO="${1:-yakupbulbul/Vervain}"
 command -v gh >/dev/null || { echo "Error: gh not found. Install: brew install gh"; exit 1; }
 
 echo "Downloads per release (${REPO})"
-gh api "repos/${REPO}/releases" --paginate --jq '.[] | [.tag_name, ([.assets[].download_count] | add // 0)] | @tsv' \
-    | awk -F'\t' '{ printf "  %-10s %6d\n", $1, $2; total += $2 } END { printf "  %-10s %6d\n", "total", total }'
+echo "  release    direct  homebrew    total"
+gh api "repos/${REPO}/releases" --paginate --jq '
+    .[] | [.tag_name,
+           ([.assets[] | select(.name | endswith("-homebrew.dmg") | not) | .download_count] | add // 0),
+           ([.assets[] | select(.name | endswith("-homebrew.dmg")) | .download_count] | add // 0)] | @tsv' \
+    | awk -F'\t' '{ printf "  %-9s %7d %9d %8d\n", $1, $2, $3, $2 + $3; d += $2; h += $3 }
+                  END { printf "  %-9s %7d %9d %8d\n", "total", d, h, d + h }'
 
 echo
 echo "Repository"
