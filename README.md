@@ -19,7 +19,7 @@
 <br>
 
 <p align="center">
-  <img src="docs/vervain-demo.gif" width="720" alt="Vervain walkthrough: Smart Scan and Project Artifacts" />
+  <img src="docs/vervain-demo.gif" width="720" alt="A quick tour of Vervain: Smart Scan, System Junk, App Uninstaller, Disk Analyzer, Project Artifacts, AI Models, System Status and Maintenance" />
 </p>
 
 <br>
