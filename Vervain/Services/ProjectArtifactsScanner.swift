@@ -97,6 +97,7 @@ actor ProjectArtifactsScanner {
 
     static let maxDepth = 6
     static let maxCategories = 300
+    static let concurrency = 6
 
     static let rules: [ProjectArtifactRule] = {
         let js = ["package.json"]
@@ -149,7 +150,7 @@ actor ProjectArtifactsScanner {
         return result
     }
 
-    private struct Found {
+    fileprivate struct Found: Sendable {
         let project: URL
         let artifact: URL
         let rule: ProjectArtifactRule
@@ -173,48 +174,30 @@ actor ProjectArtifactsScanner {
         }
         meta.inaccessibleCount = meta.errors.count
 
+        // Sizing a big node_modules takes seconds, so artifacts are measured in
+        // parallel, a few at a time.
+        let projectArtifactNames = Dictionary(grouping: found, by: \.project)
+            .mapValues { Set($0.map { $0.artifact.lastPathComponent }) }
         var itemsByProject: [String: (project: URL, items: [CleanupItem])] = [:]
-        for hit in found {
-            try Task.checkCancellation()
-            let stats = directoryStats(at: hit.artifact)
-            guard stats.size > 0 else { continue }
-
-            let siblingNames = Set(found.filter { $0.project == hit.project }.map { $0.artifact.lastPathComponent })
-            let activity = projectActivity(
-                hit.project, excluding: siblingNames, artifactNewest: stats.newestModification
-            )
-            let idleDays = max(0, Int(now.timeIntervalSince(activity) / 86_400))
-            let idle = idleDays >= config.minIdleDays
-
-            let risk: CleanupRiskLevel
-            let confidence: CleanupConfidenceLevel
-            let reason: CleanupReason
-            switch ignoreState(hit.artifact) {
-            case .ignored:
-                risk = idle ? .safe : .review
-                confidence = idle ? .high : .medium
-                reason = .projectArtifact(label: hit.rule.label, idleDays: idleDays)
-            case .unknown:
-                risk = .review
-                confidence = .medium
-                reason = .projectArtifact(label: hit.rule.label, idleDays: idleDays)
-            case .notIgnored:
-                risk = .review
-                confidence = .low
-                reason = .custom(String(localized: "\(hit.rule.label) — not in .gitignore, check that it is not part of the project"))
+        try await withThrowingTaskGroup(of: (URL, CleanupItem?).self) { group in
+            var iterator = found.makeIterator()
+            var running = 0
+            func addNext() -> Bool {
+                guard let hit = iterator.next() else { return false }
+                let siblingNames = projectArtifactNames[hit.project] ?? []
+                group.addTask {
+                    (hit.project, Self.evaluate(
+                        hit, siblingNames: siblingNames, config: config, now: now, ignoreState: ignoreState
+                    ))
+                }
+                return true
             }
-
-            let item = CleanupItem(
-                url: hit.artifact,
-                size: stats.size,
-                category: hit.project.lastPathComponent,
-                reason: reason,
-                riskLevel: risk,
-                confidenceLevel: confidence,
-                lastModifiedDate: activity,
-                sourceModule: .projectArtifacts
-            )
-            itemsByProject[hit.project.path, default: (hit.project, [])].items.append(item)
+            while running < Self.concurrency, addNext() { running += 1 }
+            while let (project, item) = try await group.next() {
+                try Task.checkCancellation()
+                if let item { itemsByProject[project.path, default: (project, [])].items.append(item) }
+                _ = addNext()
+            }
         }
 
         var categories = itemsByProject.values.map { entry -> CleanupCategory in
@@ -233,6 +216,52 @@ actor ProjectArtifactsScanner {
         meta.scannedCount = categories.reduce(0) { $0 + $1.itemCount }
         meta.duration = Date().timeIntervalSince(started)
         return (categories, meta)
+    }
+
+    // MARK: - Evaluation
+
+    private static func evaluate(
+        _ hit: Found,
+        siblingNames: Set<String>,
+        config: ProjectArtifactsConfig,
+        now: Date,
+        ignoreState: @Sendable (URL) -> GitIgnoreState
+    ) -> CleanupItem? {
+        let stats = directoryStats(at: hit.artifact)
+        guard stats.size > 0 else { return nil }
+
+        let activity = projectActivity(hit.project, excluding: siblingNames, artifactNewest: stats.newestModification)
+        let idleDays = max(0, Int(now.timeIntervalSince(activity) / 86_400))
+        let idle = idleDays >= config.minIdleDays
+
+        let risk: CleanupRiskLevel
+        let confidence: CleanupConfidenceLevel
+        let reason: CleanupReason
+        switch ignoreState(hit.artifact) {
+        case .ignored:
+            risk = idle ? .safe : .review
+            confidence = idle ? .high : .medium
+            reason = .projectArtifact(label: hit.rule.label, idleDays: idleDays)
+        case .unknown:
+            risk = .review
+            confidence = .medium
+            reason = .projectArtifact(label: hit.rule.label, idleDays: idleDays)
+        case .notIgnored:
+            risk = .review
+            confidence = .low
+            reason = .custom(String(localized: "\(hit.rule.label) — not in .gitignore, check that it is not part of the project"))
+        }
+
+        return CleanupItem(
+            url: hit.artifact,
+            size: stats.size,
+            category: hit.project.lastPathComponent,
+            reason: reason,
+            riskLevel: risk,
+            confidenceLevel: confidence,
+            lastModifiedDate: activity,
+            sourceModule: .projectArtifacts
+        )
     }
 
     // MARK: - Discovery
@@ -290,7 +319,7 @@ actor ProjectArtifactsScanner {
     /// Newest sign of life in the project: its own folder, its project file and
     /// everything directly inside it (source folders, `.git`), except the
     /// artifacts being judged. Falls back on the artifact's own newest file.
-    private func projectActivity(
+    private static func projectActivity(
         _ project: URL,
         excluding artifactNames: Set<String>,
         artifactNewest: Date
