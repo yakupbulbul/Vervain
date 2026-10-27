@@ -43,6 +43,7 @@ struct LocalSnapshotsView: View {
                     footer
                 }
             }
+            .frame(maxHeight: .infinity, alignment: .top)
         }
     }
 
