@@ -73,7 +73,14 @@ enum GitActivityProbe {
     /// Newest of: last reflog entry (commits, checkouts, pulls), last commit,
     /// modified or new files that git does not ignore, and the index file.
     /// `nil` when the folder is not in a repository or git is unusable.
-    static func lastActivity(in project: URL, ignoring artifactNames: Set<String>) -> Date? {
+    ///
+    /// The walk over modified and new files is the expensive part. When the cheap
+    /// signals already show activity after `activeSince`, it is skipped.
+    static func lastActivity(
+        in project: URL,
+        ignoring artifactNames: Set<String>,
+        activeSince: Date? = nil
+    ) -> Date? {
         guard let git = GitIgnoreProbe.gitPath else { return nil }
         guard let gitDirOutput = run(git, ["rev-parse", "--absolute-git-dir"], in: project),
               let gitDir = String(data: gitDirOutput, encoding: .utf8)?
@@ -89,6 +96,8 @@ enum GitActivityProbe {
         absorb(timestamp(run(git, ["reflog", "-1", "--format=%ct", "HEAD"], in: project)))
         absorb(timestamp(run(git, ["log", "-1", "--format=%ct"], in: project)))
         absorb(modificationDate(URL(fileURLWithPath: gitDir).appendingPathComponent("index")))
+
+        if let activeSince, let cheap = newest, cheap >= activeSince { return cheap }
 
         // Edited and new files, paths relative to the project folder. Ignored
         // folders (node_modules and friends) are left out by --exclude-standard.
@@ -235,12 +244,12 @@ actor ProjectArtifactsScanner {
         roots: [URL]? = nil,
         now: Date? = nil,
         ignoreState: (@Sendable (URL) -> GitIgnoreState)? = nil,
-        gitActivity: (@Sendable (URL, Set<String>) -> Date?)? = nil
+        gitActivity: (@Sendable (URL, Set<String>, Date) -> Date?)? = nil
     ) async throws -> (categories: [CleanupCategory], metadata: ScanMetadata) {
         let roots = roots ?? Self.defaultRoots()
         let now = now ?? Date()
         let ignoreState = ignoreState ?? { GitIgnoreProbe.state(of: $0) }
-        let gitActivity = gitActivity ?? { GitActivityProbe.lastActivity(in: $0, ignoring: $1) }
+        let gitActivity = gitActivity ?? { GitActivityProbe.lastActivity(in: $0, ignoring: $1, activeSince: $2) }
         let started = Date()
         var meta = ScanMetadata()
 
@@ -303,15 +312,18 @@ actor ProjectArtifactsScanner {
         config: ProjectArtifactsConfig,
         now: Date,
         ignoreState: @Sendable (URL) -> GitIgnoreState,
-        gitActivity: @Sendable (URL, Set<String>) -> Date?
+        gitActivity: @Sendable (URL, Set<String>, Date) -> Date?
     ) -> CleanupItem? {
         let stats = directoryStats(at: hit.artifact)
         guard stats.size > 0 else { return nil }
 
         // Git signals only ever add to the file dates, so a project can turn
-        // out more active than before but never less.
+        // out more active than before but never less. A project the file dates
+        // already show as active is not asked, which keeps big scans cheap.
         let fileActivity = projectActivity(hit.project, excluding: siblingNames, artifactNewest: stats.newestModification)
-        let activity = max(fileActivity, gitActivity(hit.project, siblingNames) ?? .distantPast)
+        let activeSince = now.addingTimeInterval(-Double(config.minIdleDays) * 86_400)
+        let gitDate = fileActivity >= activeSince ? nil : gitActivity(hit.project, siblingNames, activeSince)
+        let activity = max(fileActivity, gitDate ?? .distantPast)
         let idleDays = max(0, Int(now.timeIntervalSince(activity) / 86_400))
         let idle = idleDays >= config.minIdleDays
 

@@ -41,7 +41,7 @@ final class ProjectArtifactsScannerTests: XCTestCase {
     private func scan(
         idleDays: Int = 7,
         state: GitIgnoreState = .ignored,
-        gitActivity: @escaping @Sendable (URL, Set<String>) -> Date? = { _, _ in nil }
+        gitActivity: @escaping @Sendable (URL, Set<String>, Date) -> Date? = { _, _, _ in nil }
     ) async throws -> [CleanupCategory] {
         try await ProjectArtifactsScanner().scan(
             config: ProjectArtifactsConfig(minIdleDays: idleDays),
@@ -183,7 +183,7 @@ final class ProjectArtifactsScannerTests: XCTestCase {
     func testRecentCommitKeepsAnOtherwiseIdleProjectActive() async throws {
         try makeProject("web", marker: "package.json", artifact: "node_modules", daysOld: 60)
         let yesterday = now.addingTimeInterval(-86_400)
-        let item = try await scan(gitActivity: { _, _ in yesterday }).first!.items.first!
+        let item = try await scan(gitActivity: { _, _, _ in yesterday }).first!.items.first!
         XCTAssertFalse(item.isSelected)
         XCTAssertEqual(item.riskLevel, .review)
     }
@@ -191,15 +191,29 @@ final class ProjectArtifactsScannerTests: XCTestCase {
     func testOldGitActivityDoesNotMakeAProjectLookIdleSooner() async throws {
         try makeProject("web", marker: "package.json", artifact: "node_modules", daysOld: 1)
         let longAgo = now.addingTimeInterval(-200 * 86_400)
-        let item = try await scan(gitActivity: { _, _ in longAgo }).first!.items.first!
+        let item = try await scan(gitActivity: { _, _, _ in longAgo }).first!.items.first!
         XCTAssertFalse(item.isSelected, "git can only add activity, never remove it")
     }
 
     func testIdleProjectWithOldGitActivityIsStillPreSelected() async throws {
         try makeProject("web", marker: "package.json", artifact: "node_modules", daysOld: 60)
         let longAgo = now.addingTimeInterval(-90 * 86_400)
-        let item = try await scan(gitActivity: { _, _ in longAgo }).first!.items.first!
+        let item = try await scan(gitActivity: { _, _, _ in longAgo }).first!.items.first!
         XCTAssertTrue(item.isSelected)
+    }
+
+    func testGitIsNotAskedAboutProjectsThatAlreadyLookActive() async throws {
+        try makeProject("web", marker: "package.json", artifact: "node_modules", daysOld: 1)
+        let calls = CallCounter()
+        _ = try await scan(gitActivity: { _, _, _ in calls.increment(); return nil })
+        XCTAssertEqual(calls.value, 0)
+    }
+
+    func testGitIsAskedAboutIdleLookingProjects() async throws {
+        try makeProject("web", marker: "package.json", artifact: "node_modules", daysOld: 60)
+        let calls = CallCounter()
+        _ = try await scan(gitActivity: { _, _, _ in calls.increment(); return nil })
+        XCTAssertEqual(calls.value, 1)
     }
 
     func testGitActivityFindsUncommittedFilesButNotArtifactContents() throws {
@@ -236,4 +250,11 @@ final class ProjectArtifactsScannerTests: XCTestCase {
         suite.set(-3, forKey: ProjectArtifactsConfig.idleKey)
         XCTAssertEqual(ProjectArtifactsConfig.fromDefaults(suite).minIdleDays, 0)
     }
+}
+
+private final class CallCounter: @unchecked Sendable {
+    private let lock = NSLock()
+    private var count = 0
+    func increment() { lock.lock(); count += 1; lock.unlock() }
+    var value: Int { lock.lock(); defer { lock.unlock() }; return count }
 }
