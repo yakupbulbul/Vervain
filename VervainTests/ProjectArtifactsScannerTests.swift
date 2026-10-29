@@ -40,13 +40,15 @@ final class ProjectArtifactsScannerTests: XCTestCase {
 
     private func scan(
         idleDays: Int = 7,
-        state: GitIgnoreState = .ignored
+        state: GitIgnoreState = .ignored,
+        gitActivity: @escaping @Sendable (URL, Set<String>) -> Date? = { _, _ in nil }
     ) async throws -> [CleanupCategory] {
         try await ProjectArtifactsScanner().scan(
             config: ProjectArtifactsConfig(minIdleDays: idleDays),
             roots: [root],
             now: now,
-            ignoreState: { _ in state }
+            ignoreState: { _ in state },
+            gitActivity: gitActivity
         ).categories
     }
 
@@ -176,6 +178,56 @@ final class ProjectArtifactsScannerTests: XCTestCase {
         XCTAssertEqual(GitIgnoreProbe.state(of: artifact), .notIgnored)
         try Data("node_modules/\n".utf8).write(to: project.appendingPathComponent(".gitignore"))
         XCTAssertEqual(GitIgnoreProbe.state(of: artifact), .ignored)
+    }
+
+    func testRecentCommitKeepsAnOtherwiseIdleProjectActive() async throws {
+        try makeProject("web", marker: "package.json", artifact: "node_modules", daysOld: 60)
+        let yesterday = now.addingTimeInterval(-86_400)
+        let item = try await scan(gitActivity: { _, _ in yesterday }).first!.items.first!
+        XCTAssertFalse(item.isSelected)
+        XCTAssertEqual(item.riskLevel, .review)
+    }
+
+    func testOldGitActivityDoesNotMakeAProjectLookIdleSooner() async throws {
+        try makeProject("web", marker: "package.json", artifact: "node_modules", daysOld: 1)
+        let longAgo = now.addingTimeInterval(-200 * 86_400)
+        let item = try await scan(gitActivity: { _, _ in longAgo }).first!.items.first!
+        XCTAssertFalse(item.isSelected, "git can only add activity, never remove it")
+    }
+
+    func testIdleProjectWithOldGitActivityIsStillPreSelected() async throws {
+        try makeProject("web", marker: "package.json", artifact: "node_modules", daysOld: 60)
+        let longAgo = now.addingTimeInterval(-90 * 86_400)
+        let item = try await scan(gitActivity: { _, _ in longAgo }).first!.items.first!
+        XCTAssertTrue(item.isSelected)
+    }
+
+    func testGitActivityFindsUncommittedFilesButNotArtifactContents() throws {
+        try XCTSkipUnless(GitIgnoreProbe.gitPath != nil, "git not installed")
+        let artifact = try makeProject("web", marker: "package.json", artifact: "node_modules")
+        let project = artifact.deletingLastPathComponent()
+
+        XCTAssertNil(GitActivityProbe.lastActivity(in: project, ignoring: ["node_modules"]),
+                     "no repository yet")
+
+        let git = Process()
+        git.executableURL = URL(fileURLWithPath: GitIgnoreProbe.gitPath!)
+        git.arguments = ["-C", project.path, "init", "-q"]
+        git.standardOutput = FileHandle.nullDevice
+        git.standardError = FileHandle.nullDevice
+        try git.run(); git.waitUntilExit()
+
+        let fm = FileManager.default
+        let twoDaysAgo = Date().addingTimeInterval(-2 * 86_400)
+        try fm.createDirectory(at: project.appendingPathComponent("src"), withIntermediateDirectories: true)
+        let edited = project.appendingPathComponent("src/new.swift")
+        try Data("x".utf8).write(to: edited)
+        try fm.setAttributes([.modificationDate: twoDaysAgo], ofItemAtPath: edited.path)
+        // A fresh file inside the artifact must not count as work on the project.
+        try Data("x".utf8).write(to: artifact.appendingPathComponent("fresh.bin"))
+
+        let found = try XCTUnwrap(GitActivityProbe.lastActivity(in: project, ignoring: ["node_modules"]))
+        XCTAssertEqual(found.timeIntervalSince1970, twoDaysAgo.timeIntervalSince1970, accuracy: 120)
     }
 
     func testConfigClampsNegativeIdleDays() {

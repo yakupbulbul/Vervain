@@ -66,6 +66,80 @@ enum GitIgnoreProbe {
     }
 }
 
+/// Signs of life that only git can see: the last commit or checkout, edits that
+/// are not committed yet, and the last time the index changed. A project can
+/// look idle by file dates alone while its owner works deep inside `src/`.
+enum GitActivityProbe {
+    /// Newest of: last reflog entry (commits, checkouts, pulls), last commit,
+    /// modified or new files that git does not ignore, and the index file.
+    /// `nil` when the folder is not in a repository or git is unusable.
+    static func lastActivity(in project: URL, ignoring artifactNames: Set<String>) -> Date? {
+        guard let git = GitIgnoreProbe.gitPath else { return nil }
+        guard let gitDirOutput = run(git, ["rev-parse", "--absolute-git-dir"], in: project),
+              let gitDir = String(data: gitDirOutput, encoding: .utf8)?
+                .trimmingCharacters(in: .whitespacesAndNewlines),
+              !gitDir.isEmpty
+        else { return nil }
+
+        var newest: Date?
+        func absorb(_ date: Date?) {
+            if let date, date > (newest ?? .distantPast) { newest = date }
+        }
+
+        absorb(timestamp(run(git, ["reflog", "-1", "--format=%ct", "HEAD"], in: project)))
+        absorb(timestamp(run(git, ["log", "-1", "--format=%ct"], in: project)))
+        absorb(modificationDate(URL(fileURLWithPath: gitDir).appendingPathComponent("index")))
+
+        // Edited and new files, paths relative to the project folder. Ignored
+        // folders (node_modules and friends) are left out by --exclude-standard.
+        if let listing = run(git, ["ls-files", "-z", "--modified", "--others", "--exclude-standard"], in: project) {
+            let paths = listing.split(separator: 0).prefix(2_000)
+            for raw in paths {
+                guard let path = String(data: Data(raw), encoding: .utf8), !path.isEmpty else { continue }
+                if let first = path.split(separator: "/").first, artifactNames.contains(String(first)) { continue }
+                absorb(modificationDate(project.appendingPathComponent(path)))
+            }
+        }
+        return newest
+    }
+
+    private static func timestamp(_ data: Data?) -> Date? {
+        guard let data, let text = String(data: data, encoding: .utf8)?
+            .trimmingCharacters(in: .whitespacesAndNewlines),
+              let seconds = TimeInterval(text)
+        else { return nil }
+        return Date(timeIntervalSince1970: seconds)
+    }
+
+    private static func modificationDate(_ url: URL) -> Date? {
+        try? url.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
+    }
+
+    /// Runs git with a fixed argument list and returns stdout, or nil on any
+    /// failure. A watchdog stops a git that hangs.
+    private static func run(_ git: String, _ arguments: [String], in directory: URL) -> Data? {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: git)
+        process.arguments = ["-C", directory.path] + arguments
+        process.environment = [
+            "GIT_OPTIONAL_LOCKS": "0",
+            "GIT_TERMINAL_PROMPT": "0",
+            "HOME": NSHomeDirectory(),
+            "PATH": "/usr/bin:/bin"
+        ]
+        let pipe = Pipe()
+        process.standardOutput = pipe
+        process.standardError = FileHandle.nullDevice
+        do { try process.run() } catch { return nil }
+        let watchdog = DispatchWorkItem { if process.isRunning { process.terminate() } }
+        DispatchQueue.global().asyncAfter(deadline: .now() + 10, execute: watchdog)
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        process.waitUntilExit()
+        watchdog.cancel()
+        return process.terminationStatus == 0 ? data : nil
+    }
+}
+
 /// A folder name that a build tool recreates, plus the evidence that makes the
 /// name trustworthy. A bare `build` or `dist` folder is only an artifact when a
 /// project file sits next to it.
@@ -160,11 +234,13 @@ actor ProjectArtifactsScanner {
         config: ProjectArtifactsConfig,
         roots: [URL]? = nil,
         now: Date? = nil,
-        ignoreState: (@Sendable (URL) -> GitIgnoreState)? = nil
+        ignoreState: (@Sendable (URL) -> GitIgnoreState)? = nil,
+        gitActivity: (@Sendable (URL, Set<String>) -> Date?)? = nil
     ) async throws -> (categories: [CleanupCategory], metadata: ScanMetadata) {
         let roots = roots ?? Self.defaultRoots()
         let now = now ?? Date()
         let ignoreState = ignoreState ?? { GitIgnoreProbe.state(of: $0) }
+        let gitActivity = gitActivity ?? { GitActivityProbe.lastActivity(in: $0, ignoring: $1) }
         let started = Date()
         var meta = ScanMetadata()
 
@@ -187,7 +263,8 @@ actor ProjectArtifactsScanner {
                 let siblingNames = projectArtifactNames[hit.project] ?? []
                 group.addTask {
                     (hit.project, Self.evaluate(
-                        hit, siblingNames: siblingNames, config: config, now: now, ignoreState: ignoreState
+                        hit, siblingNames: siblingNames, config: config, now: now,
+                        ignoreState: ignoreState, gitActivity: gitActivity
                     ))
                 }
                 return true
@@ -225,12 +302,16 @@ actor ProjectArtifactsScanner {
         siblingNames: Set<String>,
         config: ProjectArtifactsConfig,
         now: Date,
-        ignoreState: @Sendable (URL) -> GitIgnoreState
+        ignoreState: @Sendable (URL) -> GitIgnoreState,
+        gitActivity: @Sendable (URL, Set<String>) -> Date?
     ) -> CleanupItem? {
         let stats = directoryStats(at: hit.artifact)
         guard stats.size > 0 else { return nil }
 
-        let activity = projectActivity(hit.project, excluding: siblingNames, artifactNewest: stats.newestModification)
+        // Git signals only ever add to the file dates, so a project can turn
+        // out more active than before but never less.
+        let fileActivity = projectActivity(hit.project, excluding: siblingNames, artifactNewest: stats.newestModification)
+        let activity = max(fileActivity, gitActivity(hit.project, siblingNames) ?? .distantPast)
         let idleDays = max(0, Int(now.timeIntervalSince(activity) / 86_400))
         let idle = idleDays >= config.minIdleDays
 
