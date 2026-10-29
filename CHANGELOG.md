@@ -22,6 +22,7 @@
 - Complete translations of every screen in six languages; CI warns about untranslated strings and prints test coverage.
 
 ### Fixed
+- Project Artifacts: a project now also counts as active when git shows recent work, meaning a recent commit, checkout or pull, edits that are not committed yet, or a recent change to the git index. Work deep inside `src/` is no longer missed. Git only adds to the file dates, so a project can look more active than before but never less.
 - Review sheet: after you ticked or unticked an item, its checkmark could keep showing the old state while the totals changed. Items now compare by selection as well, so the row redraws.
 - Cleanup now reports a cancelled run as a partial result, removes only items that reached the Trash from the list, and measures files right before trashing.
 - Onboarding texts were never translated.
