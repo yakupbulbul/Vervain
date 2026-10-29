@@ -90,4 +90,24 @@ final class CleanupCategoryTests: XCTestCase {
         let display = CleanupItem.makeDisplayPath(url: url)
         XCTAssertTrue(display.hasPrefix("~/"), "Got \(display)")
     }
+
+    // MARK: - Equality
+
+    func test_toggledItem_isNotEqualToOriginal() {
+        // SwiftUI compares rows by value; if selection were ignored a toggled row
+        // would keep its old checkmark.
+        let item = makeItem(risk: .safe)
+        var toggled = item
+        toggled.isSelected.toggle()
+        XCTAssertNotEqual(item, toggled)
+        XCTAssertEqual(item.hashValue, toggled.hashValue)
+    }
+
+    func test_toggleInCategory_changesTheItemValue() {
+        let item = makeItem(risk: .safe)
+        var cat = CleanupCategory(
+            kind: .oldCaches, title: "Test", icon: "doc", sourceModule: .systemJunk, items: [item])
+        cat.toggle(itemID: item.id)
+        XCTAssertNotEqual(cat.items[0], item)
+    }
 }
