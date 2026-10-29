@@ -70,5 +70,10 @@ struct CleanupItem: Identifiable, Sendable, Hashable {
 
 extension CleanupItem {
     func hash(into hasher: inout Hasher) { hasher.combine(id) }
-    static func == (lhs: CleanupItem, rhs: CleanupItem) -> Bool { lhs.id == rhs.id }
+
+    /// Selection counts as part of the value. If it did not, SwiftUI would see a
+    /// toggled row as unchanged and keep drawing the old checkmark.
+    static func == (lhs: CleanupItem, rhs: CleanupItem) -> Bool {
+        lhs.id == rhs.id && lhs.isSelected == rhs.isSelected
+    }
 }

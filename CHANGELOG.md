@@ -22,6 +22,7 @@
 - Complete translations of every screen in six languages; CI warns about untranslated strings and prints test coverage.
 
 ### Fixed
+- Review sheet: after you ticked or unticked an item, its checkmark could keep showing the old state while the totals changed. Items now compare by selection as well, so the row redraws.
 - Cleanup now reports a cancelled run as a partial result, removes only items that reached the Trash from the list, and measures files right before trashing.
 - Onboarding texts were never translated.
 
