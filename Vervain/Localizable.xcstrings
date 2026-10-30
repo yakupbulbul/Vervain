@@ -4401,46 +4401,6 @@
         }
       }
     },
-    "Check for updates automatically": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatisch nach Updates suchen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Check for updates automatically"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscar actualizaciones automáticamente"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rechercher les mises à jour automatiquement"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Güncellemeleri otomatik denetle"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自动检查更新"
-          }
-        }
-      }
-    },
     "Check your Mac's health": {
       "localizations": {
         "de": {
@@ -13961,46 +13921,6 @@
         }
       }
     },
-    "Off by default, so Vervain only contacts the network when you press the button. If you turn the automatic check on, it asks GitHub for the latest release at most once a day while Vervain is open. It sends nothing about you and never installs anything.": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standardmäßig aus, daher greift Vervain nur auf das Netzwerk zu, wenn Sie die Taste drücken. Wenn Sie die automatische Suche einschalten, fragt Vervain höchstens einmal am Tag bei GitHub nach der neuesten Version, solange Vervain geöffnet ist. Es werden keine Daten über Sie gesendet und nichts wird automatisch installiert."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Off by default, so Vervain only contacts the network when you press the button. If you turn the automatic check on, it asks GitHub for the latest release at most once a day while Vervain is open. It sends nothing about you and never installs anything."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desactivado por defecto, así que Vervain solo se conecta a la red cuando pulsas el botón. Si activas la búsqueda automática, consulta a GitHub la última versión como máximo una vez al día mientras Vervain está abierto. No envía nada sobre ti y nunca instala nada."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Désactivé par défaut : Vervain ne se connecte au réseau que lorsque vous appuyez sur le bouton. Si vous activez la recherche automatique, il demande à GitHub la dernière version au plus une fois par jour, tant que Vervain est ouvert. Il n'envoie rien vous concernant et n'installe jamais rien."
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Varsayılan olarak kapalıdır, bu yüzden Vervain yalnızca düğmeye bastığınızda ağa bağlanır. Otomatik denetimi açarsanız, Vervain açıkken GitHub'dan en son sürümü günde en fazla bir kez sorar. Hakkınızda hiçbir şey göndermez ve hiçbir şey kurmaz."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "默认关闭,因此只有在您点按按钮时 Vervain 才会联网。如果开启自动检查,Vervain 打开期间每天最多向 GitHub 查询一次最新版本。它不会发送任何关于您的信息,也不会自动安装任何内容。"
-          }
-        }
-      }
-    },
     "Old .dmg / .pkg installers totalling %@ — these can usually be re-downloaded.": {
       "localizations": {
         "de": {
@@ -23357,6 +23277,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vervain 不会向任何地方发送数据。没有遥测、没有分析、没有账户。一切都在这台 Mac 上运行。"
+          }
+        }
+      }
+    },
+    "Vervain only contacts the network when you press this button.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vervain greift nur auf das Netzwerk zu, wenn Sie diese Taste drücken."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vervain only contacts the network when you press this button."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vervain solo se conecta a la red cuando pulsas este botón."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vervain ne se connecte au réseau que lorsque vous appuyez sur ce bouton."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vervain yalnızca bu düğmeye bastığınızda ağa bağlanır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "只有当您按下此按钮时，Vervain 才会访问网络。"
           }
         }
       }
