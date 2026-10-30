@@ -21,9 +21,6 @@
 - Guided three-step welcome tour (replayable), Full Disk Access status and an "always confirm" switch in Settings.
 - Complete translations of every screen in six languages; CI warns about untranslated strings and prints test coverage.
 
-### Changed
-- Updates: Settings has a new "Check for updates automatically" switch, off by default. When it is on, Vervain asks the GitHub releases API for the latest version at most once a day while it is open, and shows a dismissible banner with a link to the release. It never downloads or installs anything itself.
-
 ### Fixed
 - Project Artifacts: a project now also counts as active when git shows recent work, meaning a recent commit, checkout or pull, edits that are not committed yet, or a recent change to the git index. Work deep inside `src/` is no longer missed. Git only adds to the file dates, so a project can look more active than before but never less.
 - Review sheet: after you ticked or unticked an item, its checkmark could keep showing the old state while the totals changed. Items now compare by selection as well, so the row redraws.

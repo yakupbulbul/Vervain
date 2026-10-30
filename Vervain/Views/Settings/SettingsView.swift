@@ -15,7 +15,6 @@ struct SettingsView: View {
     @State private var needsRestart = false
     @State private var exclusions = ExclusionList.paths()
     @State private var extraRoots = ScanRoots.extras()
-    @AppStorage(UpdateCheckPolicy.enabledKey) private var autoCheckForUpdates = false
     @State private var updateOutcome: UpdateChecker.Outcome?
     @State private var isCheckingForUpdates = false
 
@@ -141,11 +140,10 @@ struct SettingsView: View {
                     Spacer()
                     updateStatus
                 }
-                Toggle("Check for updates automatically", isOn: $autoCheckForUpdates)
             } header: {
                 Text("Updates")
             } footer: {
-                Text("Off by default, so Vervain only contacts the network when you press the button. If you turn the automatic check on, it asks GitHub for the latest release at most once a day while Vervain is open. It sends nothing about you and never installs anything.")
+                Text("Vervain only contacts the network when you press this button.")
             }
 
             Section {

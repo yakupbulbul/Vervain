@@ -1,9 +1,8 @@
 import Foundation
 
-/// "Check for Updates". By default nothing runs in the background: the only
-/// network request Vervain makes is the one the user triggers from Settings,
-/// a single GET to the project's public GitHub releases API. The same request
-/// is also made once a day at most when the user turns on the automatic check.
+/// Manual "Check for Updates". Nothing runs in the background: the only
+/// network request Vervain ever makes is the one the user triggers from
+/// Settings, a single GET to the project's public GitHub releases API.
 enum UpdateChecker {
 
     enum Outcome: Equatable, Sendable {
@@ -63,21 +62,5 @@ enum UpdateChecker {
         normalized(version).split(separator: ".").map { part in
             Int(part.prefix { $0.isNumber }) ?? 0
         }
-    }
-}
-
-/// Decides when the optional automatic update check may run. It is off until
-/// the user turns it on in Settings.
-enum UpdateCheckPolicy {
-    static let enabledKey = "autoCheckForUpdates"
-    static let lastCheckKey = "lastUpdateCheck"
-    static let dismissedVersionKey = "dismissedUpdateVersion"
-    static let interval: TimeInterval = 24 * 3_600
-
-    /// Check when the user opted in, and then at most once a day.
-    static func isDue(enabled: Bool, lastCheck: Date?, now: Date) -> Bool {
-        guard enabled else { return false }
-        guard let lastCheck else { return true }
-        return now.timeIntervalSince(lastCheck) >= interval
     }
 }
