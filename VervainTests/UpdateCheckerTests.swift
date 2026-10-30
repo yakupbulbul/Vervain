@@ -25,4 +25,17 @@ final class UpdateCheckerTests: XCTestCase {
         XCTAssertEqual(UpdateChecker.normalized("v2.0.0"), "2.0.0")
         XCTAssertEqual(UpdateChecker.normalized("2.0.0"), "2.0.0")
     }
+
+    func testAutomaticCheckStaysOffUntilEnabled() {
+        let now = Date()
+        XCTAssertFalse(UpdateCheckPolicy.isDue(enabled: false, lastCheck: nil, now: now))
+        XCTAssertFalse(UpdateCheckPolicy.isDue(enabled: false, lastCheck: now.addingTimeInterval(-10 * 86_400), now: now))
+    }
+
+    func testAutomaticCheckRunsOncePerDay() {
+        let now = Date()
+        XCTAssertTrue(UpdateCheckPolicy.isDue(enabled: true, lastCheck: nil, now: now))
+        XCTAssertFalse(UpdateCheckPolicy.isDue(enabled: true, lastCheck: now.addingTimeInterval(-3_600), now: now))
+        XCTAssertTrue(UpdateCheckPolicy.isDue(enabled: true, lastCheck: now.addingTimeInterval(-25 * 3_600), now: now))
+    }
 }
