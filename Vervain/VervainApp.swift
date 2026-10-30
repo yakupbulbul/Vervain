@@ -14,6 +14,7 @@ struct VervainApp: App {
     @State private var nav              = NavigationModel()
     @State private var cleanupCoord     = CleanupCoordinator()
     @State private var fdaVM            = FullDiskAccessViewModel()
+    @State private var updateNotice     = UpdateNoticeViewModel()
     @State private var showOnboarding   = !OnboardingView.hasShown
     @State private var showAbout        = false
     @AppStorage("showMenuBarExtra") private var showMenuBarExtra = false
@@ -30,11 +31,13 @@ struct VervainApp: App {
                 .environment(nav)
                 .environment(cleanupCoord)
                 .environment(fdaVM)
+                .environment(updateNotice)
                 .task {
                     fdaVM.refresh()
                     UNUserNotificationCenter.current().delegate = NotificationRouter.shared
                     DiskMonitor.shared.start()
                     if UserDefaults.standard.bool(forKey: "scanOnLaunch") { smartScanVM.startScan() }
+                    await updateNotice.checkIfDue()
                 }
                 .onReceive(NotificationCenter.default.publisher(for: OnboardingView.replayNotification)) { _ in
                     showOnboarding = true
