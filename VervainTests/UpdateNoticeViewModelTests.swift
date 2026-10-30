@@ -12,21 +12,18 @@ final class UpdateNoticeViewModelTests: XCTestCase {
     }
 
     private let releaseURL = URL(string: "https://example.com/release")!
-    private var suiteName = ""
-    private var defaults: UserDefaults!
 
-    override func setUp() {
-        super.setUp()
-        suiteName = "UpdateNoticeViewModelTests-\(UUID().uuidString)"
-        defaults = UserDefaults(suiteName: suiteName)
+    private func makeDefaults() -> UserDefaults {
+        let suiteName = "UpdateNoticeViewModelTests-\(UUID().uuidString)"
+        addTeardownBlock { UserDefaults(suiteName: suiteName)?.removePersistentDomain(forName: suiteName) }
+        return UserDefaults(suiteName: suiteName)!
     }
 
-    override func tearDown() {
-        defaults.removePersistentDomain(forName: suiteName)
-        super.tearDown()
-    }
-
-    private func makeModel(outcome: UpdateChecker.Outcome, counter: Counter) -> UpdateNoticeViewModel {
+    private func makeModel(
+        outcome: UpdateChecker.Outcome,
+        counter: Counter,
+        defaults: UserDefaults
+    ) -> UpdateNoticeViewModel {
         UpdateNoticeViewModel(defaults: defaults, currentVersion: "2.0.0") { _ in
             counter.increment()
             return outcome
@@ -34,8 +31,9 @@ final class UpdateNoticeViewModelTests: XCTestCase {
     }
 
     func test_disabledByDefault_neverContactsTheNetwork() async {
+        let defaults = makeDefaults()
         let counter = Counter()
-        let model = makeModel(outcome: .available(version: "2.1.0", url: releaseURL), counter: counter)
+        let model = makeModel(outcome: .available(version: "2.1.0", url: releaseURL), counter: counter, defaults: defaults)
 
         await model.checkIfDue()
 
@@ -44,9 +42,10 @@ final class UpdateNoticeViewModelTests: XCTestCase {
     }
 
     func test_enabled_showsNoticeForNewerVersion() async {
+        let defaults = makeDefaults()
         defaults.set(true, forKey: UpdateCheckPolicy.enabledKey)
         let counter = Counter()
-        let model = makeModel(outcome: .available(version: "2.1.0", url: releaseURL), counter: counter)
+        let model = makeModel(outcome: .available(version: "2.1.0", url: releaseURL), counter: counter, defaults: defaults)
 
         await model.checkIfDue()
 
@@ -54,9 +53,10 @@ final class UpdateNoticeViewModelTests: XCTestCase {
     }
 
     func test_enabled_checksAtMostOncePerDay() async {
+        let defaults = makeDefaults()
         defaults.set(true, forKey: UpdateCheckPolicy.enabledKey)
         let counter = Counter()
-        let model = makeModel(outcome: .upToDate, counter: counter)
+        let model = makeModel(outcome: .upToDate, counter: counter, defaults: defaults)
         let now = Date()
 
         await model.checkIfDue(now: now)
@@ -68,9 +68,10 @@ final class UpdateNoticeViewModelTests: XCTestCase {
     }
 
     func test_failedCheck_isNotRetriedOnTheSameDay() async {
+        let defaults = makeDefaults()
         defaults.set(true, forKey: UpdateCheckPolicy.enabledKey)
         let counter = Counter()
-        let model = makeModel(outcome: .failed, counter: counter)
+        let model = makeModel(outcome: .failed, counter: counter, defaults: defaults)
         let now = Date()
 
         await model.checkIfDue(now: now)
@@ -81,9 +82,10 @@ final class UpdateNoticeViewModelTests: XCTestCase {
     }
 
     func test_dismissedVersion_isNotShownAgain() async {
+        let defaults = makeDefaults()
         defaults.set(true, forKey: UpdateCheckPolicy.enabledKey)
         let counter = Counter()
-        let model = makeModel(outcome: .available(version: "2.1.0", url: releaseURL), counter: counter)
+        let model = makeModel(outcome: .available(version: "2.1.0", url: releaseURL), counter: counter, defaults: defaults)
         let now = Date()
 
         await model.checkIfDue(now: now)
@@ -96,10 +98,11 @@ final class UpdateNoticeViewModelTests: XCTestCase {
     }
 
     func test_newerVersionAfterDismissal_isShown() async {
+        let defaults = makeDefaults()
         defaults.set(true, forKey: UpdateCheckPolicy.enabledKey)
         defaults.set("2.1.0", forKey: UpdateCheckPolicy.dismissedVersionKey)
         let counter = Counter()
-        let model = makeModel(outcome: .available(version: "2.2.0", url: releaseURL), counter: counter)
+        let model = makeModel(outcome: .available(version: "2.2.0", url: releaseURL), counter: counter, defaults: defaults)
 
         await model.checkIfDue()
 
