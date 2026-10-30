@@ -10,6 +10,7 @@ struct ContentView: View {
     @Environment(LoginItemsViewModel.self) private var loginItemsVM
     @Environment(FullDiskAccessViewModel.self) private var fda
     @Environment(ModuleScanStore.self) private var modules
+    @Environment(UpdateNoticeViewModel.self) private var updates
 
     var body: some View {
         @Bindable var nav = nav
@@ -21,6 +22,8 @@ struct ContentView: View {
                 Theme.background
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
+                    UpdateBanner()
+                        .animation(.easeInOut(duration: 0.25), value: updates.notice)
                     FullDiskAccessBanner()
                         .animation(.easeInOut(duration: 0.25), value: fda.shouldShowBanner)
                     detailView(for: nav.selected)

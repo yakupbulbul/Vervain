@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B19E38DEAA0144A77120F39C"
+               BlueprintIdentifier = "B1ADD6C844DBEA0CD843BA17"
                BuildableName = "Vervain.app"
                BlueprintName = "Vervain"
                ReferencedContainer = "container:Vervain.xcodeproj">
@@ -29,7 +29,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FBA8B0DE95746207A043B802"
+               BlueprintIdentifier = "C33453DAF7EF884191F7AA8C"
                BuildableName = "VervainTests.xctest"
                BlueprintName = "VervainTests"
                ReferencedContainer = "container:Vervain.xcodeproj">
@@ -43,7 +43,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB7DBB6442E91DCB12243C43"
+               BlueprintIdentifier = "60524468845807CACC675076"
                BuildableName = "VervainUITests.xctest"
                BlueprintName = "VervainUITests"
                ReferencedContainer = "container:Vervain.xcodeproj">
@@ -60,7 +60,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B19E38DEAA0144A77120F39C"
+            BlueprintIdentifier = "B1ADD6C844DBEA0CD843BA17"
             BuildableName = "Vervain.app"
             BlueprintName = "Vervain"
             ReferencedContainer = "container:Vervain.xcodeproj">
@@ -72,7 +72,7 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FBA8B0DE95746207A043B802"
+               BlueprintIdentifier = "C33453DAF7EF884191F7AA8C"
                BuildableName = "VervainTests.xctest"
                BlueprintName = "VervainTests"
                ReferencedContainer = "container:Vervain.xcodeproj">
@@ -83,7 +83,7 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB7DBB6442E91DCB12243C43"
+               BlueprintIdentifier = "60524468845807CACC675076"
                BuildableName = "VervainUITests.xctest"
                BlueprintName = "VervainUITests"
                ReferencedContainer = "container:Vervain.xcodeproj">
@@ -107,7 +107,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B19E38DEAA0144A77120F39C"
+            BlueprintIdentifier = "B1ADD6C844DBEA0CD843BA17"
             BuildableName = "Vervain.app"
             BlueprintName = "Vervain"
             ReferencedContainer = "container:Vervain.xcodeproj">
@@ -124,7 +124,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B19E38DEAA0144A77120F39C"
+            BlueprintIdentifier = "B1ADD6C844DBEA0CD843BA17"
             BuildableName = "Vervain.app"
             BlueprintName = "Vervain"
             ReferencedContainer = "container:Vervain.xcodeproj">

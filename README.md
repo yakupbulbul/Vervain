@@ -24,7 +24,7 @@
 
 <br>
 
-Vervain finds what you can safely clear on your Mac, shows you all of it first, and moves only what you choose to the Trash, so every cleanup can be undone. There are no analytics and no accounts. The only network request is the optional Check for Updates button in Settings.
+Vervain finds what you can safely clear on your Mac, shows you all of it first, and moves only what you choose to the Trash, so every cleanup can be undone. There are no analytics and no accounts. The only network request is the update check: a button in Settings, plus an optional automatic check that is off by default.
 
 ## Install
 
@@ -99,7 +99,7 @@ Vervain is the one that is free, open source and built around reviewing everythi
 
 1. Nothing is permanently deleted. Every cleanup moves items to the Trash, so you can restore them.
 2. Nothing is cleaned without your say-so. Every module goes through review and confirmation, and risky items are never pre-selected.
-3. Nothing leaves your Mac. No analytics, no accounts, no background network calls.
+3. Nothing leaves your Mac. No analytics, no accounts, no background network calls unless you turn on the automatic update check.
 
 ## Languages
 
