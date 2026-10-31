@@ -6,6 +6,9 @@ import SwiftUI
 struct CleanupConfirmationSheet: View {
     @Environment(CleanupCoordinator.self) private var coord
     @State private var acknowledged = false
+    @State private var showingAll: Set<String> = []
+
+    private static let collapsedCount = 6
 
     var body: some View {
         VStack(spacing: 0) {
@@ -64,16 +67,7 @@ struct CleanupConfirmationSheet: View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader("Risky", icon: "exclamationmark.triangle.fill", color: Theme.statusRisky,
                           count: coord.riskyItems.count)
-            VStack(spacing: 0) {
-                ForEach(coord.riskyItems.prefix(6)) { item in
-                    inlineRow(item)
-                }
-                if coord.riskyItems.count > 6 {
-                    Text("and \(coord.riskyItems.count - 6) more…")
-                        .font(.caption).foregroundStyle(Theme.textMuted)
-                        .padding(.leading, 12).padding(.top, 4)
-                }
-            }
+            itemList(coord.riskyItems, section: "Risky")
             .padding(.vertical, 6).padding(.horizontal, 10)
             .background(Theme.statusRisky.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
         }
@@ -83,18 +77,38 @@ struct CleanupConfirmationSheet: View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader("Review", icon: "exclamationmark.circle.fill", color: Theme.statusReview,
                           count: coord.reviewItems.count)
-            VStack(spacing: 0) {
-                ForEach(coord.reviewItems.prefix(6)) { item in
-                    inlineRow(item)
-                }
-                if coord.reviewItems.count > 6 {
-                    Text("and \(coord.reviewItems.count - 6) more…")
-                        .font(.caption).foregroundStyle(Theme.textMuted)
-                        .padding(.leading, 12).padding(.top, 4)
-                }
-            }
+            itemList(coord.reviewItems, section: "Review")
             .padding(.vertical, 6).padding(.horizontal, 10)
             .background(Theme.statusReview.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
+        }
+    }
+
+    private func itemList(_ items: [CleanupItem], section: String) -> some View {
+        let showAll = showingAll.contains(section)
+        let visible = showAll ? items : Array(items.prefix(Self.collapsedCount))
+        return LazyVStack(spacing: 0) {
+            ForEach(visible) { item in
+                inlineRow(item)
+            }
+            if items.count > Self.collapsedCount {
+                Button {
+                    if showAll { showingAll.remove(section) }
+                    else       { showingAll.insert(section) }
+                } label: {
+                    Group {
+                        if showAll {
+                            Text("Show less")
+                        } else {
+                            Text("Show \(items.count - Self.collapsedCount) more items…")
+                        }
+                    }
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(Theme.smartScanAccent)
+                }
+                .buttonStyle(.plain)
+                .padding(.leading, 12).padding(.top, 4)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
     }
 

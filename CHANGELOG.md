@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- Confirmation step: when many risky or review items were selected, the list ended with "and N more…" and there was no way to see the rest. It now has a "Show N more items…" button that lists every item, and "Show less" to collapse it again.
+
 ## 2.1.0
 
 ### Changed
