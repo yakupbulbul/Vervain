@@ -10,7 +10,7 @@ Prints one JSON object per line between GAPS-BEGIN and GAPS-END.
 """
 import json, pathlib, sys
 
-LANGS = ["de", "es", "fr", "tr", "zh-Hans"]
+LANGS = ["de", "es", "fr", "ja", "ko", "tr", "zh-Hans"]
 
 
 def main() -> int:

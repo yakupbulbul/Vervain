@@ -3,7 +3,7 @@
 
 Usage: scripts/apply_translations.py translations.json
 
-translations.json: {"<key>": {"tr": "...", "de": "...", "es": "...", "fr": "...", "zh-Hans": "..."}, ...}
+translations.json: {"<key>": {"tr": "...", "de": "...", "es": "...", "fr": "...", "zh-Hans": "...", "ja": "...", "ko": "..."}, ...}
 Keys missing from the catalog are added (English value = the key). Existing
 translations are only overwritten when --force is passed.
 """
