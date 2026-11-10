@@ -31,6 +31,8 @@ struct SettingsView: View {
                     Text("Türkçe").tag("tr")
                     Text("Español").tag("es")
                     Text("中文(简体)").tag("zh-Hans")
+                    Text("日本語").tag("ja")
+                    Text("한국어").tag("ko")
                 }
                 .onChange(of: appLanguage) { _, newValue in
                     if newValue.isEmpty {
