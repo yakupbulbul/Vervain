@@ -103,7 +103,7 @@ Vervain is the one that is free, open source and built around reviewing everythi
 
 ## Languages
 
-Vervain follows your Mac's language, or you can pick one in Settings (⌘,): English, Français, Deutsch, Türkçe, Español and 中文(简体).
+Vervain follows your Mac's language, or you can pick one in Settings (⌘,): English, Français, Deutsch, Türkçe, Español, 中文(简体), 日本語 and 한국어.
 
 ## Building from source
 

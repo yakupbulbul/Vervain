@@ -1,8 +1,16 @@
 # Changelog
 
-## Unreleased
+## 2.2.0
+
+### Added
+- Japanese and Korean. All 650 strings are translated, and both languages are in the language picker in Settings.
+
+### Changed
+- Simplified Chinese: about forty strings reworded. "Review" now reads 检查 everywhere, a few cache names that were still English are translated, and punctuation is full-width.
 
 ### Fixed
+- Cleanup reasons: the line that explains why an item is safe to remove (for Xcode, Homebrew, npm, Docker and other developer caches) was always shown in English. It is now translated, in every language.
+- Unused translation rows showed the app name where the language belongs in Simplified Chinese.
 - Confirmation step: when many risky or review items were selected, the list ended with "and N more…" and there was no way to see the rest. It now has a "Show N more items…" button that lists every item, and "Show less" to collapse it again.
 
 ## 2.1.0
